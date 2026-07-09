@@ -1,0 +1,5 @@
+# include all files which are not tracked by git
+
+/node_modules
+
+/.env
