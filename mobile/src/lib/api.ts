@@ -44,8 +44,12 @@ export function submitCheckIn(token: string, payload: CheckInPayload) {
 }
 
 export function getStreaks(token: string) {
-  return request<{ streaks: Array<{ habitType: string; currentStreak: number; bestStreak: number }> }>(
-    "/checkins/streaks",
-    { token }
-  );
+  return request<{
+    streaks: Array<{
+      habitType: string;
+      currentStreak: number;
+      bestStreak: number;
+      lastCheckInDateKey?: string;
+    }>;
+  }>("/checkins/streaks", { token });
 }

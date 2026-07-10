@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { ActivityIndicator, Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { login, signup } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
+import { AppButton } from "../components/AppButton";
+import { AppTextInput } from "../components/AppCard";
+import { colors, spacing, typography } from "../theme/colors";
 
 export function LoginScreen() {
   const { setToken } = useAuth();
@@ -26,49 +29,29 @@ export function LoginScreen() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 24, gap: 12 }}>
-      <Text style={{ fontSize: 28, fontWeight: "700", marginBottom: 16 }}>
-        {isSignup ? "Create account" : "Welcome back"}
+    <View style={{ flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: spacing.lg, gap: spacing.md }}>
+      <Text style={{ fontSize: 40, marginBottom: spacing.xs }}>🔥</Text>
+      <Text style={typography.h1}>{isSignup ? "Start your streak" : "Welcome back"}</Text>
+      <Text style={[typography.body, { marginBottom: spacing.md }]}>
+        {isSignup ? "Consistency starts with day one." : "Your streak is waiting for you."}
       </Text>
 
-      {isSignup ? (
-        <TextInput
-          placeholder="Full name"
-          value={name}
-          onChangeText={setName}
-          style={{ borderWidth: 1, borderColor: "#ccc", borderRadius: 10, padding: 12 }}
-        />
-      ) : null}
-      <TextInput
+      {isSignup ? <AppTextInput placeholder="Full name" value={name} onChangeText={setName} /> : null}
+      <AppTextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         keyboardType="email-address"
-        style={{ borderWidth: 1, borderColor: "#ccc", borderRadius: 10, padding: 12 }}
       />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={{ borderWidth: 1, borderColor: "#ccc", borderRadius: 10, padding: 12 }}
-      />
+      <AppTextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
 
-      {error ? <Text style={{ color: "#dc2626" }}>{error}</Text> : null}
+      {error ? <Text style={{ color: colors.danger }}>{error}</Text> : null}
 
-      <Pressable
-        onPress={handleSubmit}
-        disabled={loading}
-        style={{ backgroundColor: "#0f766e", padding: 14, borderRadius: 10, alignItems: "center", marginTop: 8 }}
-      >
-        {loading ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontWeight: "600" }}>
-          {isSignup ? "Sign up" : "Log in"}
-        </Text>}
-      </Pressable>
+      <AppButton title={isSignup ? "Sign up" : "Log in"} onPress={handleSubmit} loading={loading} style={{ marginTop: spacing.sm }} />
 
-      <Pressable onPress={() => setIsSignup((v) => !v)} style={{ marginTop: 12, alignItems: "center" }}>
-        <Text style={{ color: "#0f766e" }}>
+      <Pressable onPress={() => setIsSignup((v) => !v)} style={{ marginTop: spacing.md, alignItems: "center" }}>
+        <Text style={{ color: colors.primary, fontWeight: "600" }}>
           {isSignup ? "Already have an account? Log in" : "New here? Create an account"}
         </Text>
       </Pressable>
