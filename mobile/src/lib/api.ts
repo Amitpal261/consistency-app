@@ -58,3 +58,39 @@ export function getStreaks(token: string) {
     }>;
   }>("/checkins/streaks", { token });
 }
+
+export type Buddy = { _id: string; name: string; email: string };
+
+export function addBuddy(token: string, buddyEmail: string) {
+  return request<{ buddy: { id: string; name: string; email: string } }>("/buddies", {
+    method: "POST",
+    token,
+    body: JSON.stringify({ buddyEmail }),
+  });
+}
+
+export function getBuddies(token: string) {
+  return request<{ buddies: Buddy[] }>("/buddies", { token });
+}
+
+export type BuddyCheckIn = {
+  _id: string;
+  habitType: string;
+  checkedInAt: string;
+  photoUrl?: string;
+  reviewStatus: "pending" | "approved" | "flagged";
+};
+
+export function getBuddyTodayCheckIns(token: string, buddyUserId: string) {
+  return request<{ checkIns: BuddyCheckIn[] }>(`/buddies/${encodeURIComponent(buddyUserId)}/checkins/today`, {
+    token,
+  });
+}
+
+export function reviewCheckIn(token: string, checkInId: string, action: "approve" | "flag") {
+  return request<{ reviewStatus: string }>(`/buddies/checkins/${encodeURIComponent(checkInId)}/review`, {
+    method: "POST",
+    token,
+    body: JSON.stringify({ action }),
+  });
+}

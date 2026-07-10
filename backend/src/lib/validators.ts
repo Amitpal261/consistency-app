@@ -12,6 +12,14 @@ export const loginSchema = z.object({
   password: z.string().min(1),
 });
 
+export const addBuddySchema = z.object({
+  buddyEmail: z.string().email(),
+});
+
+export const reviewCheckInSchema = z.object({
+  action: z.enum(["approve", "flag"]),
+});
+
 export const checkInSchema = z.object({
   habitType: z.enum(["wake_up", "library", "custom"]),
   location: z

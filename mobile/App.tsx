@@ -9,6 +9,7 @@ import { CheckInScreen } from "./src/screens/CheckInScreen";
 import { AlarmSettingsScreen } from "./src/screens/AlarmSettingsScreen";
 import { colors } from "./src/theme/colors";
 import { setupNotificationChannels, wasOpenedFromAlarm, onAlarmPressedInForeground } from "./src/lib/alarm";
+import { BuddyScreen } from "./src/screens/BuddyScreen";
 function TabBarButton({
   icon,
   label,
@@ -32,10 +33,10 @@ function TabBarButton({
 }
 
 function Tabs() {
-  const [tab, setTab] = useState<"home" | "checkin" | "alarm">("home");
+  const [tab, setTab] = useState<"home" | "checkin" | "alarm" | "buddy">("home");
   const { setToken } = useAuth();
 
-useEffect(() => {
+  useEffect(() => {
     setupNotificationChannels();
 
     wasOpenedFromAlarm().then((fromAlarm) => {
@@ -49,7 +50,15 @@ useEffect(() => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <View style={{ flex: 1 }}>
-        {tab === "home" ? <HomeScreen /> : tab === "checkin" ? <CheckInScreen habitType="wake_up" /> : <AlarmSettingsScreen />}
+        {tab === "home" ? (
+          <HomeScreen />
+        ) : tab === "checkin" ? (
+          <CheckInScreen habitType="wake_up" />
+        ) : tab === "alarm" ? (
+          <AlarmSettingsScreen />
+        ) : (
+          <BuddyScreen />
+        )}
       </View>
       <View
         style={{
@@ -67,6 +76,7 @@ useEffect(() => {
           onPress={() => setTab("checkin")}
         />
         <TabBarButton icon="alarm" label="Alarm" active={tab === "alarm"} onPress={() => setTab("alarm")} />
+        <TabBarButton icon="people" label="Buddy" active={tab === "buddy"} onPress={() => setTab("buddy")} />
         <TabBarButton
           icon="log-out-outline"
           label="Log out"

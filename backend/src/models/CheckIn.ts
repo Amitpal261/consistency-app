@@ -15,6 +15,8 @@ const checkInSchema = new Schema(
     },
     photoUrl: { type: String },
     verified: { type: Boolean, default: true },
+    reviewedBy: { type: Schema.Types.ObjectId, ref: "User" },
+reviewStatus: { type: String, enum: ["pending", "approved", "flagged"], default: "pending" }, 
   },
   { timestamps: true }
 );
