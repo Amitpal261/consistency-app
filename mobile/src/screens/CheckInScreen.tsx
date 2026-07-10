@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, Text, View } from "react-native";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import * as Location from "expo-location";
+import * as ImageManipulator from "expo-image-manipulator";
 import { useAuth } from "../context/AuthContext";
-import { getStreaks, submitCheckIn } from "../lib/api";
+import { getStreaks, getTodayPrompt, submitCheckIn } from "../lib/api";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { colors, spacing, typography } from "../theme/colors";
@@ -22,6 +24,12 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
   const [isError, setIsError] = useState(false);
   const [alreadyDoneToday, setAlreadyDoneToday] = useState<number | null>(null);
 
+  const [prompt, setPrompt] = useState<string | null>(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const [photoBase64, setPhotoBase64] = useState<string | null>(null);
+  const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef<CameraView>(null);
+
   useEffect(() => {
     if (!token) return;
     getStreaks(token).then((res) => {
@@ -30,7 +38,35 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
         setAlreadyDoneToday(row.currentStreak);
       }
     });
+    getTodayPrompt(token).then((res) => setPrompt(res.prompt));
   }, [token, habitType]);
+
+  async function handleOpenCamera() {
+    if (!permission?.granted) {
+      const res = await requestPermission();
+      if (!res.granted) {
+        Alert.alert("Camera needed", "Please allow camera access to verify your check-in.");
+        return;
+      }
+    }
+    setCameraOpen(true);
+  }
+
+  async function handleCapture() {
+    const photo = await cameraRef.current?.takePictureAsync({ quality: 0.5 });
+    if (!photo?.uri) return;
+
+    const manipulated = await ImageManipulator.manipulateAsync(photo.uri, [{ resize: { width: 800 } }], {
+      compress: 0.5,
+      format: ImageManipulator.SaveFormat.JPEG,
+      base64: true,
+    });
+
+    if (manipulated.base64) {
+      setPhotoBase64(`data:image/jpeg;base64,${manipulated.base64}`);
+    }
+    setCameraOpen(false);
+  }
 
   async function handleCheckIn() {
     if (!token) return;
@@ -55,6 +91,7 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
           accuracyMeters: position.coords.accuracy ?? undefined,
           isMockLocation,
         },
+        photoBase64: photoBase64 ?? undefined,
       });
 
       setResult(`Checked in! Current streak: ${res.currentStreak} 🔥`);
@@ -83,15 +120,48 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
     );
   }
 
+  if (cameraOpen) {
+    return (
+      <View style={{ flex: 1, backgroundColor: "#000" }}>
+        <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" />
+        <View style={{ position: "absolute", top: spacing.lg, left: spacing.lg, right: spacing.lg }}>
+          <AppCard>
+            <Text style={{ color: colors.textPrimary, fontWeight: "700", textAlign: "center" }}>{prompt}</Text>
+          </AppCard>
+        </View>
+        <View style={{ position: "absolute", bottom: spacing.xl, left: spacing.lg, right: spacing.lg }}>
+          <AppButton title="Capture photo" onPress={handleCapture} />
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: spacing.lg, gap: spacing.lg }}>
       <AppCard style={{ alignItems: "center", paddingVertical: spacing.xl }}>
         <Text style={{ fontSize: 56, marginBottom: spacing.sm }}>☀️</Text>
         <Text style={[typography.h1, { marginBottom: spacing.xs }]}>Ready to check in?</Text>
-        <Text style={[typography.body, { textAlign: "center", marginBottom: spacing.lg }]}>
-          We'll confirm your location to keep your streak honest.
-        </Text>
-        <AppButton title="Check in now" onPress={handleCheckIn} loading={loading} style={{ width: "100%" }} />
+        {prompt ? (
+          <Text style={[typography.body, { textAlign: "center", marginBottom: spacing.md }]}>
+            Today's verification: <Text style={{ color: colors.accent, fontWeight: "700" }}>{prompt}</Text>
+          </Text>
+        ) : null}
+
+        {photoBase64 ? (
+          <Text style={{ color: colors.success, fontWeight: "600", marginBottom: spacing.md }}>
+            ✅ Photo captured
+          </Text>
+        ) : (
+          <AppButton title="Take verification photo" onPress={handleOpenCamera} style={{ width: "100%", marginBottom: spacing.md }} />
+        )}
+
+        <AppButton
+          title="Check in now"
+          onPress={handleCheckIn}
+          loading={loading}
+          disabled={!photoBase64}
+          style={{ width: "100%" }}
+        />
       </AppCard>
 
       {result ? (

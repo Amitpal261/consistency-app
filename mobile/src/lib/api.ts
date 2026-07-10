@@ -33,6 +33,7 @@ export function login(email: string, password: string) {
 export type CheckInPayload = {
   habitType: "wake_up" | "library" | "custom";
   location?: { lat: number; lng: number; accuracyMeters?: number; isMockLocation?: boolean };
+  photoBase64?: string;
 };
 
 export function submitCheckIn(token: string, payload: CheckInPayload) {
@@ -41,6 +42,10 @@ export function submitCheckIn(token: string, payload: CheckInPayload) {
     token,
     body: JSON.stringify(payload),
   });
+}
+
+export function getTodayPrompt(token: string) {
+  return request<{ prompt: string; date: string }>("/checkins/prompt", { token });
 }
 
 export function getStreaks(token: string) {

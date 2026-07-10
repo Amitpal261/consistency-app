@@ -3,17 +3,14 @@ import rateLimit from "express-rate-limit";
 import { CheckIn } from "../models/CheckIn.js";
 import { Streak } from "../models/Streak.js";
 import { checkInSchema } from "../lib/validators.js";
+import { getPromptForUserAndDate } from "../lib/prompts.js";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 export const checkInRouter = Router();
 
-// Max 10 check-in attempts per 10 minutes per IP — a real person only ever
-// needs one; this just blocks scripted abuse of the endpoint.
 const checkInLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 10 });
 
 function dateKeyInTimezone(date: Date, timeZone: string): string {
-  // en-CA locale gives YYYY-MM-DD directly — simplest reliable way to get a
-  // timezone-correct calendar date without pulling in a date library.
   return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(
     date
   );
@@ -25,13 +22,17 @@ function yesterdayKey(todayKey: string): string {
   return d.toISOString().slice(0, 10);
 }
 
+checkInRouter.get("/prompt", requireAuth, async (req: AuthedRequest, res) => {
+  const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
+  const todayKey = dateKeyInTimezone(new Date(), timezone);
+  const prompt = getPromptForUserAndDate(req.userId!, todayKey);
+  return res.json({ prompt, date: todayKey });
+});
+
 checkInRouter.post("/", requireAuth, checkInLimiter, async (req: AuthedRequest, res) => {
   const parsed = checkInSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
 
-  // Reject check-ins that the device itself reports as coming from a mock
-  // location provider (fake-GPS apps set this flag on Android) — this is a
-  // real signal, not a guess, so trust it when present.
   if (parsed.data.location?.isMockLocation) {
     return res.status(400).json({ error: "Mock location detected. Please disable fake GPS apps." });
   }
@@ -58,7 +59,7 @@ checkInRouter.post("/", requireAuth, checkInLimiter, async (req: AuthedRequest, 
     habitType: parsed.data.habitType,
     checkedInAt: now,
     location: parsed.data.location,
-    photoUrl: parsed.data.photoUrl,
+    photoUrl: parsed.data.photoBase64,
   });
 
   const streak = await Streak.findOneAndUpdate(

@@ -22,5 +22,5 @@ export const checkInSchema = z.object({
       isMockLocation: z.boolean().optional(),
     })
     .optional(),
-  photoUrl: z.string().url().optional(),
+  photoBase64: z.string().max(2_500_000).optional(),
 });
