@@ -6,10 +6,13 @@ import { AuthProvider, useAuth } from "./src/context/AuthContext";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CheckInScreen } from "./src/screens/CheckInScreen";
-import { AlarmSettingsScreen } from "./src/screens/AlarmSettingsScreen";
-import { colors } from "./src/theme/colors";
-import { setupNotificationChannels, wasOpenedFromAlarm, onAlarmPressedInForeground } from "./src/lib/alarm";
+import { CreateHabitScreen } from "./src/screens/CreateHabitScreen";
 import { BuddyScreen } from "./src/screens/BuddyScreen";
+import { colors } from "./src/theme/colors";
+import { setupNotificationChannels, getHabitIdFromAlarmLaunch, onHabitAlarmPressedInForeground } from "./src/lib/alarm";
+import { getHabitsWithStreaks, type Habit } from "./src/lib/api";
+import { setupGeofencing } from "./src/lib/geofence";
+
 function TabBarButton({
   icon,
   label,
@@ -32,58 +35,78 @@ function TabBarButton({
   );
 }
 
+type Screen = { name: "habits" } | { name: "buddy" } | { name: "createHabit" } | { name: "checkin"; habit: Habit };
+
 function Tabs() {
-  const [tab, setTab] = useState<"home" | "checkin" | "alarm" | "buddy">("home");
-  const { setToken } = useAuth();
+  const { token, setToken } = useAuth();
+  const [screen, setScreen] = useState<Screen>({ name: "habits" });
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     setupNotificationChannels();
 
-    wasOpenedFromAlarm().then((fromAlarm) => {
-      if (fromAlarm) setTab("checkin");
+    getHabitIdFromAlarmLaunch().then(async (habitId) => {
+      if (!habitId || !token) return;
+      const res = await getHabitsWithStreaks(token);
+      const habit = res.habits.find((h) => h._id === habitId);
+      if (habit) setScreen({ name: "checkin", habit });
     });
 
-    const unsubscribe = onAlarmPressedInForeground(() => setTab("checkin"));
+    const unsubscribe = onHabitAlarmPressedInForeground(async (habitId) => {
+      if (!token) return;
+      const res = await getHabitsWithStreaks(token);
+      const habit = res.habits.find((h) => h._id === habitId);
+      if (habit) setScreen({ name: "checkin", habit });
+    });
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!token) return;
+    getHabitsWithStreaks(token)
+      .then((res) => {
+        setupGeofencing(res.habits);
+      })
+      .catch((err) => {
+        console.error("Failed to setup geofencing on boot:", err);
+      });
+  }, [token, refreshKey]);
+
+  const activeTab = screen.name === "checkin" || screen.name === "createHabit" ? "habits" : screen.name;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <View style={{ flex: 1 }}>
-        {tab === "home" ? (
-          <HomeScreen />
-        ) : tab === "checkin" ? (
-          <CheckInScreen habitType="wake_up" />
-        ) : tab === "alarm" ? (
-          <AlarmSettingsScreen />
+        {screen.name === "habits" ? (
+          <HomeScreen
+            key={refreshKey}
+            onSelectHabit={(habit) => setScreen({ name: "checkin", habit })}
+            onAddHabit={() => setScreen({ name: "createHabit" })}
+          />
+        ) : screen.name === "createHabit" ? (
+          <CreateHabitScreen
+            onCreated={() => {
+              setRefreshKey((k) => k + 1);
+              setScreen({ name: "habits" });
+            }}
+          />
+        ) : screen.name === "checkin" ? (
+          <CheckInScreen
+            habit={screen.habit}
+            onDone={() => {
+              setRefreshKey((k) => k + 1);
+              setScreen({ name: "habits" });
+            }}
+          />
         ) : (
           <BuddyScreen />
         )}
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          borderTopWidth: 1,
-          borderColor: colors.border,
-          backgroundColor: colors.surface,
-        }}
-      >
-        <TabBarButton icon="flame" label="Streaks" active={tab === "home"} onPress={() => setTab("home")} />
-        <TabBarButton
-          icon="checkmark-circle"
-          label="Check in"
-          active={tab === "checkin"}
-          onPress={() => setTab("checkin")}
-        />
-        <TabBarButton icon="alarm" label="Alarm" active={tab === "alarm"} onPress={() => setTab("alarm")} />
-        <TabBarButton icon="people" label="Buddy" active={tab === "buddy"} onPress={() => setTab("buddy")} />
-        <TabBarButton
-          icon="log-out-outline"
-          label="Log out"
-          active={false}
-          color={colors.danger}
-          onPress={() => setToken(null)}
-        />
+      <View style={{ flexDirection: "row", borderTopWidth: 1, borderColor: colors.border, backgroundColor: colors.surface }}>
+        <TabBarButton icon="flame" label="Habits" active={activeTab === "habits"} onPress={() => setScreen({ name: "habits" })} />
+        <TabBarButton icon="people" label="Buddy" active={activeTab === "buddy"} onPress={() => setScreen({ name: "buddy" })} />
+        <TabBarButton icon="log-out-outline" label="Log out" active={false} color={colors.danger} onPress={() => setToken(null)} />
       </View>
     </SafeAreaView>
   );

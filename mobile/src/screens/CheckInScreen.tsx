@@ -2,27 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { Alert, Text, View } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as Location from "expo-location";
+import { getCurrentPositionSafe } from "../lib/location";
 import * as ImageManipulator from "expo-image-manipulator";
 import { useAuth } from "../context/AuthContext";
-import { getStreaks, getTodayPrompt, submitCheckIn } from "../lib/api";
+import { getTodayPrompt, submitCheckIn, type Habit } from "../lib/api";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { colors, spacing, typography } from "../theme/colors";
 
-function todayKey(): string {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
-
-export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: "wake_up" | "library" | "custom" }) {
+export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => void }) {
   const { token } = useAuth();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
-  const [alreadyDoneToday, setAlreadyDoneToday] = useState<number | null>(null);
 
   const [prompt, setPrompt] = useState<string | null>(null);
   const [cameraOpen, setCameraOpen] = useState(false);
@@ -30,16 +22,13 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
 
+  const needsPhoto = habit.verificationMethod !== "gps";
+  const needsGps = habit.verificationMethod !== "photo";
+
   useEffect(() => {
-    if (!token) return;
-    getStreaks(token).then((res) => {
-      const row = res.streaks.find((s) => s.habitType === habitType);
-      if (row && row.lastCheckInDateKey === todayKey()) {
-        setAlreadyDoneToday(row.currentStreak);
-      }
-    });
+    if (!token || !needsPhoto) return;
     getTodayPrompt(token).then((res) => setPrompt(res.prompt));
-  }, [token, habitType]);
+  }, [token, needsPhoto]);
 
   async function handleOpenCamera() {
     if (!permission?.granted) {
@@ -74,50 +63,38 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
     setResult(null);
     setIsError(false);
     try {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert("Location needed", "Please allow location access to check in.");
-        return;
-      }
+      let location: { lat: number; lng: number; accuracyMeters?: number; isMockLocation?: boolean } | undefined;
 
-      const position = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-      const isMockLocation = (position.mocked as boolean | undefined) ?? false;
-
-      const res = await submitCheckIn(token, {
-        habitType,
-        location: {
+      if (needsGps) {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert("Location needed", "Please allow location access to check in.");
+          setLoading(false);
+          return;
+        }
+const position = await getCurrentPositionSafe();
+        location = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
           accuracyMeters: position.coords.accuracy ?? undefined,
-          isMockLocation,
-        },
+          isMockLocation: (position.mocked as boolean | undefined) ?? false,
+        };
+      }
+
+      const res = await submitCheckIn(token, {
+        habitId: habit._id,
+        location,
         photoBase64: photoBase64 ?? undefined,
       });
 
       setResult(`Checked in! Current streak: ${res.currentStreak} 🔥`);
-      setAlreadyDoneToday(res.currentStreak);
+      setTimeout(onDone, 1200);
     } catch (err) {
       setIsError(true);
       setResult(err instanceof Error ? err.message : "Check-in failed");
     } finally {
       setLoading(false);
     }
-  }
-
-  if (alreadyDoneToday !== null) {
-    return (
-      <View style={{ flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: spacing.lg }}>
-        <AppCard style={{ alignItems: "center", paddingVertical: spacing.xl }}>
-          <Text style={{ fontSize: 56, marginBottom: spacing.sm }}>✅</Text>
-          <Text style={[typography.h1, { marginBottom: spacing.xs, textAlign: "center" }]}>
-            Already checked in today
-          </Text>
-          <Text style={[typography.body, { textAlign: "center" }]}>
-            Nice work — streak is at {alreadyDoneToday} 🔥. Come back tomorrow.
-          </Text>
-        </AppCard>
-      </View>
-    );
   }
 
   if (cameraOpen) {
@@ -140,26 +117,26 @@ export function CheckInScreen({ habitType = "wake_up" as const }: { habitType?: 
     <View style={{ flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: spacing.lg, gap: spacing.lg }}>
       <AppCard style={{ alignItems: "center", paddingVertical: spacing.xl }}>
         <Text style={{ fontSize: 56, marginBottom: spacing.sm }}>☀️</Text>
-        <Text style={[typography.h1, { marginBottom: spacing.xs }]}>Ready to check in?</Text>
-        {prompt ? (
+        <Text style={[typography.h1, { marginBottom: spacing.xs, textAlign: "center" }]}>{habit.name}</Text>
+        {needsPhoto && prompt ? (
           <Text style={[typography.body, { textAlign: "center", marginBottom: spacing.md }]}>
             Today's verification: <Text style={{ color: colors.accent, fontWeight: "700" }}>{prompt}</Text>
           </Text>
         ) : null}
 
-        {photoBase64 ? (
-          <Text style={{ color: colors.success, fontWeight: "600", marginBottom: spacing.md }}>
-            ✅ Photo captured
-          </Text>
-        ) : (
-          <AppButton title="Take verification photo" onPress={handleOpenCamera} style={{ width: "100%", marginBottom: spacing.md }} />
-        )}
+        {needsPhoto ? (
+          photoBase64 ? (
+            <Text style={{ color: colors.success, fontWeight: "600", marginBottom: spacing.md }}>✅ Photo captured</Text>
+          ) : (
+            <AppButton title="Take verification photo" onPress={handleOpenCamera} style={{ width: "100%", marginBottom: spacing.md }} />
+          )
+        ) : null}
 
         <AppButton
           title="Check in now"
           onPress={handleCheckIn}
           loading={loading}
-          disabled={!photoBase64}
+          disabled={needsPhoto && !photoBase64}
           style={{ width: "100%" }}
         />
       </AppCard>

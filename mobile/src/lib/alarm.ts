@@ -7,8 +7,11 @@ import notifee, {
 } from "@notifee/react-native";
 import { Platform } from "react-native";
 
-const ALARM_NOTIFICATION_ID = "daily-wake-alarm";
 const ANDROID_CHANNEL_ID = "wake-alarm-channel";
+
+function alarmIdFor(habitId: string): string {
+  return `habit-alarm-${habitId}`;
+}
 
 export async function setupNotificationChannels() {
   await notifee.requestPermission();
@@ -16,7 +19,7 @@ export async function setupNotificationChannels() {
   if (Platform.OS === "android") {
     await notifee.createChannel({
       id: ANDROID_CHANNEL_ID,
-      name: "Wake-up alarm",
+      name: "Habit alarms",
       importance: AndroidImportance.HIGH,
       sound: "default",
       vibration: true,
@@ -24,8 +27,9 @@ export async function setupNotificationChannels() {
   }
 }
 
-export async function scheduleDailyAlarm(hour: number, minute: number) {
-  await notifee.cancelNotification(ALARM_NOTIFICATION_ID);
+export async function scheduleHabitAlarm(habitId: string, habitName: string, hour: number, minute: number) {
+  const id = alarmIdFor(habitId);
+  await notifee.cancelNotification(id);
 
   const now = new Date();
   const next = new Date(now);
@@ -36,8 +40,9 @@ export async function scheduleDailyAlarm(hour: number, minute: number) {
 
   await notifee.createTriggerNotification(
     {
-      id: ALARM_NOTIFICATION_ID,
-      title: "⏰ Time to wake up",
+      id,
+      title: `⏰ ${habitName}`,
+      data: { habitId },
       body: "Tap to check in and keep your streak alive.",
       android: {
         channelId: ANDROID_CHANNEL_ID,
@@ -61,33 +66,21 @@ export async function scheduleDailyAlarm(hour: number, minute: number) {
   );
 }
 
-export async function cancelDailyAlarm() {
-  await notifee.cancelNotification(ALARM_NOTIFICATION_ID);
+export async function cancelHabitAlarm(habitId: string) {
+  await notifee.cancelNotification(alarmIdFor(habitId));
 }
 
-export async function getScheduledAlarm() {
-  const triggers = await notifee.getTriggerNotifications();
-  return triggers.find((t) => t.notification.id === ALARM_NOTIFICATION_ID) ?? null;
-}
-
-/**
- * Checks whether the app was just opened by the user tapping the alarm
- * notification (works even if the app was fully closed/killed) — use this
- * once on app startup to decide whether to jump straight to Check-in.
- */
-export async function wasOpenedFromAlarm(): Promise<boolean> {
+export async function getHabitIdFromAlarmLaunch(): Promise<string | null> {
   const initial = await notifee.getInitialNotification();
-  return initial?.notification.id === ALARM_NOTIFICATION_ID;
+  const habitId = initial?.notification.data?.habitId;
+  return typeof habitId === "string" ? habitId : null;
 }
 
-/**
- * Subscribes to the alarm notification being tapped while the app is
- * already open in the foreground. Returns an unsubscribe function.
- */
-export function onAlarmPressedInForeground(callback: () => void) {
+export function onHabitAlarmPressedInForeground(callback: (habitId: string) => void) {
   return notifee.onForegroundEvent(({ type, detail }) => {
-    if (type === EventType.PRESS && detail.notification?.id === ALARM_NOTIFICATION_ID) {
-      callback();
+    const habitId = detail.notification?.data?.habitId;
+    if (type === EventType.PRESS && typeof habitId === "string") {
+      callback(habitId);
     }
   });
 }

@@ -1,7 +1,7 @@
-import { TextInput, View, type StyleProp, type TextInputProps, type ViewStyle } from "react-native";
+import { TextInput, View, type TextInputProps, type ViewProps } from "react-native";
 import { colors, radius } from "../theme/colors";
 
-export function AppCard({ children, style }: { children: React.ReactNode; style?: StyleProp<ViewStyle> }) {
+export function AppCard({ children, style, ...rest }: ViewProps & { children: React.ReactNode }) {
   return (
     <View
       style={[
@@ -14,6 +14,7 @@ export function AppCard({ children, style }: { children: React.ReactNode; style?
         },
         style,
       ]}
+      {...rest}
     >
       {children}
     </View>

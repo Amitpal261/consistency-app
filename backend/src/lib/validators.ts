@@ -21,7 +21,7 @@ export const reviewCheckInSchema = z.object({
 });
 
 export const checkInSchema = z.object({
-  habitType: z.enum(["wake_up", "library", "custom"]),
+  habitId: z.string().min(1),
   location: z
     .object({
       lat: z.number(),
@@ -31,4 +31,27 @@ export const checkInSchema = z.object({
     })
     .optional(),
   photoBase64: z.string().max(2_500_000).optional(),
+});
+
+export const createHabitSchema = z.object({
+  name: z.string().min(1).max(60),
+  taskType: z.enum(["time", "location", "location_duration"]),
+  verificationMethod: z.enum(["photo", "gps", "photo_gps"]).default("photo_gps"),
+  timeWindow: z
+    .object({
+      hour: z.number().int().min(0).max(23),
+      minute: z.number().int().min(0).max(59),
+      windowMinutes: z.number().int().min(5).max(720).default(60),
+    })
+    .optional(),
+  location: z
+    .object({
+      lat: z.number(),
+      lng: z.number(),
+      radiusMeters: z.number().min(20).max(2000).default(150),
+    })
+    .optional(),
+  requiredDurationMinutes: z.number().int().min(5).max(1440).optional(),
+  daysOfWeek: z.array(z.number().int().min(0).max(6)).min(1).max(7).optional(),
+  buddyId: z.string().optional(),
 });

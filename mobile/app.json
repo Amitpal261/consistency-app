@@ -10,7 +10,9 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Used to take a verification photo when you check in.",
-        "NSLocationWhenInUseUsageDescription": "Used to confirm your location when you check in."
+        "NSLocationWhenInUseUsageDescription": "Used to confirm your location when you check in.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Used to confirm your location for gym and library dwell-time check-ins.",
+        "NSLocationAlwaysUsageDescription": "Used to verify dwell-time check-ins in the background."
       }
     },
     "android": {
@@ -25,7 +27,8 @@
         "SCHEDULE_EXACT_ALARM",
         "USE_FULL_SCREEN_INTENT",
         "POST_NOTIFICATIONS",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
       ],
       "package": "com.anonymous.mobile"
     },

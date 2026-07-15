@@ -2,8 +2,10 @@ import { Router } from "express";
 import { Buddy } from "../models/Buddy.js";
 import { User } from "../models/User.js";
 import { CheckIn } from "../models/CheckIn.js";
+import { Streak } from "../models/Streak.js";
 import { addBuddySchema, reviewCheckInSchema } from "../lib/validators.js";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
+import { updateStreak } from "./checkin.js";
 
 export const buddyRouter = Router();
 
@@ -46,15 +48,17 @@ buddyRouter.get("/:buddyUserId/checkins/today", requireAuth, async (req: AuthedR
   const isBuddy = await areBuddies(req.userId!, buddyUserId);
   if (!isBuddy) return res.status(403).json({ error: "You're not buddies with this user." });
 
-  const startOfDay = new Date();
-  startOfDay.setHours(0, 0, 0, 0);
+  const since = new Date();
+  since.setDate(since.getDate() - 3);
+  since.setHours(0, 0, 0, 0);
 
   const checkIns = await CheckIn.find({
     userId: buddyUserId,
-    checkedInAt: { $gte: startOfDay },
+    checkedInAt: { $gte: since },
     photoUrl: { $exists: true, $ne: null },
   })
-    .select("habitType checkedInAt photoUrl reviewStatus")
+    .sort({ checkedInAt: -1 })
+    .select("habitId checkedInAt photoUrl reviewStatus")
     .lean();
 
   return res.json({ checkIns });
@@ -70,9 +74,34 @@ buddyRouter.post("/checkins/:checkInId/review", requireAuth, async (req: AuthedR
   const isBuddy = await areBuddies(req.userId!, String(checkIn.userId));
   if (!isBuddy) return res.status(403).json({ error: "You're not buddies with this user." });
 
-  checkIn.reviewStatus = parsed.data.action === "approve" ? "approved" : "flagged";
-  checkIn.reviewedBy = req.userId as unknown as typeof checkIn.reviewedBy;
-  await checkIn.save();
+  const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
+  const dateKey = new Intl.DateTimeFormat("en-CA", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(checkIn.checkedInAt);
+
+  if (parsed.data.action === "approve") {
+    checkIn.reviewStatus = "approved";
+    checkIn.verified = true;
+    checkIn.reviewedBy = req.userId as unknown as typeof checkIn.reviewedBy;
+    await checkIn.save();
+
+    await updateStreak(checkIn.userId, checkIn.habitId, dateKey);
+  } else {
+    checkIn.reviewStatus = "flagged";
+    checkIn.verified = false;
+    checkIn.reviewedBy = req.userId as unknown as typeof checkIn.reviewedBy;
+    await checkIn.save();
+
+    const habitId = checkIn.habitId;
+    const streak = await Streak.findOne({ userId: checkIn.userId, habitId });
+    if (streak && streak.lastCheckInDateKey === dateKey) {
+      streak.currentStreak = 0;
+      await streak.save();
+    }
+  }
 
   return res.json({ reviewStatus: checkIn.reviewStatus });
 });

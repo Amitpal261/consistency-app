@@ -102,23 +102,37 @@ export function BuddyScreen() {
                     />
                   ) : null}
                   <Text style={typography.body}>
-                    {c.habitType} · {new Date(c.checkedInAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    Check-in · {new Date(c.checkedInAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </Text>
-                  {c.reviewStatus === "pending" ? (
-                    <View style={{ flexDirection: "row", gap: spacing.sm }}>
-                      <AppButton title="Approve" onPress={() => handleReview(buddy._id, c._id, "approve")} style={{ flex: 1 }} />
-                      <AppButton
-                        title="Flag"
-                        variant="danger"
-                        onPress={() => handleReview(buddy._id, c._id, "flag")}
-                        style={{ flex: 1 }}
-                      />
-                    </View>
-                  ) : (
-                    <Text style={{ color: c.reviewStatus === "approved" ? colors.success : colors.danger, fontWeight: "700" }}>
-                      {c.reviewStatus === "approved" ? "✅ Approved" : "🚩 Flagged"}
-                    </Text>
-                  )}
+{c.reviewStatus === "pending" ? (
+  <View style={{ flexDirection: "row", gap: spacing.sm }}>
+    <AppButton title="Approve" onPress={() => handleReview(buddy._id, c._id, "approve")} style={{ flex: 1 }} />
+    <AppButton
+      title="Flag"
+      variant="danger"
+      onPress={() => handleReview(buddy._id, c._id, "flag")}
+      style={{ flex: 1 }}
+    />
+  </View>
+) : (
+  <Text
+    style={{
+      color:
+        c.reviewStatus === "approved"
+          ? colors.success
+          : c.reviewStatus === "flagged"
+            ? colors.danger
+            : colors.warning,
+      fontWeight: "700",
+    }}
+  >
+    {c.reviewStatus === "approved"
+      ? "✅ Approved"
+      : c.reviewStatus === "flagged"
+        ? "🚩 Flagged"
+        : "⏱️ Auto-approved (you didn't review in time)"}
+  </Text>
+)}
                 </View>
               ))
             )}

@@ -8,7 +8,7 @@
 //   than generic.
 
 export const colors = {
-  background: "#0f0f10",
+  background: "#1e1b1a",
   surface: "#141A2A",
   surfaceElevated: "#1B2236",
   border: "#262F45",

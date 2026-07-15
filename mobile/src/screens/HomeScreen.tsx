@@ -1,17 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { FlatList, RefreshControl, Text, View } from "react-native";
 import { useAuth } from "../context/AuthContext";
-import { getStreaks } from "../lib/api";
+import { getHabitsWithStreaks, type Habit } from "../lib/api";
+import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { colors, spacing, typography } from "../theme/colors";
-
-type StreakRow = { habitType: string; currentStreak: number; bestStreak: number };
-
-const HABIT_LABELS: Record<string, string> = {
-  wake_up: "Wake up",
-  library: "Library",
-  custom: "Custom habit",
-};
 
 function flameColor(streak: number) {
   if (streak >= 14) return colors.accent;
@@ -19,15 +12,25 @@ function flameColor(streak: number) {
   return colors.textMuted;
 }
 
-export function HomeScreen() {
+function taskTypeLabel(habit: Habit): string {
+  if (habit.taskType === "time" && habit.timeWindow) {
+    const h = String(habit.timeWindow.hour).padStart(2, "0");
+    const m = String(habit.timeWindow.minute).padStart(2, "0");
+    return `Daily at ${h}:${m}`;
+  }
+  if (habit.taskType === "location_duration") return `${habit.requiredDurationMinutes ?? 0} min at location`;
+  return "Location check-in";
+}
+
+export function HomeScreen({ onSelectHabit, onAddHabit }: { onSelectHabit: (habit: Habit) => void; onAddHabit: () => void }) {
   const { token } = useAuth();
-  const [streaks, setStreaks] = useState<StreakRow[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const load = useCallback(async () => {
     if (!token) return;
-    const res = await getStreaks(token);
-    setStreaks(res.streaks as StreakRow[]);
+    const res = await getHabitsWithStreaks(token);
+    setHabits(res.habits);
   }, [token]);
 
   useEffect(() => {
@@ -36,10 +39,13 @@ export function HomeScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
-      <Text style={[typography.h1, { marginBottom: spacing.lg }]}>Your streaks</Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: spacing.lg }}>
+        <Text style={typography.h1}>Your habits</Text>
+        <AppButton title="+ Add" onPress={onAddHabit} style={{ paddingHorizontal: spacing.md }} />
+      </View>
       <FlatList
-        data={streaks}
-        keyExtractor={(item) => item.habitType}
+        data={habits}
+        keyExtractor={(item) => item._id}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -53,14 +59,18 @@ export function HomeScreen() {
         }
         ListEmptyComponent={
           <AppCard>
-            <Text style={typography.body}>No check-ins yet — go complete one to start your streak 🔥</Text>
+            <Text style={typography.body}>No habits yet — tap "+ Add" to create your first one.</Text>
           </AppCard>
         }
         renderItem={({ item }) => (
-          <AppCard style={{ marginBottom: spacing.md, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-            <View>
-              <Text style={typography.label}>{(HABIT_LABELS[item.habitType] ?? item.habitType).toUpperCase()}</Text>
-              <Text style={[typography.h2, { marginTop: 4 }]}>Best: {item.bestStreak} days</Text>
+          <AppCard
+            onTouchEnd={() => onSelectHabit(item)}
+            style={{ marginBottom: spacing.md, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={typography.h2}>{item.name}</Text>
+              <Text style={typography.label}>{taskTypeLabel(item).toUpperCase()}</Text>
+              <Text style={[typography.body, { marginTop: 4 }]}>Best: {item.bestStreak} days</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <Text style={{ fontSize: 28 }}>🔥</Text>

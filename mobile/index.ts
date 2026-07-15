@@ -2,6 +2,7 @@ import { registerRootComponent } from 'expo';
 import notifee from '@notifee/react-native';
 
 import App from './App';
+import './src/lib/geofence';
 
 // Required by notifee even if we don't need to do anything here — the
 // actual "where do we navigate to" logic runs later, on app startup, via
