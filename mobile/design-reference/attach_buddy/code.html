@@ -1,0 +1,303 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 990px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Task Buddy Attachment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.1);
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(186, 195, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .orb-glow {
+            filter: blur(40px);
+            background: #3f51b5;
+            opacity: 0.3;
+        }
+        .toggle-checkbox:checked + .toggle-slot {
+            background-color: #bac3ff;
+        }
+        .toggle-checkbox:checked + .toggle-slot .toggle-dot {
+            transform: translateX(100%);
+            background-color: #08218a;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#261a00",
+                        "background": "#131313",
+                        "inverse-primary": "#4355b9",
+                        "surface-variant": "#353534",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-bright": "#393939",
+                        "secondary-fixed": "#e4e2e1",
+                        "outline-variant": "#454652",
+                        "secondary-container": "#474747",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#00105c",
+                        "primary-container": "#3f51b5",
+                        "on-secondary": "#303030",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "on-tertiary-container": "#ffcc55",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#bac3ff",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#bac3ff",
+                        "tertiary": "#fabd00",
+                        "surface-container": "#201f1f",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-fixed": "#dee0ff",
+                        "primary": "#bac3ff",
+                        "on-surface-variant": "#c5c5d4",
+                        "on-tertiary": "#3f2e00",
+                        "on-secondary-container": "#b6b5b4",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "on-primary-container": "#cacfff",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-background": "#e5e2e1",
+                        "outline": "#8f909e",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "error-container": "#93000a",
+                        "on-primary": "#08218a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-edge": "24px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen dot-grid selection:bg-primary/30">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-base transition-opacity hover:opacity-80 active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Assign Buddies</h1>
+</div>
+<div class="text-primary font-label-caps tracking-widest bg-primary-container/20 px-sm py-xs rounded-full">
+            TASK ATTACH
+        </div>
+</header>
+<main class="pt-xl pb-32 px-margin-edge max-w-2xl mx-auto space-y-md">
+<!-- Context Header -->
+<section class="mt-lg mb-xl text-center relative">
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 orb-glow rounded-full"></div>
+<div class="relative z-10">
+<span class="font-label-caps text-primary uppercase tracking-[0.2em]">Current Task</span>
+<h2 class="font-headline-lg text-headline-lg mt-xs">Deep Work: Architecture Design</h2>
+</div>
+</section>
+<!-- Solo Mode Section -->
+<section class="glass-card p-md rounded-lg flex items-center justify-between group transition-all duration-300 hover:border-primary/40">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div>
+<h3 class="font-semibold text-on-surface">Solo Mode</h3>
+<p class="text-sm text-on-surface-variant">Disable all external monitoring for this task.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only toggle-checkbox" onchange="toggleSoloMode(this)" type="checkbox">
+<div class="toggle-slot w-14 h-8 bg-surface-container-highest rounded-full transition-colors duration-300 p-1 border border-outline-variant">
+<div class="toggle-dot w-6 h-6 bg-secondary rounded-full transition-transform duration-300 shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface">check</span>
+</div>
+</div>
+</label>
+</section>
+<!-- Buddy List Header -->
+<div class="flex items-center justify-between pt-md">
+<h4 class="font-label-caps text-on-surface-variant uppercase tracking-widest">Active Discipline Buddies</h4>
+<span class="text-xs text-primary bg-primary/10 px-2 py-1 rounded">8 Connections</span>
+</div>
+<!-- Buddy List -->
+<div class="space-y-sm" id="buddy-container">
+<!-- Buddy Item 1 -->
+<div class="glass-card p-sm rounded-lg flex items-center justify-between transition-all hover:translate-x-1 duration-300">
+<div class="flex items-center gap-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-primary/20 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-end portrait of a professional woman with a focused expression. She is in a minimalist office with soft blue ambient lighting that creates a Disciplined Serenity vibe. The photography style is crisp with a shallow depth of field, highlighting her calm and determined personality. The color palette is composed of deep indigos and soft greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEMVJovzgOwijogQb3rjZ6MjR4NTXL5tYflaAZelqkCQPUj9wr27tWSWdn5ht-E878yL3-qA97e8XB_S1jm20GIpUTz1lZEgd10xjRvTuRKf7GWTqopLuR8JLs9xUl50cp4VS7Ioz0gLQfoBp6j4GVVcUfUWdrGgI6otat2HbLRETq-a4KZRswK8EShKjLfpAVnBhFn5U79nvs44zszDFB3Dv-ShmuMTPxmvjho2bJD-FHTyLI6djcxQrpV5S8TkDhIALLZmuW-Hs">
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-background"></div>
+</div>
+<div>
+<div class="flex items-center gap-xs">
+<h4 class="font-semibold text-on-surface">Elena Vance</h4>
+<span class="text-[10px] font-label-caps text-tertiary bg-tertiary/10 px-1 rounded">STREAK: 12d</span>
+</div>
+<p class="text-xs text-on-surface-variant">Accountability Partner</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox buddy-toggle" type="checkbox">
+<div class="toggle-slot w-12 h-7 bg-surface-container-highest rounded-full transition-colors duration-300 p-1 border border-outline-variant">
+<div class="toggle-dot w-5 h-5 bg-secondary rounded-full transition-transform duration-300 shadow-sm"></div>
+</div>
+</label>
+</div>
+<!-- Buddy Item 2 -->
+<div class="glass-card p-sm rounded-lg flex items-center justify-between transition-all hover:translate-x-1 duration-300">
+<div class="flex items-center gap-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-primary/20 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene, focused man in a high-tech home studio. The lighting is low-key with a warm amber glow reflecting off his face, symbolizing productivity and discipline. The background is a blurred arrangement of high-end equipment. The overall aesthetic is minimalist, sleek, and immersive, aligned with the Disciplined Serenity theme of deep dark modes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCms_iYActWK4npSzh7LzS3cGaB6lfMBH0gbXkDhSG-kPVUud5wOqEQgixWO6BPh6GQe_mUAZVhQw_rB3wIxo0mAaR-EcM6R4WordL8UEO3zTg8U-aVyGjVc2ujeB5i-WY0bY-s6k1fTFMadl4lGwu8U-6vSpb52GPYImQHldZFOGDp3ZcNC0hPDz2Ila71lEi_8Ca-m1dnNNlWVxRic38mrfwFnQf4kIZalbjXfbyr3DIMtEeLUBI3InNt4x9UuNnUr9awx6WOVg">
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-outline rounded-full border-2 border-background"></div>
+</div>
+<div>
+<div class="flex items-center gap-xs">
+<h4 class="font-semibold text-on-surface">Marcus Thorne</h4>
+<span class="text-[10px] font-label-caps text-on-surface-variant bg-surface-variant px-1 rounded">IDLE</span>
+</div>
+<p class="text-xs text-on-surface-variant">Focus Buddy</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only toggle-checkbox buddy-toggle" type="checkbox">
+<div class="toggle-slot w-12 h-7 bg-surface-container-highest rounded-full transition-colors duration-300 p-1 border border-outline-variant">
+<div class="toggle-dot w-5 h-5 bg-secondary rounded-full transition-transform duration-300 shadow-sm"></div>
+</div>
+</label>
+</div>
+<!-- Buddy Item 3 -->
+<div class="glass-card p-sm rounded-lg flex items-center justify-between transition-all hover:translate-x-1 duration-300">
+<div class="flex items-center gap-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-primary/20 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a calm woman in a high-fashion athletic outfit. The setting is a minimalist architectural space with soft morning sunlight filtering through, creating a warm, paper-like lighting. The mood is one of quiet determination and professional focus. The visual style is premium minimalism with a soft-touch texture, highlighting the brand's commitment to high-achievers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCradVAKV98gn3KICVqSTMLhdwLfVDJi4LZ87cWmBxh3dP9wpmG8u_8yudh03id2981iIkTjDKHnrPT3A4LQsKxF56JSLmEPTohCJfDCarrPs3LAstCB4RoyCEBxw6gHZNGWBK91OPvdoDn_xfCkCovUmB74CxfA-R-vn7gfOYuiK2nZ-V8fc9CoaifdmalQZV7inNsmOKA19iCOeL7EIWuSW1sDO-kEKXxXZLutOGmHOKICbqPGe8XMSFLFUT4gOCtP84_Jw8fa58">
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-background animate-pulse"></div>
+</div>
+<div>
+<div class="flex items-center gap-xs">
+<h4 class="font-semibold text-on-surface">Sarah Chen</h4>
+<span class="text-[10px] font-label-caps text-tertiary bg-tertiary/10 px-1 rounded">FOCUSING</span>
+</div>
+<p class="text-xs text-on-surface-variant">Team Mentor</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox buddy-toggle" type="checkbox">
+<div class="toggle-slot w-12 h-7 bg-surface-container-highest rounded-full transition-colors duration-300 p-1 border border-outline-variant">
+<div class="toggle-dot w-5 h-5 bg-secondary rounded-full transition-transform duration-300 shadow-sm"></div>
+</div>
+</label>
+</div>
+<!-- Add New Buddy Prompt -->
+<button class="w-full border-2 border-dashed border-outline-variant/30 rounded-lg p-md text-on-surface-variant hover:border-primary/40 hover:text-primary transition-all flex flex-col items-center gap-xs">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-label-caps text-xs">Invite New Buddy</span>
+</button>
+</div>
+</main>
+<!-- Floating Action Row -->
+<div class="fixed bottom-xl left-0 w-full px-margin-edge flex justify-center gap-md z-40 pointer-events-none">
+<button class="pointer-events-auto h-16 w-16 rounded-full bg-surface-container-highest text-secondary border border-outline-variant/30 flex items-center justify-center shadow-lg transition-transform active:scale-90 hover:bg-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="pointer-events-auto h-16 px-lg rounded-full bg-primary text-on-primary font-label-caps tracking-[0.15em] flex items-center justify-center shadow-xl transition-all active:scale-95 hover:shadow-primary/20">
+            CONFIRM SELECTION
+        </button>
+</div>
+<!-- Bottom Navigation Shell (Filter Applied: Transactional Hidden) -->
+<!-- Nav excluded as per Destination Rule for focused task configuration -->
+<script>
+        function toggleSoloMode(checkbox) {
+            const buddyContainer = document.getElementById('buddy-container');
+            const buddyToggles = document.querySelectorAll('.buddy-toggle');
+            
+            if (checkbox.checked) {
+                buddyContainer.style.opacity = '0.4';
+                buddyContainer.style.pointerEvents = 'none';
+                buddyToggles.forEach(t => t.checked = false);
+                
+                // Visual feedback
+                const glow = document.querySelector('.orb-glow');
+                glow.style.background = '#ffb4ab'; // Error/Red color for solo lock
+            } else {
+                buddyContainer.style.opacity = '1';
+                buddyContainer.style.pointerEvents = 'auto';
+                
+                // Reset visual feedback
+                const glow = document.querySelector('.orb-glow');
+                glow.style.background = '#3f51b5'; 
+            }
+        }
+
+        // Micro-interaction for toggle dots
+        document.querySelectorAll('.toggle-checkbox').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const parent = e.target.closest('section, div');
+                if(e.target.checked) {
+                    parent.classList.add('ring-1', 'ring-primary/20');
+                } else {
+                    parent.classList.remove('ring-1', 'ring-primary/20');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 884px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.1);
+        }
+
+        .dot-grid {
+            background-image: radial-gradient(rgba(186, 195, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .orb-glow {
+            filter: blur(40px);
+            background: radial-gradient(circle, rgba(186, 195, 255, 0.15) 0%, rgba(186, 195, 255, 0) 70%);
+        }
+
+        @keyframes pulse-gentle {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+
+        .animate-pulse-gentle {
+            animation: pulse-gentle 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#b6b5b4",
+                      "error": "#ffb4ab",
+                      "on-background": "#e5e2e1",
+                      "on-primary-fixed-variant": "#293ca0",
+                      "surface-dim": "#131313",
+                      "surface-tint": "#bac3ff",
+                      "surface-variant": "#353534",
+                      "secondary-fixed": "#e4e2e1",
+                      "on-surface": "#e5e2e1",
+                      "tertiary-container": "#745600",
+                      "on-tertiary": "#3f2e00",
+                      "outline": "#8f909e",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-container": "#474747",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "surface-bright": "#393939",
+                      "tertiary-fixed-dim": "#fabd00",
+                      "on-primary": "#08218a",
+                      "secondary": "#c8c6c6",
+                      "tertiary-fixed": "#ffdf9e",
+                      "secondary-fixed-dim": "#c8c6c6",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "on-error": "#690005",
+                      "background": "#131313",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#261a00",
+                      "on-surface-variant": "#c5c5d4",
+                      "primary-fixed-dim": "#bac3ff",
+                      "surface-container-low": "#1c1b1b",
+                      "outline-variant": "#454652",
+                      "surface-container-highest": "#353534",
+                      "surface-container-high": "#2a2a2a",
+                      "primary-fixed": "#dee0ff",
+                      "on-primary-fixed": "#00105c",
+                      "on-secondary-fixed-variant": "#474747",
+                      "surface-container": "#201f1f",
+                      "on-tertiary-container": "#ffcc55",
+                      "surface": "#131313",
+                      "primary": "#bac3ff",
+                      "on-primary-container": "#cacfff",
+                      "on-secondary": "#303030",
+                      "tertiary": "#fabd00",
+                      "primary-container": "#3f51b5",
+                      "inverse-primary": "#4355b9",
+                      "error-container": "#93000a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "inverse-on-surface": "#313030"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "margin-edge": "24px",
+                      "xs": "4px",
+                      "md": "24px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Open Sans"],
+                      "timer-numeric": ["Montserrat"],
+                      "display-orb": ["Montserrat"],
+                      "headline-lg": ["Montserrat"],
+                      "label-caps": ["Montserrat"],
+                      "headline-lg-mobile": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md text-body-md dot-grid min-h-screen flex flex-col items-center justify-center overflow-hidden">
+<!-- Atmospheric Background Effects -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 orb-glow animate-pulse-gentle rounded-full"></div>
+</div>
+<!-- Top Bar (Minimal, No Nav Shell as per Task-Focused Suppression) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-caps text-label-caps">BACK</span>
+</button>
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface opacity-30">Consistency</div>
+<div class="w-10"></div> <!-- Spacer -->
+</header>
+<main class="relative z-10 w-full max-w-md px-margin-edge flex flex-col items-center text-center">
+<!-- Icon Anchor -->
+<div class="mb-lg">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'wght' 200;">lock_reset</span>
+</div>
+</div>
+<!-- Header Section -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile mb-sm md:font-headline-lg md:text-headline-lg text-on-surface">Reset Password</h1>
+<p class="text-on-surface-variant max-w-[280px] mb-xl font-body-md text-body-md leading-relaxed">
+            Enter your email and we'll send you a secure link to regain access.
+        </p>
+<!-- Reset Form -->
+<form class="w-full space-y-lg" id="reset-form">
+<div class="relative group">
+<label class="absolute -top-6 left-0 font-label-caps text-label-caps text-on-surface-variant opacity-60 group-focus-within:text-primary transition-colors" for="email">EMAIL ADDRESS</label>
+<div class="relative">
+<input class="w-full bg-transparent border-b-2 border-outline-variant py-4 outline-none focus:border-primary transition-all duration-500 font-body-md text-body-md placeholder:text-on-surface-variant/30" id="email" name="email" placeholder="your@email.com" required="" type="email">
+<div class="absolute bottom-0 left-0 h-[2px] w-0 bg-primary shadow-[0_0_15px_rgba(186,195,255,0.6)] transition-all duration-700" id="input-glow"></div>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="pt-base">
+<button class="w-full h-16 bg-primary text-on-primary font-label-caps text-label-caps rounded-lg hover:shadow-[0_0_30px_rgba(186,195,255,0.3)] hover:opacity-90 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group" type="submit">
+                    SEND INSTRUCTIONS
+                    <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">send</span>
+</button>
+</div>
+</form>
+<!-- Supportive Footer -->
+<div class="mt-xl text-center">
+<p class="text-on-surface-variant opacity-60 font-body-md mb-md">
+                Remembered it? 
+                <a class="text-primary hover:underline font-semibold transition-all" href="#">Log In</a>
+</p>
+<div class="flex items-center justify-center gap-4 pt-sm">
+<div class="h-px w-8 bg-outline-variant/30"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant/40">SECURE ENCRYPTION</span>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center px-margin-edge opacity-0 pointer-events-none transition-all duration-500" id="success-modal">
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-2xl"></div>
+<div class="glass-card p-xl rounded-xl max-w-sm w-full relative flex flex-col items-center text-center shadow-2xl scale-90 transition-transform duration-500" id="modal-content">
+<div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-sm text-on-surface">Email Sent</h2>
+<p class="text-on-surface-variant mb-xl font-body-md">Check your inbox for a reset link. It might take a minute to arrive.</p>
+<button class="w-full py-4 border border-outline-variant text-on-surface font-label-caps text-label-caps rounded-lg hover:bg-white/5 transition-colors" onclick="closeModal()">
+                DONE
+            </button>
+</div>
+</div>
+<script>
+        const form = document.getElementById('reset-form');
+        const emailInput = document.getElementById('email');
+        const inputGlow = document.getElementById('input-glow');
+        const successModal = document.getElementById('success-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        // Focus UI Interaction
+        emailInput.addEventListener('focus', () => {
+            inputGlow.style.width = '100%';
+        });
+
+        emailInput.addEventListener('blur', () => {
+            if (!emailInput.value) {
+                inputGlow.style.width = '0%';
+            }
+        });
+
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Visual feedback
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span>`;
+
+            setTimeout(() => {
+                successModal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-90');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1200);
+        });
+
+        function closeModal() {
+            successModal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('scale-90');
+        }
+    </script>
+</body></html>

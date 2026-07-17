@@ -1,0 +1,227 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Geofence Check-in</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.3);
+        }
+        .orb-glow {
+            box-shadow: 0 0 60px 20px rgba(186, 195, 255, 0.15);
+        }
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b6b5b4",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "on-tertiary": "#3f2e00",
+                        "outline": "#8f909e",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-primary": "#08218a",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#454652",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105c",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#ffcc55",
+                        "surface": "#131313",
+                        "primary": "#bac3ff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary": "#303030",
+                        "tertiary": "#fabd00",
+                        "primary-container": "#3f51b5",
+                        "inverse-primary": "#4355b9",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-edge": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-hidden dot-grid">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</h1>
+</div>
+<div class="text-primary font-label-caps tracking-widest bg-primary-container/20 px-sm py-xs rounded-full">
+            12d Streak
+        </div>
+</header>
+<!-- Main Content: Map & Geofence -->
+<main class="flex-grow relative w-full flex flex-col items-center justify-center pt-xl">
+<!-- Map Canvas (Background) -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full grayscale brightness-50 contrast-125 opacity-40" data-alt="A highly stylized dark mode digital map of a city intersection featuring deep charcoal and midnight blue streets. The aesthetic is clean and minimalist, with subtle glowing lines for major roads. A large, translucent indigo circular geofence with a glowing edge is centered on a specific architectural building footprint. The lighting is moody and focused, emphasizing the precision of the location technology within a serene urban environment." data-location="New York Public Library" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8ITsxZTHcI05Y6AeODj4yAsk4MQ1XQWD_-0H-_l0O_3Xnx_yWp_KJvJh4yIkZ9igvJA_BWAJ5RFpItCcKsYatU4zJBmWb0Y-TrV1Ey5mdx4gDAoJ1QrWLIdXZK2oz43RDg1-6Tx6JrMapvk55U-dfgNPwgMVwqMtd5DvY9d02T2EQPTIjXQnwMAdC4_QJfAFxllkN17cFfT7D6H4y0_ip4qkOo_fHJQT8TxeRGiC_pqHaFtytrpLsjmwq9wHmoahprZ1SohrvokA'); background-size: cover; background-position: center;">
+</div>
+<!-- Shader Overlay for Atmospheric Depth -->
+
+</div>
+<!-- Central Orb / Destination Focus -->
+<div class="relative z-10 flex flex-col items-center">
+<!-- Pulsing Geofence Indicator -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<div class="absolute w-full h-full rounded-full border-2 border-primary/40 animate-pulse-ring"></div>
+<div class="absolute w-4/5 h-4/5 rounded-full border border-primary/20 animate-pulse-ring" style="animation-delay: 1s;"></div>
+<!-- The Central Orb -->
+<div class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center orb-glow transition-all duration-500 hover:scale-110 active:scale-95">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Arrival Text -->
+<div class="mt-lg text-center px-margin-edge">
+<div class="flex items-center justify-center gap-xs mb-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-primary tracking-widest">GEOFENCE ACTIVE</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">
+                    You've reached your destination
+                </h2>
+<p class="font-headline-lg text-primary font-bold">Library</p>
+</div>
+</div>
+<!-- Confirmation Action Row -->
+<div class="fixed bottom-xl left-0 w-full px-margin-edge z-50 flex flex-col items-center gap-md">
+<!-- Contextual Card (Optional/Minimal) -->
+<div class="glass-card w-full max-w-md p-md rounded-lg flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-caps">COMMITMENT</p>
+<p class="text-on-surface font-semibold">Deep Work Session (2h)</p>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="info">info</span>
+</div>
+</div>
+<!-- The Big Action Button -->
+<button class="w-full max-w-md h-xl rounded-full bg-primary text-on-primary font-label-caps text-lg flex items-center justify-center gap-sm shadow-[0_0_30px_rgba(186,195,255,0.4)] hover:brightness-110 transition-all active:scale-[0.98]">
+                CONFIRM ARRIVAL
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Secondary Action -->
+<button class="text-on-surface-variant font-label-caps hover:text-on-surface transition-colors">
+                Not here? Update location
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation (Shared Component Placeholder) -->
+<!-- Suppressed due to Destination Rule (Transactional/Task-Focused Screen) -->
+<script>
+        // Micro-interaction for the central orb and button
+        document.querySelector('button').addEventListener('mousedown', () => {
+            const orb = document.querySelector('.orb-glow');
+            orb.style.transform = 'scale(1.2)';
+            orb.style.boxShadow = '0 0 80px 30px rgba(186, 195, 255, 0.4)';
+        });
+
+        document.querySelector('button').addEventListener('mouseup', () => {
+            const orb = document.querySelector('.orb-glow');
+            orb.style.transform = 'scale(1)';
+            orb.style.boxShadow = '0 0 60px 20px rgba(186, 195, 255, 0.15)';
+        });
+
+        // Simple haptic-like visual feedback on map drag (preventing actual drag but giving feel)
+        const mapArea = document.querySelector('[data-location]');
+        mapArea.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            mapArea.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
+        });
+        
+        mapArea.addEventListener('mouseleave', () => {
+            mapArea.style.transform = `scale(1) translate(0, 0)`;
+        });
+    </script>
+</body></html>

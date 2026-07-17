@@ -2420,3 +2420,407 @@
 {"_e":"metro:bundling:progress","_t":1784200657495,"id":"2","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1784200657546,"id":"2","total":1,"ms":50.3105}
 {"_e":"metro:client_log","_t":1784200674554,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"root:init","_t":1784278916961,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784278916963,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784278916968,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784278918942,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784278920473,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784278922209,"plugins":[]}
+{"_e":"metro:instantiate","_t":1784278927276,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1784278932140,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784278932141,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784278932159,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784278932263,"id":"1","progress":0.07111111111111111,"total":45,"current":12}
+{"_e":"metro:bundling:progress","_t":1784278932367,"id":"1","progress":0.07111111111111111,"total":204,"current":29}
+{"_e":"metro:bundling:progress","_t":1784278932466,"id":"1","progress":0.09718238292710911,"total":247,"current":77}
+{"_e":"metro:bundling:progress","_t":1784278932566,"id":"1","progress":0.12326922887943319,"total":319,"current":112}
+{"_e":"metro:bundling:progress","_t":1784278932666,"id":"1","progress":0.1802690303049218,"total":358,"current":152}
+{"_e":"metro:bundling:progress","_t":1784278932767,"id":"1","progress":0.2537174211248285,"total":405,"current":204}
+{"_e":"metro:bundling:progress","_t":1784278932867,"id":"1","progress":0.4023510947826486,"total":443,"current":281}
+{"_e":"metro:bundling:progress","_t":1784278932967,"id":"1","progress":0.4427366863905325,"total":520,"current":346}
+{"_e":"metro:bundling:progress","_t":1784278933069,"id":"1","progress":0.4760294745029297,"total":587,"current":405}
+{"_e":"metro:bundling:progress","_t":1784278933170,"id":"1","progress":0.5202902445579146,"total":610,"current":440}
+{"_e":"metro:bundling:progress","_t":1784278933270,"id":"1","progress":0.6102763288786114,"total":649,"current":507}
+{"_e":"metro:bundling:progress","_t":1784278933370,"id":"1","progress":0.7317769816609327,"total":671,"current":574}
+{"_e":"metro:bundling:progress","_t":1784278933471,"id":"1","progress":0.7317769816609327,"total":700,"current":598}
+{"_e":"metro:bundling:progress","_t":1784278933604,"id":"1","progress":0.8257808206837529,"total":745,"current":677}
+{"_e":"metro:bundling:progress","_t":1784278933704,"id":"1","progress":0.8257808206837529,"total":815,"current":737}
+{"_e":"metro:bundling:progress","_t":1784278933804,"id":"1","progress":0.8902477508650518,"total":850,"current":802}
+{"_e":"metro:bundling:progress","_t":1784278933905,"id":"1","progress":0.9276264095648666,"total":868,"current":836}
+{"_e":"metro:bundling:progress","_t":1784278934014,"id":"1","progress":0.9977515465235013,"total":889,"current":888}
+{"_e":"metro:bundling:progress","_t":1784278935605,"id":"1","progress":0.999,"total":889,"current":889}
+{"_e":"metro:bundling:done","_t":1784278935771,"id":"1","total":889,"ms":3630.6613}
+{"_e":"root:init","_t":1784279042956,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784279042957,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784279042961,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784279043466,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784279044013,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784279044324,"plugins":[]}
+{"_e":"metro:instantiate","_t":1784279049170,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"root:init","_t":1784279912862,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784279912863,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784279912867,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784279913489,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784279914113,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784279914722,"plugins":[]}
+{"_e":"metro:instantiate","_t":1784279919860,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1784280040079,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784280040080,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784280040085,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784280041495,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1784280041596,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1784280041762,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1784280041866,"id":"1","progress":0.09,"total":8,"current":3}
+{"_e":"metro:bundling:progress","_t":1784280043571,"id":"1","progress":0.16000000000000003,"total":8,"current":4}
+{"_e":"metro:bundling:progress","_t":1784280043674,"id":"1","progress":0.16000000000000003,"total":19,"current":7}
+{"_e":"metro:bundling:progress","_t":1784280043776,"id":"1","progress":0.16000000000000003,"total":55,"current":10}
+{"_e":"metro:bundling:progress","_t":1784280043881,"id":"1","progress":0.16000000000000003,"total":79,"current":20}
+{"_e":"metro:bundling:progress","_t":1784280043983,"id":"1","progress":0.16000000000000003,"total":83,"current":29}
+{"_e":"metro:bundling:progress","_t":1784280044083,"id":"1","progress":0.19202120944325213,"total":89,"current":39}
+{"_e":"metro:bundling:progress","_t":1784280044192,"id":"1","progress":0.25507601265177027,"total":99,"current":50}
+{"_e":"metro:bundling:progress","_t":1784280044301,"id":"1","progress":0.28090000000000004,"total":100,"current":53}
+{"_e":"metro:bundling:progress","_t":1784280044415,"id":"1","progress":0.28090000000000004,"total":204,"current":57}
+{"_e":"metro:bundling:progress","_t":1784280044558,"id":"1","progress":0.28090000000000004,"total":243,"current":66}
+{"_e":"metro:bundling:progress","_t":1784280044667,"id":"1","progress":0.28090000000000004,"total":244,"current":74}
+{"_e":"metro:bundling:progress","_t":1784280044809,"id":"1","progress":0.28090000000000004,"total":255,"current":84}
+{"_e":"metro:bundling:progress","_t":1784280044915,"id":"1","progress":0.28090000000000004,"total":260,"current":94}
+{"_e":"metro:bundling:progress","_t":1784280045024,"id":"1","progress":0.28090000000000004,"total":266,"current":104}
+{"_e":"metro:bundling:progress","_t":1784280045133,"id":"1","progress":0.28090000000000004,"total":266,"current":105}
+{"_e":"metro:bundling:progress","_t":1784280045234,"id":"1","progress":0.28090000000000004,"total":274,"current":109}
+{"_e":"metro:bundling:progress","_t":1784280045333,"id":"1","progress":0.28090000000000004,"total":288,"current":116}
+{"_e":"metro:bundling:progress","_t":1784280045438,"id":"1","progress":0.28090000000000004,"total":299,"current":124}
+{"_e":"metro:bundling:progress","_t":1784280045548,"id":"1","progress":0.28090000000000004,"total":301,"current":129}
+{"_e":"metro:bundling:progress","_t":1784280045658,"id":"1","progress":0.28090000000000004,"total":317,"current":133}
+{"_e":"metro:bundling:progress","_t":1784280045759,"id":"1","progress":0.28090000000000004,"total":323,"current":144}
+{"_e":"metro:bundling:progress","_t":1784280045858,"id":"1","progress":0.28090000000000004,"total":344,"current":157}
+{"_e":"metro:bundling:progress","_t":1784280045959,"id":"1","progress":0.28090000000000004,"total":349,"current":166}
+{"_e":"metro:bundling:progress","_t":1784280046096,"id":"1","progress":0.28090000000000004,"total":354,"current":171}
+{"_e":"metro:bundling:progress","_t":1784280046204,"id":"1","progress":0.28090000000000004,"total":360,"current":173}
+{"_e":"metro:bundling:progress","_t":1784280046370,"id":"1","progress":0.28090000000000004,"total":360,"current":176}
+{"_e":"metro:bundling:progress","_t":1784280046472,"id":"1","progress":0.28090000000000004,"total":365,"current":179}
+{"_e":"metro:bundling:progress","_t":1784280046591,"id":"1","progress":0.28090000000000004,"total":366,"current":181}
+{"_e":"metro:bundling:progress","_t":1784280046786,"id":"1","progress":0.28090000000000004,"total":368,"current":185}
+{"_e":"metro:bundling:progress","_t":1784280046802,"id":"1","progress":0.28090000000000004,"total":368,"current":186}
+{"_e":"metro:bundling:progress","_t":1784280046903,"id":"1","progress":0.28090000000000004,"total":371,"current":191}
+{"_e":"metro:bundling:progress","_t":1784280047006,"id":"1","progress":0.28576986192847437,"total":376,"current":201}
+{"_e":"metro:bundling:progress","_t":1784280047113,"id":"1","progress":0.28576986192847437,"total":395,"current":210}
+{"_e":"metro:bundling:progress","_t":1784280047215,"id":"1","progress":0.28576986192847437,"total":421,"current":223}
+{"_e":"metro:bundling:progress","_t":1784280047321,"id":"1","progress":0.2924565721768519,"total":429,"current":232}
+{"_e":"metro:bundling:progress","_t":1784280047421,"id":"1","progress":0.31544379808594486,"total":438,"current":246}
+{"_e":"metro:bundling:progress","_t":1784280047528,"id":"1","progress":0.3369789336747549,"total":441,"current":256}
+{"_e":"metro:bundling:progress","_t":1784280047630,"id":"1","progress":0.3447996920213051,"total":453,"current":266}
+{"_e":"metro:bundling:progress","_t":1784280047731,"id":"1","progress":0.35394968755007206,"total":474,"current":282}
+{"_e":"metro:bundling:progress","_t":1784280047832,"id":"1","progress":0.36986255726780504,"total":490,"current":298}
+{"_e":"metro:bundling:progress","_t":1784280047931,"id":"1","progress":0.382509959516782,"total":498,"current":308}
+{"_e":"metro:bundling:progress","_t":1784280048034,"id":"1","progress":0.382509959516782,"total":520,"current":319}
+{"_e":"metro:bundling:progress","_t":1784280048135,"id":"1","progress":0.382509959516782,"total":537,"current":331}
+{"_e":"metro:bundling:progress","_t":1784280048237,"id":"1","progress":0.3861091419869775,"total":552,"current":343}
+{"_e":"metro:bundling:progress","_t":1784280048341,"id":"1","progress":0.4057826015374678,"total":562,"current":358}
+{"_e":"metro:bundling:progress","_t":1784280048440,"id":"1","progress":0.4135820451843044,"total":580,"current":373}
+{"_e":"metro:bundling:progress","_t":1784280048546,"id":"1","progress":0.4606257602059494,"total":582,"current":395}
+{"_e":"metro:bundling:progress","_t":1784280048648,"id":"1","progress":0.5035633731297458,"total":582,"current":413}
+{"_e":"metro:bundling:progress","_t":1784280048752,"id":"1","progress":0.5035633731297458,"total":595,"current":421}
+{"_e":"metro:bundling:progress","_t":1784280048853,"id":"1","progress":0.5035633731297458,"total":620,"current":430}
+{"_e":"metro:bundling:progress","_t":1784280048953,"id":"1","progress":0.5035633731297458,"total":623,"current":437}
+{"_e":"metro:bundling:progress","_t":1784280049055,"id":"1","progress":0.5035633731297458,"total":629,"current":446}
+{"_e":"metro:bundling:progress","_t":1784280049160,"id":"1","progress":0.5147493071302596,"total":630,"current":452}
+{"_e":"metro:bundling:progress","_t":1784280049263,"id":"1","progress":0.5316361832723665,"total":635,"current":463}
+{"_e":"metro:bundling:progress","_t":1784280049386,"id":"1","progress":0.5408618017236034,"total":635,"current":467}
+{"_e":"metro:bundling:progress","_t":1784280049483,"id":"1","progress":0.553105593133183,"total":636,"current":473}
+{"_e":"metro:bundling:progress","_t":1784280049599,"id":"1","progress":0.553105593133183,"total":649,"current":478}
+{"_e":"metro:bundling:progress","_t":1784280049701,"id":"1","progress":0.5561620224073542,"total":649,"current":484}
+{"_e":"metro:bundling:progress","_t":1784280049803,"id":"1","progress":0.5799408284023668,"total":650,"current":495}
+{"_e":"metro:bundling:progress","_t":1784280049903,"id":"1","progress":0.5944292290659052,"total":655,"current":505}
+{"_e":"metro:bundling:progress","_t":1784280050004,"id":"1","progress":0.5944292290659052,"total":663,"current":511}
+{"_e":"metro:bundling:progress","_t":1784280050105,"id":"1","progress":0.619536558557303,"total":667,"current":525}
+{"_e":"metro:bundling:progress","_t":1784280050212,"id":"1","progress":0.6438095153986608,"total":673,"current":540}
+{"_e":"metro:bundling:progress","_t":1784280050314,"id":"1","progress":0.6834748933178943,"total":681,"current":563}
+{"_e":"metro:bundling:progress","_t":1784280050412,"id":"1","progress":0.7054043803724397,"total":687,"current":577}
+{"_e":"metro:bundling:progress","_t":1784280050512,"id":"1","progress":0.7165367459227803,"total":697,"current":590}
+{"_e":"metro:bundling:progress","_t":1784280050616,"id":"1","progress":0.7165367459227803,"total":729,"current":606}
+{"_e":"metro:bundling:progress","_t":1784280050729,"id":"1","progress":0.7165367459227803,"total":739,"current":618}
+{"_e":"metro:bundling:progress","_t":1784280050829,"id":"1","progress":0.7165367459227803,"total":747,"current":630}
+{"_e":"metro:bundling:progress","_t":1784280050930,"id":"1","progress":0.7165367459227803,"total":757,"current":639}
+{"_e":"metro:bundling:progress","_t":1784280051033,"id":"1","progress":0.7279690261762478,"total":763,"current":651}
+{"_e":"metro:bundling:progress","_t":1784280051146,"id":"1","progress":0.742386954713714,"total":766,"current":660}
+{"_e":"metro:bundling:progress","_t":1784280051246,"id":"1","progress":0.7659094867602023,"total":769,"current":673}
+{"_e":"metro:bundling:progress","_t":1784280051350,"id":"1","progress":0.7659094867602023,"total":779,"current":679}
+{"_e":"metro:bundling:progress","_t":1784280051453,"id":"1","progress":0.7751167051907102,"total":786,"current":692}
+{"_e":"metro:bundling:progress","_t":1784280051559,"id":"1","progress":0.791874699567377,"total":790,"current":703}
+{"_e":"metro:bundling:progress","_t":1784280051657,"id":"1","progress":0.791874699567377,"total":800,"current":711}
+{"_e":"metro:bundling:progress","_t":1784280051761,"id":"1","progress":0.8014937718049017,"total":802,"current":718}
+{"_e":"metro:bundling:progress","_t":1784280051861,"id":"1","progress":0.8033470507544581,"total":810,"current":726}
+{"_e":"metro:bundling:progress","_t":1784280051961,"id":"1","progress":0.8221927810606345,"total":815,"current":739}
+{"_e":"metro:bundling:progress","_t":1784280052069,"id":"1","progress":0.8274556809355343,"total":819,"current":745}
+{"_e":"metro:bundling:progress","_t":1784280052185,"id":"1","progress":0.8349029792021307,"total":823,"current":752}
+{"_e":"metro:bundling:progress","_t":1784280052285,"id":"1","progress":0.8382517923115763,"total":829,"current":759}
+{"_e":"metro:bundling:progress","_t":1784280052400,"id":"1","progress":0.8472869792422703,"total":830,"current":764}
+{"_e":"metro:bundling:progress","_t":1784280052503,"id":"1","progress":0.8589039457319543,"total":833,"current":772}
+{"_e":"metro:bundling:progress","_t":1784280052603,"id":"1","progress":0.8622448979591837,"total":840,"current":780}
+{"_e":"metro:bundling:progress","_t":1784280052707,"id":"1","progress":0.8826635934195362,"total":843,"current":792}
+{"_e":"metro:bundling:progress","_t":1784280052805,"id":"1","progress":0.8972731233395959,"total":853,"current":808}
+{"_e":"metro:bundling:progress","_t":1784280052906,"id":"1","progress":0.9046025036557385,"total":859,"current":817}
+{"_e":"metro:bundling:progress","_t":1784280053010,"id":"1","progress":0.9293675744639617,"total":862,"current":831}
+{"_e":"metro:bundling:progress","_t":1784280053111,"id":"1","progress":0.932146919663489,"total":869,"current":839}
+{"_e":"metro:bundling:progress","_t":1784280053213,"id":"1","progress":0.9635980654881559,"total":871,"current":855}
+{"_e":"metro:bundling:progress","_t":1784280053320,"id":"1","progress":0.9954181045366551,"total":872,"current":870}
+{"_e":"metro:bundling:progress","_t":1784280053897,"id":"1","progress":0.9977077371433382,"total":872,"current":871}
+{"_e":"metro:bundling:progress","_t":1784280053998,"id":"1","progress":0.9977077371433382,"total":875,"current":873}
+{"_e":"metro:bundling:progress","_t":1784280054135,"id":"1","progress":0.9977155918367347,"total":875,"current":874}
+{"_e":"metro:bundling:progress","_t":1784280054298,"id":"1","progress":0.999,"total":875,"current":875}
+{"_e":"metro:bundling:progress","_t":1784280054399,"id":"1","progress":0.999,"total":886,"current":885}
+{"_e":"metro:bundling:progress","_t":1784280054508,"id":"1","progress":0.999,"total":886,"current":886}
+{"_e":"metro:bundling:done","_t":1784280054898,"id":"1","total":886,"ms":14819.1412}
+{"_e":"metro:client_log","_t":1784280112162,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1784280366715,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (254:24)\n\n  252 |     justifyContent: \"center\",\n  253 |     paddingHorizontal: spacing.marginEdge,\n> 254 |     paddingTop: spacing.,\n      |                         ^\n  255 |     paddingBottom: spacing.sm,\n  256 |     gap: spacing.xl,\n  257 |     maxWidth: 400,","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1784280366902,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (254:24)\n\n  252 |     justifyContent: \"center\",\n  253 |     paddingHorizontal: spacing.marginEdge,\n> 254 |     paddingTop: spacing.,\n      |                         ^\n  255 |     paddingBottom: spacing.sm,\n  256 |     gap: spacing.xl,\n  257 |     maxWidth: 400,","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1784280386009,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (256:17)\n\n  254 |     paddingTop: spacing.lg,\n  255 |     paddingBottom: spacing.sm,\n> 256 |     gap: spacing.,\n      |                  ^\n  257 |     maxWidth: 400,\n  258 |     width: \"100%\",\n  259 |     alignSelf: \"center\",","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1784280568447,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (266:26)\n\n  264 |     alignItems: \"center\",\n  265 |     justifyContent: \"center\",\n> 266 |     marginBottom: spacing.,\n      |                           ^\n  267 |   },\n  268 |   orbGlow: {\n  269 |     position: \"absolute\",","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1784280630661,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (247:27)\n\n  245 |   scrollContent: {\n  246 |     flexGrow: 1,\n> 247 |     paddingBottom: spacing.,\n      |                            ^\n  248 |   },\n  249 |   main: {\n  250 |     flex: 1,","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1784280657649,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (254:24)\n\n  252 |     justifyContent: \"center\",\n  253 |     paddingHorizontal: spacing.marginEdge,\n> 254 |     paddingTop: spacing.,\n      |                         ^\n  255 |     paddingBottom: spacing.sm,\n  256 |     gap: spacing.sm,\n  257 |     maxWidth: 400,","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1784280820883,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1784280930626,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx: Unexpected token (223:27)\n\n  221 |   scrollContent: {\n  222 |     flexGrow: 1,\n> 223 |     paddingBottom: spacing.,\n      |                            ^\n  224 |   },\n  225 |   main: {\n  226 |     flex: 1,","importStack":null,"filename":"src\\screens\\LoginScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1784280985304,"level":"error","data":["[ReferenceError: Property 'bac' doesn't exist]"]}
+{"_e":"metro:client_log","_t":1784281008890,"level":"error","data":["[ReferenceError: Property 'backgroundIm' doesn't exist]"]}
+{"_e":"metro:bundling:failed","_t":1784281010629,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |   },\n  238 |   orbWrap: {\n  239 |     width: 96,","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281017704,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281019700,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281021648,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281024488,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281025569,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281031626,"id":null,"message":"Unable to resolve \"../assets/images/background.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/background.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/background.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/background.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281036766,"id":null,"message":"Unable to resolve \"../assets/images/.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281039495,"id":null,"message":"Unable to resolve \"../assets/images/l.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/l.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/l.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/l.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281043570,"id":null,"message":"Unable to resolve \"../assets/images/loginImage.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/images/loginImage.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/images/loginImage.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/images/loginImage.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281057611,"id":null,"message":"Unable to resolve \"../assets/loginImage.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/loginImage.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/loginImage.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/loginImage.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281069541,"id":null,"message":"Unable to resolve \"../assets/loginimage.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/loginimage.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/loginimage.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/loginimage.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281071404,"id":null,"message":"Unable to resolve \"../assets/loginImage.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../assets/loginImage.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../assets/loginImage.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../assets/loginImage.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281107121,"id":null,"message":"Unable to resolve module  from D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx:  could not be found within the project or in these directories:\n  node_modules\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"\"),\n      |                      ^^^^^^^^^^^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"","originModulePath":"D:\\My-App\\consistency-app\\mobile\\src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281108226,"id":null,"message":"Unable to resolve \"mobileassetsloginImage.jpeg\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"mobile\\assets\\loginImage.jpeg\"),\n      |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"mobileassetsloginImage.jpeg\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"mobileassetsloginImage.jpeg","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281112933,"id":null,"message":"Unable to resolve \"mobileassetsloginImage.jpeg\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"mobileassets\\loginImage.jpeg\"),\n      |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"mobileassetsloginImage.jpeg\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"mobileassetsloginImage.jpeg","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281119007,"id":null,"message":"Unable to resolve \"..\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"..\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"..\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"..","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281122185,"id":null,"message":"Unable to resolve \"../\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281134095,"id":null,"message":"Unable to resolve \"../\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281137133,"id":null,"message":"Unable to resolve \"../\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281163545,"id":null,"message":"Unable to resolve \"../../assets\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281165291,"id":null,"message":"Unable to resolve \"../../assets/\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281169004,"id":null,"message":"Unable to resolve \"../../assets/lo\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/lo\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/lo\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/lo","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281173342,"id":null,"message":"Unable to resolve \"../../assets/loginImage\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/loginImage\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/loginImage\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/loginImage","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281175133,"id":null,"message":"Unable to resolve \"../../assets/loginImage.png\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/loginImage.png\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/loginImage.png\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/loginImage.png","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281205420,"id":null,"message":"Unable to resolve \"../../assets/loginBa.jpeg\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/loginBa.jpeg\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/loginBa.jpeg\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/loginBa.jpeg","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281207079,"id":null,"message":"Unable to resolve \"../../assets/loginBackground.jpeg\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/loginBackground.jpeg\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/loginBackground.jpeg\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/loginBackground.jpeg","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:bundling:failed","_t":1784281208232,"id":null,"message":"Unable to resolve \"../../assets/loginBackground1.jpeg\" from \"src\\screens\\LoginScreen.tsx\"\n  234 |     width: \"100%\",\n  235 |     alignSelf: \"center\",\n> 236 |     backgroundImage: require(\"../../assets/loginBackground1.jpeg\"),\n      |                               ^\n  237 |     backgroundSize: \"cover\",\n  238 |     backgroundPosition: \"center\",\n  239 |     backgroundRepeat: \"no-repeat\",","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\screens\\LoginScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../assets/loginBackground1.jpeg\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/screens/LoginScreen\"\u001b[39m\n","filename":null,"targetModuleName":"../../assets/loginBackground1.jpeg","originModulePath":"src\\screens\\LoginScreen.tsx"}
+{"_e":"metro:client_log","_t":1784281285140,"level":"error","data":["[Error: Uncaught (in promise, id: 2): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1784281320148,"level":"error","data":["[Error: Uncaught (in promise, id: 3): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"root:init","_t":1784281600775,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784281600777,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784281600781,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784281601479,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784281602177,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784281602934,"plugins":[]}
+{"_e":"metro:instantiate","_t":1784281608150,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1784281608538,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784281608538,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784281608542,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784281609686,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1784281609786,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1784281609917,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1784281610021,"id":"1","progress":0.04000000000000001,"total":24,"current":4}
+{"_e":"metro:bundling:progress","_t":1784281610124,"id":"1","progress":0.04000000000000001,"total":27,"current":5}
+{"_e":"metro:bundling:progress","_t":1784281610227,"id":"1","progress":0.04938271604938271,"total":27,"current":6}
+{"_e":"metro:bundling:progress","_t":1784281610259,"id":"1","progress":0.0672153635116598,"total":27,"current":7}
+{"_e":"metro:bundling:progress","_t":1784281610361,"id":"1","progress":0.0672153635116598,"total":50,"current":8}
+{"_e":"metro:bundling:progress","_t":1784281610470,"id":"1","progress":0.0672153635116598,"total":50,"current":9}
+{"_e":"metro:bundling:progress","_t":1784281610578,"id":"1","progress":0.0672153635116598,"total":52,"current":9}
+{"_e":"metro:bundling:progress","_t":1784281610687,"id":"1","progress":0.0672153635116598,"total":55,"current":14}
+{"_e":"metro:bundling:progress","_t":1784281610793,"id":"1","progress":0.09972299168975068,"total":57,"current":18}
+{"_e":"metro:bundling:progress","_t":1784281610895,"id":"1","progress":0.11784361773223434,"total":67,"current":23}
+{"_e":"metro:bundling:progress","_t":1784281610994,"id":"1","progress":0.13140625,"total":80,"current":29}
+{"_e":"metro:bundling:progress","_t":1784281611094,"id":"1","progress":0.1369,"total":100,"current":37}
+{"_e":"metro:bundling:progress","_t":1784281611205,"id":"1","progress":0.1484723508122212,"total":109,"current":42}
+{"_e":"metro:bundling:progress","_t":1784281611308,"id":"1","progress":0.1489689135118498,"total":114,"current":44}
+{"_e":"metro:bundling:progress","_t":1784281611425,"id":"1","progress":0.15581717451523547,"total":114,"current":45}
+{"_e":"metro:bundling:progress","_t":1784281611534,"id":"1","progress":0.1613704434217255,"total":117,"current":47}
+{"_e":"metro:bundling:progress","_t":1784281611641,"id":"1","progress":0.18062499999999998,"total":120,"current":51}
+{"_e":"metro:bundling:progress","_t":1784281611745,"id":"1","progress":0.19994712142243373,"total":123,"current":55}
+{"_e":"metro:bundling:progress","_t":1784281611849,"id":"1","progress":0.21878251821019767,"total":124,"current":58}
+{"_e":"metro:bundling:progress","_t":1784281611951,"id":"1","progress":0.25,"total":126,"current":63}
+{"_e":"metro:bundling:progress","_t":1784281612058,"id":"1","progress":0.31151974040021635,"total":129,"current":72}
+{"_e":"metro:bundling:progress","_t":1784281612159,"id":"1","progress":0.34956577334967237,"total":137,"current":81}
+{"_e":"metro:bundling:progress","_t":1784281612259,"id":"1","progress":0.5221908466087698,"total":137,"current":99}
+{"_e":"metro:bundling:progress","_t":1784281612367,"id":"1","progress":0.5397750937109538,"total":147,"current":108}
+{"_e":"metro:bundling:progress","_t":1784281612470,"id":"1","progress":0.5397750937109538,"total":160,"current":115}
+{"_e":"metro:bundling:progress","_t":1784281612572,"id":"1","progress":0.5397750937109538,"total":184,"current":119}
+{"_e":"metro:bundling:progress","_t":1784281612676,"id":"1","progress":0.5397750937109538,"total":283,"current":127}
+{"_e":"metro:bundling:progress","_t":1784281612779,"id":"1","progress":0.5397750937109538,"total":292,"current":138}
+{"_e":"metro:bundling:progress","_t":1784281612883,"id":"1","progress":0.5397750937109538,"total":299,"current":146}
+{"_e":"metro:bundling:progress","_t":1784281612987,"id":"1","progress":0.5397750937109538,"total":310,"current":159}
+{"_e":"metro:bundling:progress","_t":1784281613088,"id":"1","progress":0.5397750937109538,"total":319,"current":177}
+{"_e":"metro:bundling:progress","_t":1784281613187,"id":"1","progress":0.5397750937109538,"total":326,"current":189}
+{"_e":"metro:bundling:progress","_t":1784281613300,"id":"1","progress":0.5397750937109538,"total":342,"current":196}
+{"_e":"metro:bundling:progress","_t":1784281613418,"id":"1","progress":0.5397750937109538,"total":352,"current":204}
+{"_e":"metro:bundling:progress","_t":1784281613525,"id":"1","progress":0.5397750937109538,"total":356,"current":208}
+{"_e":"metro:bundling:progress","_t":1784281613641,"id":"1","progress":0.5397750937109538,"total":377,"current":223}
+{"_e":"metro:bundling:progress","_t":1784281613743,"id":"1","progress":0.5397750937109538,"total":397,"current":238}
+{"_e":"metro:bundling:progress","_t":1784281613843,"id":"1","progress":0.5397750937109538,"total":409,"current":253}
+{"_e":"metro:bundling:progress","_t":1784281613944,"id":"1","progress":0.5397750937109538,"total":424,"current":276}
+{"_e":"metro:bundling:progress","_t":1784281614050,"id":"1","progress":0.5397750937109538,"total":442,"current":291}
+{"_e":"metro:bundling:progress","_t":1784281614150,"id":"1","progress":0.5397750937109538,"total":452,"current":304}
+{"_e":"metro:bundling:progress","_t":1784281614250,"id":"1","progress":0.5397750937109538,"total":462,"current":330}
+{"_e":"metro:bundling:progress","_t":1784281614351,"id":"1","progress":0.5397750937109538,"total":483,"current":350}
+{"_e":"metro:bundling:progress","_t":1784281614450,"id":"1","progress":0.545923552262781,"total":494,"current":365}
+{"_e":"metro:bundling:progress","_t":1784281614550,"id":"1","progress":0.545923552262781,"total":531,"current":382}
+{"_e":"metro:bundling:progress","_t":1784281614653,"id":"1","progress":0.545923552262781,"total":554,"current":408}
+{"_e":"metro:bundling:progress","_t":1784281614754,"id":"1","progress":0.5553240804193355,"total":573,"current":427}
+{"_e":"metro:bundling:progress","_t":1784281614855,"id":"1","progress":0.5773914425003458,"total":583,"current":443}
+{"_e":"metro:bundling:progress","_t":1784281614960,"id":"1","progress":0.5773914425003458,"total":608,"current":458}
+{"_e":"metro:bundling:progress","_t":1784281615062,"id":"1","progress":0.5776979107511909,"total":621,"current":472}
+{"_e":"metro:bundling:progress","_t":1784281615167,"id":"1","progress":0.5969957613088633,"total":629,"current":486}
+{"_e":"metro:bundling:progress","_t":1784281615269,"id":"1","progress":0.6259012978689312,"total":632,"current":500}
+{"_e":"metro:bundling:progress","_t":1784281615371,"id":"1","progress":0.63750244140625,"total":640,"current":511}
+{"_e":"metro:bundling:progress","_t":1784281615472,"id":"1","progress":0.6698792899408283,"total":650,"current":532}
+{"_e":"metro:bundling:progress","_t":1784281615578,"id":"1","progress":0.7169643617841903,"total":659,"current":558}
+{"_e":"metro:bundling:progress","_t":1784281615679,"id":"1","progress":0.7662820478135793,"total":666,"current":583}
+{"_e":"metro:bundling:progress","_t":1784281615779,"id":"1","progress":0.7909977288746183,"total":678,"current":603}
+{"_e":"metro:bundling:progress","_t":1784281615879,"id":"1","progress":0.8303002951465033,"total":687,"current":626}
+{"_e":"metro:bundling:progress","_t":1784281615980,"id":"1","progress":0.854304081632653,"total":700,"current":647}
+{"_e":"metro:bundling:progress","_t":1784281616080,"id":"1","progress":0.8670957738921854,"total":712,"current":663}
+{"_e":"metro:bundling:progress","_t":1784281616193,"id":"1","progress":0.8670957738921854,"total":739,"current":678}
+{"_e":"metro:bundling:progress","_t":1784281616289,"id":"1","progress":0.8670957738921854,"total":747,"current":689}
+{"_e":"metro:bundling:progress","_t":1784281616406,"id":"1","progress":0.8670957738921854,"total":752,"current":693}
+{"_e":"metro:bundling:progress","_t":1784281616509,"id":"1","progress":0.8725873618466847,"total":759,"current":709}
+{"_e":"metro:bundling:progress","_t":1784281616609,"id":"1","progress":0.8725873618466847,"total":795,"current":731}
+{"_e":"metro:bundling:progress","_t":1784281616715,"id":"1","progress":0.8725873618466847,"total":803,"current":746}
+{"_e":"metro:bundling:progress","_t":1784281616814,"id":"1","progress":0.8725873618466847,"total":822,"current":765}
+{"_e":"metro:bundling:progress","_t":1784281616914,"id":"1","progress":0.8725873618466847,"total":838,"current":782}
+{"_e":"metro:bundling:progress","_t":1784281617023,"id":"1","progress":0.8825285910144944,"total":842,"current":791}
+{"_e":"metro:bundling:progress","_t":1784281617123,"id":"1","progress":0.8991501730103806,"total":850,"current":806}
+{"_e":"metro:bundling:progress","_t":1784281617225,"id":"1","progress":0.9217802905067336,"total":852,"current":818}
+{"_e":"metro:bundling:progress","_t":1784281617332,"id":"1","progress":0.9490825429591991,"total":853,"current":831}
+{"_e":"metro:bundling:progress","_t":1784281617432,"id":"1","progress":0.9490825429591991,"total":866,"current":842}
+{"_e":"metro:bundling:progress","_t":1784281617538,"id":"1","progress":0.9680386036884849,"total":869,"current":855}
+{"_e":"metro:bundling:progress","_t":1784281617652,"id":"1","progress":0.9954181045366551,"total":872,"current":870}
+{"_e":"metro:bundling:progress","_t":1784281618162,"id":"1","progress":0.9977077371433382,"total":872,"current":871}
+{"_e":"metro:bundling:progress","_t":1784281618267,"id":"1","progress":0.9977155918367347,"total":875,"current":874}
+{"_e":"metro:bundling:progress","_t":1784281618581,"id":"1","progress":0.999,"total":875,"current":875}
+{"_e":"metro:bundling:progress","_t":1784281618683,"id":"1","progress":0.999,"total":886,"current":886}
+{"_e":"metro:bundling:done","_t":1784281619025,"id":"1","total":886,"ms":10487.1511}
+{"_e":"metro:client_log","_t":1784281718263,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:started","_t":1784282389293,"id":"3","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784282389295,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1784282389409,"id":"3","total":1,"ms":114.7478}
+{"_e":"metro:bundling:started","_t":1784282399534,"id":"4","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784282399534,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1784282399569,"id":"4","total":1,"ms":34.5594}
+{"_e":"root:init","_t":1784282447539,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784282447540,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784282447544,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784282448177,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784282448851,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784282449699,"plugins":[]}
+{"_e":"metro:instantiate","_t":1784282455103,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1784282459456,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784282459456,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784282459460,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784282460501,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1784282460601,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1784282460731,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1784282460836,"id":"1","progress":0.09,"total":8,"current":3}
+{"_e":"metro:bundling:progress","_t":1784282462072,"id":"1","progress":0.16000000000000003,"total":8,"current":4}
+{"_e":"metro:bundling:progress","_t":1784282462184,"id":"1","progress":0.16000000000000003,"total":26,"current":9}
+{"_e":"metro:bundling:progress","_t":1784282462293,"id":"1","progress":0.17728531855955676,"total":38,"current":16}
+{"_e":"metro:bundling:progress","_t":1784282462406,"id":"1","progress":0.17728531855955676,"total":81,"current":22}
+{"_e":"metro:bundling:progress","_t":1784282462513,"id":"1","progress":0.17728531855955676,"total":183,"current":27}
+{"_e":"metro:bundling:progress","_t":1784282462624,"id":"1","progress":0.17728531855955676,"total":209,"current":32}
+{"_e":"metro:bundling:progress","_t":1784282462729,"id":"1","progress":0.17728531855955676,"total":223,"current":45}
+{"_e":"metro:bundling:progress","_t":1784282462832,"id":"1","progress":0.17728531855955676,"total":233,"current":59}
+{"_e":"metro:bundling:progress","_t":1784282462942,"id":"1","progress":0.17728531855955676,"total":234,"current":70}
+{"_e":"metro:bundling:progress","_t":1784282463049,"id":"1","progress":0.17728531855955676,"total":239,"current":82}
+{"_e":"metro:bundling:progress","_t":1784282463149,"id":"1","progress":0.17728531855955676,"total":239,"current":84}
+{"_e":"metro:bundling:progress","_t":1784282463253,"id":"1","progress":0.17728531855955676,"total":241,"current":89}
+{"_e":"metro:bundling:progress","_t":1784282463366,"id":"1","progress":0.17728531855955676,"total":258,"current":97}
+{"_e":"metro:bundling:progress","_t":1784282463468,"id":"1","progress":0.17728531855955676,"total":272,"current":105}
+{"_e":"metro:bundling:progress","_t":1784282463569,"id":"1","progress":0.17728531855955676,"total":275,"current":109}
+{"_e":"metro:bundling:progress","_t":1784282463676,"id":"1","progress":0.17728531855955676,"total":297,"current":124}
+{"_e":"metro:bundling:progress","_t":1784282463785,"id":"1","progress":0.1947190728143109,"total":315,"current":139}
+{"_e":"metro:bundling:progress","_t":1784282463891,"id":"1","progress":0.21475312314098752,"total":328,"current":152}
+{"_e":"metro:bundling:progress","_t":1784282463995,"id":"1","progress":0.24418624534044664,"total":342,"current":169}
+{"_e":"metro:bundling:progress","_t":1784282464097,"id":"1","progress":0.2661013711599631,"total":347,"current":179}
+{"_e":"metro:bundling:progress","_t":1784282464199,"id":"1","progress":0.2661013711599631,"total":386,"current":197}
+{"_e":"metro:bundling:progress","_t":1784282464298,"id":"1","progress":0.27277350259778455,"total":404,"current":211}
+{"_e":"metro:bundling:progress","_t":1784282464399,"id":"1","progress":0.29090042009602196,"total":432,"current":233}
+{"_e":"metro:bundling:progress","_t":1784282464503,"id":"1","progress":0.3162468313099995,"total":441,"current":248}
+{"_e":"metro:bundling:progress","_t":1784282464603,"id":"1","progress":0.3209489951923963,"total":466,"current":264}
+{"_e":"metro:bundling:progress","_t":1784282464704,"id":"1","progress":0.34515625000000005,"total":480,"current":282}
+{"_e":"metro:bundling:progress","_t":1784282464804,"id":"1","progress":0.34515625000000005,"total":500,"current":292}
+{"_e":"metro:bundling:progress","_t":1784282464906,"id":"1","progress":0.35680103140842606,"total":524,"current":313}
+{"_e":"metro:bundling:progress","_t":1784282465005,"id":"1","progress":0.35956534866624656,"total":552,"current":331}
+{"_e":"metro:bundling:progress","_t":1784282465109,"id":"1","progress":0.3776899318229859,"total":563,"current":346}
+{"_e":"metro:bundling:progress","_t":1784282465211,"id":"1","progress":0.42672240607776324,"total":571,"current":373}
+{"_e":"metro:bundling:progress","_t":1784282465311,"id":"1","progress":0.4662735898645057,"total":577,"current":394}
+{"_e":"metro:bundling:progress","_t":1784282465411,"id":"1","progress":0.4794689640562107,"total":595,"current":412}
+{"_e":"metro:bundling:progress","_t":1784282465511,"id":"1","progress":0.5078337987439432,"total":602,"current":429}
+{"_e":"metro:bundling:progress","_t":1784282465612,"id":"1","progress":0.5171851281835047,"total":616,"current":443}
+{"_e":"metro:bundling:progress","_t":1784282465719,"id":"1","progress":0.5391957805316344,"total":621,"current":456}
+{"_e":"metro:bundling:progress","_t":1784282465820,"id":"1","progress":0.5435539981337986,"total":628,"current":463}
+{"_e":"metro:bundling:progress","_t":1784282465926,"id":"1","progress":0.5780826404635928,"total":630,"current":479}
+{"_e":"metro:bundling:progress","_t":1784282466032,"id":"1","progress":0.5881802963605927,"total":635,"current":487}
+{"_e":"metro:bundling:progress","_t":1784282466135,"id":"1","progress":0.6205277678889284,"total":636,"current":501}
+{"_e":"metro:bundling:progress","_t":1784282466236,"id":"1","progress":0.6350863905325445,"total":650,"current":518}
+{"_e":"metro:bundling:progress","_t":1784282466340,"id":"1","progress":0.6710049796287914,"total":658,"current":539}
+{"_e":"metro:bundling:progress","_t":1784282466440,"id":"1","progress":0.7134261060265851,"total":663,"current":560}
+{"_e":"metro:bundling:progress","_t":1784282466540,"id":"1","progress":0.7430746946790057,"total":674,"current":581}
+{"_e":"metro:bundling:progress","_t":1784282466641,"id":"1","progress":0.7497641288918734,"total":686,"current":594}
+{"_e":"metro:bundling:progress","_t":1784282466742,"id":"1","progress":0.7497641288918734,"total":716,"current":609}
+{"_e":"metro:bundling:progress","_t":1784282466841,"id":"1","progress":0.7535204475308642,"total":720,"current":625}
+{"_e":"metro:bundling:progress","_t":1784282466941,"id":"1","progress":0.7632230406955681,"total":728,"current":636}
+{"_e":"metro:bundling:progress","_t":1784282467045,"id":"1","progress":0.7984995039913343,"total":733,"current":655}
+{"_e":"metro:bundling:progress","_t":1784282467151,"id":"1","progress":0.8097596973980439,"total":749,"current":674}
+{"_e":"metro:bundling:progress","_t":1784282467251,"id":"1","progress":0.8097596973980439,"total":834,"current":684}
+{"_e":"metro:bundling:progress","_t":1784282467351,"id":"1","progress":0.8097596973980439,"total":866,"current":702}
+{"_e":"metro:bundling:progress","_t":1784282467454,"id":"1","progress":0.8097596973980439,"total":875,"current":713}
+{"_e":"metro:bundling:progress","_t":1784282467558,"id":"1","progress":0.8097596973980439,"total":891,"current":722}
+{"_e":"metro:bundling:progress","_t":1784282467658,"id":"1","progress":0.8097596973980439,"total":897,"current":735}
+{"_e":"metro:bundling:progress","_t":1784282467758,"id":"1","progress":0.8097596973980439,"total":903,"current":753}
+{"_e":"metro:bundling:progress","_t":1784282467861,"id":"1","progress":0.8097596973980439,"total":903,"current":769}
+{"_e":"metro:bundling:progress","_t":1784282467961,"id":"1","progress":0.8097596973980439,"total":909,"current":790}
+{"_e":"metro:bundling:progress","_t":1784282468109,"id":"1","progress":0.8097596973980439,"total":912,"current":801}
+{"_e":"metro:bundling:progress","_t":1784282468261,"id":"1","progress":0.8097596973980439,"total":917,"current":808}
+{"_e":"metro:bundling:progress","_t":1784282468371,"id":"1","progress":0.8097596973980439,"total":917,"current":813}
+{"_e":"metro:bundling:progress","_t":1784282468503,"id":"1","progress":0.8097596973980439,"total":917,"current":817}
+{"_e":"metro:bundling:progress","_t":1784282468617,"id":"1","progress":0.8097596973980439,"total":917,"current":824}
+{"_e":"metro:bundling:progress","_t":1784282468723,"id":"1","progress":0.8153085603450634,"total":917,"current":828}
+{"_e":"metro:bundling:progress","_t":1784282468822,"id":"1","progress":0.8172790939113248,"total":917,"current":829}
+{"_e":"metro:bundling:progress","_t":1784282468941,"id":"1","progress":0.827346794442783,"total":918,"current":835}
+{"_e":"metro:bundling:progress","_t":1784282469045,"id":"1","progress":0.841276622001984,"total":918,"current":842}
+{"_e":"metro:bundling:progress","_t":1784282469147,"id":"1","progress":0.841276622001984,"total":930,"current":849}
+{"_e":"metro:bundling:progress","_t":1784282469247,"id":"1","progress":0.841276622001984,"total":940,"current":860}
+{"_e":"metro:bundling:progress","_t":1784282469355,"id":"1","progress":0.8537213609586879,"total":947,"current":875}
+{"_e":"metro:bundling:progress","_t":1784282469455,"id":"1","progress":0.8698016620498614,"total":950,"current":886}
+{"_e":"metro:bundling:progress","_t":1784282469555,"id":"1","progress":0.8862765007615412,"total":956,"current":900}
+{"_e":"metro:bundling:progress","_t":1784282469660,"id":"1","progress":0.8970936132513624,"total":965,"current":914}
+{"_e":"metro:bundling:progress","_t":1784282469766,"id":"1","progress":0.913217907879028,"total":969,"current":926}
+{"_e":"metro:bundling:progress","_t":1784282469868,"id":"1","progress":0.9256174835393712,"total":976,"current":939}
+{"_e":"metro:bundling:progress","_t":1784282469972,"id":"1","progress":0.9339855881625476,"total":983,"current":950}
+{"_e":"metro:bundling:progress","_t":1784282470074,"id":"1","progress":0.951765983054759,"total":983,"current":959}
+{"_e":"metro:bundling:progress","_t":1784282470184,"id":"1","progress":0.9657110864348037,"total":983,"current":966}
+{"_e":"metro:bundling:progress","_t":1784282470285,"id":"1","progress":0.9777447533812348,"total":983,"current":972}
+{"_e":"metro:bundling:progress","_t":1784282470385,"id":"1","progress":0.9918946636089568,"total":985,"current":981}
+{"_e":"metro:bundling:progress","_t":1784282470568,"id":"1","progress":0.9979726310332484,"total":986,"current":985}
+{"_e":"metro:bundling:progress","_t":1784282470671,"id":"1","progress":0.9979787776767906,"total":989,"current":988}
+{"_e":"metro:bundling:progress","_t":1784282471150,"id":"1","progress":0.999,"total":989,"current":989}
+{"_e":"metro:bundling:progress","_t":1784282471261,"id":"1","progress":0.999,"total":1000,"current":1000}
+{"_e":"metro:bundling:done","_t":1784282471571,"id":"1","total":1000,"ms":12114.8524}
+{"_e":"metro:bundling:started","_t":1784282625994,"id":"2","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784282625994,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1784282625995,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1784282626047,"id":"2","total":1,"ms":52.9548}
+{"_e":"metro:bundling:started","_t":1784282890051,"id":"3","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1784282890051,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1784282890148,"id":"3","total":1,"ms":97.2778}
+{"_e":"root:init","_t":1784284088326,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1784284088328,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1784284088334,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1784284089440,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1784284090650,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1784284092148,"plugins":[]}

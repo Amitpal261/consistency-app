@@ -1,0 +1,231 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Consistency - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#b6b5b4",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e1",
+                    "on-primary-fixed-variant": "#293ca0",
+                    "surface-dim": "#131313",
+                    "surface-tint": "#bac3ff",
+                    "surface-variant": "#353534",
+                    "secondary-fixed": "#e4e2e1",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#745600",
+                    "on-tertiary": "#3f2e00",
+                    "outline": "#8f909e",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#474747",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-bright": "#393939",
+                    "tertiary-fixed-dim": "#fabd00",
+                    "on-primary": "#08218a",
+                    "secondary": "#c8c6c6",
+                    "tertiary-fixed": "#ffdf9e",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "on-tertiary-fixed-variant": "#5b4300",
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#261a00",
+                    "on-surface-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#bac3ff",
+                    "surface-container-low": "#1c1b1b",
+                    "outline-variant": "#454652",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#dee0ff",
+                    "on-primary-fixed": "#00105c",
+                    "on-secondary-fixed-variant": "#474747",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#ffcc55",
+                    "surface": "#131313",
+                    "primary": "#bac3ff",
+                    "on-primary-container": "#cacfff",
+                    "on-secondary": "#303030",
+                    "tertiary": "#fabd00",
+                    "primary-container": "#3f51b5",
+                    "inverse-primary": "#4355b9",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "margin-edge": "24px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Open Sans"],
+                    "timer-numeric": ["Montserrat"],
+                    "display-orb": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "label-caps": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(63, 81, 181, 0.3);
+        }
+        .orb-glow {
+            box-shadow: 0 0 60px 10px rgba(63, 81, 181, 0.2);
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen dot-grid selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface dark:text-on-surface">Consistency</span>
+</div>
+<div class="text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity font-label-caps text-label-caps active:scale-95 duration-200">
+            12d Streak
+        </div>
+</header>
+<main class="flex flex-col items-center justify-center min-h-screen px-margin-edge pt-20 pb-10">
+<!-- The Central Orb (Atmospheric) -->
+<div class="relative mb-lg">
+<div class="w-24 h-24 rounded-full bg-primary-container orb-glow animate-pulse-slow flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div class="absolute inset-0 w-24 h-24 rounded-full bg-primary blur-2xl opacity-20"></div>
+</div>
+<div class="w-full max-w-[400px] flex flex-col gap-xl">
+<!-- Header Text -->
+<div class="text-center space-y-xs">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight">Welcome back</h1>
+<p class="text-on-surface-variant font-body-md">Resume your journey of focus.</p>
+</div>
+<!-- Login Form -->
+<form class="glass-card p-lg rounded-lg space-y-lg shadow-xl" onsubmit="event.preventDefault();">
+<div class="space-y-md">
+<!-- Email Field -->
+<div class="relative group">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs" for="email">Email Address</label>
+<div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-colors py-xs">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-primary mr-sm text-[20px]">mail</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant/50 font-body-md py-xs" id="email" placeholder="name@example.com" type="email">
+</div>
+</div>
+<!-- Password Field -->
+<div class="relative group">
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-caps text-label-caps text-on-surface-variant" for="password">Password</label>
+</div>
+<div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-colors py-xs">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-primary mr-sm text-[20px]">key</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant/50 font-body-md py-xs" id="password" placeholder="••••••••" type="password">
+<button class="text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Primary Login Button -->
+<button class="w-full py-md bg-primary-container text-on-primary-container rounded-full font-headline-lg-mobile text-headline-lg-mobile text-[18px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-primary-container/90">
+                    Login
+                </button>
+<!-- Forgot Password Link -->
+<div class="text-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors tracking-widest" href="#">
+                        Forgot Password?
+                    </a>
+</div>
+</form>
+<!-- Sign Up Redirect -->
+<div class="text-center">
+<p class="font-body-md text-on-surface-variant">
+                    New to Consistency? 
+                    <a class="text-primary font-semibold hover:underline underline-offset-4 decoration-primary/30" href="#">Create Account</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Footer Aesthetic (Simple spacer) -->
+<footer class="py-lg opacity-30 text-center">
+<div class="flex justify-center items-center gap-xs">
+<div class="w-1 h-1 bg-on-surface rounded-full"></div>
+<div class="w-1 h-1 bg-on-surface rounded-full"></div>
+<div class="w-1 h-1 bg-on-surface rounded-full"></div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the orb
+        const orb = document.querySelector('.orb-glow');
+        if (orb) {
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+                orb.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+            });
+        }
+
+        // Handle focus state for dot grid density
+        const inputs = document.querySelectorAll('input');
+        const body = document.body;
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                body.style.backgroundSize = '16px 16px';
+                body.style.transition = 'background-size 0.5s ease-out';
+            });
+            input.addEventListener('blur', () => {
+                body.style.backgroundSize = '24px 24px';
+            });
+        });
+    </script>
+</body></html>

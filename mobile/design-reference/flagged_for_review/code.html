@@ -1,0 +1,239 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 1418px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Verification Pending | Consistency</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#bac3ff",
+            "inverse-on-surface": "#313030",
+            "surface-bright": "#393939",
+            "on-primary-container": "#cacfff",
+            "inverse-primary": "#4355b9",
+            "on-surface": "#e5e2e1",
+            "outline-variant": "#454652",
+            "on-secondary": "#303030",
+            "inverse-surface": "#e5e2e1",
+            "surface": "#131313",
+            "secondary-container": "#474747",
+            "secondary": "#c8c6c6",
+            "primary-container": "#3f51b5",
+            "on-secondary-fixed-variant": "#474747",
+            "on-surface-variant": "#c5c5d4",
+            "on-tertiary-fixed-variant": "#5b4300",
+            "primary-fixed-dim": "#bac3ff",
+            "outline": "#8f909e",
+            "on-error-container": "#ffdad6",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-lowest": "#0e0e0e",
+            "on-primary": "#08218a",
+            "surface-container": "#201f1f",
+            "secondary-fixed-dim": "#c8c6c6",
+            "tertiary": "#fabd00",
+            "on-tertiary-fixed": "#261a00",
+            "on-primary-fixed": "#00105c",
+            "primary-fixed": "#dee0ff",
+            "on-secondary-container": "#b6b5b4",
+            "on-background": "#e5e2e1",
+            "background": "#131313",
+            "surface-tint": "#bac3ff",
+            "surface-dim": "#131313",
+            "surface-variant": "#353534",
+            "error": "#ffb4ab",
+            "tertiary-container": "#745600",
+            "on-secondary-fixed": "#1b1c1c",
+            "secondary-fixed": "#e4e2e1",
+            "surface-container-highest": "#353534",
+            "tertiary-fixed": "#ffdf9e",
+            "tertiary-fixed-dim": "#fabd00",
+            "on-tertiary-container": "#ffcc55",
+            "on-primary-fixed-variant": "#293ca0",
+            "on-error": "#690005",
+            "on-tertiary": "#3f2e00",
+            "surface-container-low": "#1c1b1b",
+            "error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "lg": "40px",
+            "xs": "4px",
+            "gutter": "16px",
+            "xl": "64px",
+            "md": "24px",
+            "margin-edge": "24px",
+            "base": "8px",
+            "sm": "12px"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Montserrat"],
+            "timer-numeric": ["Montserrat"],
+            "label-caps": ["Montserrat"],
+            "headline-lg": ["Montserrat"],
+            "body-md": ["Open Sans"],
+            "display-orb": ["Montserrat"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "timer-numeric": ["24px", { "lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-orb": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #131313;
+      background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(186, 195, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .orb-glow {
+      filter: blur(40px);
+      background: #fabd00; /* Muted Amber */
+      opacity: 0.15;
+    }
+
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); opacity: 0.15; }
+      50% { transform: scale(1.1); opacity: 0.25; }
+    }
+
+    .animate-pulse-slow {
+      animation: pulse-subtle 4s ease-in-out infinite;
+    }
+    
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-on-surface selection:bg-primary selection:text-on-primary overflow-x-hidden font-body-md text-body-md">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</h1>
+</div>
+<div class="flex items-center gap-base">
+<span class="font-label-caps text-label-caps text-primary">12d Streak</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="relative pt-32 pb-40 px-margin-edge max-w-lg mx-auto">
+<!-- Atmospheric Central Orb (Awaiting State) -->
+<div class="absolute top-24 left-1/2 -translate-x-1/2 w-64 h-64 z-0 pointer-events-none">
+<div class="orb-glow animate-pulse-slow w-full h-full rounded-full"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-6xl opacity-40" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+</div>
+<div class="relative z-10 space-y-lg">
+<!-- Heading Section -->
+<section class="text-center space-y-sm">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-tertiary-container/30 border border-tertiary/20 text-on-tertiary-container">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-caps text-label-caps">AWAITING BUDDY</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Review Requested</h2>
+<p class="text-on-surface-variant font-body-md text-balance">
+          AI verification is inconclusive. We've sent this to your buddy <span class="text-primary font-semibold">Julian</span> for a quick check.
+        </p>
+</section>
+<!-- Proof Capture Card -->
+<section class="glass-card rounded-lg p-sm relative overflow-hidden group">
+<div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
+<span class="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 font-label-caps text-[10px] text-white">CAPTURED 08:42 AM</span>
+</div>
+<div class="aspect-[3/4] w-full rounded-md overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-resolution close-up of a steaming ceramic mug of matcha latte on a minimalist oak desk. Next to the mug is an open planner with handwritten notes. The lighting is soft morning sunlight casting long shadows. The overall aesthetic is clean, disciplined, and serene, matching a premium productivity app's dark mode visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvJHLoDrSRZKUTYzsewhGoJROqPRupsYSwi9lBH2yp5hp0N3e8LNwfrS_E7hl2AqSY_8tb9tfEUepUXCax-X32nfarYeYE5ifIRUfZTxUf0NKPm7X3G__aoHvcr2pzsZb9okWp6k4zEu92hVzxjhv8Te3MbmCWbElwzSjQ-JfE5RE1owFidwBnKI257_yRXZ5JCX0kVQbbuyqk9MJnZl9pTqnKTuTybR4BF0dr7Js97HQwCL6eLB4_l1UBSigL8AvGb9SGye-o4wI">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="space-y-xs">
+<p class="font-label-caps text-white/70">COMMITMENT</p>
+<h3 class="font-headline-lg-mobile text-white">Daily Planning</h3>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="visibility">visibility</span>
+<span class="font-label-caps text-white text-[10px]">IN REVIEW</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Status Timeline/Info -->
+<section class="glass-card rounded-lg p-md space-y-md">
+<div class="flex items-start gap-md">
+<div class="mt-1 w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="robot_2">robot_2</span>
+</div>
+<div class="space-y-xs">
+<h4 class="font-label-caps text-primary">AI ANALYSIS</h4>
+<p class="text-on-surface-variant text-sm">Visual markers (planner text) were obscured by reflection. Escalated to manual verification to protect your streak.</p>
+</div>
+</div>
+<div class="h-px w-full bg-outline-variant/30"></div>
+<div class="flex items-start gap-md">
+<div class="mt-1 w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="person">person</span>
+</div>
+<div class="space-y-xs">
+<h4 class="font-label-caps text-secondary">BUDDY REVIEW</h4>
+<p class="text-on-surface-variant text-sm">Julian usually checks proofs within 2 hours. Your streak is safe while we wait for their response.</p>
+</div>
+</div>
+</section>
+<!-- Action Footer -->
+<footer class="pt-base">
+<button class="w-full py-md rounded-full bg-surface-container-highest text-on-surface font-label-caps border border-outline-variant/30 hover:bg-surface-variant transition-colors active:scale-[0.98] duration-200">
+          BACK TO DASHBOARD
+        </button>
+<p class="text-center mt-md text-on-surface-variant font-label-caps text-[10px] tracking-[0.2em] opacity-50">DISCIPLINED SERENITY • v2.4.0</p>
+</footer>
+</div>
+</main>
+<!-- Bottom Navigation (Filtered for focused journey, but showing context per instructions) -->
+<nav class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-md z-50 flex justify-around items-center px-lg py-sm bg-surface/10 dark:bg-white/10 backdrop-blur-md border border-primary/30 dark:border-primary/20 rounded-lg shadow-lg">
+<div class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors active:scale-90 duration-300 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</div>
+<div class="flex items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full w-12 h-12 hover:bg-on-surface/5 transition-colors active:scale-90 duration-300 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</div>
+<div class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors active:scale-90 duration-300 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+</nav>
+<script>
+    // Micro-interaction: Subtle interaction on the proof card
+    document.querySelector('.glass-card').addEventListener('mousemove', (e) => {
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  </script>
+</body></html>

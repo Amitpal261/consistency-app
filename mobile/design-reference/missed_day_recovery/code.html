@@ -1,0 +1,218 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 1052px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Disciplined Serenity | Fresh Start</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .orb-pulse {
+            animation: orb-soft-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes orb-soft-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; filter: blur(40px); }
+            50% { transform: scale(1.1); opacity: 0.5; filter: blur(55px); }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.1);
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(186, 195, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#bac3ff",
+                    "inverse-on-surface": "#313030",
+                    "surface-bright": "#393939",
+                    "on-primary-container": "#cacfff",
+                    "inverse-primary": "#4355b9",
+                    "on-surface": "#e5e2e1",
+                    "outline-variant": "#454652",
+                    "on-secondary": "#303030",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "secondary-container": "#474747",
+                    "secondary": "#c8c6c6",
+                    "primary-container": "#3f51b5",
+                    "on-secondary-fixed-variant": "#474747",
+                    "on-surface-variant": "#c5c5d4",
+                    "on-tertiary-fixed-variant": "#5b4300",
+                    "primary-fixed-dim": "#bac3ff",
+                    "outline": "#8f909e",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-primary": "#08218a",
+                    "surface-container": "#201f1f",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "tertiary": "#fabd00",
+                    "on-tertiary-fixed": "#261a00",
+                    "on-primary-fixed": "#00105c",
+                    "primary-fixed": "#dee0ff",
+                    "on-secondary-container": "#b6b5b4",
+                    "on-background": "#e5e2e1",
+                    "background": "#131313",
+                    "surface-tint": "#bac3ff",
+                    "surface-dim": "#131313",
+                    "surface-variant": "#353534",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#745600",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "secondary-fixed": "#e4e2e1",
+                    "surface-container-highest": "#353534",
+                    "tertiary-fixed": "#ffdf9e",
+                    "tertiary-fixed-dim": "#fabd00",
+                    "on-tertiary-container": "#ffcc55",
+                    "on-primary-fixed-variant": "#293ca0",
+                    "on-error": "#690005",
+                    "on-tertiary": "#3f2e00",
+                    "surface-container-low": "#1c1b1b",
+                    "error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "xs": "4px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "margin-edge": "24px",
+                    "base": "8px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Montserrat"],
+                    "timer-numeric": ["Montserrat"],
+                    "label-caps": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Open Sans"],
+                    "display-orb": ["Montserrat"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md text-body-md overflow-hidden dot-grid min-h-screen select-none">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</h1>
+</div>
+<div class="flex items-center px-sm py-xs bg-surface-container-high rounded-full hover:opacity-80 transition-opacity">
+<span class="font-label-caps text-label-caps text-primary uppercase">0d Streak</span>
+</div>
+</header>
+<main class="relative pt-xl pb-xl flex flex-col items-center justify-center min-h-screen px-margin-edge">
+<!-- The Central Orb (Muted State) -->
+<div class="relative w-64 h-64 flex items-center justify-center mb-xl">
+<!-- Glow layers -->
+<div class="absolute inset-0 bg-outline/20 rounded-full blur-[60px] orb-pulse"></div>
+<div class="absolute inset-4 bg-outline-variant/10 rounded-full blur-[30px]"></div>
+<!-- Core Orb -->
+<div class="relative w-48 h-48 rounded-full flex items-center justify-center border border-outline-variant/40 bg-surface-container-lowest/50 backdrop-blur-3xl overflow-hidden">
+<div class="flex flex-col items-center text-center px-base">
+<span class="material-symbols-outlined text-outline-variant text-[40px] mb-xs">restart_alt</span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Streak Reset</span>
+</div>
+</div>
+</div>
+<!-- Compassionate Content -->
+<section class="max-w-md w-full text-center space-y-lg animate-in fade-in slide-in-from-bottom-4 duration-1000">
+<div class="space-y-sm">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Yesterday is gone.</h2>
+<p class="text-on-surface-variant font-body-md">Today is a fresh start. Reflection is the bridge to growth—take a moment to breathe and reset your intention.</p>
+</div>
+<!-- Glassy Insight Card -->
+<div class="glass-card rounded-lg p-md text-left relative overflow-hidden group hover:scale-[1.01] transition-transform duration-300">
+<div class="flex items-start gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">info</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase mb-xs block">Compassionate Note</span>
+<p class="text-on-surface-variant">Your progress isn't lost, only paused. High achievers understand that consistency is a direction, not a perfect line.</p>
+</div>
+</div>
+<!-- Subtle inner glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[40px] rounded-full -mr-16 -mt-16"></div>
+</div>
+</section>
+<!-- Floating Action Row -->
+<div class="fixed bottom-32 left-0 w-full px-margin-edge flex justify-center items-center gap-md">
+<button class="flex items-center gap-base px-lg py-md bg-primary text-on-primary rounded-full font-label-caps text-label-caps uppercase tracking-widest shadow-xl hover:shadow-primary/20 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined text-[20px]">event_repeat</span>
+                Commit to Tomorrow
+            </button>
+<button class="w-16 h-16 bg-surface-container-highest text-on-surface rounded-full flex items-center justify-center glass-card hover:bg-surface-variant active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Filtered for focused journey - though requested as part of global shell) -->
+<!-- Applying Suppression logic: We are in a 'focused journey' (Missed State reflection), but usually shell is present for top-level navigation. Let's include for context but highlight the appropriate tab if any. -->
+<nav class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] rounded-lg bg-surface/10 dark:bg-white/10 backdrop-blur-md z-50 flex justify-around items-center px-lg py-sm border border-primary/30 dark:border-primary/20 shadow-lg">
+<!-- Dashboard / Home (Active by default for status) -->
+<a class="flex items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 active:scale-75 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+</a>
+<a class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</nav>
+<!-- Atmospheric Micro-interaction Scripts -->
+<script>
+        // Subtle Mouse parallax for the orb
+        document.addEventListener('mousemove', (e) => {
+            const orb = document.querySelector('.orb-pulse').parentElement;
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        // Click interaction for 'Commit' button
+        const commitBtn = document.querySelector('button.bg-primary');
+        commitBtn.addEventListener('click', () => {
+            commitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span> Committed';
+            setTimeout(() => {
+                commitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span> Ready for tomorrow';
+                commitBtn.classList.add('bg-tertiary', 'text-on-tertiary');
+                commitBtn.classList.remove('bg-primary', 'text-on-primary');
+            }, 800);
+        });
+    </script>
+</body></html>

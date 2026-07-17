@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style="width: 390px; height: 1263px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Disciplined Serenity | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#b6b5b4",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e1",
+                    "on-primary-fixed-variant": "#293ca0",
+                    "surface-dim": "#131313",
+                    "surface-tint": "#bac3ff",
+                    "surface-variant": "#353534",
+                    "secondary-fixed": "#e4e2e1",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#745600",
+                    "on-tertiary": "#3f2e00",
+                    "outline": "#8f909e",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#474747",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-bright": "#393939",
+                    "tertiary-fixed-dim": "#fabd00",
+                    "on-primary": "#08218a",
+                    "secondary": "#c8c6c6",
+                    "tertiary-fixed": "#ffdf9e",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "on-tertiary-fixed-variant": "#5b4300",
+                    "on-error": "#690005",
+                    "background": "#000000",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#261a00",
+                    "on-surface-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#bac3ff",
+                    "surface-container-low": "#1c1b1b",
+                    "outline-variant": "#454652",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#dee0ff",
+                    "on-primary-fixed": "#00105c",
+                    "on-secondary-fixed-variant": "#474747",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#ffcc55",
+                    "surface": "#131313",
+                    "primary": "#bac3ff",
+                    "on-primary-container": "#cacfff",
+                    "on-secondary": "#303030",
+                    "tertiary": "#fabd00",
+                    "primary-container": "#3f51b5",
+                    "inverse-primary": "#4355b9",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "margin-edge": "24px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Open Sans"],
+                    "timer-numeric": ["Montserrat"],
+                    "display-orb": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "label-caps": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: #e5e2e1;
+        }
+
+        .glass-card {
+            background: rgba(28, 27, 27, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(63, 81, 181, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(42, 42, 42, 0.7);
+            border-color: rgba(186, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .orb-glow {
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite ease-in-out;
+        }
+
+        .inner-glow-border {
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-black/80 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary-fixed-dim cursor-pointer" style="font-variation-settings: 'FILL' 0;">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-white">Consistency</h1>
+</div>
+<div class="bg-primary-container/20 px-sm py-xs rounded-full border border-primary/20">
+<span class="font-label-caps text-label-caps text-primary">12d Streak</span>
+</div>
+</header>
+<main class="max-w-xl mx-auto pt-32 px-margin-edge relative">
+<!-- The Central Orb Area -->
+<div class="relative w-full aspect-square flex items-center justify-center mb-xl">
+<!-- Glow layers -->
+<div class="absolute inset-0 orb-glow bg-primary animate-pulse-slow rounded-full shadow-[0_0_100px_rgba(186,195,255,0.4)]"></div>
+<div class="absolute inset-12 orb-glow bg-tertiary/20 rounded-full shadow-[0_0_60px_rgba(250,189,0,0.2)]"></div>
+<!-- Main Orb -->
+<div class="relative w-48 h-48 rounded-full flex flex-col items-center justify-center glass-card border-none shadow-[0_0_80px_rgba(63,81,115,0.4)] bg-surface-container-low/80">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim/80 mb-xs">DAILY PROGRESS</span>
+<span class="font-display-orb text-display-orb text-white">64%</span>
+<div class="mt-base flex gap-xs">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary/30"></div>
+</div>
+</div>
+</div>
+<!-- Glassy Commitment Cards -->
+<div class="space-y-md">
+<!-- Card 1 -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group inner-glow-border">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-xs">SCHEDULED</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-xs">6:00 AM Wake Up</h3>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-body-md text-body-md text-primary/80">Verified</span>
+</div>
+</div>
+<div class="bg-primary-container/20 p-sm rounded-full">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 0;">wb_sunny</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group inner-glow-border">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-tertiary mb-xs">IN PROGRESS</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-xs">Gym Session</h3>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-timer-numeric text-timer-numeric text-tertiary">42:15</span>
+</div>
+</div>
+<div class="bg-tertiary-container/20 p-sm rounded-full">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: 'FILL' 0;">fitness_center</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group inner-glow-border opacity-70">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-xs">UPCOMING</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-xs">Deep Work - Library</h3>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-body-md text-body-md">2:00 PM - 4:00 PM</span>
+</div>
+</div>
+<div class="bg-white/5 p-sm rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<div class="mt-xl grid grid-cols-2 gap-md">
+<div class="glass-card rounded-lg p-md inner-glow-border bg-surface-container-low/40">
+<span class="material-symbols-outlined text-primary mb-sm">bolt</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">PEAK MOMENT</p>
+<p class="font-timer-numeric text-timer-numeric mt-xs text-white">08:12</p>
+</div>
+<div class="glass-card rounded-lg p-md inner-glow-border bg-surface-container-low/40">
+<span class="material-symbols-outlined text-tertiary mb-sm">psychology</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">FOCUS SCORE</p>
+<p class="font-timer-numeric text-timer-numeric mt-xs text-white">92</p>
+</div>
+</div>
+</main>
+<!-- Floating Action Row -->
+<div class="fixed bottom-[104px] left-1/2 -translate-x-1/2 flex gap-gutter z-50">
+<button class="w-16 h-16 rounded-full bg-surface-container-highest text-white border border-outline-variant/30 shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">edit_note</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container shadow-[0_8px_32px_rgba(63,81,181,0.4)] flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</button>
+</div>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-lg z-50 flex justify-around items-center px-lg py-sm bg-black/60 backdrop-blur-md border border-white/10 rounded-lg shadow-2xl">
+<a class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 active:scale-90 duration-300 ease-out transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant w-12 h-12 hover:text-white transition-colors active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant w-12 h-12 hover:text-white transition-colors active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for Glass Cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

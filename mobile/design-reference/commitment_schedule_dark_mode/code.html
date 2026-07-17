@@ -1,0 +1,275 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-background": "#e5e2e1",
+                "surface-variant": "#353534",
+                "primary": "#bac3ff",
+                "secondary": "#c8c6c6",
+                "on-tertiary-container": "#ffcc55",
+                "inverse-on-surface": "#313030",
+                "on-primary-container": "#cacfff",
+                "surface-container-high": "#2a2a2a",
+                "on-secondary": "#303030",
+                "surface-tint": "#bac3ff",
+                "background": "#000000",
+                "surface-container-highest": "#353534",
+                "on-primary": "#08218a",
+                "surface-bright": "#393939",
+                "on-surface": "#e5e2e1",
+                "on-error": "#690005",
+                "on-tertiary-fixed": "#261a00",
+                "secondary-container": "#474747",
+                "on-error-container": "#ffdad6",
+                "inverse-primary": "#4355b9",
+                "on-secondary-fixed-variant": "#474747",
+                "on-primary-fixed-variant": "#293ca0",
+                "tertiary-container": "#745600",
+                "surface-container": "#201f1f",
+                "on-surface-variant": "#c5c5d4",
+                "error": "#ffb4ab",
+                "primary-fixed-dim": "#bac3ff",
+                "error-container": "#93000a",
+                "surface-container-low": "#1c1b1b",
+                "tertiary-fixed-dim": "#fabd00",
+                "outline": "#8f909e",
+                "on-primary-fixed": "#00105c",
+                "surface-dim": "#131313",
+                "primary-container": "#3f51b5",
+                "tertiary-fixed": "#ffdf9e",
+                "surface": "#131313",
+                "on-secondary-fixed": "#1b1c1c",
+                "outline-variant": "#454652",
+                "surface-container-lowest": "#0e0e0e",
+                "tertiary": "#fabd00",
+                "secondary-fixed-dim": "#c8c6c6",
+                "secondary-fixed": "#e4e2e1",
+                "inverse-surface": "#e5e2e1",
+                "on-tertiary-fixed-variant": "#5b4300",
+                "primary-fixed": "#dee0ff",
+                "on-secondary-container": "#b6b5b4",
+                "on-tertiary": "#3f2e00"
+        },
+        "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "xl": "64px",
+                "xs": "4px",
+                "sm": "12px",
+                "lg": "40px",
+                "md": "24px",
+                "margin-edge": "24px",
+                "gutter": "16px",
+                "base": "8px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Open Sans"
+                ],
+                "headline-lg": [
+                        "Montserrat"
+                ],
+                "label-caps": [
+                        "Montserrat"
+                ],
+                "display-orb": [
+                        "Montserrat"
+                ],
+                "timer-numeric": [
+                        "Montserrat"
+                ],
+                "headline-lg-mobile": [
+                        "Montserrat"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-orb": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "timer-numeric": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+}catch(_e){}</script></head><body class="bg-background text-on-surface font-body-md min-h-screen relative overflow-x-hidden">
+<!-- Dot Grid Background -->
+<div class="fixed inset-0 dot-grid pointer-events-none"></div>
+<!-- Top Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-background/80 backdrop-blur-xl border-b border-white/5">
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200" data-original-icon="arrow_back">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Schedule Setup</h1>
+</div>
+<div class="text-primary font-label-caps tracking-widest uppercase">Drafting</div>
+</header>
+<main class="pt-32 pb-44 px-margin-edge max-w-2xl mx-auto space-y-lg relative">
+<!-- Subtle Orb Background Hint -->
+<div class="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 orb-glow rounded-full"></div>
+<!-- Section 1: Time Window -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Active Window</h2>
+<div class="glass-card bg-surface-container-low rounded-lg p-md flex items-center justify-between gap-gutter border border-white/5">
+<div class="flex-1 space-y-xs">
+<span class="text-[10px] font-bold text-outline uppercase">Start</span>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary outline-none py-xs font-timer-numeric text-timer-numeric text-on-surface transition-colors" type="time" value="08:00">
+</div>
+<div class="material-symbols-outlined text-outline mt-4">arrow_forward</div>
+<div class="flex-1 space-y-xs">
+<span class="text-[10px] font-bold text-outline uppercase">End</span>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary outline-none py-xs font-timer-numeric text-timer-numeric text-on-surface transition-colors" type="time" value="18:00" style="box-sizing: border-box;">
+</div>
+</div>
+</section>
+<!-- Section 2: Days Selector -->
+<section class="space-y-sm">
+<div class="flex justify-between items-end">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Weekly Cadence</h2>
+<span class="text-xs font-medium text-primary">5 Days Selected</span>
+</div>
+<div class="flex justify-between gap-2">
+<!-- Day buttons -->
+<button class="flex-1 aspect-square glass-card rounded-full flex items-center justify-center font-label-caps text-xs transition-all duration-300 border border-white/5 hover:border-primary active:scale-90" onclick="toggleDay(this)">M</button>
+<button class="flex-1 aspect-square rounded-full flex items-center justify-center font-label-caps text-xs active-day transition-all duration-300 active:scale-90 shadow-lg shadow-primary/20" onclick="toggleDay(this)">T</button>
+<button class="flex-1 aspect-square rounded-full flex items-center justify-center font-label-caps text-xs active-day transition-all duration-300 active:scale-90 shadow-lg shadow-primary/20" onclick="toggleDay(this)">W</button>
+<button class="flex-1 aspect-square rounded-full flex items-center justify-center font-label-caps text-xs active-day transition-all duration-300 active:scale-90 shadow-lg shadow-primary/20" onclick="toggleDay(this)">T</button>
+<button class="flex-1 aspect-square rounded-full flex items-center justify-center font-label-caps text-xs active-day transition-all duration-300 active:scale-90 shadow-lg shadow-primary/20" onclick="toggleDay(this)">F</button>
+<button class="flex-1 aspect-square rounded-full flex items-center justify-center font-label-caps text-xs active-day transition-all duration-300 active:scale-90 shadow-lg shadow-primary/20" onclick="toggleDay(this)">S</button>
+<button class="flex-1 aspect-square glass-card rounded-full flex items-center justify-center font-label-caps text-xs transition-all duration-300 border border-white/5 hover:border-primary active:scale-90" onclick="toggleDay(this)">S</button>
+</div>
+</section>
+<!-- Section 3: Map Picker -->
+<section class="space-y-sm">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Target Location</h2>
+<div class="glass-card bg-surface-container-low rounded-lg overflow-hidden relative group border border-white/5">
+<div class="h-48 w-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover grayscale brightness-75 opacity-90 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj4zwzqJMkwYbRENtBNlqyXUowpZkQSVqE5_Zxix9Gs6rJBM-Cb60-bH2ci9JI6USKOFAKPUreJz8CLDClPMnv0l9iDWlCu68UTXsNSh1G4zxW8MyotuXN-HfEKAe1hEAjyfW5LbEWWt614rsZ4UYYK0yx3Bt9QnBwtb3lj5v1poZhkWpqunnxHept9RzfYm-uHOt3fDZu653UsE6CCO0lY1rrHXqI1EtvJk4xCHLCNefi8QKvWc0kfn_iiLDre2dnoBChhoxB6RI" data-alt="A clean, minimalist architectural map view of a city grid in a dark-mode aesthetic. The map uses a palette of deep blacks, charcoal greys, and thin indigo lines, with a single focused glowing primary blue circle marking a specific zone. The style is professional, high-end, and technical." data-location="New York City">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border-2 border-primary animate-pulse">
+<div class="w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#bac3ff]"></div>
+</div>
+</div>
+</div>
+<div class="p-sm flex items-center justify-between bg-black/40 backdrop-blur-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span class="text-xs font-semibold text-on-surface">Madison Square Workspace</span>
+</div>
+<button class="text-xs font-bold text-primary uppercase tracking-tighter hover:opacity-80 transition-opacity">Change</button>
+</div>
+</div>
+</section>
+<!-- Section 4: Duration Slider -->
+<section class="space-y-sm">
+<div class="flex justify-between items-end">
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Focus Duration</h2>
+<span class="font-timer-numeric text-primary" id="duration-val">4 Hours</span>
+</div>
+<div class="glass-card bg-surface-container-low rounded-lg p-md border border-white/5">
+<input class="my-4" id="duration-slider" max="8" min="1" step="0.5" type="range" value="4">
+<div class="flex justify-between text-[10px] text-outline font-bold uppercase">
+<span class="">1h</span>
+<span class="">2h</span>
+<span class="">3h</span>
+<span class="">4h</span>
+<span class="">5h</span>
+<span class="">6h</span>
+<span class="">7h</span>
+<span class="">8h</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full p-md bg-gradient-to-t from-background via-background to-transparent flex flex-col items-center gap-md z-50">
+<button class="w-full max-w-md bg-primary-container text-on-primary-container py-md rounded-full font-headline-lg-mobile font-bold shadow-xl shadow-primary/10 hover:opacity-90 active:scale-95 transition-all duration-300">
+            Save Commitment
+        </button>
+<nav class="flex justify-around items-center glass-card bg-surface-container-low w-full max-w-sm rounded-full px-lg py-sm border border-white/10">
+<div class="flex items-center justify-center text-outline w-12 h-12 hover:bg-white/5 transition-colors rounded-full">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<div class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 shadow-sm">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex items-center justify-center text-outline w-12 h-12 hover:bg-white/5 transition-colors rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</nav>
+</div>
+<script>
+        // Micro-interactions for Day Toggles
+        function toggleDay(btn) {
+            btn.classList.toggle('active-day');
+            btn.classList.toggle('glass-card');
+            btn.classList.toggle('border-white/5');
+            btn.classList.toggle('shadow-lg');
+            btn.classList.toggle('shadow-primary/20');
+        }
+
+        // Slider Value Update
+        const slider = document.getElementById('duration-slider');
+        const display = document.getElementById('duration-val');
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            display.textContent = `${val} ${val == 1 ? 'Hour' : 'Hours'}`;
+        });
+
+        // Add subtle parallax/movement to the dot grid on mouse move (desktop only)
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const dots = document.querySelector('.dot-grid');
+                const x = (e.clientX / window.innerWidth) * 15;
+                const y = (e.clientY / window.innerHeight) * 15;
+                dots.style.backgroundPosition = `${x}px ${y}px`;
+            });
+        }
+    </script>
+</body></html>

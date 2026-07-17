@@ -1,0 +1,263 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 1275px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Confirm Commitment | Disciplined Serenity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.1);
+        }
+        .orb-glow {
+            box-shadow: 0 0 60px 10px rgba(186, 195, 255, 0.15);
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(186, 195, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#261a00",
+                        "background": "#131313",
+                        "inverse-primary": "#4355b9",
+                        "surface-variant": "#353534",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-bright": "#393939",
+                        "secondary-fixed": "#e4e2e1",
+                        "outline-variant": "#454652",
+                        "secondary-container": "#474747",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed": "#00105c",
+                        "primary-container": "#3f51b5",
+                        "on-secondary": "#303030",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "on-tertiary-container": "#ffcc55",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#bac3ff",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#bac3ff",
+                        "tertiary": "#fabd00",
+                        "surface-container": "#201f1f",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-fixed": "#dee0ff",
+                        "primary": "#bac3ff",
+                        "on-surface-variant": "#c5c5d4",
+                        "on-tertiary": "#3f2e00",
+                        "on-secondary-container": "#b6b5b4",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "on-primary-container": "#cacfff",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-background": "#e5e2e1",
+                        "outline": "#8f909e",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "error-container": "#93000a",
+                        "on-primary": "#08218a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-edge": "24px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md dot-grid selection:bg-primary/30">
+<!-- Top App Bar (From Shared Components Guide) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Review</h1>
+</div>
+<div class="text-primary font-label-caps text-label-caps tracking-widest">
+            STEP 3 OF 3
+        </div>
+</header>
+<main class="pt-32 pb-40 px-margin-edge max-w-lg mx-auto relative min-h-screen flex flex-col items-center">
+<!-- The Central Orb: Idle State -->
+<div class="relative mb-xl">
+<div class="w-48 h-48 rounded-full bg-primary/10 flex items-center justify-center orb-glow border border-primary/20 animate-pulse-slow">
+<div class="w-32 h-32 rounded-full bg-primary/20 blur-xl absolute"></div>
+<span class="material-symbols-outlined text-primary text-6xl" style="font-variation-settings: 'wght' 200;">verified_user</span>
+</div>
+</div>
+<!-- Headline -->
+<div class="text-center mb-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-xs text-on-surface">Confirm Commitment</h2>
+<p class="text-on-surface-variant font-body-md opacity-80">One final check before you lock this in.</p>
+</div>
+<!-- Summary List: Vertical Plain-English Cards -->
+<section class="w-full space-y-md">
+<!-- Type / Location -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">TYPE &amp; LOCATION</p>
+<p class="font-headline-lg-mobile text-[18px] leading-tight text-on-surface">Morning Gym Session</p>
+<p class="text-on-surface-variant text-sm">Equinox, Downtown</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<!-- Schedule -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">alarm</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">SCHEDULE</p>
+<p class="font-headline-lg-mobile text-[18px] leading-tight text-on-surface">Daily at 5:00 AM</p>
+<p class="text-on-surface-variant text-sm">Starting tomorrow, Oct 24</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<!-- Proof Method -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">PROOF METHOD</p>
+<p class="font-headline-lg-mobile text-[18px] leading-tight text-on-surface">Photo Verification</p>
+<p class="text-on-surface-variant text-sm">Real-time selfie at location</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<!-- Accountability Buddy -->
+<div class="glass-card rounded-lg p-md flex items-center justify-between group hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-md">
+<div class="relative w-12 h-12 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A high-quality professional portrait of a calm, encouraging male accountability partner in his 30s. He has a warm smile and is set against a blurred, minimalist architect's studio background. The lighting is soft and natural, emphasizing a mood of quiet discipline and focused support. The color palette features muted indigos and charcoal greys to match a premium dark-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRXVpD7Ltk83LOCebRUODX7Zlf_ShPZg2z4sWg5j9WXsplqmi97aKk1mG0G6S80Kti8LTDCx4-C0bTNgX1YHTAY7DSLpnD7jCSn9he3G_9vYZSeiWTZ9gDP8loPTVoSL4UuBhMvOSlJZeCImgy8xdZLE8Po9S2pdd1SAziouqA88Sa94FLaJVaAH4L8J07o6N5bkYocM3fKdaPej717OZNZxC3G450NnyVvS5c1-2bE0xNOIf8HBzbliIbm-7FlkcBpuqNah30How">
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">ACCOUNTABILITY BUDDY</p>
+<p class="font-headline-lg-mobile text-[18px] leading-tight text-on-surface">Julian Vance</p>
+<p class="text-on-surface-variant text-sm">Will verify missed checks</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</section>
+<!-- Terms & Calm Note -->
+<div class="mt-lg text-center px-md">
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                By saving, you commit to this rhythm. Disciplined action leads to serene results.
+            </p>
+</div>
+</main>
+<!-- Floating Action Row / Primary Save Button -->
+<div class="fixed bottom-0 left-0 w-full p-md z-50 pointer-events-none">
+<div class="max-w-lg mx-auto w-full flex justify-center pointer-events-auto">
+<button class="w-full h-16 bg-primary text-on-primary font-headline-lg-mobile text-[20px] rounded-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-sm group" id="saveBtn">
+                Save Commitment
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-md bg-background/90 backdrop-blur-2xl opacity-0 pointer-events-none transition-opacity duration-500" id="successModal">
+<div class="max-w-sm w-full text-center">
+<div class="w-32 h-32 rounded-full bg-tertiary/20 flex items-center justify-center mx-auto mb-lg border border-tertiary/40">
+<span class="material-symbols-outlined text-tertiary text-5xl">task_alt</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Locked In</h3>
+<p class="text-on-surface-variant mb-xl">Your daily morning gym session is now a part of your discipline.</p>
+<button class="w-full py-md rounded-lg border border-outline text-on-surface hover:bg-surface-container-high transition-colors" onclick="location.reload()">
+                Back to Dashboard
+            </button>
+</div>
+</div>
+<script>
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            
+            // Simple haptic feedback simulation
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(20);
+            }
+        });
+    </script>
+</body></html>

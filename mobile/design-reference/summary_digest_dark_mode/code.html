@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-background": "#FFFFFF",
+                            "inverse-primary": "#4355b9",
+                            "secondary-container": "#1c1c1c",
+                            "surface-variant": "#1c1c1c",
+                            "primary-container": "#3f51b5",
+                            "error": "#ffb4ab",
+                            "surface-container-high": "#1a1a1a",
+                            "primary": "#bac3ff",
+                            "on-surface": "#FFFFFF",
+                            "on-secondary-fixed": "#1b1c1c",
+                            "on-secondary": "#FFFFFF",
+                            "tertiary-container": "#745600",
+                            "primary-fixed": "#dee0ff",
+                            "on-error": "#690005",
+                            "surface-tint": "#bac3ff",
+                            "surface-bright": "#222222",
+                            "outline-variant": "#333333",
+                            "on-primary-fixed-variant": "#293ca0",
+                            "background": "#000000",
+                            "surface-container": "#0d0d0d",
+                            "inverse-on-surface": "#000000",
+                            "on-secondary-fixed-variant": "#474747",
+                            "inverse-surface": "#FFFFFF",
+                            "on-tertiary-container": "#ffcc55",
+                            "on-secondary-container": "#b6b5b4",
+                            "surface-container-low": "#080808",
+                            "tertiary-fixed-dim": "#fabd00",
+                            "tertiary-fixed": "#ffdf9e",
+                            "on-tertiary": "#3f2e00",
+                            "error-container": "#93000a",
+                            "primary-fixed-dim": "#bac3ff",
+                            "tertiary": "#fabd00",
+                            "on-error-container": "#ffdad6",
+                            "secondary-fixed-dim": "#c8c6c6",
+                            "on-primary": "#08218a",
+                            "on-primary-container": "#cacfff",
+                            "secondary": "#c8c6c6",
+                            "outline": "#444444",
+                            "on-primary-fixed": "#00105c",
+                            "on-tertiary-fixed": "#261a00",
+                            "on-surface-variant": "#A0A0A0",
+                            "surface-container-lowest": "#000000",
+                            "surface-container-highest": "#222222",
+                            "surface-dim": "#000000",
+                            "surface": "#000000",
+                            "on-tertiary-fixed-variant": "#5b4300",
+                            "secondary-fixed": "#e4e2e1"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "margin-edge": "24px",
+                            "gutter": "16px",
+                            "xl": "64px",
+                            "sm": "12px",
+                            "base": "8px",
+                            "md": "24px",
+                            "xs": "4px",
+                            "lg": "40px"
+                        },
+                        "fontFamily": {
+                            "timer-numeric": ["Montserrat"],
+                            "headline-lg-mobile": ["Montserrat"],
+                            "headline-lg": ["Montserrat"],
+                            "body-md": ["Open Sans"],
+                            "display-orb": ["Montserrat"],
+                            "label-caps": ["Montserrat"]
+                        },
+                        "fontSize": {
+                            "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                        }
+                    },
+                },
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .dot-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glass-card {
+            background: rgba(13, 13, 13, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32 dot-grid">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-black/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-white">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-white">Consistency</span>
+</div>
+<div class="flex items-center gap-xs bg-primary-container/20 px-sm py-xs rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-caps text-label-caps text-primary">12d Streak</span>
+</div>
+</nav>
+<!-- Content Canvas -->
+<main class="pt-32 px-margin-edge max-w-xl mx-auto space-y-lg relative">
+<!-- Background Atmospheric Element -->
+<div class="absolute top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/5 blur-[100px] rounded-full -z-10 animate-pulse-soft"></div>
+<!-- Section: Monthly Summary Heatmap -->
+<section class="space-y-md">
+<header class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Insight</p>
+<h2 class="font-headline-lg text-headline-lg text-white">Monthly Velocity</h2>
+</div>
+<p class="font-label-caps text-label-caps text-primary">October 2023</p>
+</header>
+<div class="glass-card p-md rounded-lg bg-surface-container-low">
+<div class="grid grid-cols-7 gap-2">
+<!-- Days of Week -->
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">M</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">T</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">W</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">T</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">F</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">S</div>
+<div class="text-center font-label-caps text-[10px] text-on-surface-variant">S</div>
+<!-- Heatmap Grid -->
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/40"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/80 shadow-[0_0_8px_rgba(186,195,255,0.4)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/60"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/90 shadow-[0_0_8px_rgba(186,195,255,0.5)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/100 shadow-[0_0_12px_rgba(186,195,255,0.6)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/60"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/40"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/80 shadow-[0_0_8px_rgba(186,195,255,0.4)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/100 shadow-[0_0_12px_rgba(186,195,255,0.6)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/100 shadow-[0_0_12px_rgba(186,195,255,0.6)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/90 shadow-[0_0_8px_rgba(186,195,255,0.5)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/80"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/40"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/90 shadow-[0_0_8px_rgba(186,195,255,0.5)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/100 shadow-[0_0_12px_rgba(186,195,255,0.6)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/80 shadow-[0_0_8px_rgba(186,195,255,0.4)]"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10 border border-error/40"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/20"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/40"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/60"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-primary/100 shadow-[0_0_12px_rgba(186,195,255,0.6)] animate-pulse"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+<div class="heatmap-cell h-8 rounded-sm bg-surface-container-highest/10"></div>
+</div>
+<div class="mt-md flex justify-between items-center pt-base border-t border-white/5">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-primary/100"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Optimal</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-error/40 border border-error/60"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Lapsed</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Neutral</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Daily Digest Notification Preview -->
+<section class="space-y-md">
+<header>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Immediate</p>
+<h2 class="font-headline-lg text-headline-lg text-white">Daily Digest</h2>
+</header>
+<div class="relative">
+<div class="glass-card p-base rounded-lg border-primary/20 flex items-start gap-md shadow-2xl overflow-hidden group bg-surface-container-high" style="opacity: 1; transform: translateY(0px);">
+<!-- Notification Icon Box -->
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary text-2xl">verified_user</span>
+</div>
+<!-- Notification Content -->
+<div class="flex-grow space-y-xs py-1">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-[11px] text-primary tracking-widest uppercase">System Validation</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Just now</span>
+</div>
+<p class="font-body-md text-white text-sm leading-relaxed">
+                            Your 12:00 PM Library session is verified. <span class="font-semibold text-primary">8-day streak maintained.</span>
+</p>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-primary/20"></div>
+</div>
+<div class="absolute -bottom-2 left-4 right-4 h-12 bg-white/5 backdrop-blur-md -z-10 rounded-lg"></div>
+</div>
+</section>
+<!-- Section: Secondary Stats Bento -->
+<section class="grid grid-cols-2 gap-gutter">
+<div class="glass-card p-md rounded-lg flex flex-col justify-between h-32 bg-surface-container">
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+<div>
+<div class="font-label-caps text-[10px] text-on-surface-variant uppercase">Commitment Rate</div>
+<div class="font-timer-numeric text-timer-numeric text-white">94%</div>
+</div>
+</div>
+<div class="glass-card p-md rounded-lg flex flex-col justify-between h-32 bg-surface-container">
+<span class="material-symbols-outlined text-primary">timer</span>
+<div>
+<div class="font-label-caps text-[10px] text-on-surface-variant uppercase">Focus Hours</div>
+<div class="font-timer-numeric text-timer-numeric text-white">128h</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Row -->
+<div class="fixed bottom-32 left-1/2 -translate-x-1/2 flex gap-md z-50">
+<button class="w-16 h-16 rounded-full bg-surface-container-highest border border-white/10 flex items-center justify-center text-white shadow-lg hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-2xl">history_edu</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_0_30px_rgba(186,195,255,0.4)] hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">camera</span>
+</button>
+</div>
+<!-- Bottom Navigation Shell -->
+<div class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] rounded-lg bg-black/60 backdrop-blur-md border border-white/10 shadow-lg flex justify-around items-center px-lg py-sm z-50">
+<button class="flex items-center justify-center text-on-surface-variant w-12 h-12 hover:text-white transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</button>
+<button class="flex items-center justify-center text-on-surface-variant w-12 h-12 hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<script>
+        document.querySelectorAll('.heatmap-cell').forEach(cell => {
+            cell.addEventListener('click', () => {
+                cell.classList.toggle('ring-1');
+                cell.classList.toggle('ring-primary');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const digest = document.querySelector('.relative > .glass-card');
+            digest.style.opacity = '0';
+            digest.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                digest.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                digest.style.opacity = '1';
+                digest.style.transform = 'translateY(0)';
+            }, 500);
+        });
+    </script>
+</body></html>

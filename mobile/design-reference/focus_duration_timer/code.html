@@ -1,0 +1,265 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dwell Timer | Disciplined Serenity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.3);
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(143, 144, 158, 0.2) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .orb-glow {
+            filter: blur(40px);
+            animation: pulse-glow 8s ease-in-out infinite;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b6b5b4",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "on-tertiary": "#3f2e00",
+                        "outline": "#8f909e",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-primary": "#08218a",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#454652",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105c",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#ffcc55",
+                        "surface": "#131313",
+                        "primary": "#bac3ff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary": "#303030",
+                        "tertiary": "#fabd00",
+                        "primary-container": "#3f51b5",
+                        "inverse-primary": "#4355b9",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-edge": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 min-h-screen flex flex-col overflow-x-hidden dot-grid">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</h1>
+</div>
+<div class="px-sm py-xs rounded-full bg-primary-container/20 border border-primary/20 text-primary font-label-caps text-label-caps">
+            12d Streak
+        </div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-32 pb-xl px-margin-edge flex flex-col items-center">
+<!-- The Central Orb & Timer -->
+<div class="relative w-full max-w-md aspect-square flex items-center justify-center mb-lg">
+<!-- Atmospheric Glow Background -->
+<div class="absolute w-64 h-64 bg-primary-container orb-glow rounded-full opacity-40" style="transform: scale(0.95);"></div>
+<!-- Progress Ring -->
+<svg class="relative w-full h-full p-8" viewBox="0 0 200 200">
+<circle class="text-outline-variant/20" cx="100" cy="100" fill="transparent" r="90" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary progress-ring__circle" cx="100" cy="100" fill="transparent" id="timer-progress" r="90" stroke="currentColor" stroke-dasharray="565.48" stroke-dashoffset="141.37" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<!-- Numeric Content -->
+<div class="absolute flex flex-col items-center text-center">
+<span class="font-display-orb text-display-orb tracking-tighter text-on-surface">3h 42m</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em] mt-2">Remaining</span>
+</div>
+</div>
+<!-- Session Identity Section -->
+<div class="text-center space-y-2 mb-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-semibold">Library Focus Session</h2>
+<div class="flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<p class="text-on-surface-variant font-body-md">Stay within the geofence to complete.</p>
+</div>
+</div>
+<!-- Context Cards (Bento style) -->
+<div class="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Location Map Mini-Card -->
+<div class="glass-card rounded-lg overflow-hidden flex flex-col h-48 group">
+<div class="h-2/3 w-full bg-surface-container relative">
+<div class="w-full h-full bg-cover bg-center grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" data-location="New York Public Library" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8ITsxZTHcI05Y6AeODj4yAsk4MQ1XQWD_-0H-_l0O_3Xnx_yWp_KJvJh4yIkZ9igvJA_BWAJ5RFpItCcKsYatU4zJBmWb0Y-TrV1Ey5mdx4gDAoJ1QrWLIdXZK2oz43RDg1-6Tx6JrMapvk55U-dfgNPwgMVwqMtd5DvY9d02T2EQPTIjXQnwMAdC4_QJfAFxllkN17cFfT7D6H4y0_ip4qkOo_fHJQT8TxeRGiC_pqHaFtytrpLsjmwq9wHmoahprZ1SohrvokA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim/80 to-transparent"></div>
+<div class="absolute bottom-2 left-3 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-ping"></div>
+<span class="text-[10px] font-label-caps text-tertiary">Active Geofence</span>
+</div>
+</div>
+<div class="p-sm flex-grow flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Current Area</p>
+<p class="font-body-md font-semibold">Main Reading Room</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">explore</span>
+</div>
+</div>
+<!-- Stats Mini-Card -->
+<div class="glass-card rounded-lg p-md flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim">analytics</span>
+<div class="flex items-center px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant">
+<span class="text-[10px] font-label-caps text-on-surface-variant">+12 XP</span>
+</div>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Potential Reward</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">Consistency Tier 3</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Unlock 'Deep Work' badge on completion</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Row -->
+<div class="fixed bottom-xl left-1/2 -translate-x-1/2 flex gap-gutter z-50">
+<!-- Secondary Action -->
+<button class="w-16 h-16 rounded-full bg-surface-container-highest/60 backdrop-blur-md flex items-center justify-center border border-outline-variant/30 text-on-surface active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined">edit_note</span>
+</button>
+<!-- Primary Action -->
+<button class="w-16 h-16 rounded-full bg-primary-container text-on-primary shadow-[0_0_30px_rgba(63,81,181,0.4)] flex items-center justify-center active:scale-90 transition-all duration-300 ease-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-md left-0 w-full z-40 flex justify-around items-center px-lg py-sm md:hidden">
+<div class="bg-surface/10 backdrop-blur-md border border-primary/30 rounded-lg w-[calc(100%-48px)] flex justify-around items-center py-sm shadow-lg">
+<div class="flex items-center justify-center text-secondary w-12 h-12 hover:bg-on-surface/5 transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<div class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex items-center justify-center text-secondary w-12 h-12 hover:bg-on-surface/5 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</div>
+</nav>
+<script>
+        // Micro-interaction for the progress ring
+        let progress = 75; // Example progress
+        const circle = document.getElementById('timer-progress');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100 * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+
+        // Initialize progress
+        setProgress(75);
+
+        // Simple subtle orb pulse logic variation
+        let orb = document.querySelector('.orb-glow');
+        let scale = 1;
+        let growing = true;
+        
+        function animateOrb() {
+            if (growing) {
+                scale += 0.001;
+                if (scale >= 1.1) growing = false;
+            } else {
+                scale -= 0.001;
+                if (scale <= 0.9) growing = true;
+            }
+            orb.style.transform = `scale(${scale})`;
+            requestAnimationFrame(animateOrb);
+        }
+        
+        animateOrb();
+    </script>
+</body></html>

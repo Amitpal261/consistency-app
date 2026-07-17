@@ -1,0 +1,224 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Disciplined Serenity - Add Task</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:active {
+            transform: scale(0.96);
+            background: rgba(186, 195, 255, 0.1);
+            border-color: rgba(186, 195, 255, 0.3);
+        }
+
+        .dot-grid {
+            background-image: radial-gradient(rgba(186, 195, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .orb-glow {
+            filter: blur(40px);
+            background: radial-gradient(circle, rgba(186, 195, 255, 0.15) 0%, rgba(186, 195, 255, 0) 70%);
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .animate-pulse-soft {
+            animation: pulse-soft 8s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b6b5b4",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "on-tertiary": "#3f2e00",
+                        "outline": "#8f909e",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-primary": "#08218a",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#454652",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105c",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#ffcc55",
+                        "surface": "#131313",
+                        "primary": "#bac3ff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary": "#303030",
+                        "tertiary": "#fabd00",
+                        "primary-container": "#3f51b5",
+                        "inverse-primary": "#4355b9",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-edge": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary/30 min-h-screen overflow-hidden flex flex-col dot-grid">
+<!-- Subtle Background Orb -->
+<div class="fixed top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 orb-glow animate-pulse-soft pointer-events-none"></div>
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Commitment</h1>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-edge pt-xl pb-lg">
+<!-- Centered Section Title -->
+<div class="text-center mb-lg space-y-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">What is your commitment?</h2>
+<p class="text-on-surface-variant font-body-md opacity-70">Choose your trigger method</p>
+</div>
+<!-- Selection Bento-style Grid (Single column for one-handed mobile focus) -->
+<div class="w-full max-w-md space-y-gutter">
+<!-- 1. Time-Triggered Card -->
+<button class="glass-card w-full p-md rounded-lg flex items-center group relative overflow-hidden text-left" onclick="this.classList.add('scale-95')">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-primary text-[32px]">schedule</span>
+</div>
+<div class="flex-1">
+<span class="font-label-caps text-label-caps text-primary mb-1 block">ROUTINE</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-none mb-1">Time-Triggered</h3>
+<p class="text-on-surface-variant font-body-md opacity-60 text-sm">Fixed daily focus intervals</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-20 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<!-- 2. Location-Triggered Card -->
+<button class="glass-card w-full p-md rounded-lg flex items-center group relative overflow-hidden text-left" onclick="this.classList.add('scale-95')">
+<div class="w-16 h-16 rounded-full bg-tertiary/10 flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-tertiary text-[32px]">location_on</span>
+</div>
+<div class="flex-1">
+<span class="font-label-caps text-label-caps text-tertiary mb-1 block">CONTEXTUAL</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-none mb-1">Location-Triggered</h3>
+<p class="text-on-surface-variant font-body-md opacity-60 text-sm">Activate when you arrive</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-20 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<!-- 3. Location + Duration Card -->
+<button class="glass-card w-full p-md rounded-lg flex items-center group relative overflow-hidden text-left" onclick="this.classList.add('scale-95')">
+<div class="w-16 h-16 rounded-full bg-on-primary-container/10 flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-on-primary-container text-[32px]">hourglass_empty</span>
+</div>
+<div class="flex-1">
+<span class="font-label-caps text-label-caps text-on-primary-container mb-1 block">HYBRID</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-none mb-1">Location + Duration</h3>
+<p class="text-on-surface-variant font-body-md opacity-60 text-sm">Stay for a specific amount of time</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-20 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- One-Handed Control Row (Subtle Helper) -->
+<footer class="fixed bottom-margin-edge left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-md flex justify-center pb-safe">
+<div class="flex items-center space-x-sm bg-surface-container-high/40 backdrop-blur-md px-md py-sm rounded-full border border-outline-variant/20 shadow-xl">
+<span class="text-on-surface-variant font-label-caps text-label-caps opacity-50 uppercase">Tap to begin journey</span>
+</div>
+</footer>
+<!-- Decorative Edge Gradient (Glassmorphic Finish) -->
+<div class="fixed top-0 left-0 w-full h-1/4 pointer-events-none bg-gradient-to-b from-background via-transparent to-transparent z-40"></div>
+<div class="fixed bottom-0 left-0 w-full h-1/4 pointer-events-none bg-gradient-to-t from-background via-transparent to-transparent z-40"></div>
+<script>
+        // Micro-interactions for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.96)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

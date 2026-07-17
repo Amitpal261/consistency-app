@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-background": "#e5e2e1",
+                            "inverse-primary": "#4355b9",
+                            "secondary-container": "#474747",
+                            "surface-variant": "#353534",
+                            "primary-container": "#3f51b5",
+                            "error": "#ffb4ab",
+                            "surface-container-high": "#2a2a2a",
+                            "primary": "#bac3ff",
+                            "on-surface": "#e5e2e1",
+                            "on-secondary-fixed": "#1b1c1c",
+                            "on-secondary": "#303030",
+                            "tertiary-container": "#745600",
+                            "primary-fixed": "#dee0ff",
+                            "on-error": "#690005",
+                            "surface-tint": "#bac3ff",
+                            "surface-bright": "#393939",
+                            "outline-variant": "#454652",
+                            "on-primary-fixed-variant": "#293ca0",
+                            "background": "#000000",
+                            "surface-container": "#201f1f",
+                            "inverse-on-surface": "#313030",
+                            "on-secondary-fixed-variant": "#474747",
+                            "inverse-surface": "#e5e2e1",
+                            "on-tertiary-container": "#ffcc55",
+                            "on-secondary-container": "#b6b5b4",
+                            "surface-container-low": "#1c1b1b",
+                            "tertiary-fixed-dim": "#fabd00",
+                            "tertiary-fixed": "#ffdf9e",
+                            "on-tertiary": "#3f2e00",
+                            "error-container": "#93000a",
+                            "primary-fixed-dim": "#bac3ff",
+                            "tertiary": "#fabd00",
+                            "on-error-container": "#ffdad6",
+                            "secondary-fixed-dim": "#c8c6c6",
+                            "on-primary": "#08218a",
+                            "on-primary-container": "#cacfff",
+                            "secondary": "#c8c6c6",
+                            "outline": "#8f909e",
+                            "on-primary-fixed": "#00105c",
+                            "on-tertiary-fixed": "#261a00",
+                            "on-surface-variant": "#c5c5d4",
+                            "surface-container-lowest": "#0e0e0e",
+                            "surface-container-highest": "#353534",
+                            "surface-dim": "#131313",
+                            "surface": "#131313",
+                            "on-tertiary-fixed-variant": "#5b4300",
+                            "secondary-fixed": "#e4e2e1"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "margin-edge": "24px",
+                            "gutter": "16px",
+                            "xl": "64px",
+                            "sm": "12px",
+                            "base": "8px",
+                            "md": "24px",
+                            "xs": "4px",
+                            "lg": "40px"
+                        },
+                        "fontFamily": {
+                            "timer-numeric": ["Montserrat"],
+                            "headline-lg-mobile": ["Montserrat"],
+                            "headline-lg": ["Montserrat"],
+                            "body-md": ["Open Sans"],
+                            "display-orb": ["Montserrat"],
+                            "label-caps": ["Montserrat"]
+                        },
+                        "fontSize": {
+                            "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                        }
+                    },
+                },
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .dot-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .orb-glow {
+            box-shadow: 0 0 20px rgba(63, 81, 181, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32 dot-grid">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-black/80 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary-fixed-dim cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-white tracking-tight">Consistency</h1>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-primary-fixed-dim font-label-caps text-label-caps">12d Streak</span>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-margin-edge pt-32 space-y-lg">
+<!-- Action Header -->
+<div class="flex flex-col gap-base">
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em]">ACCOUNTABILITY NETWORK</p>
+<div class="flex justify-between items-end">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white">Buddy List</h2>
+<button class="flex items-center gap-xs bg-primary-container text-on-primary-container px-md py-base rounded-full font-label-caps text-label-caps hover:scale-95 transition-transform duration-200 shadow-lg orb-glow">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    ADD BUDDY
+                </button>
+</div>
+</div>
+<!-- Section: Active Buddies -->
+<section class="space-y-md">
+<!-- Buddy Card: Julian -->
+<div class="bg-surface-container-low/40 backdrop-blur-md rounded-lg p-md flex flex-col gap-md relative overflow-hidden group border border-outline-variant/20">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="relative">
+<img class="w-16 h-16 rounded-xl object-cover border-2 border-primary-container/40" data-alt="Julian's portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC92I25tcwvS111pyTnlU1oC5-tGjVdZl7Lz7dMOUQPeMPcEIU5c6t22ZvMW1cp8SdPmosK4X7QlqbzO2-kK32_xBBNVdAgCZdDUuYJP3CzBy8-OXeS8W_Xa1apaUGUw0RCmKCcNSOeXgNepM6_AdXkJzr3ZUfWqQMAogCI4Xe6Q3tJ5ngXkIP8THnayqUGijO9pvR5YiqtFp9OwHW_BJ98qKzDzky1uJTxqRIaJKu-LZPIE4emZ7hc53W4GTEnHrPVmQJ2BXifqw8"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-[#4CAF50] rounded-full border-2 border-black shadow-[0_0_8px_rgba(76,175,80,0.6)]"></div>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[20px] text-white">Julian</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">task_alt</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 ACTIVE TASKS</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="text-right hidden sm:block">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim block">VERIFIED</span>
+<span class="text-[10px] text-on-surface-variant/60 font-label-caps">2 HOURS AGO</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-white transition-colors">more_vert</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-base border-t border-outline-variant/20">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-[10px] text-on-surface-variant tracking-wider uppercase">Auto-approve on timeout</label>
+<span class="text-[12px] text-on-surface-variant/70 italic">Approved if no response in 15m</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-12 h-6 bg-surface-container-high rounded-full transition-colors duration-300">
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Buddy Card: Sarah -->
+<div class="bg-surface-container-low/40 backdrop-blur-md rounded-lg p-md flex flex-col gap-md relative overflow-hidden group border border-outline-variant/20">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="relative">
+<img class="w-16 h-16 rounded-xl object-cover border-2 border-tertiary/40" data-alt="Sarah's portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGTbMz_LRYgoQP24w6COuZSWqkfnjYIKov2bryT4SHFSh0uS4EiFQsvH82UmWRwef551wnXsJmhdbbj3-ynqeHM_Lyj2vuKPnPJJyP38N404fsYjoyosoofAZgNAUrDSJ5qYoRy-61NNdhD7ui0amp3U-nKE5yOr1uHKXlU1c9s-8TOYTp9alkZE92YtDt0gF7jNcS_huSAEEH5pplBLEFKqAtBHZ_lx6XETdsbQRMl3fLaiRQvPMVpYxY6GFklS5WJlgkY3rRRJk"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-tertiary rounded-full border-2 border-black animate-pulse shadow-[0_0_8px_rgba(250,189,0,0.6)]"></div>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-[20px] text-white">Sarah</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">pending</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">1 ACTIVE TASK</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="text-right hidden sm:block">
+<span class="font-label-caps text-label-caps text-tertiary block">PENDING</span>
+<span class="text-[10px] text-on-surface-variant/60 font-label-caps">WAITING...</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-white transition-colors">more_vert</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-base border-t border-outline-variant/20">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-[10px] text-on-surface-variant tracking-wider uppercase">Auto-approve on timeout</label>
+<span class="text-[12px] text-on-surface-variant/70 italic">Manual verification required</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-12 h-6 bg-surface-container-high rounded-full transition-colors duration-300">
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Empty State / Suggestion -->
+<div class="border-2 border-dashed border-outline-variant/20 rounded-lg p-xl flex flex-col items-center justify-center text-center gap-sm opacity-50 hover:opacity-80 transition-opacity cursor-pointer bg-white/5">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[48px] font-thin">group_add</span>
+<div>
+<p class="font-headline-lg-mobile text-[18px] text-white">Expand your circle</p>
+<p class="text-on-surface-variant text-[14px]">Mutual accountability increases success rates by 65%</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] rounded-lg bg-white/10 backdrop-blur-md border border-primary/20 shadow-lg z-50 flex justify-around items-center px-lg py-sm">
+<button class="flex items-center justify-center text-secondary-fixed-dim w-12 h-12 hover:bg-white/5 transition-colors active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 hover:opacity-90 transition-all active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+<button class="flex items-center justify-center text-secondary-fixed-dim w-12 h-12 hover:bg-white/5 transition-colors active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</nav>
+<!-- Floating Action Row -->
+<div class="fixed bottom-32 left-0 w-full flex justify-center gap-md px-margin-edge pointer-events-none">
+<button class="pointer-events-auto w-16 h-16 rounded-full bg-primary-container shadow-[0_12px_24px_rgba(63,81,181,0.3)] flex items-center justify-center text-on-primary-container active:scale-95 transition-transform orb-glow">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">camera</span>
+</button>
+<button class="pointer-events-auto w-16 h-16 rounded-full bg-surface-container-highest border border-outline-variant/30 shadow-lg flex items-center justify-center text-on-surface active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]">edit_note</span>
+</button>
+</div>
+<script>
+        // Simple micro-interaction for toggles
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const dot = this.nextElementSibling.querySelector('.toggle-dot');
+                const label = this.nextElementSibling;
+                if (this.checked) {
+                    dot.style.transform = 'translateX(24px)';
+                    label.classList.replace('bg-surface-container-high', 'bg-primary-container');
+                } else {
+                    dot.style.transform = 'translateX(0px)';
+                    label.classList.replace('bg-primary-container', 'bg-surface-container-high');
+                }
+            });
+        });
+    </script>
+</body></html>

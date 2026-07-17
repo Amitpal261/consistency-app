@@ -1,0 +1,303 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 390px; height: 1018px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Buddy Review Inbox | Disciplined Serenity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.3); /* Deep Indigo 30% */
+        }
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .orb-glow {
+            filter: blur(40px);
+            background: #3f51b5; /* Deep Indigo base */
+            opacity: 0.4;
+        }
+        .blur-privacy {
+            filter: blur(12px);
+            transition: filter 0.3s ease;
+        }
+        .blur-privacy:hover {
+            filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#bac3ff",
+                        "inverse-on-surface": "#313030",
+                        "surface-bright": "#393939",
+                        "on-primary-container": "#cacfff",
+                        "inverse-primary": "#4355b9",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#454652",
+                        "on-secondary": "#303030",
+                        "inverse-surface": "#e5e2e1",
+                        "surface": "#131313",
+                        "secondary-container": "#474747",
+                        "secondary": "#c8c6c6",
+                        "primary-container": "#3f51b5",
+                        "on-secondary-fixed-variant": "#474747",
+                        "on-surface-variant": "#c5c5d4",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-fixed-dim": "#bac3ff",
+                        "outline": "#8f909e",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary": "#08218a",
+                        "surface-container": "#201f1f",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "tertiary": "#fabd00",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-primary-fixed": "#00105c",
+                        "primary-fixed": "#dee0ff",
+                        "on-secondary-container": "#b6b5b4",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#745600",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "secondary-fixed": "#e4e2e1",
+                        "surface-container-highest": "#353534",
+                        "tertiary-fixed": "#ffdf9e",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-tertiary-container": "#ffcc55",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "on-error": "#690005",
+                        "on-tertiary": "#3f2e00",
+                        "surface-container-low": "#1c1b1b",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "margin-edge": "24px",
+                        "base": "8px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "timer-numeric": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Open Sans"],
+                        "display-orb": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md dot-grid min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</h1>
+</div>
+<div class="text-primary font-label-caps text-label-caps">12d Streak</div>
+</header>
+<main class="pt-xl pb-32 px-margin-edge max-w-2xl mx-auto">
+<!-- Floating Orb Aesthetic (Upper third decoration) -->
+<div class="relative flex justify-center mb-16 pt-lg">
+<div class="orb-glow absolute w-32 h-32 rounded-full"></div>
+<div class="relative z-10 w-24 h-24 rounded-full border border-primary/30 flex items-center justify-center bg-surface-container-high/40 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+</div>
+<!-- Section Title -->
+<div class="mb-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-xs">Buddy Review</h2>
+<p class="text-on-surface-variant text-sm">Verify your buddies' commitments to maintain the circle's integrity.</p>
+</div>
+<!-- Review Inbox List -->
+<div class="space-y-md">
+<!-- Review Card 1 -->
+<div class="glass-card p-base flex flex-col gap-sm rounded-lg">
+<div class="flex items-center gap-sm">
+<!-- Blurred Privacy Thumbnail -->
+<div class="relative w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center blur-privacy" data-alt="A blurred high-contrast photograph of a digital alarm clock showing 6:00 AM in a dimly lit, minimalist bedroom setting. The image is intentionally heavily blurred to maintain privacy, showing only soft shapes of glowing indigo and warm charcoal tones. The aesthetic is clean, moody, and professional, consistent with a high-end productivity app." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyATn7df_f0u2HqvwbmAngmQySrttnvOfrSoSCzm1ZZHPH28WH6Tn1Q8ObnPnuSCm9T5c43bbw_ZcDKRbITFQFgQPkQTLTwMbJLTncPAVvoe7buty9qqS52DKktrpunuhNg0uo80JGrwHfVbD8CDVzBtcCxjcAXZEN054CPHTjPMXC0Bj8bvlAQqmcBq8F4xgJcKH9aQuIAuf_AkVRW0xGjaid1X__T8eQutQHVTE4rE6zNSmjxDxf59s9uNFpiItSTgipDFaMVq0')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/50 text-xl">visibility_off</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-caps text-label-caps text-tertiary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                                PENDING REVIEW
+                            </span>
+<span class="text-on-surface-variant text-[10px] uppercase font-bold">2m ago</span>
+</div>
+<h3 class="font-semibold text-on-surface truncate">Marcus Chen</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">alarm</span>
+                            6 AM Wake Up
+                        </p>
+</div>
+</div>
+<!-- Action Row -->
+<div class="grid grid-cols-2 gap-sm pt-sm border-t border-outline-variant/20">
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-surface-container-highest hover:bg-error-container/20 transition-colors group">
+<span class="material-symbols-outlined text-error text-sm group-active:scale-90 transition-transform">close</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reject</span>
+</button>
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-caps text-label-caps">Approve</span>
+</button>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="glass-card p-base flex flex-col gap-sm rounded-lg">
+<div class="flex items-center gap-sm">
+<div class="relative w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center blur-privacy" data-alt="A blurred top-down perspective of a fitness mat and a pair of minimalist running shoes in a bright, morning-lit studio space. The image is heavily obscured by a gaussian blur, leaving only impressions of light gray, white, and soft indigo shapes. The lighting is ethereal and clean, fitting a disciplined serenity theme." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuwhFTOaCdYpnudZ8vUgs3XAnYog_kF4tyN45yJf7O9qpI54zYIEtgjIQ9frnMrFFfbkRjQeuKab0iBnOjWqqCf1kfr9JJ5xihtUghSGNF6CPbpIBkRxtcG5qScOVBJFTw58hhfSv08kZfsNmBosYHvsPDoPz5PsZW1OON_CMJUlc-1j3Kqbw5lkjMlTmyo22YNnXvwboxX5Etbh-7VW_v8LsfL9zzcYEkYLV8CoCtXl9M-BFX2ffhTeoZu3g6LZgdjh0hppzwDxA')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/50 text-xl">visibility_off</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-caps text-label-caps text-tertiary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                                PENDING REVIEW
+                            </span>
+<span class="text-on-surface-variant text-[10px] uppercase font-bold">14m ago</span>
+</div>
+<h3 class="font-semibold text-on-surface truncate">Sarah Jenkins</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">fitness_center</span>
+                            Morning HIIT
+                        </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm pt-sm border-t border-outline-variant/20">
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-surface-container-highest hover:bg-error-container/20 transition-colors">
+<span class="material-symbols-outlined text-error text-sm">close</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reject</span>
+</button>
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-caps text-label-caps">Approve</span>
+</button>
+</div>
+</div>
+<!-- Review Card 3 -->
+<div class="glass-card p-base flex flex-col gap-sm rounded-lg">
+<div class="flex items-center gap-sm">
+<div class="relative w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center blur-privacy" data-alt="A heavily blurred close-up shot of a physical journal and a luxury fountain pen on a dark wooden surface. The focus is soft and indistinct, showing muted amber highlights and deep charcoal shadows. The composition suggests a focused, reflective moment of morning journaling within a minimalist design language." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYSolwqxr-4ZBgsBdM6phvkxCfeMl-reb99T3YNpVmchkzkMUc3tlslS72XzNUfHbcWonPzWMMVISTHfTHuOrje90JOKmgaW9ID0qb2LNa7pObHjwOmQ4F1819F3E2hoGPc6ZaiIrPhGRnDm53-7H6lX-xRUvaNxHpgBKGmxI5reJBsulbczdzKyAUO9RnXRWyM9JC_OxUXotmjixnIijaSpCM5CfKqcA6JzLoAn9oBhzPdl4SyOKuqqidlKhWjSEjpIH5ydCtamo')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/50 text-xl">visibility_off</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-caps text-label-caps text-tertiary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                                PENDING REVIEW
+                            </span>
+<span class="text-on-surface-variant text-[10px] uppercase font-bold">45m ago</span>
+</div>
+<h3 class="font-semibold text-on-surface truncate">Elena Rodriguez</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">edit_note</span>
+                            Morning Reflection
+                        </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm pt-sm border-t border-outline-variant/20">
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-surface-container-highest hover:bg-error-container/20 transition-colors">
+<span class="material-symbols-outlined text-error text-sm">close</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reject</span>
+</button>
+<button class="flex items-center justify-center gap-xs py-base rounded-full bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-caps text-label-caps">Approve</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-md left-0 w-full z-50 flex justify-around items-center px-lg py-sm">
+<div class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] rounded-lg bg-surface/10 dark:bg-white/10 backdrop-blur-md border border-primary/30 dark:border-primary/20 shadow-lg flex justify-around items-center py-sm">
+<button class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="flex items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full w-12 h-12 shadow-lg active:scale-90 duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</button>
+<button class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</nav>
+<!-- Contextual FAB (Only for main screens) -->
+<div class="fixed bottom-32 right-margin-edge z-40 hidden">
+<!-- Suppressed for this Review Inbox screen as per Semantic Shell Mandate -->
+</div>
+<script>
+        // Simple micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Toggle blur on click for demonstration of "Opening" the proof
+        document.querySelectorAll('.blur-privacy').forEach(img => {
+            img.parentElement.addEventListener('click', () => {
+                if(img.style.filter === 'none') {
+                    img.style.filter = 'blur(12px)';
+                    img.nextElementSibling.style.opacity = '1';
+                } else {
+                    img.style.filter = 'none';
+                    img.nextElementSibling.style.opacity = '0';
+                }
+            });
+        });
+    </script>
+</body></html>

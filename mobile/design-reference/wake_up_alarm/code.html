@@ -1,0 +1,244 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Disciplined Serenity | Alarm</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&amp;family=Open+Sans:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Shared Component Logic & Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#b6b5b4",
+                    "error": "#ffb4ab",
+                    "on-background": "#e5e2e1",
+                    "on-primary-fixed-variant": "#293ca0",
+                    "surface-dim": "#131313",
+                    "surface-tint": "#bac3ff",
+                    "surface-variant": "#353534",
+                    "secondary-fixed": "#e4e2e1",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#745600",
+                    "on-tertiary": "#3f2e00",
+                    "outline": "#8f909e",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#474747",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-bright": "#393939",
+                    "tertiary-fixed-dim": "#fabd00",
+                    "on-primary": "#08218a",
+                    "secondary": "#c8c6c6",
+                    "tertiary-fixed": "#ffdf9e",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "on-tertiary-fixed-variant": "#5b4300",
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#261a00",
+                    "on-surface-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#bac3ff",
+                    "surface-container-low": "#1c1b1b",
+                    "outline-variant": "#454652",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#dee0ff",
+                    "on-primary-fixed": "#00105c",
+                    "on-secondary-fixed-variant": "#474747",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#ffcc55",
+                    "surface": "#131313",
+                    "primary": "#bac3ff",
+                    "on-primary-container": "#cacfff",
+                    "on-secondary": "#303030",
+                    "tertiary": "#fabd00",
+                    "primary-container": "#3f51b5",
+                    "inverse-primary": "#4355b9",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "margin-edge": "24px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Open Sans"],
+                    "timer-numeric": ["Montserrat"],
+                    "display-orb": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "label-caps": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            background-image: radial-gradient(#353534 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            overflow: hidden;
+        }
+
+        .orb-glow {
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: pulse-orb 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-orb {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.15);
+        }
+
+        .active-glow {
+            box-shadow: 0 0 20px rgba(186, 195, 255, 0.4);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom scrollbar suppression */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen text-on-surface">
+<!-- Top Navigation Anchor (Manual Mock from JSON structure) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</span>
+</div>
+<div class="text-primary font-label-caps tracking-widest">12d Streak</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 relative flex flex-col items-center justify-center pt-xl">
+<!-- The Central Orb -->
+<div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[320px] h-[320px] md:w-[480px] md:h-[480px] pointer-events-none">
+<div class="absolute inset-0 bg-primary-container rounded-full orb-glow"></div>
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-[100px]"></div>
+</div>
+<!-- Time Display -->
+<div class="relative z-10 text-center mt-xl">
+<div class="font-display-orb text-[120px] md:text-[160px] leading-none tracking-tighter text-on-primary-fixed drop-shadow-2xl">
+                06:00
+            </div>
+<div class="font-label-caps text-on-surface-variant tracking-[0.4em] mt-sm">STAY DISCIPLINED</div>
+</div>
+<!-- Commitment Card (Contextual Task) -->
+<div class="relative z-10 mt-lg w-full max-w-sm px-margin-edge">
+<div class="glass-card rounded-lg p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#fabd00]"></div>
+<div>
+<p class="font-body-md text-on-surface font-semibold">Morning Ritual</p>
+<p class="font-label-caps text-on-surface-variant text-[10px]">VERIFICATION PENDING</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">camera_alt</span>
+</div>
+</div>
+</main>
+<!-- Interaction & Selection Zone -->
+<footer class="relative z-20 pb-xl px-margin-edge flex flex-col items-center gap-lg">
+<!-- 7-Day Selector -->
+<div class="flex justify-between w-full max-w-md bg-surface-container/40 rounded-full p-xs border border-outline-variant/20">
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">M</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">T</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">W</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">T</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">F</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container shadow-lg">
+<span class="text-[10px] font-label-caps">S</span>
+</div>
+<div class="flex flex-col items-center justify-center w-10 h-10 rounded-full text-on-surface-variant hover:bg-on-surface/5 transition-all">
+<span class="text-[10px] font-label-caps">S</span>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="group relative w-full max-w-md h-16 bg-primary-container text-on-primary-container rounded-full font-headline-lg-mobile flex items-center justify-center gap-sm active:scale-95 transition-all duration-300 active-glow" id="mainAction">
+<span class="relative z-10 font-bold uppercase tracking-widest text-lg">I'm Up</span>
+<div class="absolute inset-0 rounded-full bg-primary/20 blur-md group-hover:blur-lg transition-all"></div>
+</button>
+</footer>
+<!-- Persistent Floating Capture Logic -->
+<div class="fixed bottom-margin-edge right-margin-edge z-50 flex flex-col gap-sm">
+<!-- Floating Log Button -->
+<button class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center text-on-surface-variant shadow-xl hover:bg-surface-container-highest transition-colors active:scale-90">
+<span class="material-symbols-outlined">edit_note</span>
+</button>
+</div>
+<!-- Scripts for micro-interactions -->
+<script>
+        const btn = document.getElementById('mainAction');
+        btn.addEventListener('click', () => {
+            // Emotional feedback
+            btn.classList.add('bg-tertiary', 'text-on-tertiary');
+            btn.innerHTML = '<span class="material-symbols-outlined">verified</span> <span class="font-bold uppercase tracking-widest text-lg">COMMITTED</span>';
+            
+            // Visual transition for the orb
+            document.querySelector('.orb-glow').style.backgroundColor = '#fabd00';
+            document.querySelector('.orb-glow').style.opacity = '0.9';
+            
+            setTimeout(() => {
+                alert("Day Started. You have 15 minutes to verify your morning ritual.");
+            }, 500);
+        });
+
+        // Time ticker simulation
+        setInterval(() => {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            // Normally we'd update 06:00, but for the alarm screen demo we keep the requested static time
+            // unless we want it live. Let's keep it as the prompt asked: 06:00.
+        }, 1000);
+    </script>
+</body></html>

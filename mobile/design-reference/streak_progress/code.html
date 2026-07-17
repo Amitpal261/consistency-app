@@ -1,0 +1,271 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Consistency - Morning Routine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(186, 195, 255, 0.3); /* Deep Indigo/Primary glow */
+        }
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.05); }
+        }
+        .orb-glow {
+            filter: blur(40px);
+            background: #3f51b5; /* primary-container color */
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        .heat-map-cell {
+            aspect-ratio: 1;
+            border-radius: 4px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b6b5b4",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "on-tertiary": "#3f2e00",
+                        "outline": "#8f909e",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-primary": "#08218a",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#454652",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105c",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#ffcc55",
+                        "surface": "#131313",
+                        "primary": "#bac3ff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary": "#303030",
+                        "tertiary": "#fabd00",
+                        "primary-container": "#3f51b5",
+                        "inverse-primary": "#4355b9",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-edge": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "timer-numeric": ["24px", { "lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-orb": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen dot-grid selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer hover:opacity-80 transition-opacity active:scale-95 duration-200">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface dark:text-on-surface">Consistency</h1>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-primary dark:text-primary-fixed-dim font-label-caps text-label-caps tracking-widest bg-primary-container/20 px-sm py-xs rounded-full">Badge Level 2</span>
+<button class="text-on-surface-variant dark:text-on-surface-variant font-body-md hover:opacity-80 transition-opacity active:scale-95">12d Streak</button>
+</div>
+</header>
+<main class="pt-32 pb-40 px-margin-edge max-w-lg mx-auto flex flex-col items-center">
+<!-- Header Info -->
+<div class="text-center mb-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-xs">Morning Routine</h2>
+<p class="text-on-surface-variant font-label-caps">PERSONAL DISCIPLINE</p>
+</div>
+<!-- Central Orb - The Earned '24' -->
+<div class="relative w-64 h-64 flex items-center justify-center mb-xl">
+<!-- The Glow -->
+<div class="absolute inset-0 orb-glow rounded-full"></div>
+<!-- The Orb Body -->
+<div class="relative w-48 h-48 rounded-full glass-card flex flex-col items-center justify-center shadow-2xl border-primary/40">
+<span class="font-display-orb text-display-orb text-primary leading-none">24</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-xs">DAY STREAK</span>
+</div>
+<!-- Floating Decorative Accents -->
+<div class="absolute -top-4 -right-4 bg-tertiary text-on-tertiary rounded-full px-3 py-1 font-label-caps text-xs shadow-lg">ELITE</div>
+</div>
+<!-- Achievement Progress Section -->
+<div class="w-full space-y-md">
+<!-- Calendar Heat Map Card -->
+<div class="glass-card p-md rounded-lg w-full">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-label-caps text-label-caps text-on-surface">Activity History</h3>
+<div class="flex gap-xs items-center">
+<span class="w-2 h-2 rounded-full bg-primary/20"></span>
+<span class="w-2 h-2 rounded-full bg-primary/60"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Placeholder days - Mocking a heatmap -->
+<div class="heat-map-cell bg-primary/90"></div>
+<div class="heat-map-cell bg-primary/80"></div>
+<div class="heat-map-cell bg-primary/10"></div>
+<div class="heat-map-cell bg-primary/70"></div>
+<div class="heat-map-cell bg-primary/90"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/80"></div>
+<div class="heat-map-cell bg-primary/90"></div>
+<div class="heat-map-cell bg-primary/95"></div>
+<div class="heat-map-cell bg-primary/80"></div>
+<div class="heat-map-cell bg-primary/90"></div>
+<div class="heat-map-cell bg-primary/85"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/80"></div>
+<div class="heat-map-cell bg-primary/90"></div>
+<div class="heat-map-cell bg-primary/95"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/100"></div>
+<div class="heat-map-cell bg-primary/100" id="current-day-pulse" style="opacity: 0.72;"></div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/30 flex justify-between">
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant">NEXT MILESTONE</p>
+<p class="font-timer-numeric text-timer-numeric text-primary">30 DAYS</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant">PERCENTAGE</p>
+<p class="font-timer-numeric text-timer-numeric text-tertiary">94%</p>
+</div>
+</div>
+</div>
+<!-- Detailed Status Pills -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="glass-card p-sm rounded-lg flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant">STATUS</p>
+<p class="font-body-md text-on-surface font-semibold">Verified</p>
+</div>
+</div>
+<div class="glass-card p-sm rounded-lg flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">schedule</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant">AVERAGE</p>
+<p class="font-body-md text-on-surface font-semibold">06:15 AM</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Capture Row -->
+<div class="fixed bottom-32 left-1/2 -translate-x-1/2 flex gap-md z-40">
+<button class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shadow-lg active:scale-90 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-2xl">edit_note</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center shadow-lg active:scale-90 transition-transform duration-300 ring-4 ring-primary/20">
+<span class="material-symbols-outlined text-on-primary-container text-2xl" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-md left-1/2 -translate-x-1/2 w-[calc(100%-48px)] rounded-lg bg-surface/10 dark:bg-white/10 backdrop-blur-md border border-primary/30 dark:border-primary/20 shadow-lg z-50 flex justify-around items-center px-lg py-sm">
+<div class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<div class="flex items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full w-12 h-12 active:scale-90 duration-300 ease-out cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div class="flex items-center justify-center text-secondary dark:text-secondary-fixed-dim w-12 h-12 hover:bg-on-surface/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for the current day heatmap pulse
+        const pulseTarget = document.getElementById('current-day-pulse');
+        if (pulseTarget) {
+            let opacity = 1;
+            let growing = false;
+            setInterval(() => {
+                if (growing) {
+                    opacity += 0.01;
+                    if (opacity >= 1) growing = false;
+                } else {
+                    opacity -= 0.01;
+                    if (opacity <= 0.4) growing = true;
+                }
+                pulseTarget.style.opacity = opacity;
+            }, 30);
+        }
+    </script>
+</body></html>

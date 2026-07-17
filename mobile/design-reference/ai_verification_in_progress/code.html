@@ -1,0 +1,252 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Verifying Commitment | Consistency</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Open+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b6b5b4",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#bac3ff",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#745600",
+                        "on-tertiary": "#3f2e00",
+                        "outline": "#8f909e",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-container": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-primary": "#08218a",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#ffdf9e",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#454652",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105c",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#ffcc55",
+                        "surface": "#131313",
+                        "primary": "#bac3ff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary": "#303030",
+                        "tertiary": "#fabd00",
+                        "primary-container": "#3f51b5",
+                        "inverse-primary": "#4355b9",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-edge": "24px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Open Sans"],
+                        "timer-numeric": ["Montserrat"],
+                        "display-orb": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "timer-numeric": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-orb": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; filter: blur(40px); }
+            50% { transform: scale(1.1); opacity: 1; filter: blur(60px); }
+        }
+
+        .orb-glow {
+            animation: orb-pulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes scanning-line {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .glass-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary/30">
+<!-- Subtle Dot Grid Background -->
+<div class="fixed inset-0 dot-grid pointer-events-none"></div>
+<!-- Header (Suppressed as per task: transactional/focused state) -->
+<!-- The TopAppBar is included but visually integrated into the verification canvas -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-edge py-sm bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface">Consistency</span>
+</div>
+<div class="text-on-surface-variant font-label-caps tracking-widest px-sm py-xs bg-surface-container rounded-full">
+            12d Streak
+        </div>
+</header>
+<!-- Verification Canvas -->
+<main class="relative min-h-screen flex flex-col items-center justify-center px-margin-edge pt-xl pb-lg overflow-hidden">
+<!-- The Central Orb -->
+<div class="relative z-10 mb-lg flex items-center justify-center">
+<!-- Emotional Centerpiece: Glowing Orb -->
+<div class="absolute w-48 h-48 bg-primary-container rounded-full orb-glow mix-blend-screen opacity-60"></div>
+<div class="absolute w-32 h-32 bg-primary rounded-full blur-2xl opacity-40"></div>
+<!-- Physical Core -->
+<div class="relative w-24 h-24 rounded-full bg-surface-container-highest border border-primary/30 flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-primary text-[40px] animate-pulse">verified</span>
+</div>
+</div>
+<!-- Content Shell -->
+<div class="relative z-20 text-center max-w-md mx-auto space-y-md">
+<div class="space-y-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Scanning pixels...</h1>
+<p class="text-on-surface-variant font-body-md opacity-80">AI is identifying objects and environmental context.</p>
+</div>
+<!-- Progress Meter (Glassmorphic) -->
+<div class="relative w-full h-2 bg-surface-container-high rounded-full overflow-hidden border border-outline-variant/20">
+<div class="absolute top-0 left-0 h-full bg-primary transition-all duration-1000 ease-in-out w-1/3" id="progress-bar" style="width: 50%;"></div>
+</div>
+</div>
+<!-- Verification Detail Card -->
+<section class="mt-xl w-full max-w-sm">
+<div class="bg-white/10 dark:bg-white/5 glass-blur border border-outline-variant/30 rounded-lg p-md relative overflow-hidden group">
+<!-- Scanning Effect -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-transparent h-1/2 w-full -translate-y-full animate-[scanning-line_3s_linear_infinite] pointer-events-none"></div>
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 border border-outline-variant/50">
+<!-- Simulated Proof Image -->
+<div class="w-full h-full bg-cover bg-center opacity-70 group-hover:opacity-100 transition-opacity" data-alt="A cinematic, high-resolution dark mode photograph of a minimalist alarm clock on a wooden nightstand, illuminated by a single soft blue light source, symbolizing a successfully completed early morning commitment. The style is clean, professional, and tranquil." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7mE4AKeIkmlWwYANnjHCPoE7CcRsRULCglXEAF2fpmLfBhyBxUIFvdMZ71tmVtiq_n4C9f3B9xMh8nttOcfsvb-nrC2pPNZwxlAfTpr4rdHwBc_e7w3Vux2Ejpfbkk62BEkWYEMQ3B6Kg8S3oYawxbfna0DImH-gWM-YsJDk-CnHPbnqHP3CqXV0KdtDidBRk2IQ07jt_1_aaeWQ1CS2eIogjwDGz-LWjGa6HWa6USa-OpTqPyGWCCnGh9ra1PxmcJdvAXByBSSg')"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-xs mb-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-tertiary font-label-caps text-label-caps uppercase">Analysis In Progress</span>
+</div>
+<p class="text-on-surface font-semibold truncate">Wake_up_5AM_Proof.jpg</p>
+<p class="text-on-surface-variant text-xs font-body-md">Meta-data verification: 100%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Feedback Cluster -->
+<div class="mt-lg flex flex-wrap justify-center gap-sm max-w-sm">
+<div class="px-sm py-xs bg-surface-container-high border border-outline-variant/30 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<span class="text-xs text-on-surface-variant font-label-caps">STAMP: 05:01 AM</span>
+</div>
+<div class="px-sm py-xs bg-surface-container-high border border-outline-variant/30 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+<span class="text-xs text-on-surface-variant font-label-caps">GEO-LOCKED</span>
+</div>
+<div class="px-sm py-xs bg-surface-container-high border border-outline-variant/30 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">image_search</span>
+<span class="text-xs text-on-surface-variant font-label-caps">AI VISION ACTIVE</span>
+</div>
+</div>
+</main>
+<!-- Footer Action (Minimalist departure) -->
+<footer class="fixed bottom-lg left-0 w-full px-margin-edge flex justify-center pointer-events-none">
+<button class="pointer-events-auto bg-surface-container-highest/50 backdrop-blur-md px-lg py-sm rounded-full border border-outline-variant/30 text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-highest transition-colors active:scale-95 duration-200">
+            Cancel Verification
+        </button>
+</footer>
+<!-- Verification Logic Simulation -->
+<script>
+        const progressBar = document.getElementById('progress-bar');
+        const statusText = document.querySelector('h1');
+        const statusSubtext = document.querySelector('p');
+        
+        const steps = [
+            { width: '25%', title: 'Extracting metadata...', sub: 'Validating timestamps and geolocation tags.' },
+            { width: '50%', title: 'Scanning pixels...', sub: 'AI is identifying objects and environmental context.' },
+            { width: '85%', title: 'Finalizing verification...', sub: 'Syncing with your global accountability ledger.' },
+            { width: '100%', title: 'Commitment Verified!', sub: 'Your streak has been safely updated to 13 days.' }
+        ];
+
+        let currentStep = 0;
+        
+        function updateProgress() {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                progressBar.style.width = step.width;
+                statusText.innerText = step.title;
+                statusSubtext.innerText = step.sub;
+                
+                if (currentStep === steps.length - 1) {
+                    const orb = document.querySelector('.orb-glow');
+                    const coreIcon = document.querySelector('.animate-pulse');
+                    orb.classList.remove('bg-primary-container');
+                    orb.classList.add('bg-tertiary-container');
+                    coreIcon.classList.remove('text-primary');
+                    coreIcon.classList.add('text-tertiary');
+                }
+
+                currentStep++;
+                setTimeout(updateProgress, 2500);
+            }
+        }
+
+        setTimeout(updateProgress, 1500);
+    </script>
+</body></html>
