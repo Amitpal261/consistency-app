@@ -28,7 +28,9 @@
         "USE_FULL_SCREEN_INTENT",
         "POST_NOTIFICATIONS",
         "ACCESS_FINE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION"
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_MEDIA_PLAYBACK"
       ],
       "package": "com.anonymous.mobile"
     },

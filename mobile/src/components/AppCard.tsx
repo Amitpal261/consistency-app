@@ -22,22 +22,26 @@ export function AppCard({ children, style, ...rest }: ViewProps & { children: Re
 }
 
 export function AppTextInput(props: TextInputProps) {
+  const { style, ...rest } = props;
+
   return (
     <TextInput
-      placeholderTextColor={colors.textMuted}
+      placeholderTextColor={"rgba(255, 255, 255, 0.7)"}
+      selectionColor="#FFFFFF"
+      underlineColorAndroid="transparent"
       style={[
         {
-          backgroundColor: colors.surfaceElevated,
+          backgroundColor: "rgba(255,255,255,0.08)",
           borderWidth: 1,
-          borderColor: colors.border,
+          borderColor: "rgba(255,255,255,0.16)",
           borderRadius: radius.md,
           padding: 14,
-          color: colors.textPrimary,
+          color: "#FFFFFF",
           fontSize: 15,
         },
-        props.style,
+        style,
       ]}
-      {...props}
+      {...rest}
     />
   );
 }

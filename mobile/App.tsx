@@ -9,7 +9,8 @@ import { CheckInScreen } from "./src/screens/CheckInScreen";
 import { CreateHabitScreen } from "./src/screens/CreateHabitScreen";
 import { BuddyScreen } from "./src/screens/BuddyScreen";
 import { colors } from "./src/theme/colors";
-import { setupNotificationChannels, getHabitIdFromAlarmLaunch, onHabitAlarmPressedInForeground } from "./src/lib/alarm";
+import { setupNotificationChannels, getHabitIdFromAlarmLaunch, onHabitAlarmForegroundEvent } from "./src/lib/alarm";
+import { getPendingAlarmHabitId } from "./src/lib/nativeAlarm";
 import { getHabitsWithStreaks, type Habit } from "./src/lib/api";
 import { setupGeofencing } from "./src/lib/geofence";
 
@@ -45,14 +46,25 @@ function Tabs() {
   useEffect(() => {
     setupNotificationChannels();
 
-    getHabitIdFromAlarmLaunch().then(async (habitId) => {
-      if (!habitId || !token) return;
+    (async () => {
+      if (!token) return;
+      // Two possible sources for "which habit should I open right now?":
+      // 1) the user tapped the notifee notification / opened via its
+      //    fullScreenAction (getHabitIdFromAlarmLaunch)
+      // 2) our own native AlarmActivity launched MainActivity directly
+      //    (getPendingAlarmHabitId) — this can happen when the alarm's
+      //    full-screen wake UI opens the app before any notifee tap.
+      const notifeeHabitId = await getHabitIdFromAlarmLaunch();
+      const nativeHabitId = await getPendingAlarmHabitId();
+      const habitId = notifeeHabitId ?? nativeHabitId;
+      if (!habitId) return;
+
       const res = await getHabitsWithStreaks(token);
       const habit = res.habits.find((h) => h._id === habitId);
       if (habit) setScreen({ name: "checkin", habit });
-    });
+    })();
 
-    const unsubscribe = onHabitAlarmPressedInForeground(async (habitId) => {
+    const unsubscribe = onHabitAlarmForegroundEvent(async (habitId) => {
       if (!token) return;
       const res = await getHabitsWithStreaks(token);
       const habit = res.habits.find((h) => h._id === habitId);

@@ -20,6 +20,13 @@ const habitSchema = new Schema(
     daysOfWeek: { type: [Number], default: [0, 1, 2, 3, 4, 5, 6] },
     buddyId: { type: Schema.Types.ObjectId, ref: "User" },
     active: { type: Boolean, default: true },
+    // "kind" (NOT "type") on purpose — mongoose reads a nested "type" key as
+    // a SchemaType definition, which would silently break this whole field.
+    ringtone: {
+      kind: { type: String, enum: ["default", "custom"], default: "default" },
+      uri: { type: String },
+      name: { type: String },
+    },
   },
   { timestamps: true }
 );

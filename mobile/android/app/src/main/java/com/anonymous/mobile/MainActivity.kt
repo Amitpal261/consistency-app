@@ -1,5 +1,6 @@
 package com.anonymous.mobile
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 
@@ -17,6 +18,25 @@ class MainActivity : ReactActivity() {
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
     super.onCreate(null)
+
+    // Cold-start case: AlarmActivity launched us directly (bypassing
+    // notifee's own tap flow). Stash the habitId so App.tsx can pick it up
+    // via AlarmModule.consumePendingHabitId().
+    captureAlarmHabitIdFromIntent(intent)
+  }
+
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    // Warm-start case: app was already running when the alarm's full-screen
+    // activity forwarded into MainActivity.
+    captureAlarmHabitIdFromIntent(intent)
+    setIntent(intent)
+  }
+
+  private fun captureAlarmHabitIdFromIntent(intent: Intent?) {
+    intent?.getStringExtra(AlarmService.EXTRA_HABIT_ID)?.let {
+      AlarmModule.pendingHabitId = it
+    }
   }
 
   /**

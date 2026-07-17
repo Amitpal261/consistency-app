@@ -30,6 +30,9 @@ export function login(email: string, password: string) {
 export type TaskType = "time" | "location" | "location_duration";
 export type VerificationMethod = "photo" | "gps" | "photo_gps";
 
+// "kind" not "type" — kept consistent with the backend model field name.
+export type Ringtone = { kind: "default" | "custom"; uri?: string; name?: string };
+
 export type Habit = {
   _id: string;
   name: string;
@@ -40,6 +43,7 @@ export type Habit = {
   requiredDurationMinutes?: number;
   daysOfWeek: number[];
   buddyId?: string;
+  ringtone?: Ringtone;
   currentStreak: number;
   bestStreak: number;
   lastCheckInDateKey?: string;
@@ -52,6 +56,7 @@ export type CreateHabitPayload = {
   timeWindow?: { hour: number; minute: number; windowMinutes?: number };
   location?: { lat: number; lng: number; radiusMeters?: number };
   requiredDurationMinutes?: number;
+  ringtone?: Ringtone;
 };
 
 export function createHabit(token: string, payload: CreateHabitPayload) {

@@ -6,6 +6,7 @@ import { getCurrentPositionSafe } from "../lib/location";
 import * as ImageManipulator from "expo-image-manipulator";
 import { useAuth } from "../context/AuthContext";
 import { getTodayPrompt, submitCheckIn, type Habit } from "../lib/api";
+import { stopNativeAlarm } from "../lib/nativeAlarm";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { colors, spacing, typography } from "../theme/colors";
@@ -55,10 +56,16 @@ export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => v
       setPhotoBase64(`data:image/jpeg;base64,${manipulated.base64}`);
     }
     setCameraOpen(false);
+
+    // Kill the loud alarm the instant proof is captured — don't wait on the
+    // network request below, since that latency shouldn't keep it ringing.
+    stopNativeAlarm();
   }
 
   async function handleCheckIn() {
     if (!token) return;
+    // Covers the GPS-only habit case (no photo capture step to hook into).
+    stopNativeAlarm();
     setLoading(true);
     setResult(null);
     setIsError(false);

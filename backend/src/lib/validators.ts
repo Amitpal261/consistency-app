@@ -33,6 +33,15 @@ export const checkInSchema = z.object({
   photoBase64: z.string().max(2_500_000).optional(),
 });
 
+// NOTE: nested key is "kind" and NOT "type" on purpose — mongoose treats a
+// nested object that has a "type" key as a SchemaType definition itself,
+// which would break the `ringtone` field. Using "kind" avoids that footgun.
+export const ringtoneSchema = z.object({
+  kind: z.enum(["default", "custom"]).default("default"),
+  uri: z.string().max(500).optional(),
+  name: z.string().max(200).optional(),
+});
+
 export const createHabitSchema = z.object({
   name: z.string().min(1).max(60),
   taskType: z.enum(["time", "location", "location_duration"]),
@@ -54,4 +63,5 @@ export const createHabitSchema = z.object({
   requiredDurationMinutes: z.number().int().min(5).max(1440).optional(),
   daysOfWeek: z.array(z.number().int().min(0).max(6)).min(1).max(7).optional(),
   buddyId: z.string().optional(),
+  ringtone: ringtoneSchema.optional(),
 });

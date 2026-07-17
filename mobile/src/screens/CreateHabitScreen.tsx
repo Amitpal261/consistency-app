@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Platform, ScrollView, Text, View } from "react-native";
+import { Alert, Platform, ScrollView, Text, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Location from "expo-location";
 import { getCurrentPositionSafe } from "../lib/location";
 import { useAuth } from "../context/AuthContext";
-import { createHabit, type TaskType, type VerificationMethod } from "../lib/api";
+import { createHabit, type Ringtone, type TaskType, type VerificationMethod } from "../lib/api";
 import { scheduleHabitAlarm } from "../lib/alarm";
+import { pickCustomRingtone } from "../lib/ringtone";
 import { AppButton } from "../components/AppButton";
 import { AppCard, AppTextInput } from "../components/AppCard";
 import { colors, spacing, typography } from "../theme/colors";
@@ -37,6 +38,24 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
   const [radiusMeters, setRadiusMeters] = useState("150");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // --- Alarm ringtone selection (time-based habits only) ---
+  const [ringtone, setRingtone] = useState<Ringtone>({ kind: "default" });
+  const [pickingRingtone, setPickingRingtone] = useState(false);
+
+  async function handlePickCustomRingtone() {
+    setPickingRingtone(true);
+    try {
+      const picked = await pickCustomRingtone();
+      if (picked) {
+        setRingtone({ kind: "custom", uri: picked.uri, name: picked.name });
+      }
+    } catch (err) {
+      Alert.alert("Could not use that file", err instanceof Error ? err.message : "Please try a different audio file.");
+    } finally {
+      setPickingRingtone(false);
+    }
+  }
 
   async function handleCreate() {
     if (!token || !name.trim()) {
@@ -72,10 +91,11 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
             : undefined,
         location,
         requiredDurationMinutes: taskType === "location_duration" ? Number(durationMinutes) || 120 : undefined,
+        ringtone: taskType === "time" ? ringtone : undefined,
       });
 
       if (taskType === "time") {
-        await scheduleHabitAlarm(res.habit._id, res.habit.name, time.getHours(), time.getMinutes());
+        await scheduleHabitAlarm(res.habit._id, res.habit.name, time.getHours(), time.getMinutes(), res.habit.ringtone);
       }
 
       onCreated();
@@ -114,18 +134,54 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
       </AppCard>
 
       {taskType === "time" ? (
-        <AppCard style={{ alignItems: "center", gap: spacing.sm }}>
-          <Text style={typography.label}>ALARM TIME</Text>
-          <DateTimePicker
-            value={time}
-            mode="time"
-            display={Platform.OS === "ios" ? "spinner" : "clock"}
-            onChange={(_, selected) => selected && setTime(selected)}
-            themeVariant="dark"
-          />
-          <Text style={typography.label}>CHECK-IN WINDOW (MINUTES AFTER ALARM)</Text>
-          <AppTextInput value={windowMinutes} onChangeText={setWindowMinutes} keyboardType="number-pad" />
-        </AppCard>
+        <>
+          <AppCard style={{ alignItems: "center", gap: spacing.sm }}>
+            <Text style={typography.label}>ALARM TIME</Text>
+            <DateTimePicker
+              value={time}
+              mode="time"
+              display={Platform.OS === "ios" ? "spinner" : "clock"}
+              onChange={(_, selected) => selected && setTime(selected)}
+              themeVariant="dark"
+            />
+            <Text style={typography.label}>CHECK-IN WINDOW (MINUTES AFTER ALARM)</Text>
+            <AppTextInput value={windowMinutes} onChangeText={setWindowMinutes} keyboardType="number-pad" />
+          </AppCard>
+
+          <AppCard style={{ gap: spacing.sm }}>
+            <Text style={typography.label}>ALARM SOUND</Text>
+
+            <View
+              onTouchEnd={() => setRingtone({ kind: "default" })}
+              style={{
+                padding: spacing.sm,
+                borderRadius: 10,
+                backgroundColor: ringtone.kind === "default" ? colors.primaryMuted : colors.surfaceElevated,
+              }}
+            >
+              <Text style={{ color: colors.textPrimary, fontWeight: "700" }}>Default alarm sound</Text>
+              <Text style={{ color: colors.textSecondary, fontSize: 12 }}>Uses your phone's default alarm ringtone.</Text>
+            </View>
+
+            <View
+              onTouchEnd={handlePickCustomRingtone}
+              style={{
+                padding: spacing.sm,
+                borderRadius: 10,
+                backgroundColor: ringtone.kind === "custom" ? colors.primaryMuted : colors.surfaceElevated,
+              }}
+            >
+              <Text style={{ color: colors.textPrimary, fontWeight: "700" }}>
+                {pickingRingtone ? "Opening file picker…" : "Choose audio file from phone"}
+              </Text>
+              {ringtone.kind === "custom" && ringtone.name ? (
+                <Text style={{ color: colors.success, fontSize: 12, marginTop: 2 }}>✅ {ringtone.name}</Text>
+              ) : (
+                <Text style={{ color: colors.textSecondary, fontSize: 12 }}>Pick any mp3/wav/m4a from your device.</Text>
+              )}
+            </View>
+          </AppCard>
+        </>
       ) : (
         <AppCard style={{ gap: spacing.sm }}>
           <Text style={typography.label}>LOCATION</Text>
