@@ -14,9 +14,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { login, signup } from "../lib/api";
-import { useAuth } from "../context/AuthContext";
 import DotGridBackground from "../components/DotGridBackground";
+import { requestPasswordReset } from "../lib/api";
 import { colors, radius, spacing, typography } from "../theme/colors";
 
 function colorWithAlpha(hex: string, alpha: number): string {
@@ -27,20 +26,21 @@ function colorWithAlpha(hex: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export function LoginScreen({ onForgotPassword }: { onForgotPassword?: () => void }) {
-  const { setToken } = useAuth();
+type ForgotPasswordScreenProps = {
+  onBackToLogin: () => void;
+};
+
+export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProps) {
   const orbScale = useRef(new Animated.Value(1)).current;
   const orbOpacity = useRef(new Animated.Value(0.8)).current;
 
-  const [isSignup, setIsSignup] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    const animation = Animated.loop(
+    const scaleAnimation = Animated.loop(
       Animated.sequence([
         Animated.timing(orbScale, {
           toValue: 1.05,
@@ -74,23 +74,26 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword?: () => voi
       ]),
     );
 
-    animation.start();
+    scaleAnimation.start();
     opacityAnimation.start();
 
     return () => {
-      animation.stop();
+      scaleAnimation.stop();
       opacityAnimation.stop();
     };
   }, [orbOpacity, orbScale]);
 
   async function handleSubmit() {
     setError(null);
+    if (!email.trim()) {
+      setError("Please enter your email.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const res = isSignup
-        ? await signup(name, email, password)
-        : await login(email, password);
-      setToken(res.token);
+      await requestPasswordReset(email.trim());
+      setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -101,7 +104,6 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword?: () => voi
   return (
     <SafeAreaView style={styles.safeArea}>
       <DotGridBackground />
-
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.flex}
@@ -131,135 +133,78 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword?: () => voi
                   },
                 ]}
               >
-                <MaterialIcons name="lock" size={36} color={colors.onPrimaryContainer} />
+                <MaterialIcons name="mail-outline" size={36} color={colors.onPrimaryContainer} />
               </Animated.View>
             </View>
 
             <View style={styles.heroText}>
-              <Text style={styles.heroTitle}>
-                {isSignup ? "Create account" : "Welcome back"}
-              </Text>
+              <Text style={styles.heroTitle}>Reset your password</Text>
               <Text style={styles.heroSubtitle}>
-                {isSignup
-                  ? "Start building better habits today."
-                  : "Resume your journey of focus."}
+                Enter the email associated with your account and we’ll send a reset link.
               </Text>
             </View>
 
             <View style={styles.formCard}>
-              <View style={styles.fieldGroup}>
-                {isSignup && (
+              {success ? (
+                <View style={styles.successPanel}>
+                  <MaterialIcons name="check-circle" size={40} color={colors.primary} />
+                  <Text style={styles.successTitle}>Check your email</Text>
+                  <Text style={styles.successText}>
+                    If that email is registered, we sent a password reset link to it.
+                  </Text>
+                </View>
+              ) : (
+                <>
                   <View style={styles.field}>
-                    <Text style={styles.fieldLabel}>Full Name</Text>
+                    <Text style={styles.fieldLabel}>Email Address</Text>
                     <View style={styles.inputRow}>
                       <MaterialIcons
-                        name="person-outline"
+                        name="mail-outline"
                         size={20}
                         color={colors.onSurfaceVariant}
                         style={styles.inputIcon}
                       />
                       <TextInput
-                        placeholder="Jane Doe"
+                        placeholder="name@example.com"
                         placeholderTextColor={colorWithAlpha(colors.outlineVariant, 0.5)}
-                        value={name}
-                        onChangeText={setName}
+                        value={email}
+                        onChangeText={setEmail}
+                        autoCapitalize="none"
+                        autoComplete="email"
+                        keyboardType="email-address"
                         style={styles.input}
                         selectionColor={colors.primary}
                       />
                     </View>
                   </View>
-                )}
 
-                <View style={styles.field}>
-                  <Text style={styles.fieldLabel}>Email Address</Text>
-                  <View style={styles.inputRow}>
-                    <MaterialIcons
-                      name="mail-outline"
-                      size={20}
-                      color={colors.onSurfaceVariant}
-                      style={styles.inputIcon}
-                    />
-                    <TextInput
-                      placeholder="name@example.com"
-                      placeholderTextColor={colorWithAlpha(colors.outlineVariant, 0.5)}
-                      value={email}
-                      onChangeText={setEmail}
-                      autoCapitalize="none"
-                      keyboardType="email-address"
-                      style={styles.input}
-                      selectionColor={colors.primary}
-                    />
-                  </View>
-                </View>
+                  {error ? <Text style={styles.error}>{error}</Text> : null}
 
-                <View style={styles.field}>
-                  <Text style={styles.fieldLabel}>Password</Text>
-                  <View style={styles.inputRow}>
-                    <MaterialIcons
-                      name="vpn-key"
-                      size={20}
-                      color={colors.onSurfaceVariant}
-                      style={styles.inputIcon}
-                    />
-                    <TextInput
-                      placeholder="••••••••"
-                      placeholderTextColor={colorWithAlpha(colors.outlineVariant, 0.5)}
-                      value={password}
-                      onChangeText={setPassword}
-                      secureTextEntry
-                      style={styles.input}
-                      selectionColor={colors.primary}
-                    />
-                    <MaterialIcons
-                      name="visibility"
-                      size={20}
-                      color={colors.onSurfaceVariant}
-                    />
-                  </View>
-                </View>
-              </View>
-
-              {error ? <Text style={styles.error}>{error}</Text> : null}
-
-              <Pressable
-                onPress={handleSubmit}
-                disabled={loading}
-                style={({ pressed }) => [
-                  styles.loginButton,
-                  pressed && styles.loginButtonPressed,
-                  loading && styles.loginButtonDisabled,
-                ]}
-              >
-                {loading ? (
-                  <ActivityIndicator color={colors.onPrimaryContainer} />
-                ) : (
-                  <Text style={styles.loginButtonText}>
-                    {isSignup ? "Create Account" : "Login"}
-                  </Text>
-                )}
-              </Pressable>
-
-              {!isSignup && (
-                <Pressable style={styles.forgotPassword} onPress={onForgotPassword}>
-                  <Text style={styles.forgotPasswordText} >
-                    Forgot Password?
-                  </Text>
-                </Pressable>
+                  <Pressable
+                    onPress={handleSubmit}
+                    disabled={loading}
+                    style={({ pressed }) => [
+                      styles.submitButton,
+                      pressed && styles.submitButtonPressed,
+                      loading && styles.submitButtonDisabled,
+                    ]}
+                  >
+                    {loading ? (
+                      <ActivityIndicator color={colors.onPrimaryContainer} />
+                    ) : (
+                      <Text style={styles.submitButtonText}>Send reset link</Text>
+                    )}
+                  </Pressable>
+                </>
               )}
             </View>
 
-            <View style={styles.signupRow}>
-              <Text style={styles.signupPrompt}>
-                {isSignup ? "Already have an account? " : "New to Consistency? "}
-              </Text>
-              <Pressable onPress={() => setIsSignup((v) => !v)}>
-                <Text style={styles.signupLink}>
-                  {isSignup ? "Log in" : "Create Account"}
-                </Text>
+            <View style={styles.footerRow}>
+              <Pressable onPress={onBackToLogin} style={styles.backButton}>
+                <Text style={styles.backText}>Back to login</Text>
               </Pressable>
             </View>
           </View>
-
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -273,12 +218,6 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-
-  streakBadge: {
-    ...typography.labelCaps,
-    color: colors.primary,
-    letterSpacing: 1.2,
   },
   scrollContent: {
     flexGrow: 1,
@@ -295,7 +234,6 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     width: "100%",
     alignSelf: "center",
-   
   },
   orbWrap: {
     width: 96,
@@ -360,9 +298,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 12 },
     elevation: 8,
   },
-  fieldGroup: {
-    gap: spacing.md,
-  },
   field: {
     gap: spacing.xs,
   },
@@ -392,7 +327,7 @@ const styles = StyleSheet.create({
     color: colors.error,
     fontSize: 14,
   },
-  loginButton: {
+  submitButton: {
     width: "100%",
     paddingVertical: spacing.md,
     borderRadius: radius.full,
@@ -405,42 +340,44 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 8 },
     elevation: 6,
   },
-  loginButtonPressed: {
+  submitButtonPressed: {
     transform: [{ scale: 0.98 }],
     opacity: 0.92,
   },
-  loginButtonDisabled: {
+  submitButtonDisabled: {
     opacity: 0.75,
   },
-  loginButtonText: {
+  submitButtonText: {
     ...typography.headlineLgMobile,
     fontSize: 18,
     fontWeight: "700",
     color: colors.onPrimaryContainer,
   },
-  forgotPassword: {
+  successPanel: {
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  successTitle: {
+    ...typography.headlineLgMobile,
+    fontWeight: "700",
+    textAlign: "center",
+    color: colors.onSurface,
+  },
+  successText: {
+    ...typography.bodyMd,
+    textAlign: "center",
+    color: colors.onSurfaceVariant,
+  },
+  footerRow: {
+    width: "100%",
     alignItems: "center",
   },
-
-  forgotPasswordText: {
+  backButton: {
+    paddingVertical: spacing.sm,
+  },
+  backText: {
     ...typography.labelCaps,
-    color: colors.onSurfaceVariant,
-    letterSpacing: 2,
-  },
- 
-  signupRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  signupPrompt: {
-    ...typography.bodyMd,
-    color: colors.onSurfaceVariant,
-  },
-  signupLink: {
-    ...typography.bodyMd,
     color: colors.primary,
-    fontWeight: "600",
+    letterSpacing: 1.2,
   },
 });

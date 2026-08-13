@@ -6,6 +6,8 @@ const userSchema = new Schema(
     passwordHash: { type: String, required: true },
     name: { type: String, required: true, trim: true },
     timezone: { type: String, default: "Asia/Kolkata" },
+    passwordResetToken: { type: String },
+    passwordResetExpires: { type: Date },
   },
   { timestamps: true }
 );

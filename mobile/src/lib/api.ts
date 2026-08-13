@@ -1,14 +1,17 @@
-export const API_BASE_URL = "http://192.168.1.13:4000";
+export const API_BASE_URL = "http://192.168.1.33:4000";
 
 async function request<T>(path: string, options: RequestInit & { token?: string } = {}): Promise<T> {
   const { token, headers, ...rest } = options;
+  const requestHeaders = new Headers(headers);
+  requestHeaders.set("Content-Type", "application/json");
+
+  if (token) {
+    requestHeaders.set("Authorization", "Bearer " + token);
+  }
+
   const res = await fetch(`${API_BASE_URL}${path}`, {
     ...rest,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...headers,
-    },
+    headers: requestHeaders,
   });
   const data = await res.json().catch(() => null);
   if (!res.ok) {
@@ -25,6 +28,13 @@ export function signup(name: string, email: string, password: string) {
 
 export function login(email: string, password: string) {
   return request<AuthResponse>("/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
+}
+
+export function requestPasswordReset(email: string) {
+  return request<{ message: string }>("/auth/forgot-password", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  });
 }
 
 export type TaskType = "time" | "location" | "location_duration";

@@ -12,6 +12,15 @@ export const loginSchema = z.object({
   password: z.string().min(1),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(1),
+  password: z.string().min(8).max(72),
+});
+
 export const addBuddySchema = z.object({
   buddyEmail: z.string().email(),
 });

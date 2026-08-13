@@ -1,8 +1,10 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { randomBytes, createHash } from "crypto";
 import { User } from "../models/User.js";
-import { loginSchema, signupSchema } from "../lib/validators.js";
+import { forgotPasswordSchema, loginSchema, resetPasswordSchema, signupSchema } from "../lib/validators.js";
+import { sendPasswordResetEmail } from "../lib/email.js";
 
 export const authRouter = Router();
 
@@ -44,3 +46,52 @@ authRouter.post("/login", async (req, res) => {
   const token = signToken(String(user._id));
   return res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
 });
+
+authRouter.post("/forgot-password", async (req, res) => {
+  const parsed = forgotPasswordSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
+
+  const user = await User.findOne({ email: parsed.data.email });
+  if (!user) {
+    return res.json({ message: "If that email is registered, we sent a password reset link to it." });
+  }
+
+  const token = randomBytes(32).toString("hex");
+  const tokenHash = createHash("sha256").update(token).digest("hex");
+  const expires = new Date(Date.now() + 60 * 60 * 1000);
+
+  user.passwordResetToken = tokenHash;
+  user.passwordResetExpires = expires;
+  await user.save();
+
+  try {
+    await sendPasswordResetEmail(user.email, user.name, token);
+  } catch (err) {
+    console.error("Failed to send password reset email:", err);
+  }
+
+  return res.json({ message: "If that email is registered, we sent a password reset link to it." });
+});
+
+authRouter.post("/reset-password", async (req, res) => {
+  const parsed = resetPasswordSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
+
+  const tokenHash = createHash("sha256").update(parsed.data.token).digest("hex");
+  const user = await User.findOne({
+    passwordResetToken: tokenHash,
+    passwordResetExpires: { $gt: new Date() },
+  });
+
+  if (!user) {
+    return res.status(400).json({ error: "Reset token is invalid or has expired." });
+  }
+
+  user.passwordHash = await bcrypt.hash(parsed.data.password, 10);
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+
+  return res.json({ message: "Password reset successfully." });
+});
+
