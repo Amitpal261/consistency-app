@@ -10,6 +10,7 @@ import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { SplashScreen } from "./src/screens/SplashScreen";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CheckInScreen } from "./src/screens/CheckInScreen";
+import { HabitDetailScreen } from "./src/screens/HabitDetailScreen";
 import { CreateHabitScreen } from "./src/screens/CreateHabitScreen";
 import { BuddyScreen } from "./src/screens/BuddyScreen";
 import { AchievementsScreen } from "./src/screens/AchievementsScreen";
@@ -50,6 +51,7 @@ type Screen =
   | { name: "settings" }
   | { name: "accountPrivacy" }
   | { name: "createHabit" }
+  | { name: "habitDetail"; habit: Habit }
   | { name: "checkin"; habit: Habit }
   | { name: "forgotPassword" }
   | { name: "login" };
@@ -102,7 +104,7 @@ function Tabs() {
   }, [token, refreshKey]);
 
   const activeTab =
-    screen.name === "checkin" || screen.name === "createHabit"
+    screen.name === "checkin" || screen.name === "createHabit" || screen.name === "habitDetail"
       ? "habits"
       : screen.name === "accountPrivacy"
       ? "settings"
@@ -114,7 +116,7 @@ function Tabs() {
         {screen.name === "habits" ? (
           <HomeScreen
             key={refreshKey}
-            onSelectHabit={(habit) => setScreen({ name: "checkin", habit })}
+            onSelectHabit={(habit) => setScreen({ name: "habitDetail", habit })}
             onAddHabit={() => setScreen({ name: "createHabit" })}
           />
         ) : screen.name === "createHabit" ? (
@@ -123,6 +125,12 @@ function Tabs() {
               setRefreshKey((k) => k + 1);
               setScreen({ name: "habits" });
             }}
+          />
+        ) : screen.name === "habitDetail" ? (
+          <HabitDetailScreen
+            habit={screen.habit}
+            onBack={() => setScreen({ name: "habits" })}
+            onCheckIn={() => setScreen({ name: "checkin", habit: screen.habit })}
           />
         ) : screen.name === "checkin" ? (
           <CheckInScreen

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { Habit } from "../models/Habit.js";
 import { Streak } from "../models/Streak.js";
+import { CheckIn } from "../models/CheckIn.js";
 import { createHabitSchema } from "../lib/validators.js";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
@@ -67,4 +68,46 @@ habitRouter.get("/with-streaks", requireAuth, async (req: AuthedRequest, res) =>
   }));
 
   return res.json({ habits: merged });
+});
+// Real per-day check-in history for a single habit — powers the "Activity
+// History" heatmap on the habit detail screen. Deliberately real data, not
+// mocked cells: each day is null (no check-in) or the actual reviewStatus.
+habitRouter.get("/:habitId/history", requireAuth, async (req: AuthedRequest, res) => {
+  const habit = await Habit.findOne({ _id: req.params.habitId, userId: req.userId });
+  if (!habit) return res.status(404).json({ error: "Habit not found" });
+
+  const days = Math.min(Math.max(Number(req.query.days) || 21, 1), 90);
+  const since = new Date();
+  since.setDate(since.getDate() - (days - 1));
+  since.setHours(0, 0, 0, 0);
+
+  const checkIns = await CheckIn.find({
+    userId: req.userId,
+    habitId: habit._id,
+    checkedInAt: { $gte: since },
+  })
+    .select("checkedInAt reviewStatus")
+    .lean();
+
+  // Collapse to one entry per calendar day (UTC-based day key — a cosmetic
+  // simplification for this visual only; actual streak logic uses the
+  // timezone-aware dateKey helper in checkin.ts, not this one).
+  const byDay = new Map<string, string>();
+  for (const c of checkIns) {
+    const key = c.checkedInAt.toISOString().slice(0, 10);
+    const existing = byDay.get(key);
+    if (!existing || c.reviewStatus === "approved" || c.reviewStatus === "auto_approved_unreviewed") {
+      byDay.set(key, c.reviewStatus);
+    }
+  }
+
+  const result: { date: string; status: string | null }[] = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(since);
+    d.setDate(since.getDate() + i);
+    const key = d.toISOString().slice(0, 10);
+    result.push({ date: key, status: byDay.get(key) ?? null });
+  }
+
+  return res.json({ days: result });
 });

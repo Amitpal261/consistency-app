@@ -4427,3 +4427,494 @@
 {"_e":"metro:client_log","_t":1786617403174,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
 {"_e":"metro:client_log","_t":1786617412447,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
 {"_e":"metro:client_log","_t":1786617417153,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"root:init","_t":1786674987433,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786674987462,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786674987514,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786674999257,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786675016694,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786675023143,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786675035306,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786675082134,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786675082135,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675082145,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675095664,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1786675095764,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1786675096067,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1786675096169,"id":"1","progress":0.04000000000000001,"total":25,"current":2}
+{"_e":"metro:bundling:progress","_t":1786675096283,"id":"1","progress":0.04000000000000001,"total":27,"current":3}
+{"_e":"metro:bundling:progress","_t":1786675096449,"id":"1","progress":0.04000000000000001,"total":27,"current":4}
+{"_e":"metro:bundling:progress","_t":1786675096563,"id":"1","progress":0.04000000000000001,"total":28,"current":4}
+{"_e":"metro:bundling:progress","_t":1786675096606,"id":"1","progress":0.04000000000000001,"total":28,"current":5}
+{"_e":"metro:bundling:progress","_t":1786675096712,"id":"1","progress":0.04591836734693877,"total":28,"current":6}
+{"_e":"metro:bundling:progress","_t":1786675096979,"id":"1","progress":0.0625,"total":28,"current":7}
+{"_e":"metro:bundling:progress","_t":1786675097088,"id":"1","progress":0.0625,"total":30,"current":7}
+{"_e":"metro:bundling:progress","_t":1786675097125,"id":"1","progress":0.07111111111111111,"total":30,"current":8}
+{"_e":"metro:bundling:progress","_t":1786675097229,"id":"1","progress":0.07111111111111111,"total":34,"current":8}
+{"_e":"metro:bundling:progress","_t":1786675097362,"id":"1","progress":0.07111111111111111,"total":34,"current":9}
+{"_e":"metro:bundling:progress","_t":1786675097464,"id":"1","progress":0.0771604938271605,"total":36,"current":10}
+{"_e":"metro:bundling:progress","_t":1786675097564,"id":"1","progress":0.10518626734842952,"total":37,"current":12}
+{"_e":"metro:bundling:progress","_t":1786675097673,"id":"1","progress":0.14792899408284024,"total":39,"current":15}
+{"_e":"metro:bundling:progress","_t":1786675097774,"id":"1","progress":0.16000000000000003,"total":40,"current":16}
+{"_e":"metro:bundling:progress","_t":1786675097925,"id":"1","progress":0.18062499999999998,"total":40,"current":17}
+{"_e":"metro:bundling:progress","_t":1786675098027,"id":"1","progress":0.18062499999999998,"total":46,"current":18}
+{"_e":"metro:bundling:progress","_t":1786675098138,"id":"1","progress":0.1810774105930285,"total":47,"current":20}
+{"_e":"metro:bundling:progress","_t":1786675098250,"id":"1","progress":0.1810774105930285,"total":69,"current":24}
+{"_e":"metro:bundling:progress","_t":1786675098358,"id":"1","progress":0.1810774105930285,"total":71,"current":27}
+{"_e":"metro:bundling:progress","_t":1786675098460,"id":"1","progress":0.1810774105930285,"total":94,"current":33}
+{"_e":"metro:bundling:progress","_t":1786675098564,"id":"1","progress":0.1810774105930285,"total":94,"current":35}
+{"_e":"metro:bundling:progress","_t":1786675098679,"id":"1","progress":0.1810774105930285,"total":101,"current":40}
+{"_e":"metro:bundling:progress","_t":1786675098782,"id":"1","progress":0.1810774105930285,"total":124,"current":43}
+{"_e":"metro:bundling:progress","_t":1786675098882,"id":"1","progress":0.1810774105930285,"total":125,"current":44}
+{"_e":"metro:bundling:progress","_t":1786675098907,"id":"1","progress":0.1810774105930285,"total":125,"current":45}
+{"_e":"metro:bundling:progress","_t":1786675099012,"id":"1","progress":0.1810774105930285,"total":137,"current":52}
+{"_e":"metro:bundling:progress","_t":1786675099112,"id":"1","progress":0.1810774105930285,"total":157,"current":58}
+{"_e":"metro:bundling:progress","_t":1786675099243,"id":"1","progress":0.1810774105930285,"total":168,"current":63}
+{"_e":"metro:bundling:progress","_t":1786675099351,"id":"1","progress":0.1810774105930285,"total":272,"current":71}
+{"_e":"metro:bundling:progress","_t":1786675099451,"id":"1","progress":0.1810774105930285,"total":280,"current":85}
+{"_e":"metro:bundling:progress","_t":1786675099551,"id":"1","progress":0.1810774105930285,"total":293,"current":102}
+{"_e":"metro:bundling:progress","_t":1786675099658,"id":"1","progress":0.1810774105930285,"total":297,"current":111}
+{"_e":"metro:bundling:progress","_t":1786675099752,"id":"1","progress":0.1810774105930285,"total":298,"current":126}
+{"_e":"metro:bundling:progress","_t":1786675099859,"id":"1","progress":0.1810774105930285,"total":308,"current":131}
+{"_e":"metro:bundling:progress","_t":1786675100803,"id":"1","progress":0.18367346938775508,"total":308,"current":132}
+{"_e":"metro:bundling:progress","_t":1786675100913,"id":"1","progress":0.18646694214876033,"total":308,"current":133}
+{"_e":"metro:bundling:progress","_t":1786675101077,"id":"1","progress":0.18928149772305614,"total":308,"current":134}
+{"_e":"metro:bundling:progress","_t":1786675101184,"id":"1","progress":0.2746973252964713,"total":311,"current":163}
+{"_e":"metro:bundling:progress","_t":1786675101284,"id":"1","progress":0.27910288358846563,"total":318,"current":168}
+{"_e":"metro:bundling:progress","_t":1786675101393,"id":"1","progress":0.28532849812893024,"total":322,"current":172}
+{"_e":"metro:bundling:progress","_t":1786675101492,"id":"1","progress":0.2990206369054682,"total":331,"current":181}
+{"_e":"metro:bundling:progress","_t":1786675101624,"id":"1","progress":0.31121168628763135,"total":337,"current":188}
+{"_e":"metro:bundling:progress","_t":1786675101749,"id":"1","progress":0.31121168628763135,"total":343,"current":190}
+{"_e":"metro:bundling:progress","_t":1786675101872,"id":"1","progress":0.31121168628763135,"total":354,"current":193}
+{"_e":"metro:bundling:progress","_t":1786675101984,"id":"1","progress":0.31121168628763135,"total":355,"current":197}
+{"_e":"metro:bundling:progress","_t":1786675102087,"id":"1","progress":0.31121168628763135,"total":372,"current":205}
+{"_e":"metro:bundling:progress","_t":1786675102187,"id":"1","progress":0.3185845998512063,"total":388,"current":219}
+{"_e":"metro:bundling:progress","_t":1786675102303,"id":"1","progress":0.33882824682557366,"total":402,"current":234}
+{"_e":"metro:bundling:progress","_t":1786675102409,"id":"1","progress":0.3491735537190083,"total":418,"current":247}
+{"_e":"metro:bundling:progress","_t":1786675102510,"id":"1","progress":0.38225405722622297,"total":427,"current":264}
+{"_e":"metro:bundling:progress","_t":1786675102623,"id":"1","progress":0.4164236080201499,"total":437,"current":282}
+{"_e":"metro:bundling:progress","_t":1786675102724,"id":"1","progress":0.4260789759690859,"total":455,"current":297}
+{"_e":"metro:bundling:progress","_t":1786675102825,"id":"1","progress":0.4482924303420738,"total":463,"current":310}
+{"_e":"metro:bundling:progress","_t":1786675102955,"id":"1","progress":0.4482924303420738,"total":499,"current":316}
+{"_e":"metro:bundling:progress","_t":1786675103056,"id":"1","progress":0.4482924303420738,"total":560,"current":326}
+{"_e":"metro:bundling:progress","_t":1786675103165,"id":"1","progress":0.4482924303420738,"total":579,"current":350}
+{"_e":"metro:bundling:progress","_t":1786675103267,"id":"1","progress":0.4482924303420738,"total":580,"current":352}
+{"_e":"metro:bundling:progress","_t":1786675103369,"id":"1","progress":0.4482924303420738,"total":586,"current":354}
+{"_e":"metro:bundling:progress","_t":1786675103470,"id":"1","progress":0.4482924303420738,"total":590,"current":356}
+{"_e":"metro:bundling:progress","_t":1786675103571,"id":"1","progress":0.4482924303420738,"total":609,"current":358}
+{"_e":"metro:bundling:progress","_t":1786675103678,"id":"1","progress":0.4482924303420738,"total":610,"current":362}
+{"_e":"metro:bundling:progress","_t":1786675103825,"id":"1","progress":0.4482924303420738,"total":610,"current":363}
+{"_e":"metro:bundling:progress","_t":1786675103929,"id":"1","progress":0.4482924303420738,"total":612,"current":366}
+{"_e":"metro:bundling:progress","_t":1786675104150,"id":"1","progress":0.4482924303420738,"total":612,"current":367}
+{"_e":"metro:bundling:progress","_t":1786675104258,"id":"1","progress":0.4482924303420738,"total":629,"current":378}
+{"_e":"metro:bundling:progress","_t":1786675104358,"id":"1","progress":0.4482924303420738,"total":636,"current":383}
+{"_e":"metro:bundling:progress","_t":1786675104517,"id":"1","progress":0.4482924303420738,"total":636,"current":384}
+{"_e":"metro:bundling:progress","_t":1786675104672,"id":"1","progress":0.4482924303420738,"total":645,"current":398}
+{"_e":"metro:bundling:progress","_t":1786675104816,"id":"1","progress":0.4482924303420738,"total":651,"current":408}
+{"_e":"metro:bundling:progress","_t":1786675104927,"id":"1","progress":0.4482924303420738,"total":675,"current":424}
+{"_e":"metro:bundling:progress","_t":1786675105032,"id":"1","progress":0.4482924303420738,"total":695,"current":443}
+{"_e":"metro:bundling:progress","_t":1786675105173,"id":"1","progress":0.4482924303420738,"total":702,"current":458}
+{"_e":"metro:bundling:progress","_t":1786675105284,"id":"1","progress":0.4482924303420738,"total":713,"current":466}
+{"_e":"metro:bundling:progress","_t":1786675105391,"id":"1","progress":0.4551044615230276,"total":713,"current":481}
+{"_e":"metro:bundling:progress","_t":1786675105497,"id":"1","progress":0.4858852526412901,"total":713,"current":497}
+{"_e":"metro:bundling:progress","_t":1786675105603,"id":"1","progress":0.5141745264417389,"total":721,"current":517}
+{"_e":"metro:bundling:progress","_t":1786675105704,"id":"1","progress":0.5435766060140503,"total":727,"current":536}
+{"_e":"metro:bundling:progress","_t":1786675105809,"id":"1","progress":0.5707719478323874,"total":728,"current":550}
+{"_e":"metro:bundling:progress","_t":1786675105914,"id":"1","progress":0.5868691764556171,"total":731,"current":560}
+{"_e":"metro:bundling:progress","_t":1786675106035,"id":"1","progress":0.5970123837025128,"total":739,"current":571}
+{"_e":"metro:bundling:progress","_t":1786675106135,"id":"1","progress":0.6170460507873987,"total":746,"current":586}
+{"_e":"metro:bundling:progress","_t":1786675106243,"id":"1","progress":0.6170460507873987,"total":759,"current":594}
+{"_e":"metro:bundling:progress","_t":1786675106357,"id":"1","progress":0.6204401127507648,"total":763,"current":601}
+{"_e":"metro:bundling:progress","_t":1786675106466,"id":"1","progress":0.6404178227406281,"total":766,"current":613}
+{"_e":"metro:bundling:progress","_t":1786675106576,"id":"1","progress":0.6640018766286638,"total":767,"current":625}
+{"_e":"metro:bundling:progress","_t":1786675106672,"id":"1","progress":0.6661748864995606,"total":778,"current":635}
+{"_e":"metro:bundling:progress","_t":1786675106776,"id":"1","progress":0.6686578527159504,"total":779,"current":637}
+{"_e":"metro:bundling:progress","_t":1786675106881,"id":"1","progress":0.6749708737544102,"total":779,"current":640}
+{"_e":"metro:bundling:progress","_t":1786675106957,"id":"1","progress":0.6770818056130025,"total":779,"current":641}
+{"_e":"metro:bundling:progress","_t":1786675107070,"id":"1","progress":0.685923734385273,"total":780,"current":646}
+{"_e":"metro:bundling:progress","_t":1786675107172,"id":"1","progress":0.716642355819232,"total":782,"current":662}
+{"_e":"metro:bundling:progress","_t":1786675107272,"id":"1","progress":0.7396875343964675,"total":786,"current":676}
+{"_e":"metro:bundling:progress","_t":1786675107379,"id":"1","progress":0.7565260891732368,"total":791,"current":688}
+{"_e":"metro:bundling:progress","_t":1786675107487,"id":"1","progress":0.7628862255890353,"total":798,"current":697}
+{"_e":"metro:bundling:progress","_t":1786675107598,"id":"1","progress":0.7628862255890353,"total":818,"current":706}
+{"_e":"metro:bundling:progress","_t":1786675107700,"id":"1","progress":0.7628862255890353,"total":823,"current":717}
+{"_e":"metro:bundling:progress","_t":1786675107810,"id":"1","progress":0.7727834321983714,"total":827,"current":727}
+{"_e":"metro:bundling:progress","_t":1786675107915,"id":"1","progress":0.78797784078975,"total":828,"current":735}
+{"_e":"metro:bundling:progress","_t":1786675108028,"id":"1","progress":0.7993211451247166,"total":840,"current":751}
+{"_e":"metro:bundling:progress","_t":1786675108130,"id":"1","progress":0.8276245338268234,"total":842,"current":766}
+{"_e":"metro:bundling:progress","_t":1786675108229,"id":"1","progress":0.8322560787934749,"total":855,"current":780}
+{"_e":"metro:bundling:progress","_t":1786675108332,"id":"1","progress":0.8331868577609518,"total":860,"current":785}
+{"_e":"metro:bundling:progress","_t":1786675108423,"id":"1","progress":0.8353109789075175,"total":860,"current":786}
+{"_e":"metro:bundling:progress","_t":1786675108531,"id":"1","progress":0.8453839644790979,"total":869,"current":799}
+{"_e":"metro:bundling:progress","_t":1786675108631,"id":"1","progress":0.8453839644790979,"total":896,"current":806}
+{"_e":"metro:bundling:progress","_t":1786675108734,"id":"1","progress":0.8453839644790979,"total":910,"current":819}
+{"_e":"metro:bundling:progress","_t":1786675108842,"id":"1","progress":0.8453839644790979,"total":910,"current":824}
+{"_e":"metro:bundling:progress","_t":1786675108933,"id":"1","progress":0.8453839644790979,"total":910,"current":825}
+{"_e":"metro:bundling:progress","_t":1786675109046,"id":"1","progress":0.8453839644790979,"total":910,"current":829}
+{"_e":"metro:bundling:progress","_t":1786675109148,"id":"1","progress":0.8453839644790979,"total":910,"current":834}
+{"_e":"metro:bundling:progress","_t":1786675109258,"id":"1","progress":0.8453839644790979,"total":913,"current":837}
+{"_e":"metro:bundling:progress","_t":1786675109364,"id":"1","progress":0.8453839644790979,"total":921,"current":843}
+{"_e":"metro:bundling:progress","_t":1786675109517,"id":"1","progress":0.8453839644790979,"total":921,"current":844}
+{"_e":"metro:bundling:progress","_t":1786675109639,"id":"1","progress":0.8453839644790979,"total":925,"current":849}
+{"_e":"metro:bundling:progress","_t":1786675109739,"id":"1","progress":0.8552772909717904,"total":931,"current":861}
+{"_e":"metro:bundling:progress","_t":1786675109840,"id":"1","progress":0.8552772909717904,"total":944,"current":871}
+{"_e":"metro:bundling:progress","_t":1786675109943,"id":"1","progress":0.8630882379345016,"total":944,"current":877}
+{"_e":"metro:bundling:progress","_t":1786675110062,"id":"1","progress":0.8712426641159617,"total":946,"current":883}
+{"_e":"metro:bundling:progress","_t":1786675110163,"id":"1","progress":0.8834811420373727,"total":949,"current":892}
+{"_e":"metro:bundling:progress","_t":1786675110287,"id":"1","progress":0.8866215568224198,"total":959,"current":903}
+{"_e":"metro:bundling:progress","_t":1786675110386,"id":"1","progress":0.8948137326515705,"total":962,"current":910}
+{"_e":"metro:bundling:progress","_t":1786675110486,"id":"1","progress":0.9010239201052377,"total":965,"current":916}
+{"_e":"metro:bundling:progress","_t":1786675110593,"id":"1","progress":0.9090023533042706,"total":966,"current":921}
+{"_e":"metro:bundling:progress","_t":1786675110798,"id":"1","progress":0.9109773714148545,"total":966,"current":922}
+{"_e":"metro:bundling:progress","_t":1786675110901,"id":"1","progress":0.9133926080855627,"total":971,"current":928}
+{"_e":"metro:bundling:progress","_t":1786675111023,"id":"1","progress":0.9179949522192811,"total":979,"current":938}
+{"_e":"metro:bundling:progress","_t":1786675111123,"id":"1","progress":0.933919512528984,"total":982,"current":949}
+{"_e":"metro:bundling:progress","_t":1786675111224,"id":"1","progress":0.9459290370790281,"total":985,"current":958}
+{"_e":"metro:bundling:progress","_t":1786675111326,"id":"1","progress":0.9520550115987695,"total":989,"current":965}
+{"_e":"metro:bundling:progress","_t":1786675111429,"id":"1","progress":0.9759044995408632,"total":990,"current":978}
+{"_e":"metro:bundling:progress","_t":1786675111534,"id":"1","progress":0.993954673799819,"total":991,"current":988}
+{"_e":"metro:bundling:progress","_t":1786675111648,"id":"1","progress":0.9959677460413143,"total":991,"current":989}
+{"_e":"metro:bundling:progress","_t":1786675111883,"id":"1","progress":0.997982854774708,"total":991,"current":990}
+{"_e":"metro:bundling:progress","_t":1786675111991,"id":"1","progress":0.997982854774708,"total":994,"current":992}
+{"_e":"metro:bundling:progress","_t":1786675112134,"id":"1","progress":0.9979889396742629,"total":994,"current":993}
+{"_e":"metro:bundling:progress","_t":1786675112532,"id":"1","progress":0.999,"total":994,"current":994}
+{"_e":"metro:bundling:progress","_t":1786675112634,"id":"1","progress":0.999,"total":1003,"current":996}
+{"_e":"metro:bundling:progress","_t":1786675112751,"id":"1","progress":0.999,"total":1005,"current":1004}
+{"_e":"metro:bundling:progress","_t":1786675112865,"id":"1","progress":0.999,"total":1005,"current":1005}
+{"_e":"metro:bundling:done","_t":1786675113662,"id":"1","total":1005,"ms":31524.0424}
+{"_e":"metro:bundling:started","_t":1786675239945,"id":"2","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786675239945,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675239951,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240052,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240185,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240286,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240448,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240548,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240648,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786675240750,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786675240875,"id":"2","total":1,"ms":930.442}
+{"_e":"metro:client_log","_t":1786675246237,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786675247100,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675253578,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786675269738,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675272606,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786675286934,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675301180,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675301247,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675301336,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675301405,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675320113,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675322404,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675322464,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675322551,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675322552,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675324736,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675324796,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330048,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330101,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330157,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330158,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330205,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330206,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330320,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675330375,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675332297,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675332360,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675335766,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675335829,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675335830,"level":"warn","data":["\"photo_camera\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675335830,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675341002,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675341056,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675341056,"level":"warn","data":["\"photo_camera\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675341056,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675342026,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675342093,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675342093,"level":"warn","data":["\"photo_camera\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675342093,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675342947,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675343011,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675346430,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675346430,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675346430,"level":"warn","data":["\"photo_camera\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675346430,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675347505,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675347506,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675348286,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675348364,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675360262,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675521552,"level":"error","data":["[ReferenceError: Property 'DotGridBackground' doesn't exist]"]}
+{"_e":"metro:client_log","_t":1786675523942,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675526776,"level":"error","data":["[Error: Uncaught (in promise, id: 2): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1786675596519,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\AchievementsScreen.tsx: Expected corresponding JSX closing tag for <SafeAreaView>. (73:4)\n\n  71 |         }\n  72 |       />\n> 73 |     </View>\n     |     ^\n  74 |   );\n  75 | }\n  76 |","importStack":null,"filename":"src\\screens\\AchievementsScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1786675596745,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\AchievementsScreen.tsx: Expected corresponding JSX closing tag for <SafeAreaView>. (73:4)\n\n  71 |         }\n  72 |       />\n> 73 |     </View>\n     |     ^\n  74 |   );\n  75 | }\n  76 |","importStack":null,"filename":"src\\screens\\AchievementsScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1786675605445,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\AchievementsScreen.tsx: Expected corresponding JSX closing tag for <SafeAreaView>. (73:4)\n\n  71 |         }\n  72 |       />\n> 73 |     </>\n     |     ^\n  74 |   );\n  75 | }\n  76 |","importStack":null,"filename":"src\\screens\\AchievementsScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786675623617,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675638345,"level":"error","data":["[ReferenceError: Property 'DotGridBackground' doesn't exist]"]}
+{"_e":"metro:client_log","_t":1786675640397,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675642989,"level":"error","data":["[Error: Uncaught (in promise, id: 3): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786675664423,"level":"error","data":["[ReferenceError: Property 'whi' doesn't exist]"]}
+{"_e":"metro:client_log","_t":1786675666382,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675667805,"level":"error","data":["[ReferenceError: Property 'white' doesn't exist]"]}
+{"_e":"metro:client_log","_t":1786675668961,"level":"error","data":["[Error: Uncaught (in promise, id: 4): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1786675677077,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\BuddyScreen.tsx: Unexpected token (88:54)\n\n  86 |\n  87 |   return (\n> 88 |     <SafeAreaView style={{ flex: 1, backgroundColor:  }}>\n     |                                                       ^\n  89 |       <DotGridBackground />\n  90 |       <ScrollView\n  91 |         style={{ flex: 1 }}","importStack":null,"filename":"src\\screens\\BuddyScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786675679850,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675682441,"level":"error","data":["[Error: Uncaught (in promise, id: 5): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1786675725042,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\BuddyScreen.tsx: Unexpected token (88:54)\n\n  86 |\n  87 |   return (\n> 88 |     <SafeAreaView style={{ flex: 1, backgroundColor:  }}>\n     |                                                       ^\n  89 |       <DotGridBackground />\n  90 |       <ScrollView\n  91 |         style={{ flex: 1 }}","importStack":null,"filename":"src\\screens\\BuddyScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786675733562,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675794102,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786675843283,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676014761,"level":"error","data":["[Error: Uncaught (in promise, id: 6): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786676014874,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676040675,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676072775,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676086862,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676090788,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676131133,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676144314,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676144370,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676144478,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676144536,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676150999,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676164720,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676189084,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676205641,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676322420,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676335645,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676340339,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676358051,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676361666,"level":"error","data":["[Error: Uncaught (in promise, id: 7): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786676369930,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676372998,"level":"error","data":["[Error: Uncaught (in promise, id: 8): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786676382828,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676396621,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676399860,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676424198,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676426041,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676446218,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:bundling:started","_t":1786676731173,"id":"n","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786676731173,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786676731174,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786676731273,"id":"n","total":1,"ms":99.4021}
+{"_e":"metro:bundling:started","_t":1786676738979,"id":"o","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786676738980,"id":"o","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786676739034,"id":"o","total":1,"ms":48.0769}
+{"_e":"metro:client_log","_t":1786676746353,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786676747181,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786676750349,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786676924230,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786677065290,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786677114384,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:server_log","_t":1786677185959,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","com.anonymous.mobile","Infinix X6812 - 11 - API 30","60"]}
+{"_e":"metro:bundling:started","_t":1786677327236,"id":"r","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786677327236,"id":"r","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786677327237,"id":"r","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786677327370,"id":"r","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786677327457,"id":"r","total":1,"ms":220.8946}
+{"_e":"metro:client_log","_t":1786677348774,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786677353076,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:started","_t":1786678396457,"id":"t","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786678396457,"id":"t","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786678396459,"id":"t","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786678396592,"id":"t","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786678396643,"id":"t","total":1,"ms":185.7794}
+{"_e":"metro:client_log","_t":1786678410420,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786678412101,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786678420089,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678420154,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678420398,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678420454,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678433758,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678433817,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678433886,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678433950,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678446432,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678446509,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678446569,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678446569,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678472004,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678472060,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678472149,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678472201,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678516664,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678516724,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678516792,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678516849,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524392,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524393,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524393,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524393,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524460,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["DateTimePicker: `onChange` is deprecated. Use `onValueChange`, `onDismiss`, and `onNeutralButtonPress` instead."]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524461,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524598,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678524666,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678525216,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678525275,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526031,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526196,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526300,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526301,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526682,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678526845,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678527222,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678527222,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678527669,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678527873,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678528247,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678528247,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678528317,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678528318,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678528744,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678529094,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678529268,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678529268,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678529502,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678529556,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678530689,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678530808,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678531305,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678531368,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678532019,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678532069,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678539590,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678539644,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678540299,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678540359,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678546755,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678546864,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678547577,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678547627,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678548498,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678548556,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678549150,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678549216,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678549533,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678549588,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550033,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550168,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550168,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550236,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550546,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678550606,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678551274,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678551323,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678552799,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678552855,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678553469,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678553525,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678554853,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678554963,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678556699,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678556756,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678557310,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678557361,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678558020,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678558071,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678558840,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678558886,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678559248,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678559310,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678559548,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678559600,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678559968,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678560021,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678560375,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678560483,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678560700,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678560762,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561095,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561203,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561450,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561508,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561911,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678561968,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678562219,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678562328,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678562936,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678562986,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678563501,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678563563,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:bundling:failed","_t":1786678593574,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\CreateHabitScreen.tsx: Missing semicolon. (378:2)\n\n  376 | });\n  377 | Done\n> 378 | No new native package here — npx expo start is enough, this fixes step 2 immediately.\n      |   ^\n  379 |\n  380 | Where the whole app stands now\n  381 | Screen\tStatus","importStack":null,"filename":"src\\screens\\CreateHabitScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786678607336,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678607390,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678607440,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678607440,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678612402,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678612512,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678612512,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678612512,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678619377,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678619426,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678620185,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622642,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622643,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622643,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622708,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622708,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622803,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678622854,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678624682,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678624682,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678624766,"level":"warn","data":["\"arrow_back\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786678624766,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:bundling:started","_t":1786680972875,"id":"w","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786680972875,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680972877,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680972999,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973407,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973507,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973607,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973707,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973809,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680973910,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680974010,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680974167,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786680974281,"id":"w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786680974481,"id":"w","total":1,"ms":1605.4308}
+{"_e":"metro:client_log","_t":1786680980828,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786680985978,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:started","_t":1786680996275,"id":"y","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786680996275,"id":"y","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786680996372,"id":"y","total":1,"ms":97.3939}
+{"_e":"metro:client_log","_t":1786681006051,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786681010436,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786681011862,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:bundling:started","_t":1786681023908,"id":"13","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786681023909,"id":"13","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786681023978,"id":"13","total":1,"ms":68.9704}
+{"_e":"metro:client_log","_t":1786681035977,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786681040515,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786681044076,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:bundling:started","_t":1786681069295,"id":"17","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786681069296,"id":"17","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786681069373,"id":"17","total":1,"ms":77.3311}
+{"_e":"metro:client_log","_t":1786681076158,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786681080150,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786681119500,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:bundling:started","_t":1786681197728,"id":"1b","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786681197728,"id":"1b","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786681197789,"id":"1b","total":1,"ms":61.7014}
+{"_e":"metro:bundling:started","_t":1786681214214,"id":"1c","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786681214214,"id":"1c","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786681214282,"id":"1c","total":1,"ms":67.9775}
+{"_e":"metro:client_log","_t":1786681262985,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786681267232,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786681619656,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681622165,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786681633267,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681633472,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681635572,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681635690,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681636616,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681636668,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681636770,"level":"warn","data":["\"verified_user\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681636819,"level":"warn","data":["\"location_on\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681653806,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681666320,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
+{"_e":"metro:client_log","_t":1786681678631,"level":"error","data":["[Error: Uncaught (in promise, id: 2): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}

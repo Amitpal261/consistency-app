@@ -35,7 +35,11 @@ export type Profile = { id: string; name: string; email: string; timezone: strin
 export function getMyProfile(token: string) {
   return request<{ user: Profile }>("/auth/me", { token });
 }
-
+export function getHabitHistory(token: string, habitId: string) {
+  return request<{ history: { dateKey: string; checkedIn: boolean }[] }>(`/habits/${encodeURIComponent(habitId)}/history`, {
+    token,
+  });
+}
 export function updateMyProfile(token: string, payload: { name?: string; timezone?: string }) {
   return request<{ user: Profile }>("/auth/me", { method: "PATCH", token, body: JSON.stringify(payload) });
 }
