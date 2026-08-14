@@ -35,10 +35,12 @@ export type Profile = { id: string; name: string; email: string; timezone: strin
 export function getMyProfile(token: string) {
   return request<{ user: Profile }>("/auth/me", { token });
 }
-export function getHabitHistory(token: string, habitId: string) {
-  return request<{ history: { dateKey: string; checkedIn: boolean }[] }>(`/habits/${encodeURIComponent(habitId)}/history`, {
-    token,
-  });
+export function getHabitHistory(token: string, habitId: string, days?: number) {
+  const query = days ? `?days=${days}` : "";
+  return request<{ history: { dateKey: string; checkedIn: boolean }[]; days?: { date: string; status: string | null }[] }>(
+    `/habits/${encodeURIComponent(habitId)}/history${query}`,
+    { token }
+  );
 }
 export function updateMyProfile(token: string, payload: { name?: string; timezone?: string }) {
   return request<{ user: Profile }>("/auth/me", { method: "PATCH", token, body: JSON.stringify(payload) });
@@ -77,6 +79,7 @@ export type Habit = {
   timeWindow?: { hour: number; minute: number; windowMinutes: number };
   location?: { lat: number; lng: number; radiusMeters: number };
   requiredDurationMinutes?: number;
+  currentDwellMinutes?: number;
   daysOfWeek: number[];
   buddyId?: string;
   ringtone?: Ringtone;

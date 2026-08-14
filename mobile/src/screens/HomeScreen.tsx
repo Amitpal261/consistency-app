@@ -1,7 +1,6 @@
-﻿import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Animated, Easing, FlatList, RefreshControl, StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
-
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList as any);
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Animated, Easing, FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuth } from "../context/AuthContext";
 import { getHabitsWithStreaks, getMyProfile, type Habit } from "../lib/api";
@@ -10,10 +9,12 @@ import { AppCard } from "../components/AppCard";
 import DotGridBackground from "../components/DotGridBackground";
 import { colors, radius, spacing, typography } from "../theme/colors";
 
-function flameColor(streak: number) {
-  if (streak >= 14) return colors.accent;
-  if (streak >= 3) return colors.warning;
-  return colors.textMuted;
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList as any);
+
+function taskTypeIcon(habit: Habit): keyof typeof MaterialIcons.glyphMap {
+  if (habit.taskType === "time") return "alarm";
+  if (habit.taskType === "location_duration") return "timer";
+  return "location-on";
 }
 
 function taskTypeLabel(habit: Habit): string {
@@ -22,32 +23,43 @@ function taskTypeLabel(habit: Habit): string {
     const m = String(habit.timeWindow.minute).padStart(2, "0");
     return `Daily at ${h}:${m}`;
   }
-  if (habit.taskType === "location_duration") return `${habit.requiredDurationMinutes ?? 0} min at location`;
-  return "Location check-in";
+  if (habit.taskType === "location_duration") return `${habit.requiredDurationMinutes ?? 0} min dwell time`;
+  return "Location arrival check-in";
 }
 
-// Matches the backend's YYYY-MM-DD date-key format closely enough for a
-// cosmetic "checked in today" indicator (backend uses the user's stored
-// timezone; this uses the device's local timezone — fine for a UI hint,
-// not used for anything that affects streak logic itself).
 function todayKeyLocal(): string {
   return new Intl.DateTimeFormat("en-CA").format(new Date());
 }
 
 function greetingForHour(hour: number): string {
-  if (hour < 5) return "Still up?";
-  if (hour < 12) return "Good morning";
-  if (hour < 17) return "Good afternoon";
-  if (hour < 21) return "Good evening";
-  return "Good night";
+  if (hour < 5) return "NIGHT FOCUS";
+  if (hour < 12) return "MORNING ROUTINE";
+  if (hour < 17) return "AFTERNOON FLOW";
+  if (hour < 21) return "EVENING REVIEW";
+  return "NIGHT DISCIPLINE";
 }
 
-export function HomeScreen({ onSelectHabit, onAddHabit }: { onSelectHabit: (habit: Habit) => void; onAddHabit: () => void }) {
+export function HomeScreen({
+  onSelectHabit,
+  onAddHabit,
+  onOpenDigest,
+  onOpenFlow,
+  onOpenFocusTimer,
+  onOpenGeofence,
+}: {
+  onSelectHabit: (habit: Habit) => void;
+  onAddHabit: () => void;
+  onOpenDigest?: () => void;
+  onOpenFlow?: () => void;
+  onOpenFocusTimer?: (habit?: Habit) => void;
+  onOpenGeofence?: (habit?: Habit) => void;
+}) {
   const { token } = useAuth();
   const [habits, setHabits] = useState<Habit[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [filter, setFilter] = useState<"all" | "time" | "location" | "dwell">("all");
 
   const load = useCallback(async () => {
     if (!token) return;
@@ -68,6 +80,13 @@ export function HomeScreen({ onSelectHabit, onAddHabit }: { onSelectHabit: (habi
       .catch(() => {});
   }, [token]);
 
+  const filteredHabits = useMemo(() => {
+    if (filter === "time") return habits.filter((h) => h.taskType === "time");
+    if (filter === "location") return habits.filter((h) => h.taskType === "location");
+    if (filter === "dwell") return habits.filter((h) => h.taskType === "location_duration");
+    return habits;
+  }, [filter, habits]);
+
   const topHabit = useMemo(() => {
     return habits.reduce<Habit | null>((best, habit) => {
       if (!best || habit.currentStreak > best.currentStreak) return habit;
@@ -87,64 +106,59 @@ export function HomeScreen({ onSelectHabit, onAddHabit }: { onSelectHabit: (habi
 
   // Animations
   const orbScale = useRef(new Animated.Value(1)).current;
-  const orbOpacity = useRef(new Animated.Value(0.85)).current;
-  const orbGlowScale = useRef(new Animated.Value(1)).current;
-  const cardEntrance = useRef(new Animated.Value(0)).current;
-
-  // Parallax / touch nudges
+  const orbOpacity = useRef(new Animated.Value(0.5)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
-  const touchNudge = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
   useEffect(() => {
-    // Orb pulse: scale + opacity loop
-    Animated.loop(
-      Animated.parallel([
-        Animated.sequence([
-          Animated.timing(orbScale, { toValue: 1.12, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-          Animated.timing(orbScale, { toValue: 1.0, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        ]),
-        Animated.sequence([
-          Animated.timing(orbOpacity, { toValue: 1.0, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-          Animated.timing(orbOpacity, { toValue: 0.85, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        ]),
-        Animated.sequence([
-          Animated.timing(orbGlowScale, { toValue: 1.15, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-          Animated.timing(orbGlowScale, { toValue: 1.0, duration: 3500, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        ]),
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(orbScale, { toValue: 1.12, duration: 3200, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(orbScale, { toValue: 1.0, duration: 3200, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
       ])
-    ).start();
-
-    Animated.timing(cardEntrance, { toValue: 1, duration: 700, easing: Easing.out(Easing.cubic), useNativeDriver: true }).start();
-  }, [orbScale, orbOpacity, orbGlowScale, cardEntrance]);
-
-  const onOrbPressIn = () => {
-    Animated.spring(touchNudge, { toValue: { x: -6, y: -6 }, useNativeDriver: true }).start();
-  };
-  const onOrbPressOut = () => {
-    Animated.spring(touchNudge, { toValue: { x: 0, y: 0 }, useNativeDriver: true }).start();
-  };
+    );
+    const opacityAnim = Animated.loop(
+      Animated.sequence([
+        Animated.timing(orbOpacity, { toValue: 0.8, duration: 3200, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(orbOpacity, { toValue: 0.4, duration: 3200, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      ])
+    );
+    animation.start();
+    opacityAnim.start();
+    return () => {
+      animation.stop();
+      opacityAnim.stop();
+    };
+  }, [orbOpacity, orbScale]);
 
   return (
     <View style={styles.container}>
       <DotGridBackground />
 
       <View style={styles.content}>
+        {/* Top Header */}
         <View style={styles.headerRow}>
           <View>
-            <Text style={styles.greeting}>
-              {greetingForHour(new Date().getHours())}
-              {firstName ? `, ${firstName}` : ""}
+            <Text style={styles.kicker}>{greetingForHour(new Date().getHours())}</Text>
+            <Text style={styles.headerTitle}>
+              {firstName ? `${firstName}'s Dashboard` : "Consistency"}
             </Text>
-            <Text style={typography.h1}>Your habits</Text>
           </View>
-          <AppButton title="+ Add" onPress={onAddHabit} style={{ paddingHorizontal: spacing.md }} />
+
+          <View style={styles.headerActions}>
+            <LinearGradient colors={["#745600", "#3f2e00"]} style={styles.streakBadge}>
+              <MaterialIcons name="whatshot" size={16} color="#fabd00" />
+              <Text style={styles.streakBadgeText}>{topHabit?.currentStreak ?? 0}d</Text>
+            </LinearGradient>
+            <AppButton title="+ Habit" onPress={onAddHabit} variant="primary" style={styles.addButton} />
+          </View>
         </View>
 
         <AnimatedFlatList
-          data={habits}
+          data={filteredHabits}
           keyExtractor={(item: Habit) => item._id}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
           scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -158,110 +172,116 @@ export function HomeScreen({ onSelectHabit, onAddHabit }: { onSelectHabit: (habi
           }
           ListHeaderComponent={
             habits.length > 0 ? (
-              <View>
-                <AppCard style={styles.progressCard}>
-                  <Text style={styles.progressHeader}>Streak progress</Text>
-                  <Text style={styles.progressSubheader}>Track your momentum, one verified streak at a time.</Text>
+              <View style={styles.headerSection}>
+                {/* Hero Dashboard Progress Card */}
+                <Pressable onPress={onOpenDigest}>
+                  <AppCard variant="hero" style={styles.heroCard}>
+                  <View style={styles.heroHeader}>
+                    <View>
+                      <Text style={styles.heroTitle}>Disciplined Momentum</Text>
+                      <Text style={styles.heroSubtitle}>Verified proof habits active</Text>
+                    </View>
+                    <View style={styles.verifiedTag}>
+                      <MaterialIcons name="verified" size={14} color="#10B981" />
+                      <Text style={styles.verifiedTagText}>PROVED</Text>
+                    </View>
+                  </View>
 
+                  {/* Central Progress Orb */}
                   <View style={styles.orbArea}>
                     <Animated.View
                       style={[
                         styles.orbGlow,
-                        { transform: [{ scale: orbGlowScale } as any], opacity: orbOpacity },
+                        { transform: [{ scale: orbScale }], opacity: orbOpacity },
                       ]}
                     />
-                    <TouchableWithoutFeedback onPressIn={onOrbPressIn} onPressOut={onOrbPressOut}>
-                      <Animated.View
-                        style={[
-                          styles.orb,
-                          {
-                            transform: [
-                              { translateY: Animated.add(Animated.multiply(scrollY, -0.03), touchNudge.y) as any },
-                              { translateX: touchNudge.x as any },
-                              { scale: orbScale } as any,
-                            ],
-                          },
-                        ]}
-                      >
-                        <MaterialIcons name="whatshot" size={28} color={colors.onPrimaryContainer} />
-                        <Text style={styles.orbValue}>{topHabit?.currentStreak ?? 0}</Text>
-                        <Text style={styles.orbLabel}>Top streak</Text>
-                      </Animated.View>
-                    </TouchableWithoutFeedback>
+                    <LinearGradient
+                      colors={["#3f51b5", "#08218a"]}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
+                      style={styles.orb}
+                    >
+                      <MaterialIcons name="whatshot" size={32} color="#fabd00" />
+                      <Text style={styles.orbValue}>{topHabit?.currentStreak ?? 0}</Text>
+                      <Text style={styles.orbLabel}>DAY STREAK</Text>
+                    </LinearGradient>
                   </View>
 
-                  <Animated.View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginTop: spacing.md,
-                      opacity: cardEntrance,
-                      transform: [
-                        { translateY: cardEntrance.interpolate({ inputRange: [0, 1], outputRange: [12, 0] }) as any },
-                      ],
-                    }}
+                  {/* Stats Grid */}
+                  <View style={styles.statsGrid}>
+                    <View style={styles.statCell}>
+                      <Text style={styles.statLabel}>COMPLETED TODAY</Text>
+                      <Text style={styles.statValue}>
+                        {checkedInToday}/{habits.length}
+                      </Text>
+                    </View>
+                    <View style={styles.statDivider} />
+                    <View style={styles.statCell}>
+                      <Text style={styles.statLabel}>BEST STREAK</Text>
+                      <Text style={styles.statValue}>{topHabit?.bestStreak ?? 0}d</Text>
+                    </View>
+                    <View style={styles.statDivider} />
+                    <View style={styles.statCell}>
+                      <Text style={styles.statLabel}>TOTAL DAYS</Text>
+                      <Text style={styles.statValue}>{totalCurrentStreakDays}d</Text>
+                    </View>
+                  </View>
+                  </AppCard>
+                </Pressable>
+
+                {/* Filter Tabs */}
+                <View style={styles.filterRow}>
+                  <Pressable
+                    onPress={() => setFilter("all")}
+                    style={[styles.filterPill, filter === "all" && styles.filterPillActive]}
                   >
-                    <AppCard style={styles.summaryCard}>
-                      <Text style={styles.summaryLabel}>Active habits</Text>
-                      <Text style={styles.summaryValue}>{habits.length}</Text>
-                    </AppCard>
-                    <AppCard style={[styles.summaryCard, { marginLeft: spacing.sm }]}>
-                      <Text style={styles.summaryLabel}>Best streak</Text>
-                      <Text style={styles.summaryValue}>{topHabit?.bestStreak ?? 0}</Text>
-                    </AppCard>
-                  </Animated.View>
-                </AppCard>
+                    <Text style={[styles.filterText, filter === "all" && styles.filterTextActive]}>
+                      All ({habits.length})
+                    </Text>
+                  </Pressable>
 
-                {/* Real "today" summary — replaces the previous mock heatmap/percentage,
-                    which showed randomly-generated cells and a hardcoded 94%/06:15 AM
-                    that had no connection to actual data. */}
-                <View style={styles.pillsRow}>
-                  <AppCard style={styles.pillCard}>
-                    <View style={styles.pillInner}>
-                      <View style={styles.pillIconWrap}>
-                        <MaterialIcons name="check-circle" size={18} color={colors.primary} />
-                      </View>
-                      <View>
-                        <Text style={styles.pillLabel}>TODAY</Text>
-                        <Text style={styles.pillValue}>
-                          {checkedInToday}/{habits.length} done
-                        </Text>
-                      </View>
-                    </View>
-                  </AppCard>
+                  <Pressable
+                    onPress={() => setFilter("time")}
+                    style={[styles.filterPill, filter === "time" && styles.filterPillActive]}
+                  >
+                    <MaterialIcons name="alarm" size={14} color={filter === "time" ? colors.primary : colors.outline} />
+                    <Text style={[styles.filterText, filter === "time" && styles.filterTextActive]}>Alarm</Text>
+                  </Pressable>
 
-                  <AppCard style={styles.pillCard}>
-                    <View style={styles.pillInner}>
-                      <View style={styles.pillIconWrapAlt}>
-                        <MaterialIcons name="local-fire-department" size={18} color={colors.tertiary} />
-                      </View>
-                      <View>
-                        <Text style={styles.pillLabel}>COMBINED STREAK</Text>
-                        <Text style={styles.pillValue}>{totalCurrentStreakDays} days</Text>
-                      </View>
-                    </View>
-                  </AppCard>
+                  <Pressable
+                    onPress={() => setFilter("location")}
+                    style={[styles.filterPill, filter === "location" && styles.filterPillActive]}
+                  >
+                    <MaterialIcons name="location-on" size={14} color={filter === "location" ? colors.primary : colors.outline} />
+                    <Text style={[styles.filterText, filter === "location" && styles.filterTextActive]}>GPS</Text>
+                  </Pressable>
+
+                  <Pressable
+                    onPress={() => setFilter("dwell")}
+                    style={[styles.filterPill, filter === "dwell" && styles.filterPillActive]}
+                  >
+                    <MaterialIcons name="timer" size={14} color={filter === "dwell" ? colors.primary : colors.outline} />
+                    <Text style={[styles.filterText, filter === "dwell" && styles.filterTextActive]}>Dwell</Text>
+                  </Pressable>
                 </View>
               </View>
             ) : null
           }
           ListEmptyComponent={
-            // Guarded by `loading` so existing users don't see a flash of
-            // "you have 0 habits" while their real data is still loading.
             !loading ? (
               <View style={styles.emptyStateContainer}>
-                <Animated.View style={[styles.emptyOrbWrapper, { opacity: cardEntrance }]}>
-                  <Animated.View style={[styles.emptyOrbGlow, { transform: [{ scale: orbGlowScale } as any], opacity: orbOpacity }]} />
-                  <Animated.View style={[styles.emptyOrb, { transform: [{ scale: orbScale } as any] }]}>
-                    <MaterialIcons name={"offline_bolt" as any} size={32} color={colors.onPrimaryContainer} />
-                  </Animated.View>
-                </Animated.View>
+                <View style={styles.emptyOrbWrapper}>
+                  <Animated.View style={[styles.emptyOrbGlow, { transform: [{ scale: orbScale }], opacity: orbOpacity }]} />
+                  <LinearGradient colors={["#3f51b5", "#08218a"]} style={styles.emptyOrb}>
+                    <MaterialIcons name="add-task" size={40} color={colors.surfaceTint} />
+                  </LinearGradient>
+                </View>
 
                 <Text style={styles.emptyTitle}>The first step is the hardest.</Text>
                 <Text style={styles.emptyText}>
-                  Empty space is just room for your future self to grow. Start by defining one simple habit today.
+                  No habits set up yet. Create your first commitment — whether a wake-up alarm, gym arrival, or library study session.
                 </Text>
-                <AppButton title="Create Your First Commitment" onPress={onAddHabit} style={styles.emptyButton} />
+                <AppButton title="Create Your First Commitment" onPress={onAddHabit} variant="primary" style={styles.emptyButton} />
               </View>
             ) : null
           }
@@ -286,12 +306,13 @@ function HabitRow({
   todayKey: string;
 }) {
   const entrance = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     Animated.timing(entrance, {
       toValue: 1,
-      duration: 420,
-      delay: Math.min(index, 6) * 60,
+      duration: 400,
+      delay: Math.min(index, 6) * 50,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
@@ -299,32 +320,82 @@ function HabitRow({
 
   const doneToday = item.lastCheckInDateKey === todayKey;
 
+  function pressIn() {
+    Animated.spring(scale, { toValue: 0.97, useNativeDriver: true, speed: 40 }).start();
+  }
+  function pressOut() {
+    Animated.spring(scale, { toValue: 1, useNativeDriver: true, speed: 30 }).start();
+  }
+
   return (
     <Animated.View
       style={{
         opacity: entrance,
-        transform: [{ translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [16, 0] }) }],
+        transform: [
+          { translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [16, 0] }) },
+          { scale },
+        ],
       }}
     >
-      <AppCard onTouchEnd={() => onSelectHabit(item)} style={styles.habitCard}>
-        <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-            <Text style={typography.h2}>{item.name}</Text>
-            {doneToday ? <MaterialIcons name="check-circle" size={16} color={colors.success} /> : null}
+      <Pressable onPress={() => onSelectHabit(item)} onPressIn={pressIn} onPressOut={pressOut}>
+        <AppCard variant="glass" style={styles.habitCard}>
+          <View style={styles.habitMainRow}>
+            {/* Task Type Icon Badge */}
+            <LinearGradient
+              colors={doneToday ? ["#10B981", "#047857"] : ["#3f51b5", "#293ca0"]}
+              style={styles.habitIconCircle}
+            >
+              <MaterialIcons name={taskTypeIcon(item)} size={22} color="#FFFFFF" />
+            </LinearGradient>
+
+            {/* Habit Details */}
+            <View style={styles.habitDetails}>
+              <View style={styles.habitTitleRow}>
+                <Text style={styles.habitName} numberOfLines={1}>
+                  {item.name}
+                </Text>
+                {doneToday ? (
+                  <View style={styles.statusDoneBadge}>
+                    <MaterialIcons name="check" size={12} color="#10B981" />
+                    <Text style={styles.statusDoneText}>PROVED TODAY</Text>
+                  </View>
+                ) : (
+                  <View style={styles.statusPendingBadge}>
+                    <MaterialIcons name="schedule" size={12} color="#fabd00" />
+                    <Text style={styles.statusPendingText}>DUE TODAY</Text>
+                  </View>
+                )}
+              </View>
+
+              <Text style={styles.habitMeta}>{taskTypeLabel(item)}</Text>
+
+              {/* Dwell time progress indicator if location_duration */}
+              {item.taskType === "location_duration" && (
+                <View style={styles.dwellProgressWrap}>
+                  <View style={styles.dwellProgressBar}>
+                    <View style={[styles.dwellProgressFill, { width: `${Math.min(100, (item.currentDwellMinutes ?? 0) / (item.requiredDurationMinutes ?? 1) * 100)}%` }]} />
+                  </View>
+                  <Text style={styles.dwellProgressText}>
+                    {item.currentDwellMinutes ?? 0}/{item.requiredDurationMinutes}m
+                  </Text>
+                </View>
+              )}
+            </View>
+
+            {/* Flame Streak Badge */}
+            <View style={styles.streakWrap}>
+              <MaterialIcons name="whatshot" size={24} color={item.currentStreak > 0 ? "#fabd00" : colors.outline} />
+              <Text style={[styles.streakNumber, item.currentStreak > 0 && styles.streakActive]}>
+                {item.currentStreak}
+              </Text>
+            </View>
           </View>
-          <Text style={typography.label}>{taskTypeLabel(item).toUpperCase()}</Text>
-          <Text style={[typography.body, { marginTop: spacing.xs }]}>Best: {item.bestStreak} days</Text>
-        </View>
-        <View style={styles.habitStreakContainer}>
-          <Text style={styles.flameIcon}>🔥</Text>
-          <Text style={[styles.streakValue, { color: flameColor(item.currentStreak) }]}>{item.currentStreak}</Text>
-        </View>
-      </AppCard>
+        </AppCard>
+      </Pressable>
     </Animated.View>
   );
 }
 
-const CELL_SIZE = 24;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -332,158 +403,326 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: spacing.sm,
+    paddingHorizontal: spacing.marginEdge,
+    paddingTop: spacing.sm,
   },
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
-    marginBottom: spacing.lg,
+    alignItems: "center",
+    marginBottom: spacing.md,
   },
-  greeting: {
+  kicker: {
     ...typography.labelCaps,
-    color: colors.onSurfaceVariant,
-    marginBottom: 2,
+    color: colors.primary,
+    fontSize: 10,
+    letterSpacing: 1.5,
   },
-  progressCard: {
-    padding: spacing.md,
-    marginBottom: spacing.lg,
-    borderWidth: 0,
-  },
-  progressHeader: {
-    ...typography.h2,
-    marginBottom: spacing.xs,
+  headerTitle: {
+    ...typography.headlineLgMobile,
+    fontWeight: "700",
     color: colors.onSurface,
   },
-  progressSubheader: {
+  headerActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.xs,
+  },
+  streakBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: "rgba(250, 189, 0, 0.3)",
+  },
+  streakBadgeText: {
     ...typography.bodyMd,
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#fabd00",
+  },
+  addButton: {
+    paddingHorizontal: 14,
+  },
+  headerSection: {
+    gap: spacing.md,
     marginBottom: spacing.md,
+  },
+  heroCard: {
+    padding: spacing.md,
+    gap: spacing.md,
+  },
+  heroHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  heroTitle: {
+    ...typography.bodyMd,
+    fontWeight: "700",
+    color: colors.onSurface,
+    fontSize: 16,
+  },
+  heroSubtitle: {
+    ...typography.bodyMd,
+    fontSize: 12,
     color: colors.onSurfaceVariant,
+  },
+  verifiedTag: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: "rgba(16, 185, 129, 0.3)",
+  },
+  verifiedTagText: {
+    ...typography.labelCaps,
+    fontSize: 10,
+    color: "#10B981",
   },
   orbArea: {
     alignItems: "center",
     justifyContent: "center",
-    height: 180,
+    height: 160,
   },
   orbGlow: {
     position: "absolute",
-    width: 180,
-    height: 180,
+    width: 170,
+    height: 170,
     borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
+    backgroundColor: "rgba(63, 81, 181, 0.4)",
+    shadowColor: colors.primaryContainer,
+    shadowOpacity: 0.5,
+    shadowRadius: 36,
+    shadowOffset: { width: 0, height: 0 },
   },
   orb: {
-    width: 140,
-    height: 140,
+    width: 130,
+    height: 130,
     borderRadius: radius.full,
-    backgroundColor: colors.surfaceContainerHigh || colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
     alignItems: "center",
     justifyContent: "center",
-    padding: spacing.sm,
-    zIndex: 2,
+    borderWidth: 1,
+    borderColor: "rgba(186, 195, 255, 0.3)",
+    elevation: 8,
   },
   orbValue: {
     ...typography.displayOrb,
+    fontSize: 40,
     color: colors.onSurface,
-    marginTop: spacing.sm,
+    lineHeight: 44,
   },
   orbLabel: {
     ...typography.labelCaps,
-    color: colors.onSurfaceVariant,
-    marginTop: spacing.xs,
+    fontSize: 10,
+    color: colors.surfaceTint,
+    letterSpacing: 1.5,
   },
-  summaryCard: {
+  statsGrid: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "rgba(0, 0, 0, 0.25)",
+    borderRadius: radius.default,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.05)",
+  },
+  statCell: {
+    alignItems: "center",
     flex: 1,
-    padding: spacing.md,
   },
-  summaryLabel: {
+  statLabel: {
     ...typography.labelCaps,
-    color: colors.onSurfaceVariant,
+    fontSize: 9,
+    color: colors.outline,
+    letterSpacing: 1,
+  },
+  statValue: {
+    ...typography.bodyMd,
+    fontWeight: "700",
+    color: colors.onSurface,
+    marginTop: 2,
+  },
+  statDivider: {
+    width: 1,
+    height: 24,
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+  },
+  filterRow: {
+    flexDirection: "row",
+    gap: spacing.xs,
+  },
+  filterPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: radius.full,
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.08)",
+  },
+  filterPillActive: {
+    backgroundColor: "rgba(63, 81, 181, 0.25)",
+    borderColor: "rgba(186, 195, 255, 0.35)",
+  },
+  filterText: {
+    ...typography.bodyMd,
+    fontSize: 13,
+    color: colors.outline,
+    fontWeight: "500",
+  },
+  filterTextActive: {
+    color: colors.onSurface,
+    fontWeight: "700",
+  },
+  habitCard: {
     marginBottom: spacing.xs,
   },
-  summaryValue: {
-    ...typography.timerNumeric,
-    color: colors.primary,
-  },
-  pillsRow: {
+  habitMainRow: {
     flexDirection: "row",
+    alignItems: "center",
     gap: spacing.sm,
   },
-  pillCard: {
+  habitIconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: radius.full,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  habitDetails: {
     flex: 1,
-    padding: spacing.sm,
-    marginBottom: spacing.lg,
+    gap: 2,
   },
-  pillInner: {
+  habitTitleRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: spacing.sm,
+    justifyContent: "space-between",
+    gap: spacing.xs,
   },
-  pillIconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "rgba(186,195,255,0.08)",
+  habitName: {
+    ...typography.bodyMd,
+    fontWeight: "700",
+    color: colors.onSurface,
+    fontSize: 15,
+    flex: 1,
+  },
+  statusDoneBadge: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    gap: 3,
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: radius.full,
   },
-  pillIconWrapAlt: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "rgba(250,189,0,0.08)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  pillLabel: {
+  statusDoneText: {
     ...typography.labelCaps,
-    fontSize: 10,
+    fontSize: 9,
+    color: "#10B981",
+  },
+  statusPendingBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    backgroundColor: "rgba(250, 189, 0, 0.15)",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: radius.full,
+  },
+  statusPendingText: {
+    ...typography.labelCaps,
+    fontSize: 9,
+    color: "#fabd00",
+  },
+  habitMeta: {
+    ...typography.bodyMd,
+    fontSize: 13,
     color: colors.onSurfaceVariant,
   },
-  pillValue: {
+  dwellProgressWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 4,
+  },
+  dwellProgressBar: {
+    flex: 1,
+    height: 4,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: radius.full,
+    overflow: "hidden",
+  },
+  dwellProgressFill: {
+    height: "100%",
+    backgroundColor: colors.primary,
+    borderRadius: radius.full,
+  },
+  dwellProgressText: {
     ...typography.bodyMd,
-    fontWeight: "600",
-    color: colors.onSurface,
+    fontSize: 11,
+    color: colors.outline,
+  },
+  streakWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 32,
+  },
+  streakNumber: {
+    ...typography.bodyMd,
+    fontSize: 13,
+    fontWeight: "700",
+    color: colors.outline,
+  },
+  streakActive: {
+    color: "#fabd00",
   },
   emptyStateContainer: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingTop: spacing.xl,
     paddingBottom: spacing.xl,
   },
   emptyOrbWrapper: {
-    width: 184,
-    height: 184,
+    width: 140,
+    height: 140,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
   emptyOrbGlow: {
     position: "absolute",
-    width: 220,
-    height: 220,
-    borderRadius: 220,
-    backgroundColor: colors.primaryContainer,
-    opacity: 0.16,
+    width: 160,
+    height: 160,
+    borderRadius: radius.full,
+    backgroundColor: "rgba(63, 81, 181, 0.3)",
   },
   emptyOrb: {
-    width: 140,
-    height: 140,
-    borderRadius: 140,
-    backgroundColor: colors.surfaceVariant,
+    width: 100,
+    height: 100,
+    borderRadius: radius.full,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: "rgba(186, 195, 255, 0.25)",
   },
   emptyTitle: {
-    ...typography.h2,
-    textAlign: "center",
+    ...typography.headlineLgMobile,
+    fontSize: 20,
+    fontWeight: "700",
     color: colors.onSurface,
-    marginBottom: spacing.sm,
+    marginBottom: spacing.xs,
+    textAlign: "center",
   },
   emptyText: {
     ...typography.bodyMd,
@@ -495,21 +734,5 @@ const styles = StyleSheet.create({
   emptyButton: {
     width: "100%",
     maxWidth: 320,
-  },
-  habitCard: {
-    marginBottom: spacing.md,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  habitStreakContainer: {
-    alignItems: "center",
-  },
-  flameIcon: {
-    fontSize: 28,
-  },
-  streakValue: {
-    fontWeight: "800",
-    fontSize: 20,
   },
 });

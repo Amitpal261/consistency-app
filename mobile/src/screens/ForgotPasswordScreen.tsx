@@ -1,30 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
-import {
-  ActivityIndicator,
-  Animated,
-  Easing,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Easing, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import { MaterialIcons } from "@expo/vector-icons";
 import DotGridBackground from "../components/DotGridBackground";
 import { requestPasswordReset } from "../lib/api";
+import { AppButton } from "../components/AppButton";
+import { AppCard, AppTextInput } from "../components/AppCard";
 import { colors, radius, spacing, typography } from "../theme/colors";
-
-function colorWithAlpha(hex: string, alpha: number): string {
-  const normalized = hex.replace("#", "");
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
 
 type ForgotPasswordScreenProps = {
   onBackToLogin: () => void;
@@ -32,7 +15,7 @@ type ForgotPasswordScreenProps = {
 
 export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProps) {
   const orbScale = useRef(new Animated.Value(1)).current;
-  const orbOpacity = useRef(new Animated.Value(0.8)).current;
+  const orbOpacity = useRef(new Animated.Value(0.7)).current;
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,53 +23,20 @@ export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProp
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    const scaleAnimation = Animated.loop(
+    const loop = Animated.loop(
       Animated.sequence([
-        Animated.timing(orbScale, {
-          toValue: 1.05,
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.timing(orbScale, {
-          toValue: 1,
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-      ]),
+        Animated.timing(orbScale, { toValue: 1.1, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(orbScale, { toValue: 1, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      ])
     );
-
-    const opacityAnimation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(orbOpacity, {
-          toValue: 1,
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.timing(orbOpacity, {
-          toValue: 0.8,
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-      ]),
-    );
-
-    scaleAnimation.start();
-    opacityAnimation.start();
-
-    return () => {
-      scaleAnimation.stop();
-      opacityAnimation.stop();
-    };
-  }, [orbOpacity, orbScale]);
+    loop.start();
+    return () => loop.stop();
+  }, [orbScale]);
 
   async function handleSubmit() {
     setError(null);
     if (!email.trim()) {
-      setError("Please enter your email.");
+      setError("Please enter your registered email address.");
       return;
     }
 
@@ -95,7 +45,7 @@ export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProp
       await requestPasswordReset(email.trim());
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Reset request failed.");
     } finally {
       setLoading(false);
     }
@@ -104,106 +54,77 @@ export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProp
   return (
     <SafeAreaView style={styles.safeArea}>
       <DotGridBackground />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.flex}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.main}>
+            {/* Orb Banner */}
             <View style={styles.orbWrap}>
-              <Animated.View
-                style={[
-                  styles.orbGlow,
-                  {
-                    transform: [{ scale: orbScale }],
-                    opacity: orbOpacity,
-                  },
-                ]}
-              />
-              <Animated.View
-                style={[
-                  styles.orb,
-                  {
-                    transform: [{ scale: orbScale }],
-                    opacity: orbOpacity,
-                  },
-                ]}
-              >
-                <MaterialIcons name="mail-outline" size={36} color={colors.onPrimaryContainer} />
-              </Animated.View>
+              <Animated.View style={[styles.orbGlow, { transform: [{ scale: orbScale }], opacity: orbOpacity }]} />
+              <LinearGradient colors={["#3f51b5", "#08218a"]} style={styles.orb}>
+                <MaterialIcons name="lock-reset" size={36} color={colors.surfaceTint} />
+              </LinearGradient>
             </View>
 
+            {/* Title Section */}
             <View style={styles.heroText}>
-              <Text style={styles.heroTitle}>Reset your password</Text>
+              <Text style={styles.kicker}>SECURITY RECOVERY</Text>
+              <Text style={styles.heroTitle}>Reset Password</Text>
               <Text style={styles.heroSubtitle}>
-                Enter the email associated with your account and we’ll send a reset link.
+                Enter your account email address. We'll send an authentication recovery link to reset your key.
               </Text>
             </View>
 
-            <View style={styles.formCard}>
+            {/* Form Card */}
+            <AppCard variant="hero" style={styles.formCard}>
               {success ? (
                 <View style={styles.successPanel}>
-                  <MaterialIcons name="check-circle" size={40} color={colors.primary} />
-                  <Text style={styles.successTitle}>Check your email</Text>
+                  <MaterialIcons name="mark-email-read" size={44} color="#10B981" />
+                  <Text style={styles.successTitle}>Check Your Inbox</Text>
                   <Text style={styles.successText}>
-                    If that email is registered, we sent a password reset link to it.
+                    A password reset link has been dispatched to <Text style={{ color: colors.onSurface, fontWeight: "700" }}>{email}</Text>.
                   </Text>
+                  <AppButton title="Return to Sign In" onPress={onBackToLogin} variant="primary" style={{ width: "100%", marginTop: spacing.xs }} />
                 </View>
               ) : (
                 <>
                   <View style={styles.field}>
-                    <Text style={styles.fieldLabel}>Email Address</Text>
-                    <View style={styles.inputRow}>
-                      <MaterialIcons
-                        name="mail-outline"
-                        size={20}
-                        color={colors.onSurfaceVariant}
-                        style={styles.inputIcon}
-                      />
-                      <TextInput
-                        placeholder="name@example.com"
-                        placeholderTextColor={colorWithAlpha(colors.outlineVariant, 0.5)}
-                        value={email}
-                        onChangeText={setEmail}
-                        autoCapitalize="none"
-                        autoComplete="email"
-                        keyboardType="email-address"
-                        style={styles.input}
-                        selectionColor={colors.primary}
-                      />
-                    </View>
+                    <Text style={styles.fieldLabel}>REGISTERED EMAIL ADDRESS</Text>
+                    <AppTextInput
+                      placeholder="name@example.com"
+                      value={email}
+                      onChangeText={setEmail}
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      keyboardType="email-address"
+                    />
                   </View>
 
-                  {error ? <Text style={styles.error}>{error}</Text> : null}
+                  {error ? (
+                    <View style={styles.errorBanner}>
+                      <MaterialIcons name="error-outline" size={16} color={colors.error} />
+                      <Text style={styles.errorText}>{error}</Text>
+                    </View>
+                  ) : null}
 
-                  <Pressable
+                  <AppButton
+                    title="Send Reset Link"
                     onPress={handleSubmit}
-                    disabled={loading}
-                    style={({ pressed }) => [
-                      styles.submitButton,
-                      pressed && styles.submitButtonPressed,
-                      loading && styles.submitButtonDisabled,
-                    ]}
-                  >
-                    {loading ? (
-                      <ActivityIndicator color={colors.onPrimaryContainer} />
-                    ) : (
-                      <Text style={styles.submitButtonText}>Send reset link</Text>
-                    )}
-                  </Pressable>
+                    loading={loading}
+                    variant="primary"
+                    style={{ width: "100%" }}
+                  />
                 </>
               )}
-            </View>
+            </AppCard>
 
-            <View style={styles.footerRow}>
-              <Pressable onPress={onBackToLogin} style={styles.backButton}>
-                <Text style={styles.backText}>Back to login</Text>
-              </Pressable>
-            </View>
+            <Pressable onPress={onBackToLogin} style={styles.backButton}>
+              <MaterialIcons name="arrow-back" size={16} color={colors.primary} />
+              <Text style={styles.backText}>BACK TO SIGN IN</Text>
+            </Pressable>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -212,172 +133,126 @@ export function ForgotPasswordScreen({ onBackToLogin }: ForgotPasswordScreenProp
 }
 
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
   safeArea: {
     flex: 1,
     backgroundColor: colors.background,
   },
   scrollContent: {
     flexGrow: 1,
-    paddingBottom: spacing.sm,
+    paddingHorizontal: spacing.marginEdge,
+    justifyContent: "center",
+    paddingVertical: spacing.xl,
   },
   main: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: spacing.marginEdge,
-    paddingTop: spacing.lg,
-    paddingBottom: spacing.sm,
-    gap: spacing.sm,
     maxWidth: 400,
     width: "100%",
     alignSelf: "center",
+    gap: spacing.md,
   },
   orbWrap: {
     width: 96,
     height: 96,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: spacing.lg,
+    marginVertical: spacing.xs,
   },
   orbGlow: {
     position: "absolute",
-    width: 112,
-    height: 112,
+    width: 116,
+    height: 116,
     borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
-    opacity: 0.2,
-    shadowColor: colors.primaryContainer,
-    shadowOpacity: 0.35,
-    shadowRadius: 40,
-    shadowOffset: { width: 0, height: 0 },
+    backgroundColor: "rgba(63, 81, 181, 0.4)",
   },
   orb: {
-    width: 96,
-    height: 96,
+    width: 88,
+    height: 88,
     borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: colors.primaryContainer,
-    shadowOpacity: 0.35,
-    shadowRadius: 30,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 12,
+    borderWidth: 1,
+    borderColor: "rgba(186, 195, 255, 0.25)",
+    elevation: 10,
   },
   heroText: {
     alignItems: "center",
-    gap: spacing.xs,
+    gap: 4,
     width: "100%",
+  },
+  kicker: {
+    ...typography.labelCaps,
+    color: colors.primary,
+    fontSize: 10,
+    letterSpacing: 1.5,
   },
   heroTitle: {
     ...typography.headlineLgMobile,
     fontWeight: "700",
-    letterSpacing: -0.5,
     textAlign: "center",
     color: colors.onSurface,
   },
   heroSubtitle: {
     ...typography.bodyMd,
+    fontSize: 13,
     textAlign: "center",
     color: colors.onSurfaceVariant,
   },
   formCard: {
     width: "100%",
-    padding: spacing.lg,
-    borderRadius: radius.lg,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderWidth: 1,
-    borderColor: colorWithAlpha(colors.primaryContainer, 0.3),
-    gap: spacing.lg,
-    shadowColor: colors.surfaceContainerLowest,
-    shadowOpacity: 0.4,
-    shadowRadius: 24,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
+    gap: spacing.md,
   },
   field: {
     gap: spacing.xs,
   },
   fieldLabel: {
     ...typography.labelCaps,
-    color: colors.onSurfaceVariant,
+    color: colors.outline,
+    fontSize: 10,
+    letterSpacing: 1.2,
   },
-  inputRow: {
+  errorBanner: {
     flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: colors.outlineVariant,
-    paddingVertical: spacing.xs,
+    gap: 6,
+    backgroundColor: "rgba(147, 0, 10, 0.2)",
+    borderWidth: 1,
+    borderColor: colors.error,
+    borderRadius: radius.sm,
+    padding: 10,
   },
-  inputIcon: {
-    marginRight: spacing.sm,
-  },
-  input: {
-    flex: 1,
-    ...typography.bodyMd,
-    color: colors.onSurface,
-    paddingVertical: spacing.xs,
-    backgroundColor: "transparent",
-  },
-  error: {
+  errorText: {
     ...typography.bodyMd,
     color: colors.error,
-    fontSize: 14,
-  },
-  submitButton: {
-    width: "100%",
-    paddingVertical: spacing.md,
-    borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: colors.primaryContainer,
-    shadowOpacity: 0.35,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 6,
-  },
-  submitButtonPressed: {
-    transform: [{ scale: 0.98 }],
-    opacity: 0.92,
-  },
-  submitButtonDisabled: {
-    opacity: 0.75,
-  },
-  submitButtonText: {
-    ...typography.headlineLgMobile,
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.onPrimaryContainer,
+    fontSize: 13,
   },
   successPanel: {
     alignItems: "center",
     gap: spacing.sm,
+    paddingVertical: spacing.xs,
   },
   successTitle: {
     ...typography.headlineLgMobile,
+    fontSize: 20,
     fontWeight: "700",
-    textAlign: "center",
     color: colors.onSurface,
   },
   successText: {
     ...typography.bodyMd,
+    fontSize: 13,
     textAlign: "center",
     color: colors.onSurfaceVariant,
   },
-  footerRow: {
-    width: "100%",
-    alignItems: "center",
-  },
   backButton: {
-    paddingVertical: spacing.sm,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingVertical: spacing.xs,
   },
   backText: {
     ...typography.labelCaps,
     color: colors.primary,
+    fontSize: 11,
     letterSpacing: 1.2,
   },
 });
+

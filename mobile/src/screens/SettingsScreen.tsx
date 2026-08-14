@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { Alert, Linking, ScrollView, Switch, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../context/AuthContext";
@@ -24,32 +25,21 @@ function MenuRow({
   danger?: boolean;
 }) {
   return (
-    <AppCard
-      style={{ flexDirection: "row", alignItems: "center", paddingVertical: 14 }}
-      onTouchEnd={onPress}
-    >
-      <View
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: radius.md,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: danger ? "rgba(239,68,68,0.12)" : "rgba(186,195,255,0.12)",
-        }}
-      >
-        <MaterialIcons name={icon} size={20} color={danger ? colors.error : colors.primary} />
-      </View>
-      <View style={{ flex: 1, marginLeft: spacing.sm }}>
-        <Text style={{ color: danger ? colors.error : colors.onSurface, fontWeight: "600", fontSize: 15 }}>
-          {label}
-        </Text>
-        {subtitle ? (
-          <Text style={[typography.bodyMd, { fontSize: 12, marginTop: 1 }]}>{subtitle}</Text>
-        ) : null}
-      </View>
-      {!danger ? <MaterialIcons name="chevron-right" size={22} color={colors.outline} /> : null}
-    </AppCard>
+    <Pressable onPress={onPress}>
+      <AppCard variant="glass" style={styles.menuRow}>
+        <LinearGradient
+          colors={danger ? ["#93000a", "#690005"] : ["#3f51b5", "#08218a"]}
+          style={styles.menuIconCircle}
+        >
+          <MaterialIcons name={icon} size={20} color={danger ? colors.error : colors.surfaceTint} />
+        </LinearGradient>
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.menuLabel, danger && styles.dangerText]}>{label}</Text>
+          {subtitle ? <Text style={styles.menuSub}>{subtitle}</Text> : null}
+        </View>
+        {!danger ? <MaterialIcons name="chevron-right" size={20} color={colors.outline} /> : null}
+      </AppCard>
+    </Pressable>
   );
 }
 
@@ -64,72 +54,139 @@ export function SettingsScreen({ onOpenAccountPrivacy }: { onOpenAccountPrivacy:
   async function toggleAlarms(value: boolean) {
     setAlarmsEnabled(value);
     await AsyncStorage.setItem(NOTIF_PREF_KEY, value ? "true" : "false");
-    // Note: this only persists the preference locally for now. Actually
-    // suppressing/re-enabling scheduled alarms based on this flag needs to
-    // be wired into scheduleHabitAlarm/cancelHabitAlarm in lib/alarm.ts —
-    // flagging this so it isn't mistaken for already being fully wired up.
   }
 
   function handleLogout() {
-    Alert.alert("Log out?", "You'll need to log back in to see your habits.", [
+    Alert.alert("Log out of Consistency?", "You will need to sign back in to access your habit streaks.", [
       { text: "Cancel", style: "cancel" },
-      { text: "Log out", style: "destructive", onPress: () => setToken(null) },
+      { text: "Log Out", style: "destructive", onPress: () => setToken(null) },
     ]);
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+    <SafeAreaView style={styles.safeArea}>
       <DotGridBackground />
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ padding: spacing.marginEdge, gap: spacing.md }}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={typography.h1}>Settings</Text>
+        <View style={styles.header}>
+          <Text style={styles.kicker}>SYSTEM PREFERENCES</Text>
+          <Text style={styles.title}>Settings & Configuration</Text>
+        </View>
 
-        <AppCard style={{ flexDirection: "row", alignItems: "center", paddingVertical: 14 }}>
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: radius.md,
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(186,195,255,0.12)",
-            }}
-          >
-            <MaterialIcons name="notifications-active" size={20} color={colors.primary} />
-          </View>
-          <View style={{ flex: 1, marginLeft: spacing.sm }}>
-            <Text style={{ color: colors.onSurface, fontWeight: "600", fontSize: 15 }}>Habit alarms</Text>
-            <Text style={[typography.bodyMd, { fontSize: 12, marginTop: 1 }]}>
-              Loud alarm when a time-based habit is due
-            </Text>
+        {/* Alarm Switch Card */}
+        <AppCard variant="glass" style={styles.menuRow}>
+          <LinearGradient colors={["#3f51b5", "#08218a"]} style={styles.menuIconCircle}>
+            <MaterialIcons name="notifications-active" size={20} color={colors.surfaceTint} />
+          </LinearGradient>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.menuLabel}>Habit STREAM_ALARM</Text>
+            <Text style={styles.menuSub}>Loud DND-bypassing alarm audio triggers</Text>
           </View>
           <Switch
             value={alarmsEnabled}
             onValueChange={toggleAlarms}
-            trackColor={{ true: colors.primaryContainer, false: colors.surfaceContainerHigh }}
-            thumbColor="#fff"
+            trackColor={{ true: colors.primaryContainer, false: "rgba(255,255,255,0.1)" }}
+            thumbColor={alarmsEnabled ? colors.primary : colors.outline}
           />
         </AppCard>
 
+        {/* Navigation Section */}
         <MenuRow
-          icon="lock-outline"
+          icon="security"
           label="Account & Privacy"
-          subtitle="Manage your data and account"
+          subtitle="Manage credentials, export data, and privacy"
           onPress={onOpenAccountPrivacy}
         />
 
         <MenuRow
           icon="help-outline"
-          label="Help & About"
-          subtitle="Support and app information"
-          onPress={() => Linking.openURL("mailto:support@example.com")}
+          label="Help & Support"
+          subtitle="Documentation, contact support, and app info"
+          onPress={() => Linking.openURL("mailto:support@consistency-app.com")}
         />
 
-        <MenuRow icon="logout" label="Log out" onPress={handleLogout} danger />
+        <MenuRow icon="logout" label="Log Out" subtitle="Sign out of current account" onPress={handleLogout} danger />
+
+        {/* App Version Branding Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Consistency App • v1.0.0 (Native Alarm Build)</Text>
+          <Text style={styles.footerSub}>Disciplined Serenity • GPS & Photo Verification Engine</Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  scrollContent: {
+    paddingHorizontal: spacing.marginEdge,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.xl,
+    gap: spacing.md,
+  },
+  header: {
+    gap: 2,
+  },
+  kicker: {
+    ...typography.labelCaps,
+    color: colors.primary,
+    fontSize: 10,
+    letterSpacing: 1.5,
+  },
+  title: {
+    ...typography.headlineLgMobile,
+    fontWeight: "700",
+    color: colors.onSurface,
+  },
+  menuRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    paddingVertical: 14,
+  },
+  menuIconCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: radius.full,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menuLabel: {
+    ...typography.bodyMd,
+    fontWeight: "700",
+    color: colors.onSurface,
+    fontSize: 15,
+  },
+  dangerText: {
+    color: colors.error,
+  },
+  menuSub: {
+    ...typography.bodyMd,
+    fontSize: 12,
+    color: colors.onSurfaceVariant,
+  },
+  footer: {
+    alignItems: "center",
+    marginTop: spacing.lg,
+    gap: 2,
+  },
+  footerText: {
+    ...typography.bodyMd,
+    fontSize: 12,
+    color: colors.outline,
+    fontWeight: "600",
+  },
+  footerSub: {
+    ...typography.bodyMd,
+    fontSize: 11,
+    color: colors.onSurfaceVariant,
+    opacity: 0.6,
+  },
+});

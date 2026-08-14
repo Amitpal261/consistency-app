@@ -1,16 +1,10 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import {
-  Animated,
-  Easing,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Animated, Easing, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import DotGridBackground from "../components/DotGridBackground";
+import { AppButton } from "../components/AppButton";
+import { AppCard } from "../components/AppCard";
 import { colors, radius, spacing, typography } from "../theme/colors";
 
 type OnboardingScreenProps = {
@@ -36,7 +30,7 @@ export function OnboardingScreen({ onContinue }: OnboardingScreenProps) {
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
-      ]),
+      ])
     );
 
     const opacity = Animated.loop(
@@ -53,7 +47,7 @@ export function OnboardingScreen({ onContinue }: OnboardingScreenProps) {
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
-      ]),
+      ])
     );
 
     scale.start();
@@ -70,7 +64,7 @@ export function OnboardingScreen({ onContinue }: OnboardingScreenProps) {
       <DotGridBackground />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <View style={styles.header}>            
+          <View style={styles.header}>
             <View style={styles.orbWrap}>
               <Animated.View
                 style={[
@@ -81,57 +75,69 @@ export function OnboardingScreen({ onContinue }: OnboardingScreenProps) {
                   },
                 ]}
               />
-              <View style={styles.orb}>
-                <MaterialIcons name="verified" size={32} color={colors.onPrimaryContainer} />
-              </View>
+              <LinearGradient
+                colors={["#3f51b5", "#08218a"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.orb}
+              >
+                <MaterialIcons name="verified-user" size={36} color={colors.surfaceTint} />
+              </LinearGradient>
             </View>
-            <Text style={styles.title}>Disciplined Serenity</Text>
+
+            <Text style={styles.kicker}>THE VERIFICATION ENGINE</Text>
+            <Text style={styles.title}>Prove you did it.{"\n"}Don't just check a box.</Text>
             <Text style={styles.subtitle}>
-              Build streaks that matter with verified accountability and simple progress.
+              Existing habit trackers rely on honor system taps. Consistency adds real proof: location, camera, and AI buddy verification.
             </Text>
           </View>
 
-          <View style={styles.card}>
+          <AppCard variant="glass" style={styles.card}>
             <View style={styles.valueRow}>
-              <View style={styles.iconCircle}>
-                <MaterialIcons name="whatshot" size={20} color={colors.onSurface} />
-              </View>
+              <LinearGradient colors={["#fabd00", "#745600"]} style={styles.iconCircle}>
+                <MaterialIcons name="whatshot" size={22} color="#261a00" />
+              </LinearGradient>
               <View style={styles.valueTextGroup}>
-                <Text style={styles.valueTitle}>Streak momentum</Text>
+                <Text style={styles.valueTitle}>True Streak Proof</Text>
                 <Text style={styles.valueDescription}>
-                  Keep your daily progress visible and rewarded with consistent habit streaks.
+                  GPS & photo evidence guarantee that your streaks represent genuine hard work and real effort.
                 </Text>
               </View>
             </View>
 
+            <View style={styles.divider} />
+
             <View style={styles.valueRow}>
-              <View style={styles.iconCircle}>
-                <MaterialIcons name="people" size={20} color={colors.onSurface} />
-              </View>
+              <LinearGradient colors={["#3f51b5", "#293ca0"]} style={styles.iconCircle}>
+                <MaterialIcons name="people-alt" size={22} color="#FFFFFF" />
+              </LinearGradient>
               <View style={styles.valueTextGroup}>
-                <Text style={styles.valueTitle}>Buddy verification</Text>
+                <Text style={styles.valueTitle}>Buddy Review Layer</Text>
                 <Text style={styles.valueDescription}>
-                  Share accountability with a trusted buddy and verify each check-in together.
+                  AI pre-screens your proof. If flagged or ambiguous, your paired accountability buddy signs off.
                 </Text>
               </View>
             </View>
 
+            <View style={styles.divider} />
+
             <View style={styles.valueRow}>
-              <View style={styles.iconCircle}>
-                <MaterialIcons name="check-circle" size={20} color={colors.onSurface} />
-              </View>
+              <LinearGradient colors={["#10B981", "#047857"]} style={styles.iconCircle}>
+                <MaterialIcons name="timer" size={22} color="#FFFFFF" />
+              </LinearGradient>
               <View style={styles.valueTextGroup}>
-                <Text style={styles.valueTitle}>Focus with purpose</Text>
+                <Text style={styles.valueTitle}>Dwell & Alarm Triggers</Text>
                 <Text style={styles.valueDescription}>
-                  Turn intention into action with reliably tracked habits and gentle reminders.
+                  Auto-detect arrival at gym/library for required dwell duration, or wake up to blaring proof-silenced alarms.
                 </Text>
               </View>
             </View>
+          </AppCard>
+
+          <View style={styles.actionWrap}>
+            <AppButton title="Get Started — Prove It" onPress={onContinue} variant="primary" style={styles.button} />
+            <Text style={styles.disclaimer}>No credit card required • Solo or buddy mode</Text>
           </View>
-
-          <Pressable onPress={onContinue} style={({ pressed }) => [styles.actionButton, pressed && styles.actionButtonPressed]}>
-            <Text style={styles.actionButtonText}>Get Started</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -149,93 +155,86 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: spacing.marginEdge,
-    paddingTop: spacing.xl,
+    paddingTop: spacing.lg,
     paddingBottom: spacing.xl,
     alignItems: "center",
     justifyContent: "space-between",
-    gap: spacing.xl,
+    gap: spacing.lg,
   },
   header: {
     alignItems: "center",
-    gap: spacing.sm,
+    gap: spacing.xs,
     width: "100%",
   },
   orbWrap: {
-    width: 152,
-    height: 152,
+    width: 140,
+    height: 140,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: spacing.lg,
+    marginBottom: spacing.sm,
   },
   orbGlow: {
     position: "absolute",
-    width: 190,
-    height: 190,
+    width: 170,
+    height: 170,
     borderRadius: radius.full,
-    backgroundColor: colors.primary,
-    opacity: 0.25,
-    shadowColor: colors.primary,
-    shadowOpacity: 0.4,
+    backgroundColor: "rgba(63, 81, 181, 0.4)",
+    shadowColor: colors.primaryContainer,
+    shadowOpacity: 0.5,
     shadowRadius: 36,
     shadowOffset: { width: 0, height: 0 },
   },
   orb: {
-    width: 152,
-    height: 152,
+    width: 120,
+    height: 120,
     borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    shadowColor: colors.primaryContainer,
-    shadowOpacity: 0.3,
-    shadowRadius: 24,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 12,
+    borderColor: "rgba(186, 195, 255, 0.3)",
+    elevation: 10,
+  },
+  kicker: {
+    ...typography.labelCaps,
+    color: colors.primary,
+    letterSpacing: 2,
+    fontSize: 11,
+    fontWeight: "700",
   },
   title: {
     ...typography.headlineLgMobile,
     fontWeight: "700",
     color: colors.onSurface,
     textAlign: "center",
+    lineHeight: 34,
   },
   subtitle: {
     ...typography.bodyMd,
     color: colors.onSurfaceVariant,
     textAlign: "center",
-    maxWidth: 320,
+    maxWidth: 330,
+    marginTop: spacing.xs,
+    lineHeight: 22,
   },
   card: {
     width: "100%",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.lg,
-    shadowColor: colors.surfaceContainerLowest,
-    shadowOpacity: 0.3,
-    shadowRadius: 24,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
+    gap: spacing.md,
   },
   valueRow: {
     flexDirection: "row",
     alignItems: "flex-start",
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   iconCircle: {
     width: 44,
     height: 44,
     borderRadius: radius.full,
-    backgroundColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
   },
   valueTextGroup: {
     flex: 1,
-    gap: spacing.xs,
+    gap: 2,
   },
   valueTitle: {
     ...typography.bodyMd,
@@ -244,30 +243,25 @@ const styles = StyleSheet.create({
   },
   valueDescription: {
     ...typography.bodyMd,
+    fontSize: 13,
+    lineHeight: 18,
     color: colors.onSurfaceVariant,
-    marginTop: spacing.xs / 2,
   },
-  actionButton: {
+  divider: {
+    height: 1,
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+  },
+  actionWrap: {
     width: "100%",
-    paddingVertical: spacing.md,
-    borderRadius: radius.full,
-    backgroundColor: colors.primaryContainer,
     alignItems: "center",
-    justifyContent: "center",
-    shadowColor: colors.primaryContainer,
-    shadowOpacity: 0.35,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 6,
+    gap: spacing.xs,
   },
-  actionButtonPressed: {
-    opacity: 0.92,
-    transform: [{ scale: 0.99 }],
+  button: {
+    width: "100%",
   },
-  actionButtonText: {
-    ...typography.headlineLgMobile,
-    fontSize: 16,
-    fontWeight: "700",
-    color: colors.onPrimaryContainer,
+  disclaimer: {
+    ...typography.bodyMd,
+    fontSize: 12,
+    color: colors.outline,
   },
-});
+});
