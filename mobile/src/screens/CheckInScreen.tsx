@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, Animated, Easing, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { MaterialIcons } from "@expo/vector-icons";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as Location from "expo-location";
 import { getCurrentPositionSafe } from "../lib/location";
@@ -9,19 +11,30 @@ import { getTodayPrompt, submitCheckIn, type Habit } from "../lib/api";
 import { stopNativeAlarm } from "../lib/nativeAlarm";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
-import { colors, spacing, typography } from "../theme/colors";
+import DotGridBackground from "../components/DotGridBackground";
+import { colors, radius, spacing, typography } from "../theme/colors";
+
+type Stage = "idle" | "submitting" | "success" | "pending" | "error";
+
+const TASK_ICON: Record<Habit["taskType"], keyof typeof MaterialIcons.glyphMap> = {
+  time: "alarm",
+  location: "place",
+  location_duration: "timer",
+};
 
 export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => void }) {
   const { token } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<string | null>(null);
-  const [isError, setIsError] = useState(false);
+  const [stage, setStage] = useState<Stage>("idle");
+  const [resultText, setResultText] = useState<string | null>(null);
 
   const [prompt, setPrompt] = useState<string | null>(null);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [photoBase64, setPhotoBase64] = useState<string | null>(null);
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
+
+  const pulse = useRef(new Animated.Value(1)).current;
+  const successScale = useRef(new Animated.Value(0.6)).current;
 
   const needsPhoto = habit.verificationMethod !== "gps";
   const needsGps = habit.verificationMethod !== "photo";
@@ -30,6 +43,26 @@ export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => v
     if (!token || !needsPhoto) return;
     getTodayPrompt(token).then((res) => setPrompt(res.prompt));
   }, [token, needsPhoto]);
+
+  // Slow "waiting for you" pulse on the idle hero icon.
+  useEffect(() => {
+    if (stage !== "idle") return;
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulse, { toValue: 1.06, duration: 1400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(pulse, { toValue: 1, duration: 1400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [stage, pulse]);
+
+  useEffect(() => {
+    if (stage === "success" || stage === "pending") {
+      successScale.setValue(0.6);
+      Animated.spring(successScale, { toValue: 1, useNativeDriver: true, speed: 14, bounciness: 10 }).start();
+    }
+  }, [stage, successScale]);
 
   async function handleOpenCamera() {
     if (!permission?.granted) {
@@ -66,9 +99,7 @@ export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => v
     if (!token) return;
     // Covers the GPS-only habit case (no photo capture step to hook into).
     stopNativeAlarm();
-    setLoading(true);
-    setResult(null);
-    setIsError(false);
+    setStage("submitting");
     try {
       let location: { lat: number; lng: number; accuracyMeters?: number; isMockLocation?: boolean } | undefined;
 
@@ -76,10 +107,10 @@ export function CheckInScreen({ habit, onDone }: { habit: Habit; onDone: () => v
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
           Alert.alert("Location needed", "Please allow location access to check in.");
-          setLoading(false);
+          setStage("idle");
           return;
         }
-const position = await getCurrentPositionSafe();
+        const position = await getCurrentPositionSafe();
         location = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -94,23 +125,34 @@ const position = await getCurrentPositionSafe();
         photoBase64: photoBase64 ?? undefined,
       });
 
-      setResult(`Checked in! Current streak: ${res.currentStreak} 🔥`);
-      setTimeout(onDone, 1200);
+      const isPending = res.reviewStatus === "pending" || res.reviewStatus === "flagged";
+
+      setResultText(
+        isPending
+          ? "Sent for buddy review — your streak updates once approved."
+          : `Streak: ${res.currentStreak} 🔥`
+      );
+      setStage(isPending ? "pending" : "success");
+      setTimeout(onDone, isPending ? 1800 : 1400);
     } catch (err) {
-      setIsError(true);
-      setResult(err instanceof Error ? err.message : "Check-in failed");
-    } finally {
-      setLoading(false);
+      setResultText(err instanceof Error ? err.message : "Check-in failed");
+      setStage("error");
     }
   }
 
+  // --- Camera capture state ---
   if (cameraOpen) {
     return (
       <View style={{ flex: 1, backgroundColor: "#000" }}>
         <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" />
-        <View style={{ position: "absolute", top: spacing.lg, left: spacing.lg, right: spacing.lg }}>
-          <AppCard>
-            <Text style={{ color: colors.textPrimary, fontWeight: "700", textAlign: "center" }}>{prompt}</Text>
+        <View style={{ position: "absolute", top: spacing.xl, left: spacing.lg, right: spacing.lg }}>
+          <AppCard style={{ alignItems: "center" }}>
+            <Text style={[typography.labelCaps, { color: colors.primary, marginBottom: spacing.xs }]}>
+              TODAY'S PROOF
+            </Text>
+            <Text style={{ color: colors.onSurface, fontWeight: "700", textAlign: "center", fontSize: 16 }}>
+              {prompt}
+            </Text>
           </AppCard>
         </View>
         <View style={{ position: "absolute", bottom: spacing.xl, left: spacing.lg, right: spacing.lg }}>
@@ -121,38 +163,96 @@ const position = await getCurrentPositionSafe();
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: spacing.lg, gap: spacing.lg }}>
-      <AppCard style={{ alignItems: "center", paddingVertical: spacing.xl }}>
-        <Text style={{ fontSize: 56, marginBottom: spacing.sm }}>☀️</Text>
-        <Text style={[typography.h1, { marginBottom: spacing.xs, textAlign: "center" }]}>{habit.name}</Text>
-        {needsPhoto && prompt ? (
-          <Text style={[typography.body, { textAlign: "center", marginBottom: spacing.md }]}>
-            Today's verification: <Text style={{ color: colors.accent, fontWeight: "700" }}>{prompt}</Text>
-          </Text>
-        ) : null}
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <DotGridBackground />
+      <View style={{ flex: 1, padding: spacing.marginEdge, justifyContent: "center", gap: spacing.lg }}>
+        {stage === "success" || stage === "pending" ? (
+          <Animated.View style={{ alignItems: "center", transform: [{ scale: successScale }] }}>
+            <View
+              style={[
+                styles.heroIconWrap,
+                { backgroundColor: stage === "success" ? "rgba(16,185,129,0.14)" : "rgba(255,193,7,0.14)" },
+              ]}
+            >
+              <MaterialIcons
+                name={stage === "success" ? "check-circle" : "hourglass-top"}
+                size={48}
+                color={stage === "success" ? colors.success : colors.warning}
+              />
+            </View>
+            <Text style={[typography.h1, { textAlign: "center", marginTop: spacing.md }]}>
+              {stage === "success" ? "Nice work!" : "Sent for review"}
+            </Text>
+            <Text style={[typography.bodyMd, { textAlign: "center", marginTop: spacing.xs }]}>{resultText}</Text>
+          </Animated.View>
+        ) : (
+          <AppCard style={{ alignItems: "center", paddingVertical: spacing.xl }}>
+            <Animated.View
+              style={[styles.heroIconWrap, { transform: [{ scale: stage === "idle" ? pulse : 1 }] }]}
+            >
+              <MaterialIcons name={TASK_ICON[habit.taskType]} size={40} color={colors.primary} />
+            </Animated.View>
 
-        {needsPhoto ? (
-          photoBase64 ? (
-            <Text style={{ color: colors.success, fontWeight: "600", marginBottom: spacing.md }}>✅ Photo captured</Text>
-          ) : (
-            <AppButton title="Take verification photo" onPress={handleOpenCamera} style={{ width: "100%", marginBottom: spacing.md }} />
-          )
-        ) : null}
+            <Text style={[typography.h1, { marginTop: spacing.md, marginBottom: spacing.xs, textAlign: "center" }]}>
+              {habit.name}
+            </Text>
 
-        <AppButton
-          title="Check in now"
-          onPress={handleCheckIn}
-          loading={loading}
-          disabled={needsPhoto && !photoBase64}
-          style={{ width: "100%" }}
-        />
-      </AppCard>
+            {needsPhoto && prompt ? (
+              <Text style={[typography.bodyMd, { textAlign: "center", marginBottom: spacing.md }]}>
+                Today's verification:{" "}
+                <Text style={{ color: colors.accent, fontWeight: "700" }}>{prompt}</Text>
+              </Text>
+            ) : null}
 
-      {result ? (
-        <Text style={{ textAlign: "center", color: isError ? colors.danger : colors.success, fontWeight: "600" }}>
-          {result}
-        </Text>
-      ) : null}
-    </View>
+            {needsPhoto ? (
+              photoBase64 ? (
+                <View style={[styles.chip, { marginBottom: spacing.md }]}>
+                  <MaterialIcons name="check-circle" size={16} color={colors.success} />
+                  <Text style={{ color: colors.success, fontWeight: "600", marginLeft: 6 }}>Photo captured</Text>
+                </View>
+              ) : (
+                <AppButton
+                  title="Take verification photo"
+                  variant="secondary"
+                  onPress={handleOpenCamera}
+                  style={{ width: "100%", marginBottom: spacing.md }}
+                />
+              )
+            ) : null}
+
+            <AppButton
+              title="Check in now"
+              onPress={handleCheckIn}
+              loading={stage === "submitting"}
+              disabled={needsPhoto && !photoBase64}
+              style={{ width: "100%" }}
+            />
+
+            {stage === "error" && resultText ? (
+              <Text style={{ color: colors.error, marginTop: spacing.sm, textAlign: "center" }}>{resultText}</Text>
+            ) : null}
+          </AppCard>
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
+
+const styles = {
+  heroIconWrap: {
+    width: 88,
+    height: 88,
+    borderRadius: radius.full,
+    backgroundColor: "rgba(186,195,255,0.12)",
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+  },
+  chip: {
+    flexDirection: "row" as const,
+    alignItems: "center" as const,
+    backgroundColor: "rgba(16,185,129,0.1)",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 8,
+    borderRadius: radius.full,
+  },
+};

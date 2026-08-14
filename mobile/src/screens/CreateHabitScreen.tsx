@@ -3,7 +3,7 @@ import { Alert, Dimensions, Platform, Pressable, ScrollView, StyleSheet, Text, V
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Animated, Easing } from "react-native";
 import * as Location from "expo-location";
-import { Camera } from "expo-camera";
+import { useCameraPermissions } from "expo-camera";
 import { MaterialIcons } from '@expo/vector-icons';
 import DotGridBackground from "../components/DotGridBackground";
 import { getCurrentPositionSafe } from "../lib/location";
@@ -47,8 +47,12 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
   // wizard step index: 0=type,1=schedule/location,2=verification,3=confirm
   const [step, setStep] = useState<number>(0);
 
-  // camera permission state — do not request automatically, only query
-  const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
+  // camera permission — via the modern expo-camera hook (matches CheckInScreen.tsx).
+  // The old `Camera.getCameraPermissionsAsync()` static API this used to call was
+  // removed from expo-camera entirely, which meant step 2 would crash as soon as
+  // a photo-based verification method was selected.
+  const [permission, requestPermission] = useCameraPermissions();
+  const cameraPermission = permission?.granted ?? null;
 
   // --- Alarm ringtone selection (time-based habits only) ---
   const [ringtone, setRingtone] = useState<Ringtone>({ kind: "default" });
@@ -84,35 +88,12 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
     }
   }
 
-  // Camera permission check when verificationMethod includes photo — do not request automatically
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      if (verificationMethod === "photo" || verificationMethod === "photo_gps") {
-        try {
-          const { status } = await Camera.getCameraPermissionsAsync();
-          if (mounted) setCameraPermission(status === "granted");
-        } catch (e) {
-          if (mounted) setCameraPermission(false);
-        }
-      } else {
-        if (mounted) setCameraPermission(null);
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, [verificationMethod]);
-
   const requestCamera = async () => {
-    try {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setCameraPermission(status === "granted");
-      if (status !== "granted") Alert.alert("Camera permission needed", "Please enable camera permission in settings to use photo verification.");
-    } catch (e) {
-      Alert.alert("Unable to request permission", "Please enable camera permission from device settings.");
+    const res = await requestPermission();
+    if (!res.granted) {
+      Alert.alert("Camera permission needed", "Please enable camera permission in settings to use photo verification.");
     }
-  }
+  };
 
   async function handleCreate() {
     if (!token || !name.trim()) {
@@ -360,11 +341,11 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-  header: { height: 56, paddingHorizontal: spacing['margin-edge'] || 24, paddingTop: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'absolute', left: 0, right: 0, zIndex: 30 },
+  header: { height: 56, paddingHorizontal: spacing.marginEdge, paddingTop: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'absolute', left: 0, right: 0, zIndex: 30 },
   headerLeft: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
   headerTitle: { color: colors.onSurface, fontSize: 18, fontWeight: '600' },
   headerRight: { color: colors.primary, fontSize: 12, fontWeight: '700' },
-  scrollContent: { paddingTop: 84, paddingHorizontal: spacing['margin-edge'] || 24, paddingBottom: 20 },
+  scrollContent: { paddingTop: 84, paddingHorizontal: spacing.marginEdge, paddingBottom: 20 },
   orbWrap: { alignSelf: 'center', marginTop: 8, width: 160, height: 160, alignItems: 'center', justifyContent: 'center', zIndex: 5 },
   orbGlow: { position: 'absolute', width: 160, height: 160, borderRadius: 80, backgroundColor: colors.primary, opacity: 0.12, shadowColor: colors.primary, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.6, shadowRadius: 30 },
   orbInner: { width: 120, height: 120, borderRadius: 60, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' },

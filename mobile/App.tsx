@@ -13,6 +13,8 @@ import { CheckInScreen } from "./src/screens/CheckInScreen";
 import { CreateHabitScreen } from "./src/screens/CreateHabitScreen";
 import { BuddyScreen } from "./src/screens/BuddyScreen";
 import { AchievementsScreen } from "./src/screens/AchievementsScreen";
+import { SettingsScreen } from "./src/screens/SettingsScreen";
+import { AccountPrivacyScreen } from "./src/screens/AccountPrivacyScreen";
 import { colors } from "./src/theme/colors";
 import { setupNotificationChannels, getHabitIdFromAlarmLaunch, onHabitAlarmForegroundEvent } from "./src/lib/alarm";
 import { getPendingAlarmHabitId } from "./src/lib/nativeAlarm";
@@ -45,6 +47,8 @@ type Screen =
   | { name: "habits" }
   | { name: "buddy" }
   | { name: "achievements" }
+  | { name: "settings" }
+  | { name: "accountPrivacy" }
   | { name: "createHabit" }
   | { name: "checkin"; habit: Habit }
   | { name: "forgotPassword" }
@@ -97,7 +101,12 @@ function Tabs() {
       });
   }, [token, refreshKey]);
 
-  const activeTab = screen.name === "checkin" || screen.name === "createHabit" ? "habits" : screen.name;
+  const activeTab =
+    screen.name === "checkin" || screen.name === "createHabit"
+      ? "habits"
+      : screen.name === "accountPrivacy"
+      ? "settings"
+      : screen.name;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
@@ -125,6 +134,10 @@ function Tabs() {
           />
         ) : screen.name === "achievements" ? (
           <AchievementsScreen />
+        ) : screen.name === "settings" ? (
+          <SettingsScreen onOpenAccountPrivacy={() => setScreen({ name: "accountPrivacy" })} />
+        ) : screen.name === "accountPrivacy" ? (
+          <AccountPrivacyScreen onBack={() => setScreen({ name: "settings" })} />
         ) : (
           <BuddyScreen />
         )}
@@ -133,7 +146,7 @@ function Tabs() {
         <TabBarButton icon="flame" label="Habits" active={activeTab === "habits"} onPress={() => setScreen({ name: "habits" })} />
         <TabBarButton icon="trophy" label="Achievements" active={activeTab === "achievements"} onPress={() => setScreen({ name: "achievements" })} />
         <TabBarButton icon="people" label="Buddy" active={activeTab === "buddy"} onPress={() => setScreen({ name: "buddy" })} />
-        <TabBarButton icon="log-out-outline" label="Log out" active={false} color={colors.danger} onPress={() => setToken(null)} />
+        <TabBarButton icon="settings-outline" label="Settings" active={activeTab === "settings"} onPress={() => setScreen({ name: "settings" })} />
       </View>
     </SafeAreaView>
   );

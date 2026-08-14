@@ -12,6 +12,16 @@ export const loginSchema = z.object({
   password: z.string().min(1),
 });
 
+export const updateProfileSchema = z.object({
+  name: z.string().min(1).max(80).optional(),
+  timezone: z.string().max(60).optional(),
+});
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword: z.string().min(8).max(72),
+});
+
 export const forgotPasswordSchema = z.object({
   email: z.string().email(),
 });

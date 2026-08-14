@@ -30,6 +30,28 @@ export function login(email: string, password: string) {
   return request<AuthResponse>("/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
 }
 
+export type Profile = { id: string; name: string; email: string; timezone: string; createdAt: string };
+
+export function getMyProfile(token: string) {
+  return request<{ user: Profile }>("/auth/me", { token });
+}
+
+export function updateMyProfile(token: string, payload: { name?: string; timezone?: string }) {
+  return request<{ user: Profile }>("/auth/me", { method: "PATCH", token, body: JSON.stringify(payload) });
+}
+
+export function changeMyPassword(token: string, currentPassword: string, newPassword: string) {
+  return request<{ message: string }>("/auth/me/password", {
+    method: "PATCH",
+    token,
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+}
+
+export function deleteMyAccount(token: string) {
+  return request<{ message: string }>("/auth/me", { method: "DELETE", token });
+}
+
 export function requestPasswordReset(email: string) {
   return request<{ message: string }>("/auth/forgot-password", {
     method: "POST",
@@ -84,13 +106,17 @@ export type CheckInPayload = {
 };
 
 export function submitCheckIn(token: string, payload: CheckInPayload) {
-  return request<{ currentStreak: number; bestStreak: number }>("/checkins", {
+  return request<{
+    currentStreak: number;
+    bestStreak: number;
+    reviewStatus: "pending" | "approved" | "flagged" | "auto_approved_unreviewed";
+    verified: boolean;
+  }>("/checkins", {
     method: "POST",
     token,
     body: JSON.stringify(payload),
   });
 }
-
 export function getTodayPrompt(token: string) {
   return request<{ prompt: string; date: string }>("/checkins/prompt", { token });
 }

@@ -6,11 +6,16 @@ export function AppCard({ children, style, ...rest }: ViewProps & { children: Re
     <View
       style={[
         {
-          backgroundColor: colors.surface,
+          backgroundColor: "rgba(255,255,255,0.04)",
           borderRadius: radius.lg,
           borderWidth: 1,
-          borderColor: colors.border,
+          borderColor: "rgba(255,255,255,0.08)",
           padding: 18,
+          shadowColor: colors.surfaceContainerLowest,
+          shadowOpacity: 0.4,
+          shadowRadius: 20,
+          shadowOffset: { width: 0, height: 10 },
+          elevation: 4,
         },
         style,
       ]}
@@ -26,14 +31,14 @@ export function AppTextInput(props: TextInputProps) {
 
   return (
     <TextInput
-      placeholderTextColor={"rgba(255, 255, 255, 0.7)"}
-      selectionColor="#FFFFFF"
+      placeholderTextColor={"rgba(255, 255, 255, 0.4)"}
+      selectionColor={colors.primary}
       underlineColorAndroid="transparent"
       style={[
         {
-          backgroundColor: "rgba(255,255,255,0.08)",
+          backgroundColor: "rgba(255,255,255,0.06)",
           borderWidth: 1,
-          borderColor: "rgba(255,255,255,0.16)",
+          borderColor: "rgba(255,255,255,0.14)",
           borderRadius: radius.md,
           padding: 14,
           color: "#FFFFFF",

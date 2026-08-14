@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useEffect, useMemo, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuth } from "../context/AuthContext";
 import { getHabitsWithStreaks, type Habit } from "../lib/api";
 import { ACHIEVEMENTS, type AchievementDef } from "../lib/achievements";
 import { colors, spacing, typography, radius } from "../theme/colors";
 import { AppCard } from "../components/AppCard";
+import DotGridBackground from "../components/DotGridBackground";
 
 export function AchievementsScreen({ onBack }: { onBack?: () => void }) {
   const { token } = useAuth();
@@ -39,45 +41,131 @@ export function AchievementsScreen({ onBack }: { onBack?: () => void }) {
     }));
   }, [maxBestStreak]);
 
-  return (
-    <View style={styles.screen}>
-      <Text style={typography.h1}>Achievements</Text>
-      <Text style={[typography.bodyMd, { color: colors.onSurfaceVariant, marginTop: spacing.sm, marginBottom: spacing.md }]}>Track milestones earned from your streaks</Text>
+  const unlockedCount = items.filter((i) => i.unlocked).length;
+  const nextGoal = items.find((i) => !i.unlocked);
 
-      <FlatList
-        data={items}
-        keyExtractor={(i) => i.id}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        renderItem={({ item }) => (
-          <AppCard style={[styles.card, !item.unlocked && styles.lockedCard]}>
-            <View style={styles.badgeInner}>
-              <View style={[styles.iconWrap, !item.unlocked && styles.lockedIconWrap]}>
-                <MaterialIcons name={item.icon as any} size={28} color={item.unlocked ? colors.primary : colors.onSurfaceVariant} />
-              </View>
-              <Text style={[typography.labelCaps, { marginTop: spacing.sm, color: item.unlocked ? colors.onSurface : colors.onSurfaceVariant }]}>
-                {item.label}
-              </Text>
-              <Text style={[typography.body, { marginTop: spacing.xs, color: item.unlocked ? colors.onSurface : colors.onSurfaceVariant }]}>Required: {item.requiredStreak} day{item.requiredStreak > 1 ? "s" : ""}</Text>
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <DotGridBackground />
+      <View style={{ flex: 1, paddingHorizontal: spacing.marginEdge, paddingTop: spacing.sm }}>
+        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: spacing.md }}>
+          {onBack ? (
+            <View style={{ marginRight: spacing.sm }}>
+              <MaterialIcons name="arrow-back" size={22} color={colors.onSurface} onPress={onBack} />
+            </View>
+          ) : null}
+          <View style={{ flex: 1 }}>
+            <Text style={typography.h1}>Achievements</Text>
+            <Text style={[typography.bodyMd, { marginTop: 2 }]}>
+              {unlockedCount} of {items.length} unlocked
+            </Text>
+          </View>
+        </View>
+
+        {nextGoal ? (
+          <AppCard style={{ marginBottom: spacing.md, gap: spacing.xs }}>
+            <Text style={typography.labelCaps}>Next milestone</Text>
+            <Text style={{ color: colors.onSurface, fontWeight: "700", fontSize: 16 }}>
+              {nextGoal.label} · {maxBestStreak}/{nextGoal.requiredStreak} days
+            </Text>
+            <View style={styles.progressTrack}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${Math.min(100, (maxBestStreak / nextGoal.requiredStreak) * 100)}%` },
+                ]}
+              />
             </View>
           </AppCard>
-        )}
-        ListEmptyComponent={
-          <View style={{ marginTop: spacing.lg }}>
-            <Text style={typography.body}>No achievements yet.</Text>
-          </View>
-        }
-      />
-    </View>
+        ) : items.length > 0 ? (
+          <AppCard style={{ marginBottom: spacing.md, alignItems: "center" }}>
+            <MaterialIcons name="emoji-events" size={28} color={colors.tertiary} />
+            <Text style={{ color: colors.onSurface, fontWeight: "700", marginTop: spacing.xs }}>
+              All achievements unlocked 🎉
+            </Text>
+          </AppCard>
+        ) : null}
+
+        <FlatList
+          data={items}
+          keyExtractor={(i) => i.id}
+          numColumns={2}
+          columnWrapperStyle={styles.row}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: spacing.lg }}
+          renderItem={({ item }) => <Badge item={item} unlocked={item.unlocked} />}
+          ListEmptyComponent={
+            !loading ? (
+              <View style={{ marginTop: spacing.lg }}>
+                <Text style={typography.bodyMd}>No achievements yet.</Text>
+              </View>
+            ) : null
+          }
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.background },
-  row: { justifyContent: "space-between", marginBottom: spacing.md },
-  card: { flex: 1, marginRight: spacing.sm, padding: spacing.md, alignItems: "center", justifyContent: "center", minHeight: 120 },
-  lockedCard: { opacity: 0.36, backgroundColor: colors.surfaceContainerLow },
-  badgeInner: { alignItems: "center" },
-  iconWrap: { width: 56, height: 56, borderRadius: radius.lg, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(186,195,255,0.08)" },
-  lockedIconWrap: { backgroundColor: "rgba(255,255,255,0.03)" },
-});
+function Badge({ item, unlocked }: { item: AchievementDef; unlocked: boolean }) {
+  return (
+    <AppCard style={[styles.card, unlocked && styles.unlockedCard, !unlocked && styles.lockedCard]}>
+      <View style={[styles.iconWrap, unlocked && styles.unlockedIconWrap]}>
+        <MaterialIcons
+          name={(item.icon as any) ?? "star"}
+          size={28}
+          color={unlocked ? colors.tertiary : colors.onSurfaceVariant}
+        />
+      </View>
+      <Text
+        style={[
+          typography.labelCaps,
+          { marginTop: spacing.sm, textAlign: "center", color: unlocked ? colors.onSurface : colors.onSurfaceVariant },
+        ]}
+      >
+        {item.label}
+      </Text>
+      <Text style={[typography.bodyMd, { marginTop: spacing.xs, fontSize: 12, textAlign: "center" }]}>
+        {item.requiredStreak} day{item.requiredStreak > 1 ? "s" : ""}
+      </Text>
+    </AppCard>
+  );
+}
+
+const styles = {
+  row: { justifyContent: "space-between" as const, marginBottom: spacing.md, gap: spacing.sm },
+  card: {
+    flex: 1,
+    padding: spacing.md,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+    minHeight: 130,
+  },
+  unlockedCard: {
+    borderColor: "rgba(250,189,0,0.35)",
+    shadowColor: colors.tertiary,
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+  },
+  lockedCard: { opacity: 0.45 },
+  iconWrap: {
+    width: 56,
+    height: 56,
+    borderRadius: radius.lg,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+    backgroundColor: "rgba(255,255,255,0.05)",
+  },
+  unlockedIconWrap: { backgroundColor: "rgba(250,189,0,0.14)" },
+  progressTrack: {
+    height: 8,
+    borderRadius: radius.full,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    overflow: "hidden" as const,
+  },
+  progressFill: {
+    height: "100%" as const,
+    borderRadius: radius.full,
+    backgroundColor: colors.primary,
+  },
+};
