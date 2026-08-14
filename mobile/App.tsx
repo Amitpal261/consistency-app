@@ -1,34 +1,29 @@
+﻿import "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator, type NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
 
-// Auth / Onboarding
 import { SplashScreen } from "./src/screens/SplashScreen";
 import { OnboardingScreen } from "./src/screens/OnboardingScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { ForgotPasswordScreen } from "./src/screens/ForgotPasswordScreen";
 
-// Core app screens
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CreateHabitScreen } from "./src/screens/CreateHabitScreen";
 import { CheckInScreen } from "./src/screens/CheckInScreen";
 import { HabitDetailScreen } from "./src/screens/HabitDetailScreen";
-
-// Buddy
 import { BuddyScreen } from "./src/screens/BuddyScreen";
 import { InviteBuddyScreen } from "./src/screens/InviteBuddyScreen";
-
-// Achievements
 import { AchievementsScreen } from "./src/screens/AchievementsScreen";
-
-// Settings / Account
 import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { AccountPrivacyScreen } from "./src/screens/AccountPrivacyScreen";
-
-// New feature screens
 import { FocusTimerScreen } from "./src/screens/FocusTimerScreen";
 import { MissedDayRecoveryScreen } from "./src/screens/MissedDayRecoveryScreen";
 import { SummaryDigestScreen } from "./src/screens/SummaryDigestScreen";
@@ -45,7 +40,48 @@ import { getPendingAlarmHabitId } from "./src/lib/nativeAlarm";
 import { getHabitsWithStreaks, type Habit } from "./src/lib/api";
 import { setupGeofencing } from "./src/lib/geofence";
 
-// ─── DEV MENU (only visible in __DEV__ mode) ──────────────────────────────────
+const ONBOARDING_STORAGE_KEY = "hasSeenOnboarding";
+
+type AuthStackParamList = {
+  onboarding: undefined;
+  login: undefined;
+  forgotPassword: undefined;
+};
+
+type HabitsStackParamList = {
+  home: undefined;
+  createHabit: undefined;
+  habitDetail: { habit: Habit };
+  checkin: { habit: Habit };
+  missedDayRecovery: { habit?: Habit };
+  focusTimer: { habit?: Habit };
+  geofenceArrival: { habit?: Habit };
+  summaryDigest: undefined;
+  productivityFlow: undefined;
+};
+
+type BuddyStackParamList = {
+  buddy: undefined;
+  inviteBuddy: undefined;
+};
+
+type SettingsStackParamList = {
+  settings: undefined;
+  accountPrivacy: undefined;
+};
+
+type AppTabParamList = {
+  habits: undefined;
+  achievements: undefined;
+  buddy: undefined;
+  settings: undefined;
+};
+
+const AuthStack = createNativeStackNavigator<AuthStackParamList>();
+const HabitsStack = createNativeStackNavigator<HabitsStackParamList>();
+const BuddyStack = createNativeStackNavigator<BuddyStackParamList>();
+const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
+const AppTabs = createBottomTabNavigator<AppTabParamList>();
 
 type DevScreen = {
   label: string;
@@ -56,13 +92,10 @@ type DevScreen = {
 function DevMenu({ screens }: { screens: DevScreen[] }) {
   const [visible, setVisible] = useState(false);
   if (!__DEV__) return null;
+
   return (
     <>
-      {/* Floating bug icon */}
-      <Pressable
-        onPress={() => setVisible(true)}
-        style={devStyles.fab}
-      >
+      <Pressable onPress={() => setVisible(true)} style={devStyles.fab}>
         <Text style={{ fontSize: 20 }}>🧪</Text>
       </Pressable>
 
@@ -76,7 +109,10 @@ function DevMenu({ screens }: { screens: DevScreen[] }) {
               <Pressable
                 key={s.label}
                 style={devStyles.row}
-                onPress={() => { s.action(); setVisible(false); }}
+                onPress={() => {
+                  s.action();
+                  setVisible(false);
+                }}
               >
                 <Text style={devStyles.rowEmoji}>{s.emoji}</Text>
                 <Text style={devStyles.rowLabel}>{s.label}</Text>
@@ -145,253 +181,47 @@ const devStyles = StyleSheet.create({
   rowArrow: { color: "#555", fontSize: 20 },
 });
 
-// ─── Tab bar button ────────────────────────────────────────────────────────────
-
 function TabBarButton({
   icon,
   label,
   active,
   onPress,
-  color,
 }: {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
   active: boolean;
   onPress: () => void;
-  color?: string;
 }) {
-  const tint = color ?? (active ? colors.primary : colors.textMuted);
+  const tint = active ? colors.primary : colors.textMuted;
   return (
-    <Pressable
-      onPress={onPress}
-      style={{ flex: 1, alignItems: "center", paddingVertical: 12, gap: 2 }}
-    >
+    <Pressable onPress={onPress} style={{ flex: 1, alignItems: "center", paddingVertical: 12, gap: 2 }}>
       <Ionicons name={icon} size={22} color={tint} />
-      <Text style={{ color: tint, fontSize: 12, fontWeight: active ? "700" : "500" }}>
-        {label}
-      </Text>
+      <Text style={{ color: tint, fontSize: 12, fontWeight: active ? "700" : "500" }}>{label}</Text>
     </Pressable>
   );
 }
 
-// ─── Screen union type ─────────────────────────────────────────────────────────
-
-type Screen =
-  // Bottom-tab roots
-  | { name: "habits" }
-  | { name: "achievements" }
-  | { name: "buddy" }
-  | { name: "settings" }
-  // Habits stack
-  | { name: "createHabit" }
-  | { name: "habitDetail"; habit: Habit }
-  | { name: "checkin"; habit: Habit }
-  | { name: "missedDayRecovery"; habit?: Habit }
-  // Focus / location sub-screens
-  | { name: "focusTimer"; habit?: Habit }
-  | { name: "geofenceArrival"; habit?: Habit }
-  // Buddy stack
-  | { name: "inviteBuddy" }
-  // Analytics
-  | { name: "summaryDigest" }
-  | { name: "productivityFlow" }
-  // Settings stack
-  | { name: "accountPrivacy" }
-  // Auth
-  | { name: "login" }
-  | { name: "forgotPassword" };
-
-// ─── Tabs (authenticated shell) ────────────────────────────────────────────────
-
-function Tabs() {
-  const { token } = useAuth();
-  const [screen, setScreen] = useState<Screen>({ name: "habits" });
-  const [refreshKey, setRefreshKey] = useState(0);
-
-  // Handle alarm launch → open CheckIn immediately
-  useEffect(() => {
-    setupNotificationChannels();
-
-    (async () => {
-      if (!token) return;
-      const notifeeHabitId = await getHabitIdFromAlarmLaunch();
-      const nativeHabitId = await getPendingAlarmHabitId();
-      const habitId = notifeeHabitId ?? nativeHabitId;
-      if (!habitId) return;
-
-      const res = await getHabitsWithStreaks(token);
-      const habit = res.habits.find((h) => h._id === habitId);
-      if (habit) setScreen({ name: "checkin", habit });
-    })();
-
-    const unsubscribe = onHabitAlarmForegroundEvent(async (habitId) => {
-      if (!token) return;
-      const res = await getHabitsWithStreaks(token);
-      const habit = res.habits.find((h) => h._id === habitId);
-      if (habit) setScreen({ name: "checkin", habit });
-    });
-    return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Setup geofencing whenever habits change
-  useEffect(() => {
-    if (!token) return;
-    getHabitsWithStreaks(token)
-      .then((res) => setupGeofencing(res.habits))
-      .catch((err) => console.error("Failed to setup geofencing:", err));
-  }, [token, refreshKey]);
-
-  // Determine which tab is "active" for tab-bar highlighting
-  const activeTab: Screen["name"] =
-    screen.name === "checkin" ||
-    screen.name === "createHabit" ||
-    screen.name === "habitDetail" ||
-    screen.name === "missedDayRecovery" ||
-    screen.name === "focusTimer" ||
-    screen.name === "geofenceArrival" ||
-    screen.name === "summaryDigest" ||
-    screen.name === "productivityFlow"
-      ? "habits"
-      : screen.name === "accountPrivacy"
-      ? "settings"
-      : screen.name === "inviteBuddy"
-      ? "buddy"
-      : screen.name;
-
-  function goHome() {
-    setRefreshKey((k) => k + 1);
-    setScreen({ name: "habits" });
-  }
+function HomeRoute() {
+  const navigation = useNavigation<NativeStackNavigationProp<HabitsStackParamList>>();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      {/* ── Screen content ── */}
-      <View style={{ flex: 1 }}>
-        {/* ── Habits stack ── */}
-        {screen.name === "habits" ? (
-          <HomeScreen
-            key={refreshKey}
-            onSelectHabit={(habit) => setScreen({ name: "habitDetail", habit })}
-            onAddHabit={() => setScreen({ name: "createHabit" })}
-            onOpenDigest={() => setScreen({ name: "summaryDigest" })}
-            onOpenFlow={() => setScreen({ name: "productivityFlow" })}
-            onOpenFocusTimer={(habit) => setScreen({ name: "focusTimer", habit })}
-            onOpenGeofence={(habit) => setScreen({ name: "geofenceArrival", habit })}
-          />
-        ) : screen.name === "createHabit" ? (
-          <CreateHabitScreen
-            onCreated={goHome}
-          />
-        ) : screen.name === "habitDetail" ? (
-          <HabitDetailScreen
-            habit={screen.habit}
-            onBack={() => setScreen({ name: "habits" })}
-            onCheckIn={() => setScreen({ name: "checkin", habit: screen.habit })}
-          />
-        ) : screen.name === "checkin" ? (
-          <CheckInScreen
-            habit={screen.habit}
-            onDone={goHome}
-          />
-        ) : screen.name === "missedDayRecovery" ? (
-          <MissedDayRecoveryScreen
-            habitName={screen.habit?.name}
-            previousStreak={screen.habit?.currentStreak ?? 0}
-            onResetStreak={goHome}
-            onUseFreeze={goHome}
-            onCancel={() => setScreen({ name: "habits" })}
-          />
-        ) : screen.name === "focusTimer" ? (
-          <FocusTimerScreen
-            habitName={screen.habit?.name}
-            targetMinutes={screen.habit?.requiredDurationMinutes ?? 60}
-            initialDwellMinutes={screen.habit?.currentDwellMinutes ?? 0}
-            onDone={goHome}
-          />
-        ) : screen.name === "geofenceArrival" ? (
-          <GeofenceArrivalScreen
-            habitName={screen.habit?.name}
-            onCheckIn={goHome}
-            onCancel={() => setScreen({ name: "habits" })}
-          />
-        ) : screen.name === "summaryDigest" ? (
-          <SummaryDigestScreen onBack={() => setScreen({ name: "habits" })} />
-        ) : screen.name === "productivityFlow" ? (
-          <ProductivityFlowScreen
-            onSelectHabit={(habitId) => {
-              // Navigate back to home; the HomeScreen will show the right habit
-              setScreen({ name: "habits" });
-            }}
-            onBack={() => setScreen({ name: "habits" })}
-          />
+    <View style={{ flex: 1 }}>
+      <HomeScreen
+        onSelectHabit={(habit) => navigation.navigate("habitDetail", { habit })}
+        onAddHabit={() => navigation.navigate("createHabit")}
+        onOpenDigest={() => navigation.navigate("summaryDigest")}
+        onOpenFlow={() => navigation.navigate("productivityFlow")}
+        onOpenFocusTimer={(habit) => navigation.navigate("focusTimer", { habit })}
+        onOpenGeofence={(habit) => navigation.navigate("geofenceArrival", { habit })}
+      />
 
-        /* ── Achievements ── */
-        ) : screen.name === "achievements" ? (
-          <AchievementsScreen />
-
-        /* ── Buddy stack ── */
-        ) : screen.name === "buddy" ? (
-          <BuddyScreen
-            onInviteBuddy={() => setScreen({ name: "inviteBuddy" })}
-          />
-        ) : screen.name === "inviteBuddy" ? (
-          <InviteBuddyScreen onBack={() => setScreen({ name: "buddy" })} />
-
-        /* ── Settings stack ── */
-        ) : screen.name === "settings" ? (
-          <SettingsScreen
-            onOpenAccountPrivacy={() => setScreen({ name: "accountPrivacy" })}
-          />
-        ) : screen.name === "accountPrivacy" ? (
-          <AccountPrivacyScreen onBack={() => setScreen({ name: "settings" })} />
-        ) : null}
-      </View>
-
-      {/* ── Bottom Tab Bar ── */}
-      <View
-        style={{
-          flexDirection: "row",
-          borderTopWidth: 1,
-          borderColor: colors.border,
-          backgroundColor: colors.surface,
-        }}
-      >
-        <TabBarButton
-          icon="flame"
-          label="Habits"
-          active={activeTab === "habits"}
-          onPress={() => setScreen({ name: "habits" })}
-        />
-        <TabBarButton
-          icon="trophy"
-          label="Progress"
-          active={activeTab === "achievements"}
-          onPress={() => setScreen({ name: "achievements" })}
-        />
-        <TabBarButton
-          icon="people"
-          label="Buddy"
-          active={activeTab === "buddy"}
-          onPress={() => setScreen({ name: "buddy" })}
-        />
-        <TabBarButton
-          icon="settings-outline"
-          label="Settings"
-          active={activeTab === "settings"}
-          onPress={() => setScreen({ name: "settings" })}
-        />
-      </View>
-
-      {/* ── DEV MENU: Floating test launcher ── */}
       <DevMenu
         screens={[
           {
             label: "CheckInScreen (Photo Verify)",
             emoji: "📸",
             action: () =>
-              setScreen({
-                name: "checkin",
+              navigation.navigate("checkin", {
                 habit: {
                   _id: "dev-habit-1",
                   name: "Morning Gym Session",
@@ -400,132 +230,256 @@ function Tabs() {
                   currentStreak: 7,
                   bestStreak: 14,
                   lastCheckInDateKey: "",
-                  timeWindow: { hour: 6, minute: 0 },
+                  timeWindow: { hour: 6, minute: 0, windowMinutes: 45 },
                   requiredDurationMinutes: 60,
-                  currentDwellMinutes: 0,
-                } as any,
+                  daysOfWeek: [1, 2, 3, 4, 5],
+                } as Habit,
               }),
           },
           {
-            label: "FocusTimerScreen (Dwell Session)",
+            label: "FocusTimerScreen",
             emoji: "⏱️",
             action: () =>
-              setScreen({
-                name: "focusTimer",
+              navigation.navigate("focusTimer", {
                 habit: {
                   _id: "dev-habit-2",
                   name: "Study at Library",
                   taskType: "location_duration",
                   requiredDurationMinutes: 120,
-                  currentDwellMinutes: 45,
-                } as any,
+                  currentStreak: 4,
+                  bestStreak: 9,
+                  daysOfWeek: [1, 2, 3, 4, 5],
+                } as Habit,
               }),
           },
           {
             label: "MissedDayRecoveryScreen",
             emoji: "🔥",
             action: () =>
-              setScreen({
-                name: "missedDayRecovery",
+              navigation.navigate("missedDayRecovery", {
                 habit: {
                   _id: "dev-habit-3",
                   name: "Evening Run",
                   currentStreak: 14,
-                } as any,
+                  bestStreak: 21,
+                  taskType: "time",
+                  verificationMethod: "gps",
+                  daysOfWeek: [1, 2, 3, 4, 5, 6, 0],
+                } as Habit,
               }),
           },
           {
             label: "GeofenceArrivalScreen",
             emoji: "📍",
             action: () =>
-              setScreen({
-                name: "geofenceArrival",
+              navigation.navigate("geofenceArrival", {
                 habit: {
                   _id: "dev-habit-4",
                   name: "Gym Arrival",
                   taskType: "location",
-                } as any,
+                  verificationMethod: "gps",
+                  currentStreak: 5,
+                  bestStreak: 12,
+                  daysOfWeek: [1, 3, 5],
+                } as Habit,
               }),
           },
           {
             label: "SummaryDigestScreen",
             emoji: "📊",
-            action: () => setScreen({ name: "summaryDigest" }),
+            action: () => navigation.navigate("summaryDigest"),
           },
           {
             label: "ProductivityFlowScreen",
             emoji: "⚡",
-            action: () => setScreen({ name: "productivityFlow" }),
-          },
-          {
-            label: "InviteBuddyScreen",
-            emoji: "🔗",
-            action: () => setScreen({ name: "inviteBuddy" }),
+            action: () => navigation.navigate("productivityFlow"),
           },
           {
             label: "CreateHabitScreen",
             emoji: "✨",
-            action: () => setScreen({ name: "createHabit" }),
-          },
-          {
-            label: "AchievementsScreen",
-            emoji: "🏆",
-            action: () => setScreen({ name: "achievements" }),
+            action: () => navigation.navigate("createHabit"),
           },
         ]}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
-// ─── Root (auth gate) ──────────────────────────────────────────────────────────
+function HabitsNavigator() {
+  return (
+    <HabitsStack.Navigator screenOptions={{ headerShown: false }}>
+      <HabitsStack.Screen name="home" component={HomeRoute} />
+      <HabitsStack.Screen name="createHabit">
+        {({ navigation }) => <CreateHabitScreen onCreated={() => navigation.navigate("home")} />}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="habitDetail">
+        {({ route, navigation }) => (
+          <HabitDetailScreen
+            habit={route.params.habit}
+            onBack={() => navigation.goBack()}
+            onCheckIn={() => navigation.navigate("checkin", { habit: route.params.habit })}
+          />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="checkin">
+        {({ route, navigation }) => (
+          <CheckInScreen habit={route.params.habit} onDone={() => navigation.navigate("home")} />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="missedDayRecovery">
+        {({ route, navigation }) => (
+          <MissedDayRecoveryScreen
+            habitName={route.params.habit?.name}
+            previousStreak={route.params.habit?.currentStreak ?? 0}
+            onResetStreak={() => navigation.navigate("home")}
+            onUseFreeze={() => navigation.navigate("home")}
+            onCancel={() => navigation.navigate("home")}
+          />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="focusTimer">
+        {({ route, navigation }) => (
+          <FocusTimerScreen
+            habitName={route.params.habit?.name}
+            targetMinutes={route.params.habit?.requiredDurationMinutes ?? 60}
+            initialDwellMinutes={route.params.habit?.currentDwellMinutes ?? 0}
+            onDone={() => navigation.navigate("home")}
+          />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="geofenceArrival">
+        {({ route, navigation }) => (
+          <GeofenceArrivalScreen
+            habitName={route.params.habit?.name}
+            onCheckIn={() => navigation.navigate("home")}
+            onCancel={() => navigation.navigate("home")}
+          />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="summaryDigest">
+        {({ navigation }) => <SummaryDigestScreen onBack={() => navigation.goBack()} />}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="productivityFlow">
+        {({ navigation }) => (
+          <ProductivityFlowScreen
+            onSelectHabit={() => navigation.navigate("home")}
+            onBack={() => navigation.goBack()}
+          />
+        )}
+      </HabitsStack.Screen>
+    </HabitsStack.Navigator>
+  );
+}
 
-const ONBOARDING_STORAGE_KEY = "hasSeenOnboarding";
+function BuddyNavigator() {
+  return (
+    <BuddyStack.Navigator screenOptions={{ headerShown: false }}>
+      <BuddyStack.Screen name="buddy">
+        {({ navigation }) => <BuddyScreen onInviteBuddy={() => navigation.navigate("inviteBuddy")} />}
+      </BuddyStack.Screen>
+      <BuddyStack.Screen name="inviteBuddy">
+        {({ navigation }) => <InviteBuddyScreen onBack={() => navigation.goBack()} />}
+      </BuddyStack.Screen>
+    </BuddyStack.Navigator>
+  );
+}
 
-function Root() {
-  const { token, loading } = useAuth();
-  const [screen, setScreen] = useState<Screen>({ name: "login" });
-  const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(null);
+function SettingsNavigator() {
+  return (
+    <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
+      <SettingsStack.Screen name="settings">
+        {({ navigation }) => <SettingsScreen onOpenAccountPrivacy={() => navigation.navigate("accountPrivacy")} />}
+      </SettingsStack.Screen>
+      <SettingsStack.Screen name="accountPrivacy">
+        {({ navigation }) => <AccountPrivacyScreen onBack={() => navigation.goBack()} />}
+      </SettingsStack.Screen>
+    </SettingsStack.Navigator>
+  );
+}
+
+function AppTabsNavigator() {
+  return (
+    <AppTabs.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textMuted,
+        tabBarIcon: ({ color, size }) => {
+          const iconMap: Record<string, keyof typeof Ionicons.glyphMap> = {
+            habits: "flame",
+            achievements: "trophy",
+            buddy: "people",
+            settings: "settings-outline",
+          };
+          return <Ionicons name={iconMap[route.name]} size={size} color={color} />;
+        },
+      })}
+    >
+      <AppTabs.Screen name="habits" component={HabitsNavigator} options={{ title: "Habits" }} />
+      <AppTabs.Screen name="achievements" component={AchievementsScreen} options={{ title: "Progress" }} />
+      <AppTabs.Screen name="buddy" component={BuddyNavigator} options={{ title: "Buddy" }} />
+      <AppTabs.Screen name="settings" component={SettingsNavigator} options={{ title: "Settings" }} />
+    </AppTabs.Navigator>
+  );
+}
+
+function AuthNavigator() {
+  const [didLoadOnboarding, setDidLoadOnboarding] = useState<boolean | null>(null);
 
   useEffect(() => {
     AsyncStorage.getItem(ONBOARDING_STORAGE_KEY)
-      .then((value) => setHasSeenOnboarding(value === "true"))
-      .catch(() => setHasSeenOnboarding(false));
+      .then((value) => setDidLoadOnboarding(value === "true"))
+      .catch(() => setDidLoadOnboarding(false));
   }, []);
 
-  // Loading / splash
-  if (loading || hasSeenOnboarding === null) return <SplashScreen />;
-
-  // Authenticated → go to main app
-  if (token) return <Tabs />;
-
-  // First-time launch → onboarding
-  if (!hasSeenOnboarding) {
-    return (
-      <OnboardingScreen
-        onContinue={async () => {
-          await AsyncStorage.setItem(ONBOARDING_STORAGE_KEY, "true");
-          setHasSeenOnboarding(true);
-        }}
-      />
-    );
+  if (didLoadOnboarding === null) {
+    return <SplashScreen />;
   }
 
-  // Auth screens
-  return screen.name === "forgotPassword" ? (
-    <ForgotPasswordScreen onBackToLogin={() => setScreen({ name: "login" })} />
-  ) : (
-    <LoginScreen onForgotPassword={() => setScreen({ name: "forgotPassword" })} />
+  return (
+    <AuthStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={didLoadOnboarding ? "login" : "onboarding"}>
+      <AuthStack.Screen name="onboarding">
+        {({ navigation }) => (
+          <OnboardingScreen
+            onContinue={async () => {
+              await AsyncStorage.setItem(ONBOARDING_STORAGE_KEY, "true");
+              setDidLoadOnboarding(true);
+              navigation.navigate("login");
+            }}
+          />
+        )}
+      </AuthStack.Screen>
+      <AuthStack.Screen name="login">
+        {({ navigation }) => <LoginScreen onForgotPassword={() => navigation.navigate("forgotPassword")} />}
+      </AuthStack.Screen>
+      <AuthStack.Screen name="forgotPassword">
+        {({ navigation }) => <ForgotPasswordScreen onBackToLogin={() => navigation.navigate("login")} />}
+      </AuthStack.Screen>
+    </AuthStack.Navigator>
   );
 }
 
-// ─── App entry ────────────────────────────────────────────────────────────────
+function RootNavigator() {
+  const { token, loading } = useAuth();
+
+  if (loading) {
+    return <SplashScreen />;
+  }
+
+  if (token) {
+    return <AppTabsNavigator />;
+  }
+
+  return <AuthNavigator />;
+}
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <AuthProvider>
-        <Root />
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
       </AuthProvider>
     </SafeAreaProvider>
   );

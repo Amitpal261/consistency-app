@@ -4918,3 +4918,783 @@
 {"_e":"metro:client_log","_t":1786681653806,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
 {"_e":"metro:client_log","_t":1786681666320,"level":"warn","data":["\"offline_bolt\" is not a valid icon name for family \"material\""]}
 {"_e":"metro:client_log","_t":1786681678631,"level":"error","data":["[Error: Uncaught (in promise, id: 2): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"root:init","_t":1786686392271,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786686392295,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786686392334,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786686402191,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786686419171,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786686425888,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786686438764,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786686583944,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786686583946,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786686583963,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786686601804,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1786686601904,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1786686602318,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1786686602425,"id":"1","progress":0.09,"total":8,"current":3}
+{"_e":"metro:bundling:progress","_t":1786686603958,"id":"1","progress":0.16000000000000003,"total":8,"current":4}
+{"_e":"metro:bundling:progress","_t":1786686604078,"id":"1","progress":0.16000000000000003,"total":9,"current":4}
+{"_e":"metro:bundling:progress","_t":1786686604179,"id":"1","progress":0.16000000000000003,"total":107,"current":4}
+{"_e":"metro:bundling:progress","_t":1786686604669,"id":"1","progress":0.16000000000000003,"total":107,"current":5}
+{"_e":"metro:bundling:progress","_t":1786686604774,"id":"1","progress":0.16000000000000003,"total":111,"current":5}
+{"_e":"metro:bundling:progress","_t":1786686604829,"id":"1","progress":0.16000000000000003,"total":111,"current":6}
+{"_e":"metro:bundling:progress","_t":1786686604929,"id":"1","progress":0.16000000000000003,"total":135,"current":7}
+{"_e":"metro:bundling:progress","_t":1786686605071,"id":"1","progress":0.16000000000000003,"total":135,"current":8}
+{"_e":"metro:bundling:progress","_t":1786686605173,"id":"1","progress":0.16000000000000003,"total":143,"current":8}
+{"_e":"metro:bundling:progress","_t":1786686606123,"id":"1","progress":0.16000000000000003,"total":143,"current":9}
+{"_e":"metro:bundling:progress","_t":1786686606230,"id":"1","progress":0.16000000000000003,"total":143,"current":10}
+{"_e":"metro:bundling:progress","_t":1786686606331,"id":"1","progress":0.16000000000000003,"total":145,"current":12}
+{"_e":"metro:bundling:progress","_t":1786686606448,"id":"1","progress":0.16000000000000003,"total":148,"current":16}
+{"_e":"metro:bundling:progress","_t":1786686606548,"id":"1","progress":0.16000000000000003,"total":157,"current":20}
+{"_e":"metro:bundling:progress","_t":1786686606651,"id":"1","progress":0.16000000000000003,"total":159,"current":22}
+{"_e":"metro:bundling:progress","_t":1786686606773,"id":"1","progress":0.16000000000000003,"total":161,"current":24}
+{"_e":"metro:bundling:progress","_t":1786686606898,"id":"1","progress":0.16000000000000003,"total":167,"current":28}
+{"_e":"metro:bundling:progress","_t":1786686607016,"id":"1","progress":0.16000000000000003,"total":167,"current":29}
+{"_e":"metro:bundling:progress","_t":1786686607123,"id":"1","progress":0.16000000000000003,"total":168,"current":29}
+{"_e":"metro:bundling:progress","_t":1786686607202,"id":"1","progress":0.16000000000000003,"total":168,"current":30}
+{"_e":"metro:bundling:progress","_t":1786686607310,"id":"1","progress":0.16000000000000003,"total":171,"current":33}
+{"_e":"metro:bundling:progress","_t":1786686607432,"id":"1","progress":0.16000000000000003,"total":182,"current":35}
+{"_e":"metro:bundling:progress","_t":1786686607534,"id":"1","progress":0.16000000000000003,"total":182,"current":38}
+{"_e":"metro:bundling:progress","_t":1786686607634,"id":"1","progress":0.16000000000000003,"total":182,"current":39}
+{"_e":"metro:bundling:progress","_t":1786686607789,"id":"1","progress":0.16000000000000003,"total":186,"current":43}
+{"_e":"metro:bundling:progress","_t":1786686607926,"id":"1","progress":0.16000000000000003,"total":189,"current":45}
+{"_e":"metro:bundling:progress","_t":1786686608027,"id":"1","progress":0.16000000000000003,"total":196,"current":50}
+{"_e":"metro:bundling:progress","_t":1786686608134,"id":"1","progress":0.16000000000000003,"total":202,"current":55}
+{"_e":"metro:bundling:progress","_t":1786686608237,"id":"1","progress":0.16000000000000003,"total":204,"current":57}
+{"_e":"metro:bundling:progress","_t":1786686608338,"id":"1","progress":0.16000000000000003,"total":210,"current":62}
+{"_e":"metro:bundling:progress","_t":1786686608451,"id":"1","progress":0.16000000000000003,"total":213,"current":67}
+{"_e":"metro:bundling:progress","_t":1786686608567,"id":"1","progress":0.16000000000000003,"total":214,"current":68}
+{"_e":"metro:bundling:progress","_t":1786686608668,"id":"1","progress":0.16000000000000003,"total":216,"current":70}
+{"_e":"metro:bundling:progress","_t":1786686608770,"id":"1","progress":0.16000000000000003,"total":220,"current":71}
+{"_e":"metro:bundling:progress","_t":1786686608860,"id":"1","progress":0.16000000000000003,"total":220,"current":72}
+{"_e":"metro:bundling:progress","_t":1786686608962,"id":"1","progress":0.16000000000000003,"total":231,"current":79}
+{"_e":"metro:bundling:progress","_t":1786686609072,"id":"1","progress":0.16000000000000003,"total":236,"current":85}
+{"_e":"metro:bundling:progress","_t":1786686609172,"id":"1","progress":0.16000000000000003,"total":237,"current":89}
+{"_e":"metro:bundling:progress","_t":1786686609277,"id":"1","progress":0.16264458331216447,"total":243,"current":98}
+{"_e":"metro:bundling:progress","_t":1786686609387,"id":"1","progress":0.17275483073379735,"total":243,"current":101}
+{"_e":"metro:bundling:progress","_t":1786686609503,"id":"1","progress":0.17619265355890867,"total":243,"current":102}
+{"_e":"metro:bundling:progress","_t":1786686609633,"id":"1","progress":0.17966434655963692,"total":243,"current":103}
+{"_e":"metro:bundling:progress","_t":1786686609794,"id":"1","progress":0.17966434655963692,"total":247,"current":103}
+{"_e":"metro:bundling:progress","_t":1786686609898,"id":"1","progress":0.17966434655963692,"total":247,"current":104}
+{"_e":"metro:bundling:progress","_t":1786686610010,"id":"1","progress":0.18071104263305415,"total":247,"current":105}
+{"_e":"metro:bundling:progress","_t":1786686610170,"id":"1","progress":0.18071104263305415,"total":250,"current":106}
+{"_e":"metro:bundling:progress","_t":1786686610269,"id":"1","progress":0.18172727417025128,"total":251,"current":107}
+{"_e":"metro:bundling:progress","_t":1786686610450,"id":"1","progress":0.1929104190695886,"total":255,"current":112}
+{"_e":"metro:bundling:progress","_t":1786686610565,"id":"1","progress":0.1960258726181458,"total":262,"current":116}
+{"_e":"metro:bundling:progress","_t":1786686610666,"id":"1","progress":0.2028436571295379,"total":262,"current":118}
+{"_e":"metro:bundling:progress","_t":1786686610776,"id":"1","progress":0.2028436571295379,"total":291,"current":123}
+{"_e":"metro:bundling:progress","_t":1786686610877,"id":"1","progress":0.2028436571295379,"total":296,"current":126}
+{"_e":"metro:bundling:progress","_t":1786686611011,"id":"1","progress":0.2028436571295379,"total":297,"current":127}
+{"_e":"metro:bundling:progress","_t":1786686611119,"id":"1","progress":0.2028436571295379,"total":317,"current":131}
+{"_e":"metro:bundling:progress","_t":1786686611241,"id":"1","progress":0.2028436571295379,"total":318,"current":135}
+{"_e":"metro:bundling:progress","_t":1786686611347,"id":"1","progress":0.2028436571295379,"total":319,"current":135}
+{"_e":"metro:bundling:progress","_t":1786686611460,"id":"1","progress":0.2028436571295379,"total":320,"current":136}
+{"_e":"metro:bundling:progress","_t":1786686611612,"id":"1","progress":0.2028436571295379,"total":320,"current":138}
+{"_e":"metro:bundling:progress","_t":1786686611725,"id":"1","progress":0.2028436571295379,"total":330,"current":142}
+{"_e":"metro:bundling:progress","_t":1786686611826,"id":"1","progress":0.2028436571295379,"total":332,"current":148}
+{"_e":"metro:bundling:progress","_t":1786686611931,"id":"1","progress":0.20302359383450516,"total":344,"current":155}
+{"_e":"metro:bundling:progress","_t":1786686612087,"id":"1","progress":0.2101788983670085,"total":349,"current":160}
+{"_e":"metro:bundling:progress","_t":1786686612186,"id":"1","progress":0.21725079000287273,"total":354,"current":165}
+{"_e":"metro:bundling:progress","_t":1786686612289,"id":"1","progress":0.225625,"total":360,"current":171}
+{"_e":"metro:bundling:progress","_t":1786686612410,"id":"1","progress":0.225625,"total":368,"current":174}
+{"_e":"metro:bundling:progress","_t":1786686612510,"id":"1","progress":0.22749539148508016,"total":369,"current":176}
+{"_e":"metro:bundling:progress","_t":1786686612613,"id":"1","progress":0.23547211580619423,"total":373,"current":181}
+{"_e":"metro:bundling:progress","_t":1786686612716,"id":"1","progress":0.25,"total":382,"current":191}
+{"_e":"metro:bundling:progress","_t":1786686612818,"id":"1","progress":0.25,"total":400,"current":194}
+{"_e":"metro:bundling:progress","_t":1786686612923,"id":"1","progress":0.25,"total":415,"current":199}
+{"_e":"metro:bundling:progress","_t":1786686613027,"id":"1","progress":0.25,"total":421,"current":210}
+{"_e":"metro:bundling:progress","_t":1786686613128,"id":"1","progress":0.2629848783694937,"total":429,"current":220}
+{"_e":"metro:bundling:progress","_t":1786686613228,"id":"1","progress":0.2660143251359467,"total":444,"current":229}
+{"_e":"metro:bundling:progress","_t":1786686613334,"id":"1","progress":0.2773777777777777,"total":450,"current":237}
+{"_e":"metro:bundling:progress","_t":1786686613465,"id":"1","progress":0.2805506581330757,"total":455,"current":241}
+{"_e":"metro:bundling:progress","_t":1786686613580,"id":"1","progress":0.28905075731298413,"total":465,"current":250}
+{"_e":"metro:bundling:progress","_t":1786686613696,"id":"1","progress":0.2968998566080168,"total":479,"current":261}
+{"_e":"metro:bundling:progress","_t":1786686613805,"id":"1","progress":0.31424427307110125,"total":487,"current":273}
+{"_e":"metro:bundling:progress","_t":1786686613912,"id":"1","progress":0.343061224489796,"total":490,"current":287}
+{"_e":"metro:bundling:progress","_t":1786686614012,"id":"1","progress":0.3604820889985646,"total":498,"current":299}
+{"_e":"metro:bundling:progress","_t":1786686614116,"id":"1","progress":0.3604820889985646,"total":518,"current":308}
+{"_e":"metro:bundling:progress","_t":1786686614221,"id":"1","progress":0.3604820889985646,"total":536,"current":316}
+{"_e":"metro:bundling:progress","_t":1786686614342,"id":"1","progress":0.3604820889985646,"total":541,"current":322}
+{"_e":"metro:bundling:progress","_t":1786686614465,"id":"1","progress":0.363959640251463,"total":547,"current":330}
+{"_e":"metro:bundling:progress","_t":1786686614582,"id":"1","progress":0.36925582076828817,"total":548,"current":333}
+{"_e":"metro:bundling:progress","_t":1786686614741,"id":"1","progress":0.37147690340455003,"total":548,"current":334}
+{"_e":"metro:bundling:progress","_t":1786686614866,"id":"1","progress":0.3781801108210347,"total":548,"current":337}
+{"_e":"metro:bundling:progress","_t":1786686614965,"id":"1","progress":0.3889223140495868,"total":550,"current":343}
+{"_e":"metro:bundling:progress","_t":1786686615079,"id":"1","progress":0.3889223140495868,"total":569,"current":352}
+{"_e":"metro:bundling:progress","_t":1786686615182,"id":"1","progress":0.3889223140495868,"total":569,"current":353}
+{"_e":"metro:bundling:progress","_t":1786686615427,"id":"1","progress":0.3889223140495868,"total":569,"current":354}
+{"_e":"metro:bundling:progress","_t":1786686615539,"id":"1","progress":0.3900769467528471,"total":570,"current":356}
+{"_e":"metro:bundling:progress","_t":1786686615772,"id":"1","progress":0.39227146814404423,"total":570,"current":357}
+{"_e":"metro:bundling:progress","_t":1786686615872,"id":"1","progress":0.4033364112034472,"total":570,"current":362}
+{"_e":"metro:bundling:progress","_t":1786686615979,"id":"1","progress":0.40556786703601105,"total":570,"current":363}
+{"_e":"metro:bundling:progress","_t":1786686616082,"id":"1","progress":0.4063783389205652,"total":571,"current":364}
+{"_e":"metro:bundling:progress","_t":1786686616185,"id":"1","progress":0.4148612316743827,"total":576,"current":371}
+{"_e":"metro:bundling:progress","_t":1786686616315,"id":"1","progress":0.4171006944444445,"total":576,"current":372}
+{"_e":"metro:bundling:progress","_t":1786686616475,"id":"1","progress":0.4306640625,"total":576,"current":378}
+{"_e":"metro:bundling:progress","_t":1786686616589,"id":"1","progress":0.43752712673611116,"total":576,"current":381}
+{"_e":"metro:bundling:progress","_t":1786686616750,"id":"1","progress":0.43752712673611116,"total":586,"current":387}
+{"_e":"metro:bundling:progress","_t":1786686616786,"id":"1","progress":0.43839765169075934,"total":586,"current":388}
+{"_e":"metro:bundling:progress","_t":1786686616892,"id":"1","progress":0.45740911109240817,"total":587,"current":397}
+{"_e":"metro:bundling:progress","_t":1786686616994,"id":"1","progress":0.48055443837977585,"total":590,"current":409}
+{"_e":"metro:bundling:progress","_t":1786686617096,"id":"1","progress":0.5006454346444461,"total":595,"current":421}
+{"_e":"metro:bundling:progress","_t":1786686617207,"id":"1","progress":0.5166763104199601,"total":601,"current":432}
+{"_e":"metro:bundling:progress","_t":1786686617307,"id":"1","progress":0.540873364137973,"total":601,"current":442}
+{"_e":"metro:bundling:progress","_t":1786686617410,"id":"1","progress":0.5612630569987691,"total":606,"current":454}
+{"_e":"metro:bundling:progress","_t":1786686617510,"id":"1","progress":0.5849230652700831,"total":608,"current":465}
+{"_e":"metro:bundling:progress","_t":1786686617610,"id":"1","progress":0.5849230652700831,"total":629,"current":475}
+{"_e":"metro:bundling:progress","_t":1786686617714,"id":"1","progress":0.6022151678293146,"total":634,"current":492}
+{"_e":"metro:bundling:progress","_t":1786686617935,"id":"1","progress":0.6152441406250001,"total":640,"current":502}
+{"_e":"metro:bundling:progress","_t":1786686618042,"id":"1","progress":0.6300390625,"total":640,"current":508}
+{"_e":"metro:bundling:progress","_t":1786686618142,"id":"1","progress":0.6780493164062501,"total":640,"current":527}
+{"_e":"metro:bundling:progress","_t":1786686618262,"id":"1","progress":0.6854299621416982,"total":645,"current":534}
+{"_e":"metro:bundling:progress","_t":1786686618377,"id":"1","progress":0.6854299621416982,"total":653,"current":540}
+{"_e":"metro:bundling:progress","_t":1786686618472,"id":"1","progress":0.6863856063075592,"total":653,"current":541}
+{"_e":"metro:bundling:progress","_t":1786686618572,"id":"1","progress":0.6940229943285567,"total":659,"current":549}
+{"_e":"metro:bundling:progress","_t":1786686618684,"id":"1","progress":0.7028618760325298,"total":662,"current":555}
+{"_e":"metro:bundling:progress","_t":1786686618787,"id":"1","progress":0.709141274238227,"total":665,"current":560}
+{"_e":"metro:bundling:progress","_t":1786686618896,"id":"1","progress":0.7175385320832837,"total":667,"current":565}
+{"_e":"metro:bundling:progress","_t":1786686618999,"id":"1","progress":0.7230090716770053,"total":668,"current":568}
+{"_e":"metro:bundling:progress","_t":1786686619101,"id":"1","progress":0.7278064436598015,"total":674,"current":575}
+{"_e":"metro:bundling:progress","_t":1786686619239,"id":"1","progress":0.7332433470507546,"total":675,"current":578}
+{"_e":"metro:bundling:progress","_t":1786686619372,"id":"1","progress":0.740874622770919,"total":675,"current":581}
+{"_e":"metro:bundling:progress","_t":1786686619473,"id":"1","progress":0.7495779709539597,"total":678,"current":587}
+{"_e":"metro:bundling:progress","_t":1786686619577,"id":"1","progress":0.7550304636680903,"total":679,"current":590}
+{"_e":"metro:bundling:progress","_t":1786686619678,"id":"1","progress":0.76114111505749,"total":682,"current":595}
+{"_e":"metro:bundling:progress","_t":1786686619778,"id":"1","progress":0.76114111505749,"total":687,"current":599}
+{"_e":"metro:bundling:progress","_t":1786686619879,"id":"1","progress":0.76114111505749,"total":692,"current":602}
+{"_e":"metro:bundling:progress","_t":1786686619978,"id":"1","progress":0.76114111505749,"total":700,"current":607}
+{"_e":"metro:bundling:progress","_t":1786686620172,"id":"1","progress":0.76114111505749,"total":702,"current":609}
+{"_e":"metro:bundling:progress","_t":1786686620273,"id":"1","progress":0.7659353151249938,"total":705,"current":617}
+{"_e":"metro:bundling:progress","_t":1786686620375,"id":"1","progress":0.7702469333618189,"total":711,"current":624}
+{"_e":"metro:bundling:progress","_t":1786686620488,"id":"1","progress":0.7854141680343392,"total":712,"current":631}
+{"_e":"metro:bundling:progress","_t":1786686620593,"id":"1","progress":0.7962130177514793,"total":715,"current":638}
+{"_e":"metro:bundling:progress","_t":1786686620697,"id":"1","progress":0.809749671638673,"total":719,"current":647}
+{"_e":"metro:bundling:progress","_t":1786686620802,"id":"1","progress":0.8227823507572508,"total":721,"current":654}
+{"_e":"metro:bundling:progress","_t":1786686620932,"id":"1","progress":0.8271266236515435,"total":729,"current":663}
+{"_e":"metro:bundling:progress","_t":1786686621044,"id":"1","progress":0.8321243562314538,"total":729,"current":665}
+{"_e":"metro:bundling:progress","_t":1786686621145,"id":"1","progress":0.8321243562314538,"total":738,"current":673}
+{"_e":"metro:bundling:progress","_t":1786686621252,"id":"1","progress":0.8417255516634592,"total":739,"current":678}
+{"_e":"metro:bundling:progress","_t":1786686621372,"id":"1","progress":0.8470954194372051,"total":741,"current":682}
+{"_e":"metro:bundling:progress","_t":1786686621474,"id":"1","progress":0.8549404128981304,"total":743,"current":687}
+{"_e":"metro:bundling:progress","_t":1786686621580,"id":"1","progress":0.8553146254673213,"total":745,"current":689}
+{"_e":"metro:bundling:progress","_t":1786686621757,"id":"1","progress":0.8608267322485631,"total":748,"current":694}
+{"_e":"metro:bundling:progress","_t":1786686621857,"id":"1","progress":0.8608267322485631,"total":784,"current":698}
+{"_e":"metro:bundling:progress","_t":1786686621967,"id":"1","progress":0.8608267322485631,"total":785,"current":699}
+{"_e":"metro:bundling:progress","_t":1786686622071,"id":"1","progress":0.8608267322485631,"total":849,"current":705}
+{"_e":"metro:bundling:progress","_t":1786686622193,"id":"1","progress":0.8608267322485631,"total":853,"current":706}
+{"_e":"metro:bundling:progress","_t":1786686622301,"id":"1","progress":0.8608267322485631,"total":857,"current":713}
+{"_e":"metro:bundling:progress","_t":1786686622411,"id":"1","progress":0.8608267322485631,"total":865,"current":723}
+{"_e":"metro:bundling:progress","_t":1786686622510,"id":"1","progress":0.8608267322485631,"total":866,"current":729}
+{"_e":"metro:bundling:progress","_t":1786686622621,"id":"1","progress":0.8608267322485631,"total":866,"current":730}
+{"_e":"metro:bundling:progress","_t":1786686622754,"id":"1","progress":0.8608267322485631,"total":870,"current":738}
+{"_e":"metro:bundling:progress","_t":1786686622856,"id":"1","progress":0.8608267322485631,"total":873,"current":743}
+{"_e":"metro:bundling:progress","_t":1786686622971,"id":"1","progress":0.8608267322485631,"total":873,"current":746}
+{"_e":"metro:bundling:progress","_t":1786686623090,"id":"1","progress":0.8608267322485631,"total":875,"current":752}
+{"_e":"metro:bundling:progress","_t":1786686623191,"id":"1","progress":0.8608267322485631,"total":875,"current":761}
+{"_e":"metro:bundling:progress","_t":1786686623293,"id":"1","progress":0.8608267322485631,"total":875,"current":769}
+{"_e":"metro:bundling:progress","_t":1786686623393,"id":"1","progress":0.8608267322485631,"total":875,"current":779}
+{"_e":"metro:bundling:progress","_t":1786686623498,"id":"1","progress":0.8608267322485631,"total":877,"current":789}
+{"_e":"metro:bundling:progress","_t":1786686623597,"id":"1","progress":0.8608267322485631,"total":884,"current":798}
+{"_e":"metro:bundling:progress","_t":1786686623708,"id":"1","progress":0.8608267322485631,"total":890,"current":814}
+{"_e":"metro:bundling:progress","_t":1786686623820,"id":"1","progress":0.8655270799141522,"total":890,"current":828}
+{"_e":"metro:bundling:progress","_t":1786686623922,"id":"1","progress":0.8655270799141522,"total":905,"current":839}
+{"_e":"metro:bundling:progress","_t":1786686624038,"id":"1","progress":0.8655270799141522,"total":919,"current":847}
+{"_e":"metro:bundling:progress","_t":1786686624125,"id":"1","progress":0.8655270799141522,"total":926,"current":853}
+{"_e":"metro:bundling:progress","_t":1786686624287,"id":"1","progress":0.8655270799141522,"total":926,"current":854}
+{"_e":"metro:bundling:progress","_t":1786686624401,"id":"1","progress":0.8655270799141522,"total":926,"current":856}
+{"_e":"metro:bundling:progress","_t":1786686624504,"id":"1","progress":0.8655270799141522,"total":930,"current":864}
+{"_e":"metro:bundling:progress","_t":1786686624607,"id":"1","progress":0.8655270799141522,"total":930,"current":865}
+{"_e":"metro:bundling:progress","_t":1786686624832,"id":"1","progress":0.8655270799141522,"total":938,"current":869}
+{"_e":"metro:bundling:progress","_t":1786686624966,"id":"1","progress":0.8687348145744024,"total":942,"current":878}
+{"_e":"metro:bundling:progress","_t":1786686625066,"id":"1","progress":0.8785389294523442,"total":957,"current":897}
+{"_e":"metro:bundling:progress","_t":1786686625168,"id":"1","progress":0.8824609733700643,"total":957,"current":899}
+{"_e":"metro:bundling:progress","_t":1786686625274,"id":"1","progress":0.886391752352189,"total":957,"current":901}
+{"_e":"metro:bundling:progress","_t":1786686625386,"id":"1","progress":0.8966769569939395,"total":961,"current":910}
+{"_e":"metro:bundling:progress","_t":1786686625490,"id":"1","progress":0.899260925965336,"total":967,"current":917}
+{"_e":"metro:bundling:progress","_t":1786686625600,"id":"1","progress":0.899260925965336,"total":969,"current":918}
+{"_e":"metro:bundling:progress","_t":1786686625711,"id":"1","progress":0.9117801446416831,"total":975,"current":931}
+{"_e":"metro:bundling:progress","_t":1786686625826,"id":"1","progress":0.9157017751479289,"total":975,"current":933}
+{"_e":"metro:bundling:progress","_t":1786686625941,"id":"1","progress":0.9196318211702827,"total":975,"current":935}
+{"_e":"metro:bundling:progress","_t":1786686626050,"id":"1","progress":0.9356309148924603,"total":978,"current":946}
+{"_e":"metro:bundling:progress","_t":1786686626156,"id":"1","progress":0.9360808059986085,"total":985,"current":953}
+{"_e":"metro:bundling:progress","_t":1786686626261,"id":"1","progress":0.9401335907835294,"total":987,"current":957}
+{"_e":"metro:bundling:progress","_t":1786686626368,"id":"1","progress":0.9500329869363535,"total":988,"current":963}
+{"_e":"metro:bundling:progress","_t":1786686626473,"id":"1","progress":0.9602425767326332,"total":996,"current":976}
+{"_e":"metro:bundling:progress","_t":1786686626582,"id":"1","progress":0.9622112949791132,"total":996,"current":977}
+{"_e":"metro:bundling:progress","_t":1786686626683,"id":"1","progress":0.9701063289301786,"total":996,"current":981}
+{"_e":"metro:bundling:progress","_t":1786686626783,"id":"1","progress":0.9900050602206418,"total":998,"current":993}
+{"_e":"metro:bundling:progress","_t":1786686626883,"id":"1","progress":0.9960000040080121,"total":999,"current":997}
+{"_e":"metro:bundling:progress","_t":1786686627080,"id":"1","progress":0.9979990000010021,"total":999,"current":998}
+{"_e":"metro:bundling:progress","_t":1786686629203,"id":"1","progress":0.999,"total":999,"current":999}
+{"_e":"metro:bundling:progress","_t":1786686629305,"id":"1","progress":0.999,"total":1001,"current":1000}
+{"_e":"metro:bundling:progress","_t":1786686629439,"id":"1","progress":0.999,"total":1008,"current":1002}
+{"_e":"metro:bundling:progress","_t":1786686629640,"id":"1","progress":0.999,"total":1010,"current":1010}
+{"_e":"metro:bundling:done","_t":1786686631069,"id":"1","total":1010,"ms":47123.3907}
+{"_e":"metro:client_log","_t":1786686637361,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786686642213,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:client_log","_t":1786686861765,"level":"error","data":["[Error: Uncaught (in promise, id: 1): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:started","_t":1786687343656,"id":"4","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786687343657,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786687343765,"id":"4","total":1,"ms":108.1433}
+{"_e":"metro:client_log","_t":1786687362028,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786687367062,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:started","_t":1786687484524,"id":"6","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786687484524,"id":"6","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786687484645,"id":"6","total":1,"ms":120.8834}
+{"_e":"metro:client_log","_t":1786687495458,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786687500123,"level":"error","data":["[Error: Uncaught (in promise, id: 0): \"Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest\"]"]}
+{"_e":"metro:bundling:failed","_t":1786687590054,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\HomeScreen.tsx: Expected corresponding JSX closing tag for <Pressable>. (266:14)\n\n  264 |                   </Pressable>\n  265 |                 </View>\n> 266 |               </View>\n      |               ^\n  267 |             ) : null\n  268 |           }\n  269 |           ListEmptyComponent={","importStack":null,"filename":"src\\screens\\HomeScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:bundling:failed","_t":1786687590304,"id":null,"message":"SyntaxError: D:\\My-App\\consistency-app\\mobile\\src\\screens\\HomeScreen.tsx: Expected corresponding JSX closing tag for <Pressable>. (266:14)\n\n  264 |                   </Pressable>\n  265 |                 </View>\n> 266 |               </View>\n      |               ^\n  267 |             ) : null\n  268 |           }\n  269 |           ListEmptyComponent={","importStack":null,"filename":"src\\screens\\HomeScreen.tsx","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786687695450,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786687826924,"level":"warn","data":["Clipboard has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-clipboard/clipboard' instead of 'react-native'. See https://github.com/react-native-clipboard/clipboard"]}
+{"_e":"metro:client_log","_t":1786687885053,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786687964619,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:bundling:started","_t":1786688298331,"id":"c","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786688298331,"id":"c","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786688298430,"id":"c","total":1,"ms":99.0269}
+{"_e":"metro:client_log","_t":1786688306971,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786688310240,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786688368827,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786688399239,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786688507188,"level":"warn","data":["DateTimePicker: `onChange` is deprecated. Use `onValueChange`, `onDismiss`, and `onNeutralButtonPress` instead."]}
+{"_e":"metro:bundling:started","_t":1786694920720,"id":"g","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786694920725,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694920793,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694920893,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694921470,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922377,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922478,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922585,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922685,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922785,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922886,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694922985,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694923085,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694923185,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694923285,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786694923385,"id":"g","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786694923500,"id":"g","total":1,"ms":2778.3928}
+{"_e":"metro:client_log","_t":1786694930303,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786694932744,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786695074650,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786695096103,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:bundling:started","_t":1786697006498,"id":"j","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786697006500,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697006522,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697006748,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007171,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007275,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007378,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007479,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007580,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007681,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007783,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007888,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697007991,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008090,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008190,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008330,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008430,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008534,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786697008738,"id":"j","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786697008872,"id":"j","total":1,"ms":2373.4072}
+{"_e":"metro:client_log","_t":1786697073012,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786697075477,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786697182806,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:server_log","_t":1786697828483,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","com.anonymous.mobile","Infinix X6812 - 11 - API 30","60"]}
+{"_e":"metro:bundling:started","_t":1786700057100,"id":"n","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786700057106,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700057178,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700057278,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700057796,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700058561,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700058663,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700058763,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700058864,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700058964,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059068,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059168,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059268,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059369,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059469,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059570,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059672,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059772,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059872,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700059973,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060074,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060174,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060274,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060377,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060478,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060581,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786700060732,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786700061113,"id":"n","total":1,"ms":4008.6884}
+{"_e":"metro:client_log","_t":1786700071371,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786700073770,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:server_log","_t":1786700280425,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","com.anonymous.mobile","Infinix X6812 - 11 - API 30","60"]}
+{"_e":"root:init","_t":1786718729455,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786718729487,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786718729547,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786718741361,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786718755294,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786718760980,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786718773636,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"root:init","_t":1786719000128,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786719000129,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786719000132,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786719000565,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786719000953,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786719001301,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786719007300,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786719014022,"id":"1","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786719014023,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786719014029,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786719026657,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1786719026758,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1786719026936,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1786719027053,"id":"1","progress":0.04000000000000001,"total":19,"current":3}
+{"_e":"metro:bundling:progress","_t":1786719027170,"id":"1","progress":0.0625,"total":20,"current":5}
+{"_e":"metro:bundling:progress","_t":1786719027266,"id":"1","progress":0.0625,"total":45,"current":7}
+{"_e":"metro:bundling:progress","_t":1786719027371,"id":"1","progress":0.0625,"total":47,"current":9}
+{"_e":"metro:bundling:progress","_t":1786719027512,"id":"1","progress":0.0625,"total":47,"current":10}
+{"_e":"metro:bundling:progress","_t":1786719027615,"id":"1","progress":0.0625,"total":50,"current":11}
+{"_e":"metro:bundling:progress","_t":1786719028758,"id":"1","progress":0.0625,"total":50,"current":12}
+{"_e":"metro:bundling:progress","_t":1786719028863,"id":"1","progress":0.0625,"total":151,"current":14}
+{"_e":"metro:bundling:progress","_t":1786719028964,"id":"1","progress":0.0625,"total":166,"current":22}
+{"_e":"metro:bundling:progress","_t":1786719029063,"id":"1","progress":0.0625,"total":174,"current":33}
+{"_e":"metro:bundling:progress","_t":1786719029173,"id":"1","progress":0.0625,"total":191,"current":46}
+{"_e":"metro:bundling:progress","_t":1786719029275,"id":"1","progress":0.0625,"total":213,"current":49}
+{"_e":"metro:bundling:progress","_t":1786719029374,"id":"1","progress":0.0625,"total":219,"current":50}
+{"_e":"metro:bundling:progress","_t":1786719030105,"id":"1","progress":0.0625,"total":219,"current":51}
+{"_e":"metro:bundling:progress","_t":1786719030463,"id":"1","progress":0.0625,"total":219,"current":52}
+{"_e":"metro:bundling:progress","_t":1786719030581,"id":"1","progress":0.0625,"total":220,"current":54}
+{"_e":"metro:bundling:progress","_t":1786719030684,"id":"1","progress":0.06825744663582502,"total":222,"current":58}
+{"_e":"metro:bundling:progress","_t":1786719030785,"id":"1","progress":0.07755167441115204,"total":237,"current":66}
+{"_e":"metro:bundling:progress","_t":1786719030886,"id":"1","progress":0.08262715337081414,"total":247,"current":71}
+{"_e":"metro:bundling:progress","_t":1786719031001,"id":"1","progress":0.08555046946523144,"total":253,"current":74}
+{"_e":"metro:bundling:progress","_t":1786719031066,"id":"1","progress":0.08787826711868645,"total":253,"current":75}
+{"_e":"metro:bundling:progress","_t":1786719031175,"id":"1","progress":0.10169570339140678,"total":254,"current":81}
+{"_e":"metro:bundling:progress","_t":1786719031276,"id":"1","progress":0.1111111111111111,"total":261,"current":87}
+{"_e":"metro:bundling:progress","_t":1786719031385,"id":"1","progress":0.11671584706374033,"total":281,"current":96}
+{"_e":"metro:bundling:progress","_t":1786719031500,"id":"1","progress":0.13155989658144213,"total":295,"current":107}
+{"_e":"metro:bundling:progress","_t":1786719031600,"id":"1","progress":0.15323104224376732,"total":304,"current":119}
+{"_e":"metro:bundling:progress","_t":1786719031718,"id":"1","progress":0.17687134247532535,"total":321,"current":135}
+{"_e":"metro:bundling:progress","_t":1786719031829,"id":"1","progress":0.21344961705823118,"total":329,"current":152}
+{"_e":"metro:bundling:progress","_t":1786719031941,"id":"1","progress":0.2455424370683894,"total":335,"current":166}
+{"_e":"metro:bundling:progress","_t":1786719032041,"id":"1","progress":0.25584775554353706,"total":344,"current":174}
+{"_e":"metro:bundling:progress","_t":1786719032157,"id":"1","progress":0.26600766824574507,"total":349,"current":180}
+{"_e":"metro:bundling:progress","_t":1786719032280,"id":"1","progress":0.27822726723825625,"total":364,"current":192}
+{"_e":"metro:bundling:progress","_t":1786719032426,"id":"1","progress":0.281133015336312,"total":364,"current":193}
+{"_e":"metro:bundling:progress","_t":1786719032571,"id":"1","progress":0.2840538582296824,"total":364,"current":194}
+{"_e":"metro:bundling:progress","_t":1786719032674,"id":"1","progress":0.29242231805293006,"total":368,"current":199}
+{"_e":"metro:bundling:progress","_t":1786719032775,"id":"1","progress":0.293524458555227,"total":371,"current":201}
+{"_e":"metro:bundling:progress","_t":1786719032878,"id":"1","progress":0.29911808465524803,"total":373,"current":204}
+{"_e":"metro:bundling:progress","_t":1786719032989,"id":"1","progress":0.31527924733335244,"total":374,"current":210}
+{"_e":"metro:bundling:progress","_t":1786719033091,"id":"1","progress":0.32653061224489793,"total":399,"current":228}
+{"_e":"metro:bundling:progress","_t":1786719033195,"id":"1","progress":0.3498118381187197,"total":421,"current":249}
+{"_e":"metro:bundling:progress","_t":1786719033296,"id":"1","progress":0.36892297681463976,"total":433,"current":263}
+{"_e":"metro:bundling:progress","_t":1786719033400,"id":"1","progress":0.39205980136352153,"total":436,"current":273}
+{"_e":"metro:bundling:progress","_t":1786719033500,"id":"1","progress":0.39205980136352153,"total":476,"current":291}
+{"_e":"metro:bundling:progress","_t":1786719033611,"id":"1","progress":0.39409090357031523,"total":497,"current":312}
+{"_e":"metro:bundling:progress","_t":1786719033711,"id":"1","progress":0.40005013300210635,"total":517,"current":327}
+{"_e":"metro:bundling:progress","_t":1786719033820,"id":"1","progress":0.4040809566159817,"total":527,"current":335}
+{"_e":"metro:bundling:progress","_t":1786719033925,"id":"1","progress":0.4040809566159817,"total":554,"current":348}
+{"_e":"metro:bundling:progress","_t":1786719034029,"id":"1","progress":0.40969078517177204,"total":564,"current":361}
+{"_e":"metro:bundling:progress","_t":1786719034129,"id":"1","progress":0.41264291870152253,"total":590,"current":379}
+{"_e":"metro:bundling:progress","_t":1786719034234,"id":"1","progress":0.41264291870152253,"total":604,"current":382}
+{"_e":"metro:bundling:progress","_t":1786719034338,"id":"1","progress":0.41264291870152253,"total":608,"current":384}
+{"_e":"metro:bundling:progress","_t":1786719034520,"id":"1","progress":0.41264291870152253,"total":608,"current":385}
+{"_e":"metro:bundling:progress","_t":1786719034620,"id":"1","progress":0.41264291870152253,"total":612,"current":386}
+{"_e":"metro:bundling:progress","_t":1786719034685,"id":"1","progress":0.41264291870152253,"total":612,"current":387}
+{"_e":"metro:bundling:progress","_t":1786719034793,"id":"1","progress":0.41264291870152253,"total":618,"current":390}
+{"_e":"metro:bundling:progress","_t":1786719034914,"id":"1","progress":0.41264291870152253,"total":621,"current":391}
+{"_e":"metro:bundling:progress","_t":1786719034955,"id":"1","progress":0.41264291870152253,"total":621,"current":392}
+{"_e":"metro:bundling:progress","_t":1786719035066,"id":"1","progress":0.41264291870152253,"total":629,"current":400}
+{"_e":"metro:bundling:progress","_t":1786719035216,"id":"1","progress":0.41264291870152253,"total":629,"current":401}
+{"_e":"metro:bundling:progress","_t":1786719035326,"id":"1","progress":0.41264291870152253,"total":633,"current":405}
+{"_e":"metro:bundling:progress","_t":1786719035440,"id":"1","progress":0.4134104005849924,"total":633,"current":407}
+{"_e":"metro:bundling:progress","_t":1786719035557,"id":"1","progress":0.42640488013613437,"total":634,"current":414}
+{"_e":"metro:bundling:progress","_t":1786719035660,"id":"1","progress":0.42640488013613437,"total":641,"current":418}
+{"_e":"metro:bundling:progress","_t":1786719035768,"id":"1","progress":0.4423700274647956,"total":642,"current":427}
+{"_e":"metro:bundling:progress","_t":1786719035868,"id":"1","progress":0.4603842726745006,"total":647,"current":439}
+{"_e":"metro:bundling:progress","_t":1786719035975,"id":"1","progress":0.4747546103509815,"total":656,"current":452}
+{"_e":"metro:bundling:progress","_t":1786719036077,"id":"1","progress":0.5006634527089072,"total":660,"current":467}
+{"_e":"metro:bundling:progress","_t":1786719036177,"id":"1","progress":0.519089018033296,"total":669,"current":482}
+{"_e":"metro:bundling:progress","_t":1786719036277,"id":"1","progress":0.5525297396296523,"total":674,"current":501}
+{"_e":"metro:bundling:progress","_t":1786719036384,"id":"1","progress":0.5697239319353564,"total":677,"current":511}
+{"_e":"metro:bundling:progress","_t":1786719036491,"id":"1","progress":0.5910190200003905,"total":679,"current":522}
+{"_e":"metro:bundling:progress","_t":1786719036591,"id":"1","progress":0.5967002730518799,"total":690,"current":533}
+{"_e":"metro:bundling:progress","_t":1786719036691,"id":"1","progress":0.5967002730518799,"total":723,"current":554}
+{"_e":"metro:bundling:progress","_t":1786719036791,"id":"1","progress":0.5997829040642723,"total":736,"current":570}
+{"_e":"metro:bundling:progress","_t":1786719036899,"id":"1","progress":0.6035618482246313,"total":753,"current":585}
+{"_e":"metro:bundling:progress","_t":1786719037410,"id":"1","progress":0.6056270711752371,"total":753,"current":586}
+{"_e":"metro:bundling:progress","_t":1786719037520,"id":"1","progress":0.6678461470988115,"total":755,"current":617}
+{"_e":"metro:bundling:progress","_t":1786719037624,"id":"1","progress":0.6785801934705397,"total":766,"current":631}
+{"_e":"metro:bundling:progress","_t":1786719037724,"id":"1","progress":0.6915689011785551,"total":772,"current":642}
+{"_e":"metro:bundling:progress","_t":1786719037833,"id":"1","progress":0.7102840365607397,"total":776,"current":654}
+{"_e":"metro:bundling:progress","_t":1786719037938,"id":"1","progress":0.7234773417888756,"total":783,"current":666}
+{"_e":"metro:bundling:progress","_t":1786719038047,"id":"1","progress":0.751842653420926,"total":790,"current":685}
+{"_e":"metro:bundling:progress","_t":1786719038153,"id":"1","progress":0.7555787837948913,"total":803,"current":698}
+{"_e":"metro:bundling:progress","_t":1786719038255,"id":"1","progress":0.765625,"total":808,"current":707}
+{"_e":"metro:bundling:progress","_t":1786719038359,"id":"1","progress":0.7809626825310979,"total":817,"current":722}
+{"_e":"metro:bundling:progress","_t":1786719038509,"id":"1","progress":0.7834497440523797,"total":827,"current":732}
+{"_e":"metro:bundling:progress","_t":1786719038614,"id":"1","progress":0.7910734097633135,"total":832,"current":740}
+{"_e":"metro:bundling:progress","_t":1786719038724,"id":"1","progress":0.7934467904808984,"total":833,"current":742}
+{"_e":"metro:bundling:progress","_t":1786719038826,"id":"1","progress":0.8024726594714763,"total":835,"current":748}
+{"_e":"metro:bundling:progress","_t":1786719038930,"id":"1","progress":0.8199345825416084,"total":836,"current":757}
+{"_e":"metro:bundling:progress","_t":1786719039083,"id":"1","progress":0.8199345825416084,"total":842,"current":762}
+{"_e":"metro:bundling:progress","_t":1786719039183,"id":"1","progress":0.8282076958089704,"total":845,"current":769}
+{"_e":"metro:bundling:progress","_t":1786719039285,"id":"1","progress":0.8282076958089704,"total":853,"current":775}
+{"_e":"metro:bundling:progress","_t":1786719039400,"id":"1","progress":0.8282076958089704,"total":856,"current":779}
+{"_e":"metro:bundling:progress","_t":1786719039502,"id":"1","progress":0.8422262473330656,"total":863,"current":792}
+{"_e":"metro:bundling:progress","_t":1786719039602,"id":"1","progress":0.8597957746854482,"total":866,"current":803}
+{"_e":"metro:bundling:progress","_t":1786719039702,"id":"1","progress":0.8630048193940921,"total":873,"current":811}
+{"_e":"metro:bundling:progress","_t":1786719039804,"id":"1","progress":0.8630048193940921,"total":907,"current":817}
+{"_e":"metro:bundling:progress","_t":1786719039905,"id":"1","progress":0.8630048193940921,"total":911,"current":822}
+{"_e":"metro:bundling:progress","_t":1786719040005,"id":"1","progress":0.8630048193940921,"total":966,"current":832}
+{"_e":"metro:bundling:progress","_t":1786719040137,"id":"1","progress":0.8630048193940921,"total":968,"current":842}
+{"_e":"metro:bundling:progress","_t":1786719040241,"id":"1","progress":0.8630048193940921,"total":973,"current":855}
+{"_e":"metro:bundling:progress","_t":1786719040349,"id":"1","progress":0.8630048193940921,"total":977,"current":870}
+{"_e":"metro:bundling:progress","_t":1786719040458,"id":"1","progress":0.8630048193940921,"total":979,"current":877}
+{"_e":"metro:bundling:progress","_t":1786719040559,"id":"1","progress":0.8630048193940921,"total":979,"current":889}
+{"_e":"metro:bundling:progress","_t":1786719040659,"id":"1","progress":0.8630048193940921,"total":979,"current":907}
+{"_e":"metro:bundling:progress","_t":1786719040759,"id":"1","progress":0.8742724625731144,"total":985,"current":921}
+{"_e":"metro:bundling:progress","_t":1786719040859,"id":"1","progress":0.8923976454299236,"total":994,"current":939}
+{"_e":"metro:bundling:progress","_t":1786719040963,"id":"1","progress":0.9230685926423734,"total":994,"current":955}
+{"_e":"metro:bundling:progress","_t":1786719041063,"id":"1","progress":0.9464118716322077,"total":994,"current":967}
+{"_e":"metro:bundling:progress","_t":1786719041164,"id":"1","progress":0.9661210575490518,"total":995,"current":978}
+{"_e":"metro:bundling:progress","_t":1786719041270,"id":"1","progress":0.9781644296237865,"total":1002,"current":991}
+{"_e":"metro:bundling:progress","_t":1786719041384,"id":"1","progress":0.9920319042553616,"total":1002,"current":998}
+{"_e":"metro:bundling:progress","_t":1786719041534,"id":"1","progress":0.9940209401556169,"total":1002,"current":999}
+{"_e":"metro:bundling:progress","_t":1786719041645,"id":"1","progress":0.9960119680798083,"total":1002,"current":1000}
+{"_e":"metro:bundling:progress","_t":1786719042203,"id":"1","progress":0.9980049880279361,"total":1002,"current":1001}
+{"_e":"metro:bundling:progress","_t":1786719042325,"id":"1","progress":0.9980069760807309,"total":1003,"current":1002}
+{"_e":"metro:bundling:progress","_t":1786719042437,"id":"1","progress":0.9980069760807309,"total":1007,"current":1005}
+{"_e":"metro:bundling:progress","_t":1786719042554,"id":"1","progress":0.9980069760807309,"total":1014,"current":1007}
+{"_e":"metro:bundling:progress","_t":1786719042777,"id":"1","progress":0.999,"total":1016,"current":1016}
+{"_e":"metro:bundling:done","_t":1786719043869,"id":"1","total":1016,"ms":29846.2406}
+{"_e":"metro:client_log","_t":1786719051781,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786719117535,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:client_log","_t":1786719122691,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:bundling:started","_t":1786719146461,"id":"9","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786719146461,"id":"9","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786719146510,"id":"9","total":1,"ms":48.6269}
+{"_e":"metro:client_log","_t":1786719158933,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786719160487,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:client_log","_t":1786719161488,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:bundling:started","_t":1786719838111,"id":"d","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786719838112,"id":"d","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786719838167,"id":"d","total":1,"ms":55.6512}
+{"_e":"metro:client_log","_t":1786719847128,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786719848613,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:client_log","_t":1786719866362,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:bundling:started","_t":1786720204257,"id":"h","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786720204258,"id":"h","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786720204261,"id":"h","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786720204525,"id":"h","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786720204603,"id":"h","total":1,"ms":345.53}
+{"_e":"metro:client_log","_t":1786720212431,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786720218427,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:client_log","_t":1786720301626,"level":"error","data":["[TypeError: undefined is not a function]"]}
+{"_e":"metro:bundling:started","_t":1786720327338,"id":"n","platform":"android","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786720327338,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786720327509,"id":"n","total":1,"ms":170.2485}
+{"_e":"metro:client_log","_t":1786720337055,"level":"warn","data":["SafeAreaView has been deprecated and will be removed in a future release. Please use 'react-native-safe-area-context' instead. See https://github.com/AppAndFlow/react-native-safe-area-context"]}
+{"_e":"metro:client_log","_t":1786720339523,"level":"error","data":["Failed to setup geofencing:","[Error: Call to function 'ExpoLocation.requestBackgroundPermissionsAsync' has been rejected.\n→ Caused by: You need to add `ACCESS_BACKGROUND_LOCATION` to the AndroidManifest]"]}
+{"_e":"metro:server_log","_t":1786720623789,"level":"error","data":["[timeout] connection terminated with Device for app='%s' on device='%s' after not responding for %s seconds.","com.anonymous.mobile","Infinix X6812 - 11 - API 30","60"]}
+{"_e":"root:init","_t":1786725135889,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786725135933,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786725136047,"mode":"development","files":[],"env":{}}
+{"_e":"root:init","_t":1786725205124,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786725205125,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786725205127,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786725211888,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786725228229,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786725234402,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786725249618,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786725252808,"id":"1","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786725252810,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786725252819,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786725269272,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1786725269372,"id":"1","progress":0.010000000000000002,"total":6,"current":1}
+{"_e":"metro:bundling:progress","_t":1786725269794,"id":"1","progress":0.04000000000000001,"total":6,"current":2}
+{"_e":"metro:bundling:progress","_t":1786725269900,"id":"1","progress":0.04000000000000001,"total":39,"current":2}
+{"_e":"metro:bundling:progress","_t":1786725269992,"id":"1","progress":0.04000000000000001,"total":39,"current":3}
+{"_e":"metro:bundling:progress","_t":1786725270099,"id":"1","progress":0.04000000000000001,"total":41,"current":3}
+{"_e":"metro:bundling:progress","_t":1786725270111,"id":"1","progress":0.04000000000000001,"total":41,"current":4}
+{"_e":"metro:bundling:progress","_t":1786725270219,"id":"1","progress":0.04000000000000001,"total":50,"current":4}
+{"_e":"metro:bundling:progress","_t":1786725270308,"id":"1","progress":0.04000000000000001,"total":50,"current":5}
+{"_e":"metro:bundling:progress","_t":1786725270418,"id":"1","progress":0.04000000000000001,"total":56,"current":6}
+{"_e":"metro:bundling:progress","_t":1786725270564,"id":"1","progress":0.04000000000000001,"total":56,"current":7}
+{"_e":"metro:bundling:progress","_t":1786725270592,"id":"1","progress":0.04000000000000001,"total":56,"current":8}
+{"_e":"metro:bundling:progress","_t":1786725270699,"id":"1","progress":0.04000000000000001,"total":61,"current":8}
+{"_e":"metro:bundling:progress","_t":1786725270757,"id":"1","progress":0.04000000000000001,"total":61,"current":9}
+{"_e":"metro:bundling:progress","_t":1786725270863,"id":"1","progress":0.04000000000000001,"total":65,"current":9}
+{"_e":"metro:bundling:progress","_t":1786725270883,"id":"1","progress":0.04000000000000001,"total":65,"current":10}
+{"_e":"metro:bundling:progress","_t":1786725271149,"id":"1","progress":0.04000000000000001,"total":65,"current":11}
+{"_e":"metro:bundling:progress","_t":1786725271250,"id":"1","progress":0.04000000000000001,"total":67,"current":11}
+{"_e":"metro:bundling:progress","_t":1786725271409,"id":"1","progress":0.04000000000000001,"total":67,"current":12}
+{"_e":"metro:bundling:progress","_t":1786725271509,"id":"1","progress":0.04000000000000001,"total":69,"current":12}
+{"_e":"metro:bundling:progress","_t":1786725271670,"id":"1","progress":0.04000000000000001,"total":69,"current":13}
+{"_e":"metro:bundling:progress","_t":1786725271772,"id":"1","progress":0.04000000000000001,"total":76,"current":14}
+{"_e":"metro:bundling:progress","_t":1786725271924,"id":"1","progress":0.04000000000000001,"total":86,"current":17}
+{"_e":"metro:bundling:progress","_t":1786725272017,"id":"1","progress":0.043807463493780424,"total":86,"current":18}
+{"_e":"metro:bundling:progress","_t":1786725272124,"id":"1","progress":0.043807463493780424,"total":90,"current":18}
+{"_e":"metro:bundling:progress","_t":1786725272207,"id":"1","progress":0.0445679012345679,"total":90,"current":19}
+{"_e":"metro:bundling:progress","_t":1786725272334,"id":"1","progress":0.04938271604938271,"total":90,"current":20}
+{"_e":"metro:bundling:progress","_t":1786725272434,"id":"1","progress":0.05844704745803647,"total":91,"current":22}
+{"_e":"metro:bundling:progress","_t":1786725272557,"id":"1","progress":0.0738421550094518,"total":92,"current":25}
+{"_e":"metro:bundling:progress","_t":1786725272667,"id":"1","progress":0.09064631749335184,"total":93,"current":28}
+{"_e":"metro:bundling:progress","_t":1786725272771,"id":"1","progress":0.09517881394296061,"total":94,"current":29}
+{"_e":"metro:bundling:progress","_t":1786725272887,"id":"1","progress":0.10068417159763313,"total":104,"current":33}
+{"_e":"metro:bundling:progress","_t":1786725272995,"id":"1","progress":0.10902456390174438,"total":106,"current":35}
+{"_e":"metro:bundling:progress","_t":1786725273152,"id":"1","progress":0.11736968449931415,"total":108,"current":37}
+{"_e":"metro:bundling:progress","_t":1786725273260,"id":"1","progress":0.11736968449931415,"total":129,"current":40}
+{"_e":"metro:bundling:progress","_t":1786725273363,"id":"1","progress":0.11736968449931415,"total":136,"current":43}
+{"_e":"metro:bundling:progress","_t":1786725273462,"id":"1","progress":0.11736968449931415,"total":146,"current":49}
+{"_e":"metro:bundling:progress","_t":1786725273569,"id":"1","progress":0.14303911900065747,"total":156,"current":59}
+{"_e":"metro:bundling:progress","_t":1786725273688,"id":"1","progress":0.16201890747992564,"total":159,"current":64}
+{"_e":"metro:bundling:progress","_t":1786725273828,"id":"1","progress":0.19634981533938112,"total":167,"current":74}
+{"_e":"metro:bundling:progress","_t":1786725273930,"id":"1","progress":0.19634981533938112,"total":198,"current":83}
+{"_e":"metro:bundling:progress","_t":1786725274035,"id":"1","progress":0.19634981533938112,"total":200,"current":85}
+{"_e":"metro:bundling:progress","_t":1786725274135,"id":"1","progress":0.2043535372490148,"total":219,"current":99}
+{"_e":"metro:bundling:progress","_t":1786725274235,"id":"1","progress":0.2308989711587114,"total":231,"current":111}
+{"_e":"metro:bundling:progress","_t":1786725274345,"id":"1","progress":0.2308989711587114,"total":263,"current":124}
+{"_e":"metro:bundling:progress","_t":1786725274453,"id":"1","progress":0.23182441700960216,"total":270,"current":130}
+{"_e":"metro:bundling:progress","_t":1786725274553,"id":"1","progress":0.2630819297122861,"total":271,"current":139}
+{"_e":"metro:bundling:progress","_t":1786725274656,"id":"1","progress":0.28495079849545973,"total":281,"current":150}
+{"_e":"metro:bundling:progress","_t":1786725274758,"id":"1","progress":0.29228733034499116,"total":283,"current":153}
+{"_e":"metro:bundling:progress","_t":1786725274862,"id":"1","progress":0.3090737933395276,"total":286,"current":159}
+{"_e":"metro:bundling:progress","_t":1786725274985,"id":"1","progress":0.3090737933395276,"total":297,"current":164}
+{"_e":"metro:bundling:progress","_t":1786725275198,"id":"1","progress":0.3118569741946365,"total":308,"current":172}
+{"_e":"metro:bundling:progress","_t":1786725275320,"id":"1","progress":0.3118569741946365,"total":346,"current":180}
+{"_e":"metro:bundling:progress","_t":1786725275450,"id":"1","progress":0.3118569741946365,"total":346,"current":191}
+{"_e":"metro:bundling:progress","_t":1786725275553,"id":"1","progress":0.3118569741946365,"total":346,"current":193}
+{"_e":"metro:bundling:progress","_t":1786725275719,"id":"1","progress":0.31904591849446473,"total":347,"current":196}
+{"_e":"metro:bundling:progress","_t":1786725275821,"id":"1","progress":0.32792753305573813,"total":351,"current":201}
+{"_e":"metro:bundling:progress","_t":1786725275922,"id":"1","progress":0.33587293388429756,"total":352,"current":204}
+{"_e":"metro:bundling:progress","_t":1786725276042,"id":"1","progress":0.33809651559146575,"total":356,"current":207}
+{"_e":"metro:bundling:progress","_t":1786725276159,"id":"1","progress":0.3481326877479455,"total":361,"current":213}
+{"_e":"metro:bundling:progress","_t":1786725276264,"id":"1","progress":0.36329517733158184,"total":365,"current":220}
+{"_e":"metro:bundling:progress","_t":1786725276374,"id":"1","progress":0.37999624695064743,"total":365,"current":225}
+{"_e":"metro:bundling:progress","_t":1786725276481,"id":"1","progress":0.3969337808796153,"total":373,"current":235}
+{"_e":"metro:bundling:progress","_t":1786725276580,"id":"1","progress":0.4268444444444444,"total":375,"current":245}
+{"_e":"metro:bundling:progress","_t":1786725276680,"id":"1","progress":0.48071111111111114,"total":375,"current":260}
+{"_e":"metro:bundling:progress","_t":1786725276797,"id":"1","progress":0.49957512129601717,"total":382,"current":270}
+{"_e":"metro:bundling:progress","_t":1786725276902,"id":"1","progress":0.5155464963289681,"total":383,"current":275}
+{"_e":"metro:bundling:progress","_t":1786725277002,"id":"1","progress":0.5155464963289681,"total":396,"current":281}
+{"_e":"metro:bundling:progress","_t":1786725277102,"id":"1","progress":0.5155464963289681,"total":398,"current":284}
+{"_e":"metro:bundling:progress","_t":1786725277207,"id":"1","progress":0.5155464963289681,"total":409,"current":292}
+{"_e":"metro:bundling:progress","_t":1786725277306,"id":"1","progress":0.5167114017730644,"total":409,"current":294}
+{"_e":"metro:bundling:progress","_t":1786725277407,"id":"1","progress":0.5247412254610351,"total":410,"current":297}
+{"_e":"metro:bundling:progress","_t":1786725277512,"id":"1","progress":0.5353955978584176,"total":410,"current":300}
+{"_e":"metro:bundling:progress","_t":1786725277614,"id":"1","progress":0.5579472060904209,"total":411,"current":307}
+{"_e":"metro:bundling:progress","_t":1786725277712,"id":"1","progress":0.5797996806503121,"total":415,"current":316}
+{"_e":"metro:bundling:progress","_t":1786725277814,"id":"1","progress":0.5954199796597633,"total":416,"current":321}
+{"_e":"metro:bundling:progress","_t":1786725277921,"id":"1","progress":0.6032972054998562,"total":421,"current":327}
+{"_e":"metro:bundling:progress","_t":1786725278031,"id":"1","progress":0.6152209069877137,"total":422,"current":331}
+{"_e":"metro:bundling:progress","_t":1786725278138,"id":"1","progress":0.6152209069877137,"total":445,"current":338}
+{"_e":"metro:bundling:progress","_t":1786725278255,"id":"1","progress":0.6152209069877137,"total":446,"current":341}
+{"_e":"metro:bundling:progress","_t":1786725278389,"id":"1","progress":0.6152209069877137,"total":450,"current":348}
+{"_e":"metro:bundling:progress","_t":1786725278504,"id":"1","progress":0.6152209069877137,"total":454,"current":353}
+{"_e":"metro:bundling:progress","_t":1786725278607,"id":"1","progress":0.6185702555047679,"total":459,"current":361}
+{"_e":"metro:bundling:progress","_t":1786725278710,"id":"1","progress":0.6310273420663032,"total":462,"current":367}
+{"_e":"metro:bundling:progress","_t":1786725278811,"id":"1","progress":0.6559950365957764,"total":463,"current":375}
+{"_e":"metro:bundling:progress","_t":1786725278912,"id":"1","progress":0.6675237664101402,"total":470,"current":384}
+{"_e":"metro:bundling:progress","_t":1786725279014,"id":"1","progress":0.6768030608991391,"total":485,"current":399}
+{"_e":"metro:bundling:progress","_t":1786725279117,"id":"1","progress":0.6807947636708496,"total":486,"current":401}
+{"_e":"metro:bundling:progress","_t":1786725279244,"id":"1","progress":0.684194482548392,"total":486,"current":402}
+{"_e":"metro:bundling:progress","_t":1786725279574,"id":"1","progress":0.684781737916844,"total":487,"current":403}
+{"_e":"metro:bundling:progress","_t":1786725279757,"id":"1","progress":0.6859497911099401,"total":489,"current":405}
+{"_e":"metro:bundling:progress","_t":1786725279888,"id":"1","progress":0.6927413317943635,"total":489,"current":407}
+{"_e":"metro:bundling:progress","_t":1786725280027,"id":"1","progress":0.6927413317943635,"total":492,"current":409}
+{"_e":"metro:bundling:progress","_t":1786725280127,"id":"1","progress":0.7017885282391616,"total":493,"current":413}
+{"_e":"metro:bundling:progress","_t":1786725280232,"id":"1","progress":0.7120210327958559,"total":493,"current":416}
+{"_e":"metro:bundling:progress","_t":1786725280331,"id":"1","progress":0.7366781950204068,"total":494,"current":424}
+{"_e":"metro:bundling:progress","_t":1786725280433,"id":"1","progress":0.7687215590245893,"total":495,"current":434}
+{"_e":"metro:bundling:progress","_t":1786725280534,"id":"1","progress":0.7877453589458235,"total":498,"current":442}
+{"_e":"metro:bundling:progress","_t":1786725280634,"id":"1","progress":0.813604,"total":500,"current":451}
+{"_e":"metro:bundling:progress","_t":1786725280734,"id":"1","progress":0.8543356454659449,"total":502,"current":464}
+{"_e":"metro:bundling:progress","_t":1786725280845,"id":"1","progress":0.8664445624834007,"total":506,"current":471}
+{"_e":"metro:bundling:progress","_t":1786725280957,"id":"1","progress":0.8825721740722656,"total":512,"current":481}
+{"_e":"metro:bundling:progress","_t":1786725281063,"id":"1","progress":0.8825721740722656,"total":529,"current":485}
+{"_e":"metro:bundling:progress","_t":1786725281189,"id":"1","progress":0.8825721740722656,"total":533,"current":487}
+{"_e":"metro:bundling:progress","_t":1786725281230,"id":"1","progress":0.8825721740722656,"total":533,"current":488}
+{"_e":"metro:bundling:progress","_t":1786725281340,"id":"1","progress":0.8825721740722656,"total":536,"current":491}
+{"_e":"metro:bundling:progress","_t":1786725281442,"id":"1","progress":0.8825721740722656,"total":543,"current":498}
+{"_e":"metro:bundling:progress","_t":1786725281543,"id":"1","progress":0.8825721740722656,"total":547,"current":504}
+{"_e":"metro:bundling:progress","_t":1786725281643,"id":"1","progress":0.8902558385672245,"total":549,"current":518}
+{"_e":"metro:bundling:progress","_t":1786725281746,"id":"1","progress":0.9186911076646378,"total":554,"current":531}
+{"_e":"metro:bundling:progress","_t":1786725281847,"id":"1","progress":0.929600082218882,"total":558,"current":538}
+{"_e":"metro:bundling:progress","_t":1786725281953,"id":"1","progress":0.9436734693877551,"total":560,"current":544}
+{"_e":"metro:bundling:progress","_t":1786725282096,"id":"1","progress":0.9436734693877551,"total":568,"current":546}
+{"_e":"metro:bundling:progress","_t":1786725282107,"id":"1","progress":0.9436734693877551,"total":568,"current":547}
+{"_e":"metro:bundling:progress","_t":1786725282211,"id":"1","progress":0.9436734693877551,"total":574,"current":555}
+{"_e":"metro:bundling:progress","_t":1786725282329,"id":"1","progress":0.9436734693877551,"total":576,"current":559}
+{"_e":"metro:bundling:progress","_t":1786725282431,"id":"1","progress":0.9454029525508555,"total":578,"current":562}
+{"_e":"metro:bundling:progress","_t":1786725282532,"id":"1","progress":0.9590487514863257,"total":580,"current":568}
+{"_e":"metro:bundling:progress","_t":1786725282631,"id":"1","progress":0.9727440429081259,"total":583,"current":575}
+{"_e":"metro:bundling:progress","_t":1786725282735,"id":"1","progress":0.9728826194830459,"total":586,"current":578}
+{"_e":"metro:bundling:progress","_t":1786725282835,"id":"1","progress":0.9796959600166597,"total":588,"current":582}
+{"_e":"metro:bundling:progress","_t":1786725282936,"id":"1","progress":0.9864408348373362,"total":588,"current":584}
+{"_e":"metro:bundling:progress","_t":1786725283050,"id":"1","progress":0.9932088481651163,"total":588,"current":586}
+{"_e":"metro:bundling:progress","_t":1786725283078,"id":"1","progress":0.9966015317691703,"total":588,"current":587}
+{"_e":"metro:bundling:progress","_t":1786725285439,"id":"1","progress":0.999,"total":588,"current":588}
+{"_e":"metro:bundling:progress","_t":1786725285544,"id":"1","progress":0.999,"total":590,"current":589}
+{"_e":"metro:bundling:progress","_t":1786725285606,"id":"1","progress":0.999,"total":590,"current":590}
+{"_e":"metro:bundling:done","_t":1786725286966,"id":"1","total":590,"ms":34168.8143}
+{"_e":"metro:client_log","_t":1786725287624,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786725287626,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786725287626,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786725287698,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786725287721,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1786725291515,"id":"4","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786725291515,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786725291584,"id":"4","total":1,"ms":68.8811}
+{"_e":"metro:client_log","_t":1786725291916,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786725291917,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786725291917,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786725291923,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786725291959,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:client_log","_t":1786725296650,"level":"warn","data":["Cannot record touch end without a touch start.\n","Touch End: {\"identifier\":0,\"pageX\":974,\"pageY\":262,\"timestamp\":5249.9000000059605}\n","Touch Bank: []"]}
+{"_e":"metro:bundling:started","_t":1786725298956,"id":"8","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:client_log","_t":1786725362751,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786725362902,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786725376796,"level":"warn","data":["An error occurred in the <HabitDetailScreen> component.\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.\n"]}
+{"_e":"metro:client_log","_t":1786725376836,"level":"error","data":["[TypeError: (0 , _libApi.getHabitHistory) is not a function]","\n\n\u001b[1mCode: HabitDetailScreen.tsx\u001b[22m\n\u001b[0m \u001b[90m 56 |\u001b[39m   useEffect(() \u001b[33m=>\u001b[39m {\n \u001b[90m 57 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mtoken) \u001b[36mreturn\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 58 |\u001b[39m     getHabitHistory(token\u001b[33m,\u001b[39m habit\u001b[33m.\u001b[39m_id\u001b[33m,\u001b[39m \u001b[35m21\u001b[39m)\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 59 |\u001b[39m       \u001b[33m.\u001b[39mthen((res) \u001b[33m=>\u001b[39m {\n \u001b[90m 60 |\u001b[39m         \u001b[36mconst\u001b[39m days \u001b[33m=\u001b[39m\n \u001b[90m 61 |\u001b[39m           res\u001b[33m.\u001b[39mdays \u001b[33m?\u001b[39m\u001b[33m?\u001b[39m\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  useEffect$argument_0 (src\\screens\\HabitDetailScreen.tsx:58:20)\u001b[39m","\n\n\u001b[1mCode: App.tsx\u001b[22m\n\u001b[0m \u001b[90m 285 |\u001b[39m           \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 286 |\u001b[39m         ) \u001b[33m:\u001b[39m screen\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m \u001b[32m\"habitDetail\"\u001b[39m \u001b[33m?\u001b[39m (\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 287 |\u001b[39m           \u001b[33m<\u001b[39m\u001b[33mHabitDetailScreen\u001b[39m\n \u001b[90m     |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 288 |\u001b[39m             habit\u001b[33m=\u001b[39m{screen\u001b[33m.\u001b[39mhabit}\n \u001b[90m 289 |\u001b[39m             onBack\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setScreen({ name\u001b[33m:\u001b[39m \u001b[32m\"habits\"\u001b[39m })}\n \u001b[90m 290 |\u001b[39m             onCheckIn\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setScreen({ name\u001b[33m:\u001b[39m \u001b[32m\"checkin\"\u001b[39m\u001b[33m,\u001b[39m habit\u001b[33m:\u001b[39m screen\u001b[33m.\u001b[39mhabit })}\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  Tabs (App.tsx:287:11)\u001b[39m\n\u001b[90m  Root (App.tsx:500:21)\u001b[39m\n\u001b[90m  App (App.tsx:528:9)\u001b[39m"]}
+{"_e":"metro:bundling:started","_t":1786725418795,"id":"e","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786725418796,"id":"e","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786725418844,"id":"e","total":1,"ms":47.6289}
+{"_e":"metro:client_log","_t":1786725419139,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786725419141,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786725419141,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786725419145,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786725419175,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:client_log","_t":1786725424942,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786725424961,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:bundling:started","_t":1786725454041,"id":"j","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:client_log","_t":1786725471337,"level":"warn","data":["An error occurred in the <HabitDetailScreen> component.\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.\n"]}
+{"_e":"metro:client_log","_t":1786725471367,"level":"error","data":["[TypeError: (0 , _libApi.getHabitHistory) is not a function]","\n\n\u001b[1mCode: HabitDetailScreen.tsx\u001b[22m\n\u001b[0m \u001b[90m 56 |\u001b[39m   useEffect(() \u001b[33m=>\u001b[39m {\n \u001b[90m 57 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mtoken) \u001b[36mreturn\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 58 |\u001b[39m     getHabitHistory(token\u001b[33m,\u001b[39m habit\u001b[33m.\u001b[39m_id\u001b[33m,\u001b[39m \u001b[35m21\u001b[39m)\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 59 |\u001b[39m       \u001b[33m.\u001b[39mthen((res) \u001b[33m=>\u001b[39m {\n \u001b[90m 60 |\u001b[39m         \u001b[36mconst\u001b[39m days \u001b[33m=\u001b[39m\n \u001b[90m 61 |\u001b[39m           res\u001b[33m.\u001b[39mdays \u001b[33m?\u001b[39m\u001b[33m?\u001b[39m\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  useEffect$argument_0 (src\\screens\\HabitDetailScreen.tsx:58:20)\u001b[39m","\n\n\u001b[1mCode: App.tsx\u001b[22m\n\u001b[0m \u001b[90m 285 |\u001b[39m           \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 286 |\u001b[39m         ) \u001b[33m:\u001b[39m screen\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m \u001b[32m\"habitDetail\"\u001b[39m \u001b[33m?\u001b[39m (\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 287 |\u001b[39m           \u001b[33m<\u001b[39m\u001b[33mHabitDetailScreen\u001b[39m\n \u001b[90m     |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 288 |\u001b[39m             habit\u001b[33m=\u001b[39m{screen\u001b[33m.\u001b[39mhabit}\n \u001b[90m 289 |\u001b[39m             onBack\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setScreen({ name\u001b[33m:\u001b[39m \u001b[32m\"habits\"\u001b[39m })}\n \u001b[90m 290 |\u001b[39m             onCheckIn\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setScreen({ name\u001b[33m:\u001b[39m \u001b[32m\"checkin\"\u001b[39m\u001b[33m,\u001b[39m habit\u001b[33m:\u001b[39m screen\u001b[33m.\u001b[39mhabit })}\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  Tabs (App.tsx:287:11)\u001b[39m\n\u001b[90m  Root (App.tsx:500:21)\u001b[39m\n\u001b[90m  App (App.tsx:528:9)\u001b[39m"]}
+{"_e":"root:init","_t":1786725838871,"format":"v0-jsonl","version":"57.0.6"}
+{"_e":"env:mode","_t":1786725838872,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786725838881,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786725839642,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786725840289,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786725840751,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786725848157,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786725848960,"id":"1","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786725848961,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786725848967,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786725849108,"id":"1","progress":0.03628117913832199,"total":21,"current":4}
+{"_e":"metro:bundling:progress","_t":1786725849212,"id":"1","progress":0.03628117913832199,"total":88,"current":15}
+{"_e":"metro:bundling:progress","_t":1786725849332,"id":"1","progress":0.04591836734693877,"total":112,"current":24}
+{"_e":"metro:bundling:progress","_t":1786725849445,"id":"1","progress":0.04591836734693877,"total":132,"current":28}
+{"_e":"metro:bundling:progress","_t":1786725849545,"id":"1","progress":0.08439187291283046,"total":179,"current":52}
+{"_e":"metro:bundling:progress","_t":1786725849665,"id":"1","progress":0.17292422311538083,"total":202,"current":84}
+{"_e":"metro:bundling:progress","_t":1786725849765,"id":"1","progress":0.23437893675988913,"total":252,"current":122}
+{"_e":"metro:bundling:progress","_t":1786725849866,"id":"1","progress":0.23437893675988913,"total":297,"current":143}
+{"_e":"metro:bundling:progress","_t":1786725849965,"id":"1","progress":0.2866366863905325,"total":325,"current":174}
+{"_e":"metro:bundling:progress","_t":1786725850065,"id":"1","progress":0.3856301371027378,"total":343,"current":213}
+{"_e":"metro:bundling:progress","_t":1786725850165,"id":"1","progress":0.4754935998067866,"total":364,"current":251}
+{"_e":"metro:bundling:progress","_t":1786725850266,"id":"1","progress":0.6310971681826381,"total":394,"current":313}
+{"_e":"metro:bundling:progress","_t":1786725850371,"id":"1","progress":0.6439083878643665,"total":410,"current":329}
+{"_e":"metro:bundling:progress","_t":1786725850471,"id":"1","progress":0.7153860788457483,"total":441,"current":373}
+{"_e":"metro:bundling:progress","_t":1786725850573,"id":"1","progress":0.7153860788457483,"total":484,"current":408}
+{"_e":"metro:bundling:progress","_t":1786725850679,"id":"1","progress":0.8150077160493827,"total":504,"current":455}
+{"_e":"metro:bundling:progress","_t":1786725850783,"id":"1","progress":0.8915717455621301,"total":520,"current":491}
+{"_e":"metro:bundling:progress","_t":1786725850895,"id":"1","progress":0.8915717455621301,"total":529,"current":494}
+{"_e":"metro:bundling:progress","_t":1786725850994,"id":"1","progress":0.9147889375857422,"total":574,"current":549}
+{"_e":"metro:bundling:progress","_t":1786725851094,"id":"1","progress":0.999,"total":590,"current":590}
+{"_e":"metro:bundling:done","_t":1786725851245,"id":"1","total":590,"ms":2284.7437}
+{"_e":"metro:client_log","_t":1786725851657,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786725851658,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786725851658,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786725851663,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786725851702,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1786725862031,"id":"3","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786725862033,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786725862148,"id":"3","total":1,"ms":114.6196}
+{"_e":"metro:client_log","_t":1786725862819,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786725862819,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786725862820,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786725862851,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786725862925,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:client_log","_t":1786725863634,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786725863681,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786725989446,"level":"error","data":["Failed to load profile:","[Error: Request failed (404)]","\n\n\u001b[1mCode: api.ts\u001b[22m\n\u001b[0m \u001b[90m 16 |\u001b[39m   \u001b[36mconst\u001b[39m data \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m res\u001b[33m.\u001b[39mjson()\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m \u001b[36mnull\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 17 |\u001b[39m   \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mres\u001b[33m.\u001b[39mok) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 18 |\u001b[39m     \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m((data \u001b[33m&&\u001b[39m \u001b[36mtypeof\u001b[39m data\u001b[33m.\u001b[39merror \u001b[33m===\u001b[39m \u001b[32m\"string\"\u001b[39m \u001b[33m?\u001b[39m data\u001b[33m.\u001b[39merror \u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m) \u001b[33m?\u001b[39m\u001b[33m?\u001b[39m \u001b[32m`Request failed (${res.status})`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 19 |\u001b[39m   }\n \u001b[90m 20 |\u001b[39m   \u001b[36mreturn\u001b[39m data \u001b[36mas\u001b[39m \u001b[33mT\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 21 |\u001b[39m }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  request (src\\lib\\api.ts:18:11)\u001b[39m"]}
+{"_e":"metro:bundling:started","_t":1786726089221,"id":"9","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786726089222,"id":"9","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786726089381,"id":"9","total":1,"ms":160.0625}
+{"_e":"metro:bundling:started","_t":1786726089386,"id":"a","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786726089389,"id":"a","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786726089610,"id":"a","total":1,"ms":223.3947}
+{"_e":"metro:client_log","_t":1786726090541,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786726090541,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786726090542,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786726090575,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786726090675,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:client_log","_t":1786726091107,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786726091107,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786726091107,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786726091127,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786726091205,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:client_log","_t":1786726091310,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786726091362,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786726262471,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786726262485,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786726272355,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786726272377,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786726323834,"level":"warn","data":["DateTimePicker is not supported on: web"]}
+{"_e":"metro:client_log","_t":1786726362508,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786726362527,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:client_log","_t":1786726566203,"level":"log","data":["[Geofence] Setting up 2 geofence region(s)..."]}
+{"_e":"metro:client_log","_t":1786726566234,"level":"error","data":["[Geofence] startGeofencingAsync failed","[TypeError: ExpoLocation.default.startGeofencingAsync is not a function]","\n\n\u001b[1mCode: geofence.ts\u001b[22m\n\u001b[0m \u001b[90m 72 |\u001b[39m   \u001b[36mtry\u001b[39m {\n \u001b[90m 73 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`[Geofence] Setting up ${regions.length} geofence region(s)...`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mLocation\u001b[39m\u001b[33m.\u001b[39mstartGeofencingAsync(\u001b[33mGEOFENCE_TASK_NAME\u001b[39m\u001b[33m,\u001b[39m regions)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m   } \u001b[36mcatch\u001b[39m (err) {\n \u001b[90m 76 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m\"[Geofence] startGeofencingAsync failed\"\u001b[39m\u001b[33m,\u001b[39m err)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   }\u001b[0m\n\u001b[1mCall Stack\u001b[22m\n\u001b[90m  setupGeofencing (src\\lib\\geofence.ts:74:20)\u001b[39m"]}
+{"_e":"metro:bundling:failed","_t":1786727090757,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727091368,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727092939,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727092999,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727094142,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727094147,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727105766,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727105772,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727107237,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727107284,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727108452,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727108494,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727109851,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727109907,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727111036,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727111040,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727124524,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727124529,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727508368,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727508490,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727510882,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727510887,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727542354,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727542361,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:failed","_t":1786727564753,"id":null,"message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:client_log","_t":1786727564759,"level":"error","data":["[UnableToResolveError: Unable to resolve module ./components/gestureHandlerRootHOC from D:\\My-App\\consistency-app\\mobile\\node_modules\\react-native-gesture-handler\\lib\\module\\index.js: \n\nNone of these files exist:\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)\n  * node_modules\\react-native-gesture-handler\\lib\\module\\components\\gestureHandlerRootHOC\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';]"]}
+{"_e":"metro:bundling:started","_t":1786727631900,"id":"l","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786727631901,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727631904,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632005,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632251,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632350,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632450,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632588,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727632689,"id":"l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:failed","_t":1786727632753,"id":"l","message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}
+{"_e":"metro:bundling:started","_t":1786727652063,"id":"n","platform":"web","environment":null,"entry":"index.ts"}
+{"_e":"metro:bundling:progress","_t":1786727652063,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652065,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652167,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652466,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652565,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652669,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652767,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652867,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727652997,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786727653097,"id":"n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:failed","_t":1786727653148,"id":"n","message":"Unable to resolve \"./components/gestureHandlerRootHOC\" from \"node_modules\\react-native-gesture-handler\\lib\\module\\index.js\"\n   5 | export { State } from './State';\n   6 | export { PointerType } from './PointerType';\n>  7 | export { default as gestureHandlerRootHOC } from './components/gestureHandlerRootHOC';\n     |                                                   ^\n   8 | export { default as GestureHandlerRootView } from './components/GestureHandlerRootView';\n   9 | export { MouseButton } from './handlers/gestureHandlerCommon';\n  10 | export { TapGestureHandler } from './handlers/TapGestureHandler';","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\react-native-gesture-handler\\lib\\module\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./components/gestureHandlerRootHOC\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"react-native-gesture-handler\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.ts\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index.ts\"\u001b[39m\n","filename":null,"targetModuleName":"./components/gestureHandlerRootHOC","originModulePath":"node_modules\\react-native-gesture-handler\\lib\\module\\index.js"}

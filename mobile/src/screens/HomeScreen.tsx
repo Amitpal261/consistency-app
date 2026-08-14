@@ -94,6 +94,9 @@ export function HomeScreen({
     }, null);
   }, [habits]);
 
+  const focusHabit = habits.find((habit) => habit.taskType === "location_duration") ?? topHabit ?? habits[0] ?? null;
+  const geofenceHabit = habits.find((habit) => habit.taskType === "location" || habit.taskType === "location_duration") ?? topHabit ?? habits[0] ?? null;
+
   const todayKey = todayKeyLocal();
   const checkedInToday = useMemo(
     () => habits.filter((h) => h.lastCheckInDateKey === todayKey).length,
@@ -225,6 +228,29 @@ export function HomeScreen({
                       <Text style={styles.statLabel}>TOTAL DAYS</Text>
                       <Text style={styles.statValue}>{totalCurrentStreakDays}d</Text>
                     </View>
+                  </View>
+
+                  <View style={styles.quickActionsRow}>
+                    {onOpenFlow ? (
+                      <Pressable style={styles.quickAction} onPress={onOpenFlow}>
+                        <MaterialIcons name="bolt" size={16} color={colors.primary} />
+                        <Text style={styles.quickActionText}>Flow</Text>
+                      </Pressable>
+                    ) : null}
+
+                    {onOpenFocusTimer && focusHabit ? (
+                      <Pressable style={styles.quickAction} onPress={() => onOpenFocusTimer(focusHabit)}>
+                        <MaterialIcons name="timer" size={16} color={colors.primary} />
+                        <Text style={styles.quickActionText}>Focus</Text>
+                      </Pressable>
+                    ) : null}
+
+                    {onOpenGeofence && geofenceHabit ? (
+                      <Pressable style={styles.quickAction} onPress={() => onOpenGeofence(geofenceHabit)}>
+                        <MaterialIcons name="location-on" size={16} color={colors.primary} />
+                        <Text style={styles.quickActionText}>Arrival</Text>
+                      </Pressable>
+                    ) : null}
                   </View>
                   </AppCard>
                 </Pressable>
@@ -454,6 +480,28 @@ const styles = StyleSheet.create({
   heroCard: {
     padding: spacing.md,
     gap: spacing.md,
+  },
+  quickActionsRow: {
+    flexDirection: "row",
+    gap: spacing.xs,
+    flexWrap: "wrap",
+  },
+  quickAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: "rgba(63, 81, 181, 0.12)",
+    borderWidth: 1,
+    borderColor: "rgba(186, 195, 255, 0.2)",
+    borderRadius: radius.full,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  quickActionText: {
+    ...typography.bodyMd,
+    color: colors.onSurface,
+    fontSize: 12,
+    fontWeight: "700",
   },
   heroHeader: {
     flexDirection: "row",

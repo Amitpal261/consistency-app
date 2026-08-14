@@ -30,34 +30,6 @@ export function login(email: string, password: string) {
   return request<AuthResponse>("/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
 }
 
-export type Profile = { id: string; name: string; email: string; timezone: string; createdAt: string };
-
-export function getMyProfile(token: string) {
-  return request<{ user: Profile }>("/auth/me", { token });
-}
-export function getHabitHistory(token: string, habitId: string, days?: number) {
-  const query = days ? `?days=${days}` : "";
-  return request<{ history: { dateKey: string; checkedIn: boolean }[]; days?: { date: string; status: string | null }[] }>(
-    `/habits/${encodeURIComponent(habitId)}/history${query}`,
-    { token }
-  );
-}
-export function updateMyProfile(token: string, payload: { name?: string; timezone?: string }) {
-  return request<{ user: Profile }>("/auth/me", { method: "PATCH", token, body: JSON.stringify(payload) });
-}
-
-export function changeMyPassword(token: string, currentPassword: string, newPassword: string) {
-  return request<{ message: string }>("/auth/me/password", {
-    method: "PATCH",
-    token,
-    body: JSON.stringify({ currentPassword, newPassword }),
-  });
-}
-
-export function deleteMyAccount(token: string) {
-  return request<{ message: string }>("/auth/me", { method: "DELETE", token });
-}
-
 export function requestPasswordReset(email: string) {
   return request<{ message: string }>("/auth/forgot-password", {
     method: "POST",
@@ -79,13 +51,13 @@ export type Habit = {
   timeWindow?: { hour: number; minute: number; windowMinutes: number };
   location?: { lat: number; lng: number; radiusMeters: number };
   requiredDurationMinutes?: number;
-  currentDwellMinutes?: number;
   daysOfWeek: number[];
   buddyId?: string;
   ringtone?: Ringtone;
   currentStreak: number;
   bestStreak: number;
   lastCheckInDateKey?: string;
+  currentDwellMinutes?: number;
 };
 
 export type CreateHabitPayload = {
@@ -104,6 +76,38 @@ export function createHabit(token: string, payload: CreateHabitPayload) {
 
 export function getHabitsWithStreaks(token: string) {
   return request<{ habits: Habit[] }>("/habits/with-streaks", { token });
+}
+
+// Fetch per-day history for a single habit. Backend: GET /habits/:habitId/history?days=N
+export function getHabitHistory(token: string, habitId: string, days = 21) {
+  const encoded = encodeURIComponent(habitId);
+  return request<{ days?: { date: string; status: string | null }[]; history?: any[] }>(
+    `/habits/${encoded}/history?days=${Number(days)}`,
+    { token }
+  );
+}
+
+export type Profile = { id?: string; name: string; email: string };
+
+// Fetch the authenticated user's profile. Backend path may vary (/auth/me or /me).
+export function getMyProfile(token: string) {
+  return request<{ user: Profile }>("/auth/me", { token });
+}
+
+export function updateMyProfile(token: string, payload: { name?: string; email?: string }) {
+  return request<{ user: Profile }>("/me", { method: "PATCH", token, body: JSON.stringify(payload) });
+}
+
+export function changeMyPassword(token: string, currentPassword: string, newPassword: string) {
+  return request<{ message: string }>("/auth/change-password", {
+    method: "POST",
+    token,
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+}
+
+export function deleteMyAccount(token: string) {
+  return request<{ message: string }>("/me", { method: "DELETE", token });
 }
 
 export type CheckInPayload = {
