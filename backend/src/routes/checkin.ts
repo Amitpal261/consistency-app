@@ -119,11 +119,22 @@ checkInRouter.post("/", requireAuth, checkInLimiter, async (req: AuthedRequest, 
     return res.status(409).json({ error: "Already checked in today for this habit." });
   }
 
-  const withinTimeWindow = isWithinTimeWindow(habit, now);
+const withinTimeWindow = isWithinTimeWindow(habit, now);
   if (habit.taskType === "time" && !withinTimeWindow) {
     return res.status(400).json({ error: "This habit's time window has already closed for today." });
   }
 
+  // Location-arrival habits can optionally have a deadline (e.g. "reach the
+  // park by 6:00 PM every day") stored in the same timeWindow.hour/minute
+  // fields used by time-based habits — here it means "any time today up
+  // until this time", not a fixed start+window like the time-based check above.
+  if (habit.taskType === "location" && habit.timeWindow?.hour != null && habit.timeWindow?.minute != null) {
+    const deadline = new Date(now);
+    deadline.setHours(habit.timeWindow.hour, habit.timeWindow.minute, 0, 0);
+    if (now.getTime() > deadline.getTime()) {
+      return res.status(400).json({ error: "You arrived after today's deadline for this habit." });
+    }
+  }
   let photoHash: string | undefined;
   if (parsed.data.photoBase64) {
     photoHash = await computeImageHash(parsed.data.photoBase64);

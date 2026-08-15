@@ -1,9 +1,19 @@
 import * as TaskManager from "expo-task-manager";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { startDwell, exitDwell } from "./api";
+import { startDwell, exitDwell, submitCheckIn } from "./api";
 
 export const GEOFENCE_TASK_NAME = "habit-geofence-task";
+const GEOFENCE_META_KEY = "geofence_habit_meta";
+
+type GeofenceHabitMeta = { taskType: "location" | "location_duration" };
+
+async function getHabitMeta(habitId: string): Promise<GeofenceHabitMeta | null> {
+  const raw = await AsyncStorage.getItem(GEOFENCE_META_KEY);
+  if (!raw) return null;
+  const map = JSON.parse(raw) as Record<string, GeofenceHabitMeta>;
+  return map[habitId] ?? null;
+}
 
 TaskManager.defineTask(GEOFENCE_TASK_NAME, async ({ data: { eventType, region }, error }: any) => {
   if (error) {
@@ -20,17 +30,36 @@ TaskManager.defineTask(GEOFENCE_TASK_NAME, async ({ data: { eventType, region },
   const habitId = region.identifier;
   const lat = region.latitude;
   const lng = region.longitude;
+  const meta = await getHabitMeta(habitId);
 
   if (eventType === Location.GeofencingEventType.Enter) {
     console.log(`[Geofence] Entered habit region: ${habitId}`);
     try {
-      await startDwell(token, habitId, { lat, lng });
-      console.log(`[Geofence] Successfully started dwell for habit: ${habitId}`);
+      if (meta?.taskType === "location") {
+        // Plain arrival habit — a single Enter event IS the whole check-in.
+        // Only works when verificationMethod is GPS-only (no photo capture
+        // is possible from a background task) — the backend will reject
+        // this with a clear error for photo-required habits, which is
+        // expected: the user needs to open the app and check in manually
+        // for those.
+        await submitCheckIn(token, { habitId, location: { lat, lng } });
+        console.log(`[Geofence] Auto check-in submitted for arrival habit: ${habitId}`);
+      } else {
+        // location_duration — Enter just starts the dwell timer, the actual
+        // check-in/streak update happens on Exit once enough time has passed.
+        await startDwell(token, habitId, { lat, lng });
+        console.log(`[Geofence] Successfully started dwell for habit: ${habitId}`);
+      }
     } catch (err) {
-      console.error(`[Geofence] Failed to start dwell for habit: ${habitId}`, err);
+      console.error(`[Geofence] Failed to process entry for habit: ${habitId}`, err);
     }
   } else if (eventType === Location.GeofencingEventType.Exit) {
     console.log(`[Geofence] Exited habit region: ${habitId}`);
+    if (meta?.taskType === "location") {
+      // Nothing to do on exit for a plain arrival habit — it already
+      // checked in on Enter above.
+      return;
+    }
     try {
       await exitDwell(token, habitId, { lat, lng });
       console.log(`[Geofence] Successfully exited dwell for habit: ${habitId}`);
@@ -57,8 +86,19 @@ export async function setupGeofencing(habits: any[]) {
     if (isRegistered) {
       await Location.stopGeofencingAsync(GEOFENCE_TASK_NAME);
     }
+    await AsyncStorage.removeItem(GEOFENCE_META_KEY);
     return;
   }
+
+  // Persist a small habitId -> taskType lookup so the background task
+  // (which only receives a bare region identifier from the OS, not the
+  // full habit object) knows whether an Enter event means "auto check-in
+  // now" (plain arrival) or "start the dwell timer" (duration habit).
+  const metaMap: Record<string, GeofenceHabitMeta> = {};
+  for (const h of locationHabits) {
+    metaMap[h._id] = { taskType: h.taskType };
+  }
+  await AsyncStorage.setItem(GEOFENCE_META_KEY, JSON.stringify(metaMap));
 
   const regions = locationHabits.map((h) => ({
     identifier: h._id,

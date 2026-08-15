@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Animated, Easing, Platform, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Map as MapLibreMap, Camera as MapLibreCamera, ViewAnnotation } from "@maplibre/maplibre-react-native";
+
+// OpenFreeMap — genuinely free, unlimited, no API key required, built on
+// OpenStreetMap data. See https://openfreemap.org. MapLibre auto-adds the
+// required attribution, so nothing else to do here.
+const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+
+type LatLng = { latitude: number; longitude: number };
 import * as Location from "expo-location";
 import { useCameraPermissions } from "expo-camera";
 import { LinearGradient } from "expo-linear-gradient";
@@ -40,6 +48,15 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
   const [windowMinutes, setWindowMinutes] = useState("60");
   const [durationMinutes, setDurationMinutes] = useState("120");
   const [radiusMeters, setRadiusMeters] = useState("150");
+  const [pickedLocation, setPickedLocation] = useState<LatLng | null>(null);
+  const [mapInitialRegion, setMapInitialRegion] = useState<LatLng | null>(null);
+  const cameraRef = useRef<any>(null);
+  const [loadingMap, setLoadingMap] = useState(false);
+  const [arrivalDeadline, setArrivalDeadline] = useState(() => {
+    const d = new Date();
+    d.setHours(18, 0, 0, 0); // sensible default: 6:00 PM
+    return d;
+  });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -82,6 +99,45 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
     }
   }
 
+  // Centers the map on the user's current position ONCE, purely as a
+  // starting point for the map view — it does NOT set pickedLocation.
+  // The actual habit location only gets set when the user taps/drags the
+  // pin themselves, so "wherever I happen to be right now" is never
+  // silently used as the target place.
+  async function centerMapOnMyLocation() {
+    setLoadingMap(true);
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Location permission needed", "Allow location access to find your position on the map.");
+        return;
+      }
+      const pos = await getCurrentPositionSafe();
+      const here = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
+      setMapInitialRegion(here);
+      // If the map is already mounted (e.g. the user tapped "recenter"
+      // again later), fly the camera there instead of waiting for a re-mount.
+      // v11 renamed the imperative method setCamera() -> setStop(), and its
+      // prop names center/zoom/duration (not centerCoordinate/zoomLevel/animationDuration).
+      cameraRef.current?.setStop({
+        center: [here.longitude, here.latitude],
+        zoom: 15,
+        duration: 600,
+      });
+    } catch (err) {
+      Alert.alert("Could not get your location", "You can still tap anywhere on the map to place the pin manually.");
+    } finally {
+      setLoadingMap(false);
+    }
+  }
+
+  useEffect(() => {
+    if (step === 1 && (taskType === "location" || taskType === "location_duration") && !mapInitialRegion) {
+      centerMapOnMyLocation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, taskType]);
+
   const requestCamera = async () => {
     const res = await requestPermission();
     if (!res.granted) {
@@ -94,24 +150,21 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
       setError("Please enter a name for this habit.");
       return;
     }
+    if ((taskType === "location" || taskType === "location_duration") && !pickedLocation) {
+      setError("Please tap the map to choose this habit's location.");
+      return;
+    }
     setError(null);
     setSaving(true);
     try {
-      let location: { lat: number; lng: number; radiusMeters: number } | undefined;
-      if (taskType !== "time") {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          setError("Location permission is required for geofenced habits.");
-          setSaving(false);
-          return;
-        }
-        const pos = await getCurrentPositionSafe();
-        location = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          radiusMeters: Number(radiusMeters) || 150,
-        };
-      }
+      const location =
+        taskType !== "time" && pickedLocation
+          ? {
+              lat: pickedLocation.latitude,
+              lng: pickedLocation.longitude,
+              radiusMeters: Number(radiusMeters) || 150,
+            }
+          : undefined;
 
       const res = await createHabit(token, {
         name: name.trim(),
@@ -120,6 +173,8 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
         timeWindow:
           taskType === "time"
             ? { hour: time.getHours(), minute: time.getMinutes(), windowMinutes: Number(windowMinutes) || 60 }
+            : taskType === "location"
+            ? { hour: arrivalDeadline.getHours(), minute: arrivalDeadline.getMinutes(), windowMinutes: 1440 }
             : undefined,
         location,
         requiredDurationMinutes: taskType === "location_duration" ? Number(durationMinutes) || 120 : undefined,
@@ -286,9 +341,76 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
               </>
             ) : (
               <AppCard variant="glass" style={styles.cardSection}>
-                <Text style={styles.inputLabel}>GEOFENCE RADIUS (METERS)</Text>
-                <Text style={styles.infoHint}>Your current phone location will be recorded as the habit target place.</Text>
+                <Text style={styles.inputLabel}>HABIT LOCATION</Text>
+                <Text style={styles.infoHint}>
+                  Tap the map to place the pin at the exact spot — e.g. the park entrance, your gym's door. Tap again anywhere to move it.
+                </Text>
+
+                <View style={styles.mapWrap}>
+                  {mapInitialRegion ? (
+                    <MapLibreMap
+                      style={styles.map}
+                      mapStyle={MAP_STYLE_URL}
+                      onPress={(event: any) => {
+                        const [lng, lat] = event.nativeEvent.lngLat;
+                        setPickedLocation({ latitude: lat, longitude: lng });
+                      }}
+                    >
+                      <MapLibreCamera
+                        ref={cameraRef}
+                        initialViewState={{
+                          center: [mapInitialRegion.longitude, mapInitialRegion.latitude],
+                          zoom: 15,
+                        }}
+                      />
+
+                      {pickedLocation ? (
+                        <ViewAnnotation lngLat={[pickedLocation.longitude, pickedLocation.latitude]}>
+                          <View style={styles.pin} />
+                        </ViewAnnotation>
+                      ) : null}
+                    </MapLibreMap>
+                  ) : (
+                    <View style={[styles.map, styles.mapLoading]}>
+                      <Text style={styles.infoHint}>{loadingMap ? "Finding your location…" : "Map loading…"}</Text>
+                    </View>
+                  )}
+                </View>
+
+                <Pressable onPress={centerMapOnMyLocation} style={styles.recenterButton}>
+                  <MaterialIcons name="my-location" size={16} color={colors.primary} />
+                  <Text style={styles.recenterButtonText}>Center on my current location</Text>
+                </Pressable>
+
+                {pickedLocation ? (
+                  <View style={styles.chipRow}>
+                    <MaterialIcons name="check-circle" size={16} color={colors.success} />
+                    <Text style={styles.chipText}>Pin placed — this is your habit's target place</Text>
+                  </View>
+                ) : (
+                  <View style={styles.chipRow}>
+                    <MaterialIcons name="info-outline" size={16} color={colors.warning} />
+                    <Text style={styles.chipText}>Tap the map to place a pin</Text>
+                  </View>
+                )}
+
+                <Text style={[styles.inputLabel, { marginTop: 14 }]}>GEOFENCE RADIUS (METERS)</Text>
                 <AppTextInput value={radiusMeters} onChangeText={setRadiusMeters} keyboardType="number-pad" />
+
+                {taskType === "location" && (
+                  <>
+                    <Text style={[styles.inputLabel, { marginTop: 14 }]}>ARRIVE BY (DAILY DEADLINE)</Text>
+                    <Text style={styles.infoHint}>
+                      e.g. reach the park by 6:00 PM every day — arriving after this time won't count for today.
+                    </Text>
+                    <DateTimePicker
+                      value={arrivalDeadline}
+                      mode="time"
+                      display={Platform.OS === "ios" ? "spinner" : "default"}
+                      onChange={(_, selected) => selected && setArrivalDeadline(selected)}
+                    />
+                  </>
+                )}
 
                 {taskType === "location_duration" && (
                   <>
@@ -360,6 +482,8 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
                   <Text style={styles.summaryVal}>
                     {taskType === "time"
                       ? `${String(time.getHours()).padStart(2, "0")}:${String(time.getMinutes()).padStart(2, "0")} Daily`
+                      : taskType === "location"
+                      ? `${radiusMeters}m · Arrive by ${String(arrivalDeadline.getHours()).padStart(2, "0")}:${String(arrivalDeadline.getMinutes()).padStart(2, "0")}`
                       : `${radiusMeters}m Geofence`}
                   </Text>
                 </View>
@@ -408,6 +532,53 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
 }
 
 const styles = StyleSheet.create({
+  pin: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: colors.primary,
+    borderWidth: 3,
+    borderColor: "#fff",
+  },
+  mapWrap: {
+    height: 220,
+    borderRadius: radius.md,
+    overflow: "hidden",
+    marginTop: spacing.sm,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+  },
+  map: {
+    width: "100%",
+    height: "100%",
+  },
+  mapLoading: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,0.03)",
+  },
+  recenterButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: spacing.sm,
+    alignSelf: "flex-start",
+  },
+  recenterButtonText: {
+    color: colors.primary,
+    fontWeight: "600",
+    fontSize: 13,
+  },
+  chipRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: spacing.sm,
+  },
+  chipText: {
+    color: colors.onSurfaceVariant,
+    fontSize: 12,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -660,4 +831,4 @@ const styles = StyleSheet.create({
   bottomBarBtnMain: {
     flex: 2,
   },
-});
+});

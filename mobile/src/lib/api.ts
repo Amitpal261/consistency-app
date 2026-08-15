@@ -1,4 +1,9 @@
-export const API_BASE_URL = "http://192.168.1.33:4000";
+// EXPO_PUBLIC_-prefixed vars are automatically inlined by Expo at build time
+// (no extra config needed) — see mobile/.env for local dev, and set
+// EXPO_PUBLIC_API_URL as an EAS environment variable for real builds.
+// The hardcoded fallback below only exists so local dev still works if you
+// forget to create .env — change the IP to your own machine's LAN IP.
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? "http://192.168.1.33:4000";
 
 async function request<T>(path: string, options: RequestInit & { token?: string } = {}): Promise<T> {
   const { token, headers, ...rest } = options;

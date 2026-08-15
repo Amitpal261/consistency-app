@@ -42,6 +42,9 @@
         "projectId": "75cfbf5d-096f-410f-95ee-749924af6b16"
       }
     },
-    "owner": "amitpalapps-team"
+    "owner": "amitpalapps-team",
+    "plugins": [
+      "@maplibre/maplibre-react-native"
+    ]
   }
 }
