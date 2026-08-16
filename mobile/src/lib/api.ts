@@ -1,6 +1,6 @@
 export const API_BASE_URL = "http://192.168.1.43:4000";
 
-async function request<T>(path: string, options: RequestInit & { token?: string } = {}): Promise<T> {
+async function request<T>(path: string, options: RequestInit & { token?: string } = {}): Promise<T> {matchMedia
   const { token, headers, ...rest } = options;
   const requestHeaders = new Headers(headers);
   requestHeaders.set("Content-Type", "application/json");
