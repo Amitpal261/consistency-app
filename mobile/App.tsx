@@ -1,8 +1,8 @@
 ﻿import "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { getStoredItem, setStoredItem } from "./src/lib/storage";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -28,6 +28,7 @@ import { FocusTimerScreen } from "./src/screens/FocusTimerScreen";
 import { MissedDayRecoveryScreen } from "./src/screens/MissedDayRecoveryScreen";
 import { SummaryDigestScreen } from "./src/screens/SummaryDigestScreen";
 import { GeofenceArrivalScreen } from "./src/screens/GeofenceArrivalScreen";
+import { TimeAlarmCheckInScreen } from "./src/screens/TimeAlarmCheckInScreen";
 import { ProductivityFlowScreen } from "./src/screens/ProductivityFlowScreen";
 
 import { colors } from "./src/theme/colors";
@@ -52,6 +53,8 @@ type HabitsStackParamList = {
   home: undefined;
   createHabit: undefined;
   habitDetail: { habit: Habit };
+  timeCheckin: { habit: Habit };
+  // legacy checkin route kept for compatibility but habitDetail now routes by taskType
   checkin: { habit: Habit };
   missedDayRecovery: { habit?: Habit };
   focusTimer: { habit?: Habit };
@@ -218,10 +221,10 @@ function HomeRoute() {
       <DevMenu
         screens={[
           {
-            label: "CheckInScreen (Photo Verify)",
+            label: "TimeAlarmCheckInScreen",
             emoji: "📸",
             action: () =>
-              navigation.navigate("checkin", {
+              navigation.navigate("timeCheckin", {
                 habit: {
                   _id: "dev-habit-1",
                   name: "Morning Gym Session",
@@ -317,8 +320,19 @@ function HabitsNavigator() {
           <HabitDetailScreen
             habit={route.params.habit}
             onBack={() => navigation.goBack()}
-            onCheckIn={() => navigation.navigate("checkin", { habit: route.params.habit })}
+            onCheckIn={() => {
+              // route to screen by taskType
+              const t = route.params.habit.taskType;
+              if (t === "time") navigation.navigate("timeCheckin", { habit: route.params.habit });
+              else if (t === "location") navigation.navigate("geofenceArrival", { habit: route.params.habit });
+              else navigation.navigate("focusTimer", { habit: route.params.habit });
+            }}
           />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="timeCheckin">
+        {({ route, navigation }) => (
+          <TimeAlarmCheckInScreen habit={route.params.habit} onDone={() => navigation.navigate("home")} />
         )}
       </HabitsStack.Screen>
       <HabitsStack.Screen name="checkin">
@@ -427,7 +441,7 @@ function AuthNavigator() {
   const [didLoadOnboarding, setDidLoadOnboarding] = useState<boolean | null>(null);
 
   useEffect(() => {
-    AsyncStorage.getItem(ONBOARDING_STORAGE_KEY)
+    getStoredItem(ONBOARDING_STORAGE_KEY)
       .then((value) => setDidLoadOnboarding(value === "true"))
       .catch(() => setDidLoadOnboarding(false));
   }, []);
@@ -442,7 +456,7 @@ function AuthNavigator() {
         {({ navigation }) => (
           <OnboardingScreen
             onContinue={async () => {
-              await AsyncStorage.setItem(ONBOARDING_STORAGE_KEY, "true");
+              await setStoredItem(ONBOARDING_STORAGE_KEY, "true");
               setDidLoadOnboarding(true);
               navigation.navigate("login");
             }}

@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { getStoredItem, removeStoredItem, setStoredItem } from "../lib/storage";
 
 type AuthContextValue = {
   token: string | null;
@@ -16,7 +16,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY).then((stored) => {
+    getStoredItem(STORAGE_KEY).then((stored) => {
       setTokenState(stored);
       setLoading(false);
     });
@@ -25,9 +25,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const setToken = (next: string | null) => {
     setTokenState(next);
     if (next) {
-      AsyncStorage.setItem(STORAGE_KEY, next);
+      void setStoredItem(STORAGE_KEY, next);
     } else {
-      AsyncStorage.removeItem(STORAGE_KEY);
+      void removeStoredItem(STORAGE_KEY);
     }
   };
 
