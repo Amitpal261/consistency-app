@@ -50,6 +50,7 @@ export type Habit = {
   verificationMethod: VerificationMethod;
   timeWindow?: { hour: number; minute: number; windowMinutes: number };
   location?: { lat: number; lng: number; radiusMeters: number };
+  locationDeadline?: { hour: number; minute: number };
   requiredDurationMinutes?: number;
   daysOfWeek: number[];
   buddyId?: string;
@@ -66,7 +67,9 @@ export type CreateHabitPayload = {
   verificationMethod: VerificationMethod;
   timeWindow?: { hour: number; minute: number; windowMinutes?: number };
   location?: { lat: number; lng: number; radiusMeters?: number };
+  locationDeadline?: { hour: number; minute: number };
   requiredDurationMinutes?: number;
+  daysOfWeek?: number[];
   ringtone?: Ringtone;
 };
 

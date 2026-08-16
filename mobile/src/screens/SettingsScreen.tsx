@@ -3,8 +3,8 @@ import { Alert, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View }
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../context/AuthContext";
+import { getStoredItem, setStoredItem } from "../lib/storage";
 import { AppCard } from "../components/AppCard";
 import DotGridBackground from "../components/DotGridBackground";
 import { colors, radius, spacing, typography } from "../theme/colors";
@@ -48,12 +48,12 @@ export function SettingsScreen({ onOpenAccountPrivacy }: { onOpenAccountPrivacy:
   const [alarmsEnabled, setAlarmsEnabled] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem(NOTIF_PREF_KEY).then((v) => setAlarmsEnabled(v !== "false"));
+    getStoredItem(NOTIF_PREF_KEY).then((v) => setAlarmsEnabled(v !== "false"));
   }, []);
 
   async function toggleAlarms(value: boolean) {
     setAlarmsEnabled(value);
-    await AsyncStorage.setItem(NOTIF_PREF_KEY, value ? "true" : "false");
+    await setStoredItem(NOTIF_PREF_KEY, value ? "true" : "false");
   }
 
   function handleLogout() {

@@ -39,6 +39,47 @@ function isWithinTimeWindow(
   return now.getTime() >= scheduled.getTime() && now.getTime() <= windowEnd.getTime();
 }
 
+function toMinutesSinceMidnight(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
+  const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
+  return hour * 60 + minute;
+}
+
+function isDeadlinePassed(
+  deadline: { hour?: number | null; minute?: number | null } | null | undefined,
+  now: Date,
+  timeZone: string
+): boolean {
+  if (!deadline || deadline.hour == null || deadline.minute == null) return false;
+  const nowMinutes = toMinutesSinceMidnight(now, timeZone);
+  const deadlineMinutes = deadline.hour * 60 + deadline.minute;
+  return nowMinutes > deadlineMinutes;
+}
+
+function isWithinLocationRadius(
+  point: { lat: number; lng: number },
+  target: { lat?: number | null; lng?: number | null; radiusMeters?: number | null } | null | undefined
+): boolean {
+  if (!target || target.lat == null || target.lng == null) return true;
+  const radius = target.radiusMeters ?? 150;
+  const R = 6371000;
+  const toRad = (value: number) => (value * Math.PI) / 180;
+  const dLat = toRad(point.lat - target.lat);
+  const dLng = toRad(point.lng - target.lng);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(target.lat)) * Math.cos(toRad(point.lat)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const distanceMeters = 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return distanceMeters <= radius;
+}
+
 checkInRouter.get("/prompt", requireAuth, async (req: AuthedRequest, res) => {
   const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
   const todayKey = dateKeyInTimezone(new Date(), timezone);
@@ -106,6 +147,18 @@ checkInRouter.post("/", requireAuth, checkInLimiter, async (req: AuthedRequest, 
   const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
   const now = new Date();
   const todayKey = dateKeyInTimezone(now, timezone);
+
+  if (habit.taskType === "location") {
+    if (!parsed.data.location) {
+      return res.status(400).json({ error: "GPS location is required for location-arrival habits." });
+    }
+    if (!isWithinLocationRadius(parsed.data.location, habit.location)) {
+      return res.status(400).json({ error: "You are outside the geofence for this habit." });
+    }
+    if (isDeadlinePassed(habit.locationDeadline, now, timezone)) {
+      return res.status(400).json({ error: "You arrived after today's deadline." });
+    }
+  }
 
   const alreadyCheckedIn = await CheckIn.exists({
     userId,

@@ -23,6 +23,9 @@ habitRouter.post("/", requireAuth, async (req: AuthedRequest, res) => {
   if (parsed.data.taskType === "location_duration" && !parsed.data.requiredDurationMinutes) {
     return res.status(400).json({ error: "requiredDurationMinutes is required for duration habits." });
   }
+  if (parsed.data.taskType === "location" && !parsed.data.locationDeadline) {
+    return res.status(400).json({ error: "locationDeadline is required for location-arrival habits." });
+  }
 
   const habit = await Habit.create({ ...parsed.data, userId: req.userId });
   return res.status(201).json({ habit });

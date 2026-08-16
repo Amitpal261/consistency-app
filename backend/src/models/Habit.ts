@@ -16,6 +16,10 @@ const habitSchema = new Schema(
       lng: { type: Number },
       radiusMeters: { type: Number, default: 150 },
     },
+    locationDeadline: {
+      hour: { type: Number, min: 0, max: 23 },
+      minute: { type: Number, min: 0, max: 59 },
+    },
     requiredDurationMinutes: { type: Number },
     daysOfWeek: { type: [Number], default: [0, 1, 2, 3, 4, 5, 6] },
     buddyId: { type: Schema.Types.ObjectId, ref: "User" },

@@ -69,6 +69,12 @@ export const createHabitSchema = z.object({
       radiusMeters: z.number().min(20).max(2000).default(150),
     })
     .optional(),
+  locationDeadline: z
+    .object({
+      hour: z.number().int().min(0).max(23),
+      minute: z.number().int().min(0).max(59),
+    })
+    .optional(),
   requiredDurationMinutes: z.number().int().min(5).max(1440).optional(),
   daysOfWeek: z.array(z.number().int().min(0).max(6)).min(1).max(7).optional(),
   buddyId: z.string().optional(),
