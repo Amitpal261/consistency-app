@@ -28,6 +28,7 @@ import { FocusTimerScreen } from "./src/screens/FocusTimerScreen";
 import { MissedDayRecoveryScreen } from "./src/screens/MissedDayRecoveryScreen";
 import { SummaryDigestScreen } from "./src/screens/SummaryDigestScreen";
 import { GeofenceArrivalScreen } from "./src/screens/GeofenceArrivalScreen";
+import { LocationArrivalScreen } from "./src/screens/LocationArrivalScreen";
 import { TimeAlarmCheckInScreen } from "./src/screens/TimeAlarmCheckInScreen";
 import { ProductivityFlowScreen } from "./src/screens/ProductivityFlowScreen";
 
@@ -58,7 +59,7 @@ type HabitsStackParamList = {
   checkin: { habit: Habit };
   missedDayRecovery: { habit?: Habit };
   focusTimer: { habit?: Habit };
-  geofenceArrival: { habit?: Habit };
+  locationArrival: { habit: Habit };
   summaryDigest: undefined;
   productivityFlow: undefined;
 };
@@ -215,7 +216,7 @@ function HomeRoute() {
         onOpenDigest={() => navigation.navigate("summaryDigest")}
         onOpenFlow={() => navigation.navigate("productivityFlow")}
         onOpenFocusTimer={(habit) => navigation.navigate("focusTimer", { habit })}
-        onOpenGeofence={(habit) => navigation.navigate("geofenceArrival", { habit })}
+        onOpenGeofence={(habit) => habit && navigation.navigate("locationArrival", { habit })}
       />
 
       <DevMenu
@@ -272,10 +273,10 @@ function HomeRoute() {
               }),
           },
           {
-            label: "GeofenceArrivalScreen",
+            label: "LocationArrivalScreen",
             emoji: "📍",
             action: () =>
-              navigation.navigate("geofenceArrival", {
+              navigation.navigate("locationArrival", {
                 habit: {
                   _id: "dev-habit-4",
                   name: "Gym Arrival",
@@ -324,7 +325,7 @@ function HabitsNavigator() {
               // route to screen by taskType
               const t = route.params.habit.taskType;
               if (t === "time") navigation.navigate("timeCheckin", { habit: route.params.habit });
-              else if (t === "location") navigation.navigate("geofenceArrival", { habit: route.params.habit });
+              else if (t === "location") navigation.navigate("locationArrival", { habit: route.params.habit });
               else navigation.navigate("focusTimer", { habit: route.params.habit });
             }}
           />
@@ -333,6 +334,11 @@ function HabitsNavigator() {
       <HabitsStack.Screen name="timeCheckin">
         {({ route, navigation }) => (
           <TimeAlarmCheckInScreen habit={route.params.habit} onDone={() => navigation.navigate("home")} />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="locationArrival">
+        {({ route, navigation }) => (
+          <LocationArrivalScreen habit={route.params.habit} onCheckIn={() => navigation.navigate("home")} onCancel={() => navigation.navigate("home")} />
         )}
       </HabitsStack.Screen>
       <HabitsStack.Screen name="checkin">
@@ -358,15 +364,6 @@ function HabitsNavigator() {
             targetMinutes={route.params.habit?.requiredDurationMinutes ?? 60}
             initialDwellMinutes={route.params.habit?.currentDwellMinutes ?? 0}
             onDone={() => navigation.navigate("home")}
-          />
-        )}
-      </HabitsStack.Screen>
-      <HabitsStack.Screen name="geofenceArrival">
-        {({ route, navigation }) => (
-          <GeofenceArrivalScreen
-            habitName={route.params.habit?.name}
-            onCheckIn={() => navigation.navigate("home")}
-            onCancel={() => navigation.navigate("home")}
           />
         )}
       </HabitsStack.Screen>

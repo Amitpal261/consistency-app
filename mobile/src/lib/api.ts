@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://192.168.1.33:4000";
+export const API_BASE_URL = "http://192.168.1.43:4000";
 
 async function request<T>(path: string, options: RequestInit & { token?: string } = {}): Promise<T> {
   const { token, headers, ...rest } = options;

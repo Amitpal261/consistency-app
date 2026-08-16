@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: colors.onSurface,
   },
+  
   menuRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -189,4 +190,4 @@ const styles = StyleSheet.create({
     color: colors.onSurfaceVariant,
     opacity: 0.6,
   },
-});
+});
