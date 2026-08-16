@@ -8,6 +8,7 @@ import { submitCheckIn, type Habit } from "../lib/api";
 import DotGridBackground from "../components/DotGridBackground";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
+import MapView, { Marker, Circle } from 'react-native-maps';
 import { colors, spacing, typography } from "../theme/colors";
 
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -151,27 +152,52 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
 
       <View style={styles.container}>
         <AppCard variant="glass" style={styles.mapCard}>
-          {/* simple placeholder map */}
+          {/* Map */}
           <View style={styles.mapView}>
-            <View style={styles.mapCenterMarker} />
-            {habit?.location && (
-              <View style={styles.mapPinWrap}>
-                <MaterialIcons name="location-pin" size={36} color={colors.primary} />
-                <Text style={styles.mapPinText}>Target</Text>
-              </View>
-            )}
-            {position && (
-              <View style={styles.youMarker}>
-                <MaterialIcons name="person-pin-circle" size={32} color={colors.tertiary} />
-                <Text style={styles.youText}>You</Text>
+            {/* react-native-maps MapView */}
+            {habit.location ? (
+              <>
+                <MapView
+                  style={StyleSheet.absoluteFill}
+                  initialRegion={{
+                    latitude: habit.location.lat,
+                    longitude: habit.location.lng,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                  }}
+                  showsUserLocation={false}
+                  showsMyLocationButton={false}
+                >
+                  <Marker
+                    coordinate={{ latitude: habit.location.lat, longitude: habit.location.lng }}
+                    title={habit.name}
+                    pinColor={colors.primary}
+                  />
+
+                  <Circle
+                    center={{ latitude: habit.location.lat, longitude: habit.location.lng }}
+                    radius={habit.location.radiusMeters}
+                    strokeColor={"rgba(63,81,181,0.3)"}
+                    fillColor={"rgba(63,81,181,0.12)"}
+                  />
+
+                  {position && (
+                    <Marker coordinate={{ latitude: position.coords.latitude, longitude: position.coords.longitude }} title={"You"} pinColor={colors.tertiary} />
+                  )}
+                </MapView>
+              </>
+            ) : (
+              <View style={styles.mapPlaceholderCenter}>
+                <MaterialIcons name="location-pin" size={48} color={colors.onSurfaceVariant} />
+                <Text style={{ color: colors.onSurfaceVariant, marginTop: 8 }}>No saved location</Text>
               </View>
             )}
           </View>
 
           <View style={{ padding: 12 }}>
             <Text style={{ ...typography.labelCaps, color: colors.primary }}>TARGET LOCATION</Text>
-            <Text style={{ marginTop: 6, color: colors.onSurface }}>{habit?.name}</Text>
-            <Text style={{ marginTop: 6, color: colors.onSurfaceVariant }}>{habit?.location ? `${habit.location.radiusMeters}m radius` : "No saved location"}</Text>
+            <Text style={{ marginTop: 6, color: colors.onSurface }}>{habit.name}</Text>
+            <Text style={{ marginTop: 6, color: colors.onSurfaceVariant }}>{habit.location ? `${habit.location.radiusMeters}m radius` : "No saved location"}</Text>
           </View>
         </AppCard>
 
@@ -212,10 +238,11 @@ const styles = StyleSheet.create({
   headerTitle: { ...typography.bodyMd, fontWeight: "700", color: colors.onSurface },
   container: { flex: 1, padding: spacing.marginEdge, gap: spacing.lg },
   mapCard: { padding: 0, overflow: "hidden", borderRadius: 20 },
-  mapView: { height: 220, backgroundColor: "#dfe4ec", justifyContent: "center", alignItems: "center" },
+  mapView: { height: 320, backgroundColor: "#dfe4ec", justifyContent: "center", alignItems: "center" },
   mapCenterMarker: { width: 88, height: 88, borderRadius: 44, backgroundColor: "rgba(186,195,255,0.16)", borderWidth: 2, borderColor: colors.primary, alignItems: "center", justifyContent: "center" },
   mapPinWrap: { position: "absolute", top: 24, left: 24, alignItems: "center" },
   mapPinText: { color: colors.onSurface, marginTop: 4 },
   youMarker: { position: "absolute", bottom: 18, right: 24, alignItems: "center" },
   youText: { color: colors.onSurface, marginTop: 4, fontSize: 12 },
+  mapPlaceholderCenter: { alignItems: "center", justifyContent: "center", flex: 1 },
 });
