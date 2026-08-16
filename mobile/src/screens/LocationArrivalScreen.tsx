@@ -8,7 +8,7 @@ import { submitCheckIn, type Habit } from "../lib/api";
 import DotGridBackground from "../components/DotGridBackground";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
-import MapView, { Marker, Circle } from 'react-native-maps';
+import MapLibreGL from '@maplibre/maplibre-react-native';
 import { colors, spacing, typography } from "../theme/colors";
 
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -31,6 +31,28 @@ function secondsToHHMMSS(sec: number) {
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60);
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+// Create a GeoJSON polygon approximating a circle (radius in meters)
+function createGeoJSONCircle(lat: number, lng: number, radiusMeters: number, points = 64) {
+  const coords: Array<[number, number]> = [];
+  const R = 6371000; // earth radius in meters
+  const latRad = (lat * Math.PI) / 180;
+  const lngRad = (lng * Math.PI) / 180;
+  const d = radiusMeters / R;
+  for (let i = 0; i < points; i++) {
+    const bearing = (i / points) * 2 * Math.PI;
+    const lat2 = Math.asin(Math.sin(latRad) * Math.cos(d) + Math.cos(latRad) * Math.sin(d) * Math.cos(bearing));
+    const lng2 = lngRad + Math.atan2(Math.sin(bearing) * Math.sin(d) * Math.cos(latRad), Math.cos(d) - Math.sin(latRad) * Math.sin(lat2));
+    coords.push([lng2 * (180 / Math.PI), lat2 * (180 / Math.PI)]);
+  }
+  // close polygon
+  if (coords.length > 0) coords.push(coords[0]);
+  return {
+    type: "Feature",
+    geometry: { type: "Polygon", coordinates: [coords] },
+    properties: {},
+  };
 }
 
 export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: Habit; onCheckIn?: () => void; onCancel?: () => void }) {
@@ -157,34 +179,37 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
             {/* react-native-maps MapView */}
             {habit.location ? (
               <>
-                <MapView
+                <MapLibreGL.MapView
                   style={StyleSheet.absoluteFill}
-                  initialRegion={{
-                    latitude: habit.location.lat,
-                    longitude: habit.location.lng,
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01,
-                  }}
-                  showsUserLocation={false}
-                  showsMyLocationButton={false}
+                  styleURL={'https://demotiles.maplibre.org/style.json'}
                 >
-                  <Marker
-                    coordinate={{ latitude: habit.location.lat, longitude: habit.location.lng }}
-                    title={habit.name}
-                    pinColor={colors.primary}
+                  <MapLibreGL.Camera
+                    centerCoordinate={[habit.location.lng, habit.location.lat]}
+                    zoomLevel={15}
                   />
 
-                  <Circle
-                    center={{ latitude: habit.location.lat, longitude: habit.location.lng }}
-                    radius={habit.location.radiusMeters}
-                    strokeColor={"rgba(63,81,181,0.3)"}
-                    fillColor={"rgba(63,81,181,0.12)"}
-                  />
+                  {/* Circle polygon as GeoJSON */}
+                  {habit.location && (
+                    <MapLibreGL.ShapeSource
+                      id="circleSource"
+                      shape={createGeoJSONCircle(habit.location.lat, habit.location.lng, habit.location.radiusMeters)}
+                    >
+                      <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: 'rgba(63,81,181,0.12)' }} />
+                      <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: 'rgba(63,81,181,0.3)', lineWidth: 1 }} />
+                    </MapLibreGL.ShapeSource>
+                  )}
+
+                  {/* Target marker */}
+                  <MapLibreGL.PointAnnotation id="target" coordinate={[habit.location.lng, habit.location.lat]}>
+                    <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: colors.primary, borderWidth: 2, borderColor: '#fff' }} />
+                  </MapLibreGL.PointAnnotation>
 
                   {position && (
-                    <Marker coordinate={{ latitude: position.coords.latitude, longitude: position.coords.longitude }} title={"You"} pinColor={colors.tertiary} />
+                    <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
+                      <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: colors.tertiary, borderWidth: 2, borderColor: '#fff' }} />
+                    </MapLibreGL.PointAnnotation>
                   )}
-                </MapView>
+                </MapLibreGL.MapView>
               </>
             ) : (
               <View style={styles.mapPlaceholderCenter}>
