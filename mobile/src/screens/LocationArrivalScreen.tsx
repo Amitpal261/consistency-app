@@ -8,7 +8,19 @@ import { submitCheckIn, type Habit } from "../lib/api";
 import DotGridBackground from "../components/DotGridBackground";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
-import MapLibreGL from '@maplibre/maplibre-react-native';
+// Try to require MapLibre at runtime — if native module isn't linked (Expo dev client not rebuilt), avoid crashing and render a fallback.
+let MapLibreGL: any;
+try {
+  // use require so a missing native module doesn't break static import evaluation
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  MapLibreGL = require('@maplibre/maplibre-react-native');
+} catch (e) {
+  MapLibreGL = undefined;
+  // allow the app to continue — map will show a placeholder
+  // console.warn is okay here for debugging in dev
+  // eslint-disable-next-line no-console
+  console.warn('MapLibre native module not available, map disabled', e);
+}
 import { colors, spacing, typography } from "../theme/colors";
 
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -179,37 +191,48 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
             {/* react-native-maps MapView */}
             {habit.location ? (
               <>
-                <MapLibreGL.MapView
-                  style={StyleSheet.absoluteFill}
-                  styleURL={'https://demotiles.maplibre.org/style.json'}
-                >
-                  <MapLibreGL.Camera
-                    centerCoordinate={[habit.location.lng, habit.location.lat]}
-                    zoomLevel={15}
-                  />
+                {MapLibreGL && MapLibreGL.MapView ? (
+                  <MapLibreGL.MapView
+                    style={StyleSheet.absoluteFill}
+                    styleURL={'https://demotiles.maplibre.org/style.json'}
+                  >
+                    <MapLibreGL.Camera
+                      centerCoordinate={[habit.location.lng, habit.location.lat]}
+                      zoomLevel={15}
+                    />
 
-                  {/* Circle polygon as GeoJSON */}
-                  {habit.location && (
-                    <MapLibreGL.ShapeSource
-                      id="circleSource"
-                      shape={createGeoJSONCircle(habit.location.lat, habit.location.lng, habit.location.radiusMeters)}
-                    >
-                      <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: 'rgba(63,81,181,0.12)' }} />
-                      <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: 'rgba(63,81,181,0.3)', lineWidth: 1 }} />
-                    </MapLibreGL.ShapeSource>
-                  )}
+                    {/* Circle polygon as GeoJSON */}
+                    {habit.location && (
+                      <MapLibreGL.ShapeSource
+                        id="circleSource"
+                        shape={createGeoJSONCircle(habit.location.lat, habit.location.lng, habit.location.radiusMeters)}
+                      >
+                        <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: 'rgba(63,81,181,0.12)' }} />
+                        <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: 'rgba(63,81,181,0.3)', lineWidth: 1 }} />
+                      </MapLibreGL.ShapeSource>
+                    )}
 
-                  {/* Target marker */}
-                  <MapLibreGL.PointAnnotation id="target" coordinate={[habit.location.lng, habit.location.lat]}>
-                    <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: colors.primary, borderWidth: 2, borderColor: '#fff' }} />
-                  </MapLibreGL.PointAnnotation>
-
-                  {position && (
-                    <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
-                      <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: colors.tertiary, borderWidth: 2, borderColor: '#fff' }} />
+                    {/* Target marker */}
+                    <MapLibreGL.PointAnnotation id="target" coordinate={[habit.location.lng, habit.location.lat]}>
+                      <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: colors.primary, borderWidth: 2, borderColor: '#fff' }} />
                     </MapLibreGL.PointAnnotation>
-                  )}
-                </MapLibreGL.MapView>
+
+                    {position && (
+                      <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
+                        <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: colors.tertiary, borderWidth: 2, borderColor: '#fff' }} />
+                      </MapLibreGL.PointAnnotation>
+                    )}
+                  </MapLibreGL.MapView>
+                ) : (
+                  <View style={StyleSheet.absoluteFill}>
+                    <View style={styles.mapPlaceholderCenter}>
+                      <MaterialIcons name="map" size={48} color={colors.onSurfaceVariant} />
+                      <Text style={{ color: colors.onSurfaceVariant, marginTop: 8, textAlign: 'center' }}>
+                        Map is unavailable (native map module not linked).\nRebuild the app (expo prebuild / run) to enable the native map view.
+                      </Text>
+                    </View>
+                  </View>
+                )}
               </>
             ) : (
               <View style={styles.mapPlaceholderCenter}>
