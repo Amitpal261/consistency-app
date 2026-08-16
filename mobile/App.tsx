@@ -285,6 +285,12 @@ function HomeRoute() {
                   currentStreak: 5,
                   bestStreak: 12,
                   daysOfWeek: [1, 3, 5],
+                  timeWindow: {
+                    hour: new Date().getHours(),
+                    minute: new Date().getMinutes() + 30,
+                    windowMinutes: 60,
+                  },
+                  location: { lat: 40.758, lng: -73.9855, radiusMeters: 150 },
                 } as Habit,
               }),
           },

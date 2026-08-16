@@ -156,12 +156,10 @@ export function CreateHabitScreen({ onCreated }: { onCreated: () => void }) {
         timeWindow:
           taskType === "time"
             ? { hour: time.getHours(), minute: time.getMinutes(), windowMinutes: Number(windowMinutes) || 60 }
-            : undefined,
+            : taskType === "location"
+              ? { hour: locationDeadline.getHours(), minute: locationDeadline.getMinutes(), windowMinutes: 60 }
+              : undefined,
         location,
-        locationDeadline:
-          taskType === "location"
-            ? { hour: locationDeadline.getHours(), minute: locationDeadline.getMinutes() }
-            : undefined,
         requiredDurationMinutes: taskType === "location_duration" ? Number(durationMinutes) || 120 : undefined,
         daysOfWeek: daysOfWeek.length > 0 ? daysOfWeek : [0, 1, 2, 3, 4, 5, 6],
         ringtone: taskType === "time" ? ringtone : undefined,
