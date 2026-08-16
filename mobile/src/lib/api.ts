@@ -186,3 +186,14 @@ export function exitDwell(token: string, habitId: string, location?: { lat: numb
     body: JSON.stringify({ habitId, location }),
   });
 }
+
+// Poll dwell status for a habit. Backend: GET /checkins/dwell-status/:habitId
+export function getDwellStatus(token: string, habitId: string) {
+  return request<{
+    elapsedMinutes: number;
+    requiredMinutes: number;
+    isInGrace: boolean;
+    graceSecondsRemaining: number;
+    isCompleted?: boolean;
+  }>(`/checkins/dwell-status/${encodeURIComponent(habitId)}`, { token });
+}
