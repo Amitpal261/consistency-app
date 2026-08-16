@@ -1,51 +1,96 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Alert, Animated, Easing, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Location from "expo-location";
-import { useAuth } from "../context/AuthContext";
-import { submitCheckIn, type Habit } from "../lib/api";
-import DotGridBackground from "../components/DotGridBackground";
-import { AppButton } from "../components/AppButton";
-import { AppCard } from "../components/AppCard";
-// Try to require MapLibre at runtime — if native module isn't linked (Expo dev client not rebuilt), avoid crashing and render a fallback.
+// Use MapLibre where available. Require dynamically so missing native module doesn't crash the app.
 let MapLibreGL: any;
 try {
-  // use require so a missing native module doesn't break static import evaluation
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   MapLibreGL = require('@maplibre/maplibre-react-native');
 } catch (e) {
   MapLibreGL = undefined;
-  // allow the app to continue — map will show a placeholder
-  // console.warn is okay here for debugging in dev
   // eslint-disable-next-line no-console
-  console.warn('MapLibre native module not available, map disabled', e);
+  console.warn('MapLibre native module not available', e);
 }
-import { colors, spacing, typography } from "../theme/colors";
+
+import type { Region } from "react-native-maps"; // keep Region type for calculations
+import { useAuth } from "../context/AuthContext";
+import { submitCheckIn, type Habit } from "../lib/api";
+import { AppButton } from "../components/AppButton";
+import { AppCard } from "../components/AppCard";
+import { colors, radius, spacing, typography } from "../theme/colors";
+
+function colorWithAlpha(hexColor: string, alpha: number): string {
+  const hex = hexColor.replace("#", "");
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
 
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const toRad = (v: number) => (v * Math.PI) / 180;
-  const R = 6371000; // meters
+  const R = 6371000;
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
 function formatDistance(meters: number) {
-  if (meters < 1000) return `${Math.round(meters)} m`;
-  return `${(meters / 1000).toFixed(2)} km`;
+  if (meters < 1000) return `${Math.round(meters)} m remaining`;
+  return `${(meters / 1000).toFixed(2)} km remaining`;
 }
 
 function secondsToHHMMSS(sec: number) {
   if (sec <= 0) return "00:00";
-  const m = Math.floor(sec / 60);
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
   const s = Math.floor(sec % 60);
+  if (h > 0) {
+    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  }
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-// Create a GeoJSON polygon approximating a circle (radius in meters)
+function getArrivalDeadline(habit: Habit): { hour: number; minute: number } | null {
+  if (habit.timeWindow?.hour != null && habit.timeWindow?.minute != null) {
+    return { hour: habit.timeWindow.hour, minute: habit.timeWindow.minute };
+  }
+  if (habit.locationDeadline?.hour != null && habit.locationDeadline?.minute != null) {
+    return { hour: habit.locationDeadline.hour, minute: habit.locationDeadline.minute };
+  }
+  return null;
+}
+
+function buildMapRegion(
+  target: { lat: number; lng: number },
+  user: { lat: number; lng: number } | null,
+  radiusMeters: number
+): Region {
+  const userLat = user?.lat ?? target.lat;
+  const userLng = user?.lng ?? target.lng;
+  const minLat = Math.min(target.lat, userLat);
+  const maxLat = Math.max(target.lat, userLat);
+  const minLng = Math.min(target.lng, userLng);
+  const maxLng = Math.max(target.lng, userLng);
+  const radiusDelta = (radiusMeters / 111_000) * 5;
+  const latitudeDelta = Math.max((maxLat - minLat) * 2.8, radiusDelta, 0.006);
+  const longitudeDelta = Math.max((maxLng - minLng) * 2.8, radiusDelta, 0.006);
+
+  return {
+    latitude: (minLat + maxLat) / 2,
+    longitude: (minLng + maxLng) / 2,
+    latitudeDelta,
+    longitudeDelta,
+  };
+}
+
+
 function createGeoJSONCircle(lat: number, lng: number, radiusMeters: number, points = 64) {
   const coords: Array<[number, number]> = [];
   const R = 6371000; // earth radius in meters
@@ -58,7 +103,6 @@ function createGeoJSONCircle(lat: number, lng: number, radiusMeters: number, poi
     const lng2 = lngRad + Math.atan2(Math.sin(bearing) * Math.sin(d) * Math.cos(latRad), Math.cos(d) - Math.sin(latRad) * Math.sin(lat2));
     coords.push([lng2 * (180 / Math.PI), lat2 * (180 / Math.PI)]);
   }
-  // close polygon
   if (coords.length > 0) coords.push(coords[0]);
   return {
     type: "Feature",
@@ -67,14 +111,108 @@ function createGeoJSONCircle(lat: number, lng: number, radiusMeters: number, poi
   };
 }
 
-export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: Habit; onCheckIn?: () => void; onCancel?: () => void }) {
+function HabitMap({
+  region,
+  habitLocation,
+  position,
+}: {
+  region: Region;
+  habitLocation: { lat: number; lng: number; radiusMeters: number };
+  position: Location.LocationObject | null;
+}) {
+  if (Platform.OS === "web") {
+    return (
+      <View style={[StyleSheet.absoluteFill, styles.webMapFallback]}>
+        <MaterialIcons name="map" size={64} color={colors.onSurfaceVariant} />
+        <Text style={styles.webMapText}>Map preview unavailable on web — use the Android dev build.</Text>
+      </View>
+    );
+  }
+
+  // If MapLibre is available, render it. Otherwise show a placeholder instructing to rebuild.
+  if (MapLibreGL && MapLibreGL.MapView) {
+    return (
+      <MapLibreGL.MapView style={StyleSheet.absoluteFill} styleURL={"https://demotiles.maplibre.org/style.json"}>
+        <MapLibreGL.Camera centerCoordinate={[habitLocation.lng, habitLocation.lat]} zoomLevel={15} />
+
+        <MapLibreGL.ShapeSource id="circleSource" shape={createGeoJSONCircle(habitLocation.lat, habitLocation.lng, habitLocation.radiusMeters)}>
+          <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: colorWithAlpha(colors.primaryContainer, 0.18) }} />
+          <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: colorWithAlpha(colors.primary, 0.45), lineWidth: 1 }} />
+        </MapLibreGL.ShapeSource>
+
+        <MapLibreGL.PointAnnotation id="target" coordinate={[habitLocation.lng, habitLocation.lat]}>
+          <View style={styles.targetMarker} />
+        </MapLibreGL.PointAnnotation>
+
+        {position && (
+          <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
+            <View style={styles.youMarker} />
+          </MapLibreGL.PointAnnotation>
+        )}
+      </MapLibreGL.MapView>
+    );
+  }
+
+  // Fallback placeholder when MapLibre is not linked.
+  return (
+    <View style={[StyleSheet.absoluteFill, styles.mapPlaceholderCenter]}>
+      <MaterialIcons name="map" size={48} color={colors.onSurfaceVariant} />
+      <Text style={{ color: colors.onSurfaceVariant, marginTop: 8, textAlign: 'center' }}>
+        Map unavailable — native map module not linked.\nRun a native build (expo prebuild / expo run:android) to enable the map view.
+      </Text>
+    </View>
+  );
+}
+
+export function LocationArrivalScreen({
+  habit,
+  onCheckIn,
+  onCancel,
+}: {
+  habit: Habit;
+  onCheckIn?: () => void;
+  onCancel?: () => void;
+}) {
   const { token } = useAuth();
   const [position, setPosition] = useState<Location.LocationObject | null>(null);
   const [distanceMeters, setDistanceMeters] = useState<number | null>(null);
   const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null);
-  const [watchSub, setWatchSub] = useState<Location.LocationSubscription | null>(null);
-  const timerRef = useRef<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pulseOuter = useRef(new Animated.Value(1)).current;
+  const pulseInner = useRef(new Animated.Value(1)).current;
+
+  const arrivalDeadline = useMemo(() => getArrivalDeadline(habit), [habit]);
+
+  const mapRegion = useMemo(() => {
+    if (!habit.location) return null;
+    return buildMapRegion(
+      habit.location,
+      position ? { lat: position.coords.latitude, lng: position.coords.longitude } : null,
+      habit.location.radiusMeters
+    );
+  }, [habit.location, position]);
+
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseOuter, { toValue: 1.08, duration: 2000, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(pulseOuter, { toValue: 0.92, duration: 2000, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      ])
+    );
+    const loopInner = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseInner, { toValue: 1.12, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+        Animated.timing(pulseInner, { toValue: 0.88, duration: 2400, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    loopInner.start();
+    return () => {
+      loop.stop();
+      loopInner.stop();
+    };
+  }, [pulseOuter, pulseInner]);
 
   useEffect(() => {
     let mounted = true;
@@ -83,13 +221,11 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") return;
         const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-        if (!mounted) return;
-        setPosition(pos);
+        if (mounted) setPosition(pos);
       } catch (e) {
         console.warn("Location init failed", e);
       }
     })();
-
     return () => {
       mounted = false;
     };
@@ -103,30 +239,27 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
           { accuracy: Location.Accuracy.Balanced, distanceInterval: 2, timeInterval: 2000 },
           (pos) => setPosition(pos)
         );
-        setWatchSub(sub);
       } catch (e) {
         console.warn("watchPosition failed", e);
       }
     })();
-
     return () => {
       if (sub) sub.remove();
     };
   }, []);
 
   useEffect(() => {
-    // distance compute
-    if (!position || !habit?.location) {
+    if (!position || !habit.location) {
       setDistanceMeters(null);
       return;
     }
-    const d = haversineDistance(position.coords.latitude, position.coords.longitude, habit.location.lat, habit.location.lng);
-    setDistanceMeters(d);
-  }, [position, habit]);
+    setDistanceMeters(
+      haversineDistance(position.coords.latitude, position.coords.longitude, habit.location.lat, habit.location.lng)
+    );
+  }, [position, habit.location]);
 
   useEffect(() => {
-    // countdown to deadline
-    if (!habit.locationDeadline) {
+    if (!arrivalDeadline) {
       setRemainingSeconds(null);
       return;
     }
@@ -134,18 +267,16 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
     function compute() {
       const now = new Date();
       const target = new Date(now);
-      target.setHours(habit.locationDeadline!.hour, habit.locationDeadline!.minute, 0, 0);
-      // if target already passed earlier today, treat as passed
-      const secs = Math.floor((target.getTime() - now.getTime()) / 1000);
-      setRemainingSeconds(secs);
+      target.setHours(arrivalDeadline!.hour, arrivalDeadline!.minute, 0, 0);
+      setRemainingSeconds(Math.floor((target.getTime() - now.getTime()) / 1000));
     }
 
     compute();
-    timerRef.current = setInterval(compute, 1000) as unknown as number;
+    timerRef.current = setInterval(compute, 1000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [habit.locationDeadline]);
+  }, [arrivalDeadline]);
 
   const handleManualCheckIn = async () => {
     if (!token || !habit) return;
@@ -153,14 +284,16 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
     try {
       if (!position) {
         Alert.alert("Location unavailable", "Could not get current location to submit check-in.");
-        setSubmitting(false);
         return;
       }
       const res = await submitCheckIn(token, {
         habitId: habit._id,
-        location: { lat: position.coords.latitude, lng: position.coords.longitude, accuracyMeters: position.coords.accuracy ?? undefined },
+        location: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          accuracyMeters: position.coords.accuracy ?? undefined,
+        },
       });
-      // success
       Alert.alert(res.reviewStatus === "pending" ? "Sent for review" : "Check-in complete");
       onCheckIn?.();
     } catch (err) {
@@ -173,124 +306,218 @@ export function LocationArrivalScreen({ habit, onCheckIn, onCancel }: { habit: H
   const missed = remainingSeconds !== null && remainingSeconds <= 0;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <DotGridBackground />
+    <View style={styles.root}>
+      {habit.location && mapRegion ? (
+        <HabitMap region={mapRegion} habitLocation={habit.location} position={position} />
+      ) : (
+        <View style={styles.noLocationBg}>
+          <MaterialIcons name="location-pin" size={48} color={colors.onSurfaceVariant} />
+          <Text style={styles.noLocationText}>No saved location for this habit</Text>
+        </View>
+      )}
 
-      <View style={styles.header}>
-        <Pressable onPress={onCancel} style={styles.headerBack}>
-          <MaterialIcons name="close" size={22} color={colors.onSurface} />
-        </Pressable>
-        <Text style={styles.headerTitle}>Arrival Check-In</Text>
-        <View style={{ width: 34 }} />
-      </View>
+      <View style={styles.mapOverlay} pointerEvents="none" />
 
-      <View style={styles.container}>
-        <AppCard variant="glass" style={styles.mapCard}>
-          {/* Map */}
-          <View style={styles.mapView}>
-            {/* react-native-maps MapView */}
-            {habit.location ? (
-              <>
-                {MapLibreGL && MapLibreGL.MapView ? (
-                  <MapLibreGL.MapView
-                    style={StyleSheet.absoluteFill}
-                    styleURL={'https://demotiles.maplibre.org/style.json'}
-                  >
-                    <MapLibreGL.Camera
-                      centerCoordinate={[habit.location.lng, habit.location.lat]}
-                      zoomLevel={15}
-                    />
+      <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
+        <View style={styles.header}>
+          <Pressable onPress={onCancel} style={styles.headerBack} accessibilityLabel="Close">
+            <MaterialIcons name="close" size={22} color={colors.onSurface} />
+          </Pressable>
+          <Text style={styles.headerTitle}>Arrival Check-In</Text>
+          <View style={styles.headerSpacer} />
+        </View>
 
-                    {/* Circle polygon as GeoJSON */}
-                    {habit.location && (
-                      <MapLibreGL.ShapeSource
-                        id="circleSource"
-                        shape={createGeoJSONCircle(habit.location.lat, habit.location.lng, habit.location.radiusMeters)}
-                      >
-                        <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: 'rgba(63,81,181,0.12)' }} />
-                        <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: 'rgba(63,81,181,0.3)', lineWidth: 1 }} />
-                      </MapLibreGL.ShapeSource>
-                    )}
-
-                    {/* Target marker */}
-                    <MapLibreGL.PointAnnotation id="target" coordinate={[habit.location.lng, habit.location.lat]}>
-                      <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: colors.primary, borderWidth: 2, borderColor: '#fff' }} />
-                    </MapLibreGL.PointAnnotation>
-
-                    {position && (
-                      <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
-                        <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: colors.tertiary, borderWidth: 2, borderColor: '#fff' }} />
-                      </MapLibreGL.PointAnnotation>
-                    )}
-                  </MapLibreGL.MapView>
-                ) : (
-                  <View style={StyleSheet.absoluteFill}>
-                    <View style={styles.mapPlaceholderCenter}>
-                      <MaterialIcons name="map" size={48} color={colors.onSurfaceVariant} />
-                      <Text style={{ color: colors.onSurfaceVariant, marginTop: 8, textAlign: 'center' }}>
-                        Map is unavailable (native map module not linked).\nRebuild the app (expo prebuild / run) to enable the native map view.
-                      </Text>
-                    </View>
-                  </View>
-                )}
-              </>
-            ) : (
-              <View style={styles.mapPlaceholderCenter}>
-                <MaterialIcons name="location-pin" size={48} color={colors.onSurfaceVariant} />
-                <Text style={{ color: colors.onSurfaceVariant, marginTop: 8 }}>No saved location</Text>
-              </View>
-            )}
+        <View style={styles.centerContent}>
+          <View style={styles.orbWrap}>
+            <Animated.View style={[styles.pulseRingOuter, { transform: [{ scale: pulseOuter }] }]} />
+            <Animated.View style={[styles.pulseRingInner, { transform: [{ scale: pulseInner }] }]} />
+            <View style={styles.orbCore}>
+              <MaterialIcons name="location-on" size={36} color={colors.onPrimary} />
+            </View>
           </View>
 
-          <View style={{ padding: 12 }}>
-            <Text style={{ ...typography.labelCaps, color: colors.primary }}>TARGET LOCATION</Text>
-            <Text style={{ marginTop: 6, color: colors.onSurface }}>{habit.name}</Text>
-            <Text style={{ marginTop: 6, color: colors.onSurfaceVariant }}>{habit.location ? `${habit.location.radiusMeters}m radius` : "No saved location"}</Text>
+          <View style={styles.titleBlock}>
+            <View style={styles.activeRow}>
+              <View style={styles.activeDot} />
+              <Text style={styles.activeLabel}>GEOFENCE ACTIVE</Text>
+            </View>
+            <Text style={styles.headline}>
+              {missed ? "Deadline passed for today" : "Head to your destination"}
+            </Text>
+            <Text style={styles.habitName}>{habit.name}</Text>
           </View>
-        </AppCard>
 
-        <AppCard variant="hero" style={{ width: "100%" }}>
-          <View style={{ gap: 6 }}>
-            <Text style={{ ...typography.labelCaps, color: colors.primary }}>DISTANCE</Text>
-            <Text style={{ ...typography.h2 }}>{distanceMeters !== null ? formatDistance(distanceMeters) : "—"}</Text>
-
-            <Text style={{ ...typography.labelCaps, color: colors.primary, marginTop: 8 }}>ARRIVAL DEADLINE</Text>
-            {remainingSeconds !== null ? (
-              missed ? (
-                <Text style={{ color: colors.onSurfaceVariant }}>Didn't make it today</Text>
-              ) : (
-                <Text style={{ ...typography.h2, color: colors.primary }}>{secondsToHHMMSS(remainingSeconds)}</Text>
-              )
-            ) : (
-              <Text style={{ color: colors.onSurfaceVariant }}>No deadline</Text>
+          <View style={styles.liveStats}>
+            <Text style={styles.liveStatText}>
+              {distanceMeters !== null ? formatDistance(distanceMeters) : "Locating your position…"}
+            </Text>
+            {remainingSeconds !== null && (
+              <Text style={styles.liveStatText}>
+                {missed ? "Didn't make it today" : `${secondsToHHMMSS(remainingSeconds)} until deadline`}
+              </Text>
             )}
+          </View>
+        </View>
 
+        <View style={styles.bottomPanel}>
+          <AppCard variant="glass" style={styles.commitCard}>
+            <View style={styles.commitIconWrap}>
+              <MaterialIcons name="auto-awesome" size={22} color={colors.primary} />
+            </View>
+            <View style={styles.commitTextWrap}>
+              <Text style={styles.commitLabel}>COMMITMENT</Text>
+              <Text style={styles.commitTitle}>{habit.name}</Text>
+              {habit.location && (
+                <Text style={styles.commitSub}>{habit.location.radiusMeters}m geofence radius</Text>
+              )}
+            </View>
+          </AppCard>
+
+          {missed ? (
+            <AppCard variant="glass" style={styles.missedCard}>
+              <MaterialIcons name="schedule" size={22} color={colors.onSurfaceVariant} />
+              <Text style={styles.missedCardText}>
+                You can try again tomorrow — a calm reset, not a failure.
+              </Text>
+            </AppCard>
+          ) : (
             <AppButton
-              title={missed ? "Too late today" : "I'm here — Check in"}
+              title={submitting ? "Checking in…" : "Confirm Arrival"}
               onPress={handleManualCheckIn}
-              disabled={missed || submitting}
-              style={{ marginTop: 12 }}
+              disabled={submitting || !position}
+              loading={submitting}
               variant="primary"
+              icon={<MaterialIcons name="arrow-forward" size={20} color={colors.onPrimary} />}
             />
-          </View>
-        </AppCard>
-      </View>
-    </SafeAreaView>
+          )}
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: colors.background },
-  header: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: spacing.marginEdge, paddingTop: spacing.sm },
+  root: { flex: 1, backgroundColor: colors.background },
+  mapOverlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: colorWithAlpha(colors.background, 0.55),
+  },
+  noLocationBg: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: colors.surfaceContainerHigh,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: spacing.sm,
+  },
+  noLocationText: { ...typography.bodyMd, color: colors.onSurfaceVariant },
+  webMapFallback: {
+    backgroundColor: colors.surfaceContainerHigh,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.marginEdge,
+    gap: spacing.sm,
+  },
+  webMapText: { ...typography.bodyMd, fontSize: 13, color: colors.onSurfaceVariant, textAlign: "center" },
+  safeArea: { flex: 1 },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: spacing.marginEdge,
+    paddingTop: spacing.sm,
+  },
   headerBack: { padding: 6 },
   headerTitle: { ...typography.bodyMd, fontWeight: "700", color: colors.onSurface },
-  container: { flex: 1, padding: spacing.marginEdge, gap: spacing.lg },
-  mapCard: { padding: 0, overflow: "hidden", borderRadius: 20 },
-  mapView: { height: 320, backgroundColor: "#dfe4ec", justifyContent: "center", alignItems: "center" },
-  mapCenterMarker: { width: 88, height: 88, borderRadius: 44, backgroundColor: "rgba(186,195,255,0.16)", borderWidth: 2, borderColor: colors.primary, alignItems: "center", justifyContent: "center" },
-  mapPinWrap: { position: "absolute", top: 24, left: 24, alignItems: "center" },
-  mapPinText: { color: colors.onSurface, marginTop: 4 },
-  youMarker: { position: "absolute", bottom: 18, right: 24, alignItems: "center" },
-  youText: { color: colors.onSurface, marginTop: 4, fontSize: 12 },
-  mapPlaceholderCenter: { alignItems: "center", justifyContent: "center", flex: 1 },
+  headerSpacer: { width: 34 },
+  centerContent: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: spacing.marginEdge,
+    gap: spacing.md,
+  },
+  orbWrap: { width: 140, height: 140, alignItems: "center", justifyContent: "center" },
+  pulseRingOuter: {
+    position: "absolute",
+    width: 140,
+    height: 140,
+    borderRadius: radius.full,
+    borderWidth: 2,
+    borderColor: colorWithAlpha(colors.primary, 0.4),
+  },
+  pulseRingInner: {
+    position: "absolute",
+    width: 110,
+    height: 110,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colorWithAlpha(colors.primary, 0.22),
+  },
+  orbCore: {
+    width: 80,
+    height: 80,
+    borderRadius: radius.full,
+    backgroundColor: colors.primaryContainer,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: colors.primaryContainer,
+    shadowOpacity: 0.5,
+    shadowRadius: 24,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 10,
+  },
+  titleBlock: { alignItems: "center", gap: 6 },
+  activeRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  activeDot: { width: 8, height: 8, borderRadius: radius.full, backgroundColor: colors.primaryContainer },
+  activeLabel: { ...typography.labelCaps, color: colors.primary, fontSize: 10 },
+  headline: { ...typography.headlineLgMobile, textAlign: "center" },
+  habitName: { ...typography.bodyMd, color: colors.primary, fontWeight: "700", textAlign: "center" },
+  liveStats: { alignItems: "center", gap: 4, marginTop: spacing.xs },
+  liveStatText: { ...typography.bodyMd, fontSize: 14, color: colors.onSurfaceVariant, textAlign: "center" },
+  bottomPanel: {
+    paddingHorizontal: spacing.marginEdge,
+    paddingBottom: spacing.md,
+    gap: spacing.sm,
+  },
+  commitCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    padding: spacing.sm,
+  },
+  commitIconWrap: {
+    width: 44,
+    height: 44,
+    borderRadius: radius.full,
+    backgroundColor: colorWithAlpha(colors.primary, 0.12),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  commitTextWrap: { flex: 1, gap: 2 },
+  commitLabel: { ...typography.labelCaps, color: colors.onSurfaceVariant, fontSize: 10 },
+  commitTitle: { ...typography.bodyMd, fontWeight: "700", color: colors.onSurface },
+  commitSub: { ...typography.bodyMd, fontSize: 12, color: colors.onSurfaceVariant },
+  missedCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    padding: spacing.sm,
+  },
+  missedCardText: { flex: 1, ...typography.bodyMd, fontSize: 14, color: colors.onSurfaceVariant },
+  targetMarker: {
+    width: 20,
+    height: 20,
+    borderRadius: radius.full,
+    backgroundColor: colors.primaryContainer,
+    borderWidth: 2,
+    borderColor: colors.onPrimary,
+  },
+  youMarker: {
+    width: 14,
+    height: 14,
+    borderRadius: radius.full,
+    backgroundColor: colors.tertiary,
+    borderWidth: 2,
+    borderColor: colors.onPrimary,
+  },
 });
