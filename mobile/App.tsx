@@ -29,6 +29,7 @@ import { MissedDayRecoveryScreen } from "./src/screens/MissedDayRecoveryScreen";
 import { SummaryDigestScreen } from "./src/screens/SummaryDigestScreen";
 import { GeofenceArrivalScreen } from "./src/screens/GeofenceArrivalScreen";
 import { LocationArrivalScreen } from "./src/screens/LocationArrivalScreen";
+import { DwellSessionScreen } from "./src/screens/DwellSessionScreen";
 import { TimeAlarmCheckInScreen } from "./src/screens/TimeAlarmCheckInScreen";
 import { ProductivityFlowScreen } from "./src/screens/ProductivityFlowScreen";
 
@@ -60,6 +61,7 @@ type HabitsStackParamList = {
   missedDayRecovery: { habit?: Habit };
   focusTimer: { habit?: Habit };
   locationArrival: { habit: Habit };
+  dwellSession: { habit: Habit };
   summaryDigest: undefined;
   productivityFlow: undefined;
 };
@@ -332,7 +334,7 @@ function HabitsNavigator() {
               const t = route.params.habit.taskType;
               if (t === "time") navigation.navigate("timeCheckin", { habit: route.params.habit });
               else if (t === "location") navigation.navigate("locationArrival", { habit: route.params.habit });
-              else navigation.navigate("focusTimer", { habit: route.params.habit });
+              else navigation.navigate("dwellSession", { habit: route.params.habit });
             }}
           />
         )}
@@ -345,6 +347,11 @@ function HabitsNavigator() {
       <HabitsStack.Screen name="locationArrival">
         {({ route, navigation }) => (
           <LocationArrivalScreen habit={route.params.habit} onCheckIn={() => navigation.navigate("home")} onCancel={() => navigation.navigate("home")} />
+        )}
+      </HabitsStack.Screen>
+      <HabitsStack.Screen name="dwellSession">
+        {({ route, navigation }) => (
+          <DwellSessionScreen habit={route.params.habit} onDone={() => navigation.navigate("home")} />
         )}
       </HabitsStack.Screen>
       <HabitsStack.Screen name="checkin">

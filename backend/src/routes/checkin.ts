@@ -12,6 +12,10 @@ export const checkInRouter = Router();
 
 const checkInLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 10 });
 
+// How long a location_duration habit's session stays "pausable" after the
+// user leaves the geofence before it resets to zero for the day.
+const DWELL_GRACE_MINUTES = 10;
+
 function dateKeyInTimezone(date: Date, timeZone: string): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(
     date
@@ -22,6 +26,21 @@ function yesterdayKey(todayKey: string): string {
   const d = new Date(`${todayKey}T00:00:00Z`);
   d.setUTCDate(d.getUTCDate() - 1);
   return d.toISOString().slice(0, 10);
+}
+
+// Straight-line distance between two GPS points, in meters. Used to verify
+// a manually-submitted "I'm here" start-dwell actually is within the
+// habit's geofence radius, so the manual fallback button can't be used to
+// fake being at the location.
+function distanceMeters(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
+  const R = 6371000;
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
 }
 
 function isWithinTimeWindow(
@@ -228,6 +247,23 @@ checkInRouter.post("/start-dwell", requireAuth, async (req: AuthedRequest, res) 
     return res.status(400).json({ error: "This endpoint is only for location+duration habits." });
   }
 
+  // The background geofence task always sends real coordinates from the
+  // Enter event, but this endpoint can also be called manually from the
+  // app (a fallback for when background detection is slow/hasn't fired
+  // yet) so verify distance here rather than trusting the client.
+  if (habit.location?.lat != null && habit.location?.lng != null && parsed.data.location) {
+    const distance = distanceMeters(
+      { lat: habit.location.lat, lng: habit.location.lng },
+      { lat: parsed.data.location.lat, lng: parsed.data.location.lng }
+    );
+    const radius = habit.location.radiusMeters || 150;
+    if (distance > radius) {
+      return res.status(400).json({
+        error: `You are about ${Math.round(distance)}m away, get within ${radius}m of the target to start tracking.`,
+      });
+    }
+  }
+
   const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
   const now = new Date();
   const todayKey = dateKeyInTimezone(now, timezone);
@@ -254,14 +290,26 @@ checkInRouter.post("/start-dwell", requireAuth, async (req: AuthedRequest, res) 
       verified: false,
       reviewStatus: "pending",
     });
+  } else if (checkIn.lastEntryTimestamp && !checkIn.lastExitTimestamp) {
+    // Already inside and tracking — nothing to do, this is likely a
+    // duplicate/retried Enter event.
+  } else if (checkIn.graceExpiresAt && now.getTime() > checkIn.graceExpiresAt.getTime()) {
+    // They left and did NOT make it back before the grace window closed —
+    // the session genuinely resets. This is the real "step out too long
+    // and it doesn't count" behavior.
+    checkIn.totalDwellMinutes = 0;
+    checkIn.completionStatus = "none";
+    checkIn.graceExpiresAt = undefined;
+    checkIn.lastEntryTimestamp = now;
+    checkIn.lastExitTimestamp = undefined;
+    await checkIn.save();
   } else {
-    if (checkIn.lastEntryTimestamp && !checkIn.lastExitTimestamp) {
-      // already in progress
-    } else {
-      checkIn.lastEntryTimestamp = now;
-      checkIn.lastExitTimestamp = undefined;
-      await checkIn.save();
-    }
+    // Either no grace was pending, or they made it back in time — resume,
+    // keeping whatever totalDwellMinutes was already banked.
+    checkIn.graceExpiresAt = undefined;
+    checkIn.lastEntryTimestamp = now;
+    checkIn.lastExitTimestamp = undefined;
+    await checkIn.save();
   }
 
   return res.status(200).json({ checkIn });
@@ -301,18 +349,26 @@ checkInRouter.post("/exit-dwell", requireAuth, async (req: AuthedRequest, res) =
     const entryTime = new Date(checkIn.lastEntryTimestamp).getTime();
     const exitTime = now.getTime();
     const sessionMinutes = (exitTime - entryTime) / (60 * 1000);
-    
+
     checkIn.totalDwellMinutes = (checkIn.totalDwellMinutes || 0) + sessionMinutes;
 
     const required = habit.requiredDurationMinutes || 120;
     if (checkIn.totalDwellMinutes >= required) {
+      // Goal actually met — this is the only case that completes for real.
       checkIn.completionStatus = "full";
       checkIn.verified = true;
       checkIn.reviewStatus = "approved";
-    } else if (checkIn.totalDwellMinutes > 0) {
+      checkIn.graceExpiresAt = undefined;
+    } else {
+      // Not done yet — bank the partial minutes, but do NOT mark this
+      // verified/approved (that used to happen here, which meant partial
+      // dwell time silently counted as a full success). Instead start a
+      // real grace countdown: if they come back and finish within
+      // DWELL_GRACE_MINUTES, start-dwell resumes it; if not, dwell-status
+      // (or the next start-dwell attempt) resets it to zero for the day.
       checkIn.completionStatus = "partial";
-      checkIn.verified = true;
-      checkIn.reviewStatus = "approved";
+      checkIn.verified = false;
+      checkIn.graceExpiresAt = new Date(now.getTime() + DWELL_GRACE_MINUTES * 60_000);
     }
 
     await checkIn.save();
@@ -332,6 +388,90 @@ checkInRouter.post("/exit-dwell", requireAuth, async (req: AuthedRequest, res) =
   }
 });
 
+
+checkInRouter.get("/dwell-status/:habitId", requireAuth, async (req: AuthedRequest, res) => {
+  const userId = req.userId!;
+  const habit = await Habit.findOne({ _id: req.params.habitId, userId });
+  if (!habit) return res.status(404).json({ error: "Habit not found" });
+
+  if (habit.taskType !== "location_duration") {
+    return res.status(400).json({ error: "This endpoint is only for location+duration habits." });
+  }
+
+  const timezone = req.header("x-user-timezone") || "Asia/Kolkata";
+  const now = new Date();
+  const todayKey = dateKeyInTimezone(now, timezone);
+
+  const checkIn = await CheckIn.findOne({
+    userId,
+    habitId: habit._id,
+    checkedInAt: {
+      $gte: new Date(`${todayKey}T00:00:00.000Z`),
+      $lte: new Date(`${todayKey}T23:59:59.999Z`),
+    },
+  });
+
+  const requiredMinutes = habit.requiredDurationMinutes || 120;
+
+  if (!checkIn) {
+    return res.json({
+      elapsedMinutes: 0,
+      requiredMinutes,
+      isInGrace: false,
+      graceSecondsRemaining: 0,
+      isCompleted: false,
+    });
+  }
+
+  // Grace period genuinely expired since the last check — reset now,
+  // persisted, so this is consistent whether the user reopens the app or
+  // just leaves it running.
+  if (checkIn.graceExpiresAt && now.getTime() > checkIn.graceExpiresAt.getTime()) {
+    checkIn.totalDwellMinutes = 0;
+    checkIn.completionStatus = "none";
+    checkIn.graceExpiresAt = undefined;
+    await checkIn.save();
+
+    return res.json({
+      elapsedMinutes: 0,
+      requiredMinutes,
+      isInGrace: false,
+      graceSecondsRemaining: 0,
+      isCompleted: false,
+    });
+  }
+
+  if (checkIn.graceExpiresAt) {
+    const graceSecondsRemaining = Math.max(
+      0,
+      Math.round((checkIn.graceExpiresAt.getTime() - now.getTime()) / 1000)
+    );
+    return res.json({
+      elapsedMinutes: checkIn.totalDwellMinutes || 0,
+      requiredMinutes,
+      isInGrace: true,
+      graceSecondsRemaining,
+      isCompleted: false,
+    });
+  }
+
+  // If currently inside the geofence (entered but not yet exited), add the
+  // live in-progress session time on top of previously banked
+  // totalDwellMinutes, so this keeps counting up between actual exit events.
+  let elapsedMinutes = checkIn.totalDwellMinutes || 0;
+  if (checkIn.lastEntryTimestamp && !checkIn.lastExitTimestamp) {
+    const liveMinutes = (now.getTime() - new Date(checkIn.lastEntryTimestamp).getTime()) / 60000;
+    elapsedMinutes += liveMinutes;
+  }
+
+  return res.json({
+    elapsedMinutes,
+    requiredMinutes,
+    isInGrace: false,
+    graceSecondsRemaining: 0,
+    isCompleted: checkIn.completionStatus === "full" || elapsedMinutes >= requiredMinutes,
+  });
+});
 
 checkInRouter.get("/streaks", requireAuth, async (req: AuthedRequest, res) => {
   const streaks = await Streak.find({ userId: req.userId }).lean();

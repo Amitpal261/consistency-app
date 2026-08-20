@@ -23,6 +23,8 @@ export function TimeAlarmCheckInScreen({ habit, onDone }: { habit: Habit; onDone
   const cameraRef = useRef<CameraView>(null);
 
   const [now, setNow] = useState(new Date());
+  const [stage, setStage] = useState<"idle" | "submitting" | "success" | "pending">("idle");
+  const [resultStreak, setResultStreak] = useState<number | null>(null);
 
   // update clock every minute
   useEffect(() => {
@@ -56,11 +58,13 @@ export function TimeAlarmCheckInScreen({ habit, onDone }: { habit: Habit; onDone
       base64: true,
     });
 
-    if (manipulated.base64) setPhotoBase64(`data:image/jpeg;base64,${manipulated.base64}`);
+    const finalPhotoBase64 = manipulated.base64 ? `data:image/jpeg;base64,${manipulated.base64}` : undefined;
+    if (finalPhotoBase64) setPhotoBase64(finalPhotoBase64);
     setCameraOpen(false);
 
     // stop any native alarm
     stopNativeAlarm();
+    setStage("submitting");
 
     // submit check-in with photo
     try {
@@ -74,11 +78,13 @@ export function TimeAlarmCheckInScreen({ habit, onDone }: { habit: Habit; onDone
       }
 
       if (!token) throw new Error("Not authenticated");
-      const res = await submitCheckIn(token, { habitId: habit._id, photoBase64: photoBase64 ?? undefined, location });
+      const res = await submitCheckIn(token, { habitId: habit._id, photoBase64: finalPhotoBase64, location });
       const isPending = res.reviewStatus === "pending" || res.reviewStatus === "flagged";
-      // brief delay then finish
-      setTimeout(onDone, isPending ? 2000 : 1500);
+      setResultStreak(res.currentStreak);
+      setStage(isPending ? "pending" : "success");
+      setTimeout(onDone, isPending ? 2200 : 1800);
     } catch (err) {
+      setStage("idle");
       Alert.alert("Check-in failed", err instanceof Error ? err.message : "Failed to submit check-in");
     }
   }
@@ -90,7 +96,7 @@ export function TimeAlarmCheckInScreen({ habit, onDone }: { habit: Habit; onDone
 
         <SafeAreaView style={{ position: "absolute", top: 12, left: 12, right: 12 }}>
           <AppCard variant="hero" style={{ padding: 12 }}>
-            <Text style={{ fontSize: 12, color: colors.onSurfaceVariant }}>PROOFSPEC PROMPT</Text>
+            <Text style={{ fontSize: 12, color: colors.onSurfaceVariant }}>TODAY'S PROOF</Text>
             <Text style={{ fontSize: 16, color: colors.onSurface }}>{prompt ?? "Hold up proof indicator"}</Text>
           </AppCard>
         </SafeAreaView>
@@ -116,27 +122,54 @@ export function TimeAlarmCheckInScreen({ habit, onDone }: { habit: Habit; onDone
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <DotGridBackground />
       <View style={{ padding: spacing.marginEdge, flex: 1 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-          <Text style={{ ...typography.h1, color: colors.onSurface }}>{habit.name}</Text>
-          <Text style={{ ...typography.bodyMd, color: colors.onSurfaceVariant }}>{now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</Text>
-        </View>
+        {stage === "submitting" ? (
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: spacing.md }}>
+            <MaterialIcons name="hourglass-top" size={40} color={colors.primary} />
+            <Text style={{ ...typography.bodyMd, color: colors.onSurfaceVariant }}>Verifying your check-in…</Text>
+          </View>
+        ) : stage === "success" || stage === "pending" ? (
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: spacing.sm }}>
+            <MaterialIcons
+              name={stage === "success" ? "check-circle" : "hourglass-top"}
+              size={56}
+              color={stage === "success" ? colors.success : colors.warning}
+            />
+            <Text style={{ ...typography.h1, textAlign: "center" }}>
+              {stage === "success" ? "Nice work!" : "Sent for review"}
+            </Text>
+            <Text style={{ ...typography.bodyMd, textAlign: "center" }}>
+              {stage === "success" && resultStreak != null
+                ? `Streak: ${resultStreak} 🔥`
+                : "Your buddy will review this shortly."}
+            </Text>
+          </View>
+        ) : (
+          <>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              <Text style={{ ...typography.h1, color: colors.onSurface }}>{habit.name}</Text>
+              <Text style={{ ...typography.bodyMd, color: colors.onSurfaceVariant }}>{now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</Text>
+            </View>
 
-        <Text style={{ marginTop: 8, color: colors.onSurfaceVariant }}>{now.toLocaleDateString()}</Text>
+            <Text style={{ marginTop: 8, color: colors.onSurfaceVariant }}>
+              {now.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" })}
+            </Text>
 
-        <View style={{ marginTop: 24 }}>
-          <AppCard variant="hero">
-            <Text style={{ ...typography.labelCaps, color: colors.primary }}>PHOTO PROMPT</Text>
-            <Text style={{ marginTop: 8, color: colors.onSurface }}>{prompt ?? "Take a quick photo to prove you're up"}</Text>
+            <View style={{ marginTop: 24 }}>
+              <AppCard variant="hero">
+                <Text style={{ ...typography.labelCaps, color: colors.primary }}>TODAY'S PROOF</Text>
+                <Text style={{ marginTop: 8, color: colors.onSurface }}>{prompt ?? "Take a quick photo to prove you're up"}</Text>
 
-            <AppButton title="I'm up — Take Photo" onPress={handleOpenCamera} style={{ marginTop: 12 }} />
-          </AppCard>
-        </View>
+                <AppButton title="I'm up — Take Photo" onPress={handleOpenCamera} style={{ marginTop: 12 }} />
+              </AppCard>
+            </View>
 
-        <View style={{ flex: 1 }} />
+            <View style={{ flex: 1 }} />
 
-        <View style={{ alignItems: "center", marginBottom: 24 }}>
-          <Text style={{ color: colors.onSurfaceVariant, fontSize: 12 }}>No snooze — this alarm requires a photo to verify</Text>
-        </View>
+            <View style={{ alignItems: "center", marginBottom: 24 }}>
+              <Text style={{ color: colors.onSurfaceVariant, fontSize: 12 }}>No snooze — this alarm requires a photo to verify</Text>
+            </View>
+          </>
+        )}
       </View>
     </SafeAreaView>
   );

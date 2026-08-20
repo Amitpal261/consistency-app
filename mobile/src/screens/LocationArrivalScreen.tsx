@@ -29,6 +29,10 @@ function colorWithAlpha(hexColor: string, alpha: number): string {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
+function todayKeyLocal(): string {
+  return new Intl.DateTimeFormat("en-CA").format(new Date());
+}
+
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const toRad = (v: number) => (v * Math.PI) / 180;
   const R = 6371000;
@@ -130,26 +134,38 @@ function HabitMap({
   }
 
   // If MapLibre is available, render it. Otherwise show a placeholder instructing to rebuild.
-  if (MapLibreGL && MapLibreGL.MapView) {
+  // v11 named-export API: Map (not MapView), Camera uses initialViewState
+  // instead of centerCoordinate/zoomLevel props directly.
+ if (
+  MapLibreGL &&
+  MapLibreGL.Map &&
+  MapLibreGL.Camera &&
+  MapLibreGL.ShapeSource &&
+  MapLibreGL.FillLayer &&
+  MapLibreGL.LineLayer &&
+  MapLibreGL.ViewAnnotation
+)  {
     return (
-      <MapLibreGL.MapView style={StyleSheet.absoluteFill} styleURL={"https://demotiles.maplibre.org/style.json"}>
-        <MapLibreGL.Camera centerCoordinate={[habitLocation.lng, habitLocation.lat]} zoomLevel={15} />
+      <MapLibreGL.Map style={StyleSheet.absoluteFill} mapStyle={"https://tiles.openfreemap.org/styles/liberty"}>
+        <MapLibreGL.Camera
+          initialViewState={{ center: [habitLocation.lng, habitLocation.lat], zoom: 15 }}
+        />
 
         <MapLibreGL.ShapeSource id="circleSource" shape={createGeoJSONCircle(habitLocation.lat, habitLocation.lng, habitLocation.radiusMeters)}>
           <MapLibreGL.FillLayer id="circleFill" style={{ fillColor: colorWithAlpha(colors.primaryContainer, 0.18) }} />
           <MapLibreGL.LineLayer id="circleStroke" style={{ lineColor: colorWithAlpha(colors.primary, 0.45), lineWidth: 1 }} />
         </MapLibreGL.ShapeSource>
 
-        <MapLibreGL.PointAnnotation id="target" coordinate={[habitLocation.lng, habitLocation.lat]}>
+        <MapLibreGL.ViewAnnotation lngLat={[habitLocation.lng, habitLocation.lat]}>
           <View style={styles.targetMarker} />
-        </MapLibreGL.PointAnnotation>
+        </MapLibreGL.ViewAnnotation>
 
         {position && (
-          <MapLibreGL.PointAnnotation id="you" coordinate={[position.coords.longitude, position.coords.latitude]}>
+          <MapLibreGL.ViewAnnotation lngLat={[position.coords.longitude, position.coords.latitude]}>
             <View style={styles.youMarker} />
-          </MapLibreGL.PointAnnotation>
+          </MapLibreGL.ViewAnnotation>
         )}
-      </MapLibreGL.MapView>
+      </MapLibreGL.Map>
     );
   }
 
@@ -183,6 +199,11 @@ export function LocationArrivalScreen({
   const pulseInner = useRef(new Animated.Value(1)).current;
 
   const arrivalDeadline = useMemo(() => getArrivalDeadline(habit), [habit]);
+  // The background geofence task (geofence.ts) may have already auto-submitted
+  // today's check-in before the user even opened this screen — recognize
+  // that instead of confusingly showing "head to destination" for a habit
+  // that's already done, which would 409 if they tapped Confirm again.
+  const alreadyDoneToday = habit.lastCheckInDateKey === todayKeyLocal();
 
   const mapRegion = useMemo(() => {
     if (!habit.location) return null;
@@ -304,6 +325,19 @@ export function LocationArrivalScreen({
   };
 
   const missed = remainingSeconds !== null && remainingSeconds <= 0;
+
+  if (alreadyDoneToday) {
+    return (
+      <SafeAreaView style={[styles.root, { alignItems: "center", justifyContent: "center", gap: spacing.md, padding: spacing.marginEdge }]}>
+        <MaterialIcons name="check-circle" size={56} color={colors.success} />
+        <Text style={[typography.h1, { textAlign: "center" }]}>Already checked in today</Text>
+        <Text style={[typography.bodyMd, { textAlign: "center" }]}>
+          Looks like this was picked up automatically when you arrived — nice work.
+        </Text>
+        <AppButton title="Done" onPress={() => onCheckIn?.()} style={{ width: "100%", marginTop: spacing.sm }} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <View style={styles.root}>

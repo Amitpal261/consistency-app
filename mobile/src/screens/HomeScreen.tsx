@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+﻿import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Animated, Easing, FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -213,7 +213,7 @@ export function HomeScreen({
                   {/* Stats Grid */}
                   <View style={styles.statsGrid}>
                     <View style={styles.statCell}>
-                      <Text style={styles.statLabel}>COMPLETED TODAY</Text>
+                      <Text style={styles.statLabel}>DONE TODAY</Text>
                       <Text style={styles.statValue}>
                         {checkedInToday}/{habits.length}
                       </Text>
@@ -426,11 +426,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    paddingTop: spacing.marginEdge,
   },
   content: {
     flex: 1,
     paddingHorizontal: spacing.marginEdge,
-    paddingTop: spacing.sm,
+    paddingTop: spacing.lg,
+   
   },
   headerRow: {
     flexDirection: "row",
@@ -476,10 +478,13 @@ const styles = StyleSheet.create({
   headerSection: {
     gap: spacing.md,
     marginBottom: spacing.md,
+   
   },
   heroCard: {
     padding: spacing.md,
     gap: spacing.md,
+   
+    
   },
   quickActionsRow: {
     flexDirection: "row",
